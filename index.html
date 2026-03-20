@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kireeti Varma | Product Design & Partnerships</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --op-red: #F50514;
+  --op-red-dark: #c8102e;
+  --accent: #2563EB;
+  --bg: #0D0F14;
+  --bg-2: #141720;
+  --bg-card: rgba(255,255,255,0.04);
+  --bg-card-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.18);
+  --text-1: #F1F5F9;
+  --text-2: #94A3B8;
+  --text-3: #64748B;
+  --tag-bg: rgba(37,99,235,0.12);
+  --tag-color: #60A5FA;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-hover: 0 20px 60px rgba(0,0,0,0.5);
+  --nav-bg: rgba(13,15,20,0.85);
+  --modal-bg: #141720;
+  --goal-bg: rgba(37,99,235,0.08);
+  --outcome-bg: rgba(16,185,129,0.08);
+}
+
+[data-theme="light"] {
+  --bg: #F8FAFC;
+  --bg-2: #F1F5F9;
+  --bg-card: rgba(255,255,255,0.9);
+  --bg-card-hover: rgba(255,255,255,1);
+  --border: rgba(0,0,0,0.07);
+  --border-hover: rgba(37,99,235,0.25);
+  --text-1: #0F172A;
+  --text-2: #475569;
+  --text-3: #94A3B8;
+  --tag-bg: rgba(37,99,235,0.08);
+  --tag-color: #1D4ED8;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 16px 48px rgba(0,0,0,0.14);
+  --nav-bg: rgba(248,250,252,0.92);
+  --modal-bg: #FFFFFF;
+  --goal-bg: rgba(37,99,235,0.06);
+  --outcome-bg: rgba(16,185,129,0.06);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Open Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text-1);
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(37,99,235,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(139,92,246,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(16,185,129,0.04) 0%, transparent 70%);
+  animation: ambientShift 18s ease-in-out infinite alternate;
+}
+
+@keyframes ambientShift {
+  0%   { opacity: 0.7; transform: scale(1) translateY(0); }
+  50%  { opacity: 1;   transform: scale(1.05) translateY(-20px); }
+  100% { opacity: 0.7; transform: scale(1) translateY(0); }
+}
+
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 1000;
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 2rem; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative;
+}
+
+.nav-logo {
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--text-1); text-decoration: none; letter-spacing: -0.2px;
+  flex-shrink: 0; cursor: pointer;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-2);
+  text-decoration: none; cursor: pointer;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text-1); }
+
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+
+.theme-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-2); font-size: 1rem; padding: 4px;
+  transition: color 0.2s; line-height: 1;
+}
+.theme-btn:hover { color: var(--text-1); }
+
+.hamburger {
+  display: none; flex-direction: column; gap: 4px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: var(--text-2); border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none; position: absolute; top: 60px; left: 0; right: 0;
+  background: var(--nav-bg); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem 1.5rem; flex-direction: column; gap: 0.25rem;
+  z-index: 999;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 0.9rem; font-weight: 500; color: var(--text-2);
+  text-decoration: none; padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s; cursor: pointer;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--text-1); }
+
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 6rem 2rem 4rem;
+  position: relative; z-index: 1;
+}
+
+.hero-inner { max-width: 900px; margin: 0 auto; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.78rem; font-weight: 600; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+.hero-eyebrow span { width: 24px; height: 1px; background: var(--text-3); }
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 800; line-height: 1.15;
+  letter-spacing: -1.5px; color: var(--text-1);
+  margin-bottom: 1.25rem;
+}
+.hero h1 em { font-style: normal; color: var(--op-red); }
+
+.hero-sub {
+  font-size: 1rem; color: var(--text-2); max-width: 520px;
+  line-height: 1.7; margin-bottom: 2.5rem;
+}
+
+.hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 4rem; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.65rem 1.5rem; border-radius: 8px;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  text-decoration: none; border: none; transition: all 0.2s ease;
+  font-family: inherit;
+}
+.btn-primary { background: var(--op-red); color: #fff; }
+.btn-primary:hover {
+  background: var(--op-red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245,5,20,0.3);
+}
+.btn-outline {
+  background: transparent; color: var(--text-1);
+  border: 1.5px solid var(--border-hover);
+}
+.btn-outline:hover { border-color: var(--text-1); transform: translateY(-2px); }
+
+.stats-row { display: flex; gap: 3rem; flex-wrap: wrap; }
+.stat-n {
+  font-size: 2rem; font-weight: 800; color: var(--text-1);
+  letter-spacing: -1px; line-height: 1;
+}
+.stat-l {
+  font-size: 0.78rem; color: var(--text-3); margin-top: 0.3rem;
+  font-weight: 500; letter-spacing: 0.02em;
+}
+
+.section { position: relative; z-index: 1; padding: 5rem 2rem; }
+.section-inner { max-width: 1280px; margin: 0 auto; }
+
+.section-label {
+  font-size: 0.72rem; font-weight: 700;
+  color: var(--text-3); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 0.6rem;
+}
+.section-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 800; color: var(--text-1);
+  letter-spacing: -0.8px; margin-bottom: 0.75rem; line-height: 1.2;
+}
+.section-desc {
+  font-size: 0.9rem; color: var(--text-2);
+  max-width: 520px; line-height: 1.7; margin-bottom: 3rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.75rem;
+  cursor: pointer; transition: all 0.25s ease;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--op-red);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+.card:hover::after { transform: scaleX(1); }
+
+.card-icon { font-size: 1.8rem; margin-bottom: 1rem; line-height: 1; }
+.card-tag {
+  font-size: 0.7rem; font-weight: 700; color: var(--tag-color);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  background: var(--tag-bg); border-radius: 4px;
+  padding: 0.25rem 0.6rem; display: inline-block; margin-bottom: 0.75rem;
+}
+.card-title {
+  font-size: 1.05rem; font-weight: 700; color: var(--text-1);
+  margin-bottom: 0.5rem; letter-spacing: -0.3px;
+}
+.card-desc {
+  font-size: 0.85rem; color: var(--text-2);
+  line-height: 1.65; flex: 1; margin-bottom: 1.25rem;
+}
+.card-cta {
+  font-size: 0.8rem; font-weight: 600; color: var(--text-3);
+  display: flex; align-items: center; gap: 0.3rem; transition: all 0.2s;
+}
+.card:hover .card-cta { color: var(--text-1); gap: 0.6rem; }
+
+.oneplus-wrap {
+  background: linear-gradient(135deg, #F50514 0%, #b8000f 60%, #8B0000 100%);
+  position: relative; overflow: hidden;
+}
+.oneplus-wrap::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,0,0,0.2) 0%, transparent 50%);
+}
+.oneplus-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 5rem 2rem; position: relative; z-index: 1;
+}
+.op-eyebrow {
+  font-size: 0.72rem; font-weight: 700;
+  color: rgba(255,255,255,0.55); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 0.6rem;
+}
+.op-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800;
+  color: #fff; letter-spacing: -1px; line-height: 1.2; margin-bottom: 0.75rem;
+}
+.op-desc {
+  font-size: 0.9rem; color: rgba(255,255,255,0.7);
+  max-width: 560px; line-height: 1.7; margin-bottom: 3rem;
+}
+.op-stat-row { display: flex; gap: 3rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+.op-stat-n {
+  font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -1px;
+}
+.op-stat-l {
+  font-size: 0.75rem; color: rgba(255,255,255,0.55);
+  margin-top: 0.25rem; font-weight: 500;
+}
+.op-section-label {
+  font-size: 0.7rem; font-weight: 700;
+  color: rgba(255,255,255,0.45); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 1rem;
+}
+.op-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.25rem; margin-bottom: 3rem;
+}
+.op-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 1.5rem;
+  cursor: pointer; transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+.op-card:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+.op-card-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+.op-card-tag {
+  font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,0.55);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  background: rgba(255,255,255,0.08); border-radius: 4px;
+  padding: 0.2rem 0.5rem; display: inline-block; margin-bottom: 0.6rem;
+}
+.op-card-title {
+  font-size: 1rem; font-weight: 700; color: #fff;
+  margin-bottom: 0.4rem; letter-spacing: -0.3px;
+}
+.op-card-desc {
+  font-size: 0.83rem; color: rgba(255,255,255,0.65);
+  line-height: 1.65; margin-bottom: 1rem;
+}
+.op-card-cta {
+  font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.5);
+  display: flex; align-items: center; gap: 0.3rem; transition: all 0.2s;
+}
+.op-card:hover .op-card-cta { color: #fff; gap: 0.6rem; }
+
+.brands-bg { background: var(--bg-2); }
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+.brand-cell {
+  aspect-ratio: 3/2;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem; transition: all 0.2s ease;
+}
+.brand-cell:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.brand-cell img {
+  width: 100%; height: 100%; object-fit: contain;
+  filter: grayscale(1) opacity(0.55); transition: filter 0.2s;
+}
+.brand-cell:hover img { filter: grayscale(0) opacity(1); }
+.brand-cell-name {
+  font-size: 0.72rem; font-weight: 600;
+  color: var(--text-3); text-align: center;
+}
+
+.contact-wrap {
+  background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(139,92,246,0.04) 100%);
+  border-top: 1px solid var(--border);
+}
+.contact-inner {
+  max-width: 760px; margin: 0 auto;
+  padding: 5rem 2rem; text-align: center;
+}
+.contact-inner .section-title { margin-bottom: 0.5rem; }
+.contact-inner .section-desc { margin: 0 auto 2rem; }
+.contact-btns {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.contact-location { font-size: 0.78rem; color: var(--text-3); }
+
+footer {
+  text-align: center; padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem; color: var(--text-3);
+  position: relative; z-index: 1;
+}
+
+.scroll-top {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--text-1); color: var(--bg);
+  border: none; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: all 0.3s;
+  z-index: 900; box-shadow: var(--shadow);
+}
+.scroll-top.show { opacity: 1; visibility: visible; }
+.scroll-top:hover { transform: translateY(-3px); }
+
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  z-index: 2000; align-items: center; justify-content: center;
+  padding: 1.5rem; overflow-y: auto;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--modal-bg);
+  border: 1px solid var(--border);
+  border-radius: 18px; padding: 0;
+  max-width: 760px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
+  animation: modalUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+@keyframes modalUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-img {
+  width: 100%; height: 200px; object-fit: cover;
+  border-radius: 18px 18px 0 0; display: block;
+}
+.modal-body { padding: 2rem; }
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(128,128,128,0.2); border: none;
+  color: var(--text-1); cursor: pointer; font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; z-index: 10;
+}
+.modal-close:hover { background: rgba(128,128,128,0.35); }
+.modal-tag {
+  font-size: 0.68rem; font-weight: 700;
+  color: var(--tag-color); text-transform: uppercase;
+  letter-spacing: 0.08em; background: var(--tag-bg);
+  border-radius: 4px; padding: 0.25rem 0.6rem;
+  display: inline-block; margin-bottom: 0.75rem;
+}
+.modal-tag.red { color: #fff; background: var(--op-red); }
+.modal-title {
+  font-size: 1.6rem; font-weight: 800; color: var(--text-1);
+  letter-spacing: -0.5px; margin-bottom: 0.3rem;
+}
+.modal-sub { font-size: 0.9rem; color: var(--text-2); margin-bottom: 1.75rem; }
+.modal-problem {
+  font-size: 0.875rem; color: var(--text-2);
+  line-height: 1.7; margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-card); border-radius: 8px;
+  border-left: 3px solid var(--op-red);
+}
+.goal-outcome-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.go-box { padding: 1.25rem; border-radius: 10px; }
+.go-box.goal { background: var(--goal-bg); border: 1px solid rgba(37,99,235,0.15); }
+.go-box.outcome { background: var(--outcome-bg); border: 1px solid rgba(16,185,129,0.15); }
+.go-box h5 {
+  font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;
+}
+.go-box.goal h5 { color: #60A5FA; }
+.go-box.outcome h5 { color: #34D399; }
+.go-box p { font-size: 0.85rem; color: var(--text-2); line-height: 1.6; }
+.modal-h3 {
+  font-size: 0.8rem; font-weight: 700; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+}
+.features-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+.feat {
+  background: var(--bg-card); border-radius: 8px;
+  padding: 0.9rem 1rem; border: 1px solid var(--border);
+}
+.feat-label {
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--text-1); margin-bottom: 0.25rem;
+}
+.feat-val { font-size: 0.8rem; color: var(--text-2); line-height: 1.5; }
+.modal-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.65rem 1.5rem; border-radius: 8px;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  text-decoration: none; border: none; transition: all 0.2s;
+  font-family: inherit; margin-top: 0.25rem;
+  background: var(--text-1); color: var(--bg);
+}
+.modal-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .op-cards-grid { grid-template-columns: 1fr; }
+  .brands-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+  .goal-outcome-row { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .stats-row { gap: 2rem; }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.stagger > * { opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease, transform 0.45s ease; }
+.stagger.in > *:nth-child(1)  { opacity:1; transform:translateY(0); transition-delay:0.04s }
+.stagger.in > *:nth-child(2)  { opacity:1; transform:translateY(0); transition-delay:0.10s }
+.stagger.in > *:nth-child(3)  { opacity:1; transform:translateY(0); transition-delay:0.16s }
+.stagger.in > *:nth-child(4)  { opacity:1; transform:translateY(0); transition-delay:0.22s }
+.stagger.in > *:nth-child(5)  { opacity:1; transform:translateY(0); transition-delay:0.28s }
+.stagger.in > *:nth-child(6)  { opacity:1; transform:translateY(0); transition-delay:0.34s }
+.stagger.in > *:nth-child(7)  { opacity:1; transform:translateY(0); transition-delay:0.40s }
+.stagger.in > *:nth-child(8)  { opacity:1; transform:translateY(0); transition-delay:0.46s }
+.stagger.in > *:nth-child(9)  { opacity:1; transform:translateY(0); transition-delay:0.52s }
+.stagger.in > *:nth-child(n+10){ opacity:1; transform:translateY(0); transition-delay:0.56s }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo" onclick="scrollTo('hero')">Kireeti Varma</span>
+    <ul class="nav-links">
+      <li><a onclick="scrollTo('products')">Work</a></li>
+      <li><a onclick="scrollTo('oneplus')">OnePlus</a></li>
+      <li><a onclick="scrollTo('brands')">Brands</a></li>
+      <li><a onclick="scrollTo('contact')">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">&#9788;</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a onclick="scrollTo('products');closeMenu()">Work</a>
+      <a onclick="scrollTo('oneplus');closeMenu()">OnePlus</a>
+      <a onclick="scrollTo('brands');closeMenu()">Brands</a>
+      <a onclick="scrollTo('contact');closeMenu()">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal"><span></span>Product Design &amp; Strategy</div>
+    <h1 class="reveal">Designer turned<br><em>Product Builder</em><br>at global scale.</h1>
+    <p class="hero-sub reveal">10+ years crafting experiences from pixel to platform. Senior Product Manager at OnePlus. Building AI-native tools, consumer apps, and strategic partnerships across 15+ global brands.</p>
+    <div class="hero-cta reveal">
+      <button class="btn btn-primary" onclick="scrollTo('products')">View Work</button>
+      <button class="btn btn-outline" onclick="scrollTo('contact')">Let's Talk</button>
+    </div>
+    <div class="stats-row stagger reveal">
+      <div class="stat"><div class="stat-n">200M+</div><div class="stat-l">Users Reached</div></div>
+      <div class="stat"><div class="stat-n">9+</div><div class="stat-l">Products Built &amp; Shipped</div></div>
+      <div class="stat"><div class="stat-n">15+</div><div class="stat-l">Global Brands &amp; Teams</div></div>
+      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Years Experience</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="section-inner">
+    <div class="section-label reveal">Independent Work</div>
+    <div class="section-title reveal">Products &amp; Projects</div>
+    <div class="section-desc reveal">From AI operating systems to FinTech platforms — each product built with a design-first, outcome-driven process.</div>
+    <div class="cards-grid stagger">
+      <div class="card" onclick="openModal('m-productf')">
+        <div class="card-icon">&#9889;</div>
+        <div class="card-tag">Currently Building &middot; AI Product OS</div>
+        <div class="card-title">Product f()</div>
+        <div class="card-desc">The AI operating system for product teams. Every capability is a named, executable function — research, ideation, versioning, support — coordinated in one persistent brain.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-prostudio')">
+        <div class="card-icon">&#127912;</div>
+        <div class="card-tag">Design Platform</div>
+        <div class="card-title">Pro Studio Space</div>
+        <div class="card-desc">Collaborative workspace for creative professionals. Real-time iteration, asset management, and seamless developer handoff in one integrated platform.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-reporting')">
+        <div class="card-icon">&#128202;</div>
+        <div class="card-tag">Design Consulting</div>
+        <div class="card-title">The Reporting Hub</div>
+        <div class="card-desc">White-label Power BI analytics portal. End-to-end design audit, UX improvements, and complete Bootstrap design system implementation.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-petfolk')">
+        <div class="card-icon">&#128062;</div>
+        <div class="card-tag">AI &middot; Dev &middot; Des &middot; Deploy</div>
+        <div class="card-title">Petfolk</div>
+        <div class="card-desc">Full-stack AI-powered luxury pet care platform with grooming services, spa, marketplace, and franchise management for Pan India expansion.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-labh')">
+        <div class="card-icon">&#128142;</div>
+        <div class="card-tag">Product Design &middot; FinTech</div>
+        <div class="card-title">Labh</div>
+        <div class="card-desc">SEBI &amp; AMFI certified investment platform. Research-led mutual fund baskets with quant models, intelligent rebalancing, and NSE/BSE direct processing.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-itihasa')">
+        <div class="card-icon">&#127916;</div>
+        <div class="card-tag">Dev &middot; Des &middot; Deploy</div>
+        <div class="card-title">Itihasa Collective</div>
+        <div class="card-desc">Invite-only platform for filmmakers to share scripts securely, collaborate on stories, and protect IP — built on Bubble with Stripe integration.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-imux')">
+        <div class="card-icon">&#128269;</div>
+        <div class="card-tag">Co-Founded &middot; NLI-DB SaaS</div>
+        <div class="card-title">Imux</div>
+        <div class="card-desc">Natural language interface to databases. Query complex enterprise data in plain English — no SQL knowledge required. Democratising data access.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-station91')">
+        <div class="card-icon">&#128218;</div>
+        <div class="card-tag">Co-Founded &middot; Learning App</div>
+        <div class="card-title">Station91</div>
+        <div class="card-desc">Bite-sized learning platform for startup founders. Curated 5–10 min lessons from practitioners on product, GTM, fundraising, and operations.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+      <div class="card" onclick="openModal('m-cabdost')">
+        <div class="card-icon">&#128661;</div>
+        <div class="card-tag">Co-Founded &middot; FinTech</div>
+        <div class="card-title">Cabdost</div>
+        <div class="card-desc">Tax and financial management platform for cab drivers. Simplified ITR filing, expense tracking, and compliance guidance for the gig economy.</div>
+        <div class="card-cta">Explore <span>&#8594;</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="oneplus-wrap" id="oneplus">
+  <div class="oneplus-inner">
+    <div class="reveal">
+      <div class="op-eyebrow">Senior Product Manager &middot; 2020–2024</div>
+      <div class="op-title">OnePlus: Products &amp; Partnerships</div>
+      <div class="op-desc">Led product strategy, UX redesign, and global partnership integrations at OnePlus — building experiences reaching 200M+ users across 50+ countries.</div>
+    </div>
+    <div class="op-stat-row stagger reveal">
+      <div><div class="op-stat-n">200M+</div><div class="op-stat-l">Users Worldwide</div></div>
+      <div><div class="op-stat-n">50+</div><div class="op-stat-l">Countries Reached</div></div>
+      <div><div class="op-stat-n">6</div><div class="op-stat-l">Products &amp; Partnerships</div></div>
+    </div>
+    <div class="op-section-label reveal">Core Products</div>
+    <div class="op-cards-grid stagger reveal">
+      <div class="op-card" onclick="openModal('m-shelf')">
+        <div class="op-card-icon">&#128241;</div>
+        <div class="op-card-tag">Product Redesign &middot; PM</div>
+        <div class="op-card-title">OnePlus Shelf</div>
+        <div class="op-card-desc">Led end-to-end redesign of OnePlus Shelf — improving UX architecture, enabling 3rd-party partner integrations, and growing MAU 4x.</div>
+        <div class="op-card-cta">View Case Study <span>&#8594;</span></div>
+      </div>
+      <div class="op-card" onclick="openModal('m-scout')">
+        <div class="op-card-icon">&#127759;</div>
+        <div class="op-card-tag">Global Scaling &middot; PM</div>
+        <div class="op-card-title">OnePlus Scout</div>
+        <div class="op-card-desc">Scaled Scout from a regional product to a global search &amp; discovery feature — improving CTR by 200%+ and expanding to 50+ countries.</div>
+        <div class="op-card-cta">View Case Study <span>&#8594;</span></div>
+      </div>
+      <div class="op-card" onclick="openModal('m-charging')">
+        <div class="op-card-icon">&#9889;</div>
+        <div class="op-card-tag">IoT Feature &middot; PM</div>
+        <div class="op-card-title">Nearby Charging Stations</div>
+        <div class="op-card-desc">Designed and shipped Nearby Charging Stations feature — enabling users to find airport gate charging pods directly from the device.</div>
+        <div class="op-card-cta">View Case Study <span>&#8594;</span></div>
+      </div>
+    </div>
+    <div class="op-section-label reveal">Partnership Integrations</div>
+    <div class="op-cards-grid stagger reveal">
+      <div class="op-card" onclick="openModal('m-foodaod')">
+        <div class="op-card-icon">&#127829;</div>
+        <div class="op-card-tag">Partnership &middot; AOD</div>
+        <div class="op-card-title">Food Delivery on AOD</div>
+        <div class="op-card-desc">Led OnePlus × Zomato &amp; Swiggy integration — live food delivery tracking on Always-on-Display. India's first AOD food delivery feature, reaching 50M+ users.</div>
+        <div class="op-card-cta">View Case Study <span>&#8594;</span></div>
+      </div>
+      <div class="op-card" onclick="openModal('m-spotify')">
+        <div class="op-card-icon">&#127925;</div>
+        <div class="op-card-tag">Partnership &middot; Shelf</div>
+        <div class="op-card-title">Spotify on OnePlus Shelf</div>
+        <div class="op-card-desc">Launched Spotify widget on OnePlus Shelf — real-time music playback control without unlocking. Shipped globally to 30M+ device installs.</div>
+        <div class="op-card-cta">View Case Study <span>&#8594;</span></div>
+      </div>
+      <div class="op-card" onclick="openModal('m-zomshelf')">
+        <div class="op-card-icon">&#128722;</div>
+        <div class="op-card-tag">Partnership &middot; Shelf &middot; Q4 2024</div>
+        <div class="op-card-title">Zomato &amp; Blinkit on Shelf</div>
+        <div class="op-card-desc">"Eternal Never Settles" — Zomato &amp; Blinkit commerce widgets on OnePlus Shelf enabling order tracking and quick-commerce from the homescreen layer.</div>
+        <div class="op-card-cta">View Case Study <span>&#8594;</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section brands-bg" id="brands">
+  <div class="section-inner">
+    <div class="section-label reveal">Collaborated With</div>
+    <div class="section-title reveal">Worked with teams across</div>
+    <div class="section-desc reveal">Brands, platforms, and product teams across consumer tech, FinTech, food delivery, and entertainment.</div>
+    <div class="brands-grid stagger">
+      <div class="brand-cell"><img src="./logos/oneplus.svg" alt="OnePlus" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">OnePlus</div></div>
+      <div class="brand-cell"><img src="./logos/oppo.svg" alt="Oppo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Oppo</div></div>
+      <div class="brand-cell"><img src="./logos/spotify.svg" alt="Spotify" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Spotify</div></div>
+      <div class="brand-cell"><img src="./logos/google.svg" alt="Google" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Google</div></div>
+      <div class="brand-cell"><img src="./logos/snapchat.svg" alt="Snapchat" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Snapchat</div></div>
+      <div class="brand-cell"><img src="./logos/netflix.svg" alt="Netflix" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Netflix</div></div>
+      <div class="brand-cell"><img src="./logos/zomato.svg" alt="Zomato" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Zomato</div></div>
+      <div class="brand-cell"><img src="./logos/swiggy.svg" alt="Swiggy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Swiggy</div></div>
+      <div class="brand-cell"><img src="./logos/blinkit.svg" alt="Blinkit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Blinkit</div></div>
+      <div class="brand-cell"><img src="./logos/grab.svg" alt="Grab" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Grab</div></div>
+      <div class="brand-cell"><img src="./logos/reportinghub.svg" alt="Reporting Hub" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Reporting Hub</div></div>
+      <div class="brand-cell"><img src="./logos/labh.svg" alt="Labh" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Labh</div></div>
+      <div class="brand-cell"><img src="./logos/petfolk.svg" alt="Petfolk" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Petfolk</div></div>
+      <div class="brand-cell"><img src="./logos/itihasa.svg" alt="Itihasa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Itihasa</div></div>
+      <div class="brand-cell"><img src="./logos/startupvillage.svg" alt="Startup Village" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="brand-cell-name" style="display:none">Startup Village</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-wrap" id="contact">
+  <div class="contact-inner">
+    <div class="section-label reveal">Get in touch</div>
+    <div class="section-title reveal">Let's build something great</div>
+    <p class="section-desc reveal">Available for contract work, partnerships, and consulting on product strategy, design systems, and scaling digital experiences globally.</p>
+    <div class="contact-btns reveal">
+      <a href="mailto:hello@kireetivarma.me" class="btn btn-primary">Email</a>
+      <a href="https://linkedin.com/in/kireetivarma" target="_blank" class="btn btn-outline">LinkedIn</a>
+      <a href="https://x.com/kireetivarma" target="_blank" class="btn btn-outline">X / Twitter</a>
+      <a href="https://kireetivarma.me" target="_blank" class="btn btn-outline">Blog</a>
+    </div>
+    <p class="contact-location reveal">Calgary &middot; Vancouver &middot; Toronto &middot; Remote &#127464;&#127462; &middot; Global &#127757;</p>
+  </div>
+</section>
+
+<footer>&copy; 2026 Kireeti Varma. Designed &amp; built from scratch.</footer>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="m-productf">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-productf')">&#10005;</button>
+    <img src="./projects/productf-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Currently Building &middot; AI Operating System</div>
+      <div class="modal-title">Product f()</div>
+      <div class="modal-sub">productf.io &middot; Pre-MVP, Waitlist Open</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Product teams switch between 50+ tools daily, none share context. AI generates faster than humans can verify. Research dies in transcripts. Decisions vanish into threads. No persistent brain learns team preferences.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Build a coordinated OS where every capability is a named, executable function — evidence-linked, human-in-the-loop at high-stakes moments.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Pre-MVP with waitlist open. Persistent context learning. Designed for teams who believe AI should extend, not replace, human judgment.</p></div>
+      </div>
+      <div class="modal-h3">Core Functions</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">f(data)</div><div class="feat-val">NL queries, KPI monitoring, anomaly detection</div></div>
+        <div class="feat"><div class="feat-label">f(research)</div><div class="feat-val">Synthesize interviews, surveys, market data at scale</div></div>
+        <div class="feat"><div class="feat-label">f(ideate)</div><div class="feat-val">Problem-led brainstorm and PRD generation grounded in evidence</div></div>
+        <div class="feat"><div class="feat-label">f(version)</div><div class="feat-val">Release workspaces with 12 configurable gate domains</div></div>
+        <div class="feat"><div class="feat-label">f(brain)</div><div class="feat-val">Persistent memory layer — learns team context and decisions</div></div>
+        <div class="feat"><div class="feat-label">f(support)</div><div class="feat-val">Support signal ingestion, AI resolution, CSAT modeling</div></div>
+      </div>
+      <a href="https://productf.io" target="_blank" class="modal-btn">Visit productf.io &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-prostudio">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-prostudio')">&#10005;</button>
+    <img src="./projects/prostudio-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Design Platform</div>
+      <div class="modal-title">Pro Studio Space</div>
+      <div class="modal-sub">prostudio.space &middot; Collaborative workspace for creatives</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Creative professionals juggle fragmented tools for design, feedback, and developer handoff. Context is lost between apps and teams waste hours on misaligned expectations.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Create a unified workspace where designers iterate, collaborate in real-time, and hand off seamlessly to engineers.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Real-time collaboration, structured asset library, version history, and automated developer handoff in one integrated product.</p></div>
+      </div>
+      <div class="modal-h3">Key Features</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Real-Time Collaboration</div><div class="feat-val">Multiple designers on the same project simultaneously</div></div>
+        <div class="feat"><div class="feat-label">Asset Library</div><div class="feat-val">Components, colours, typography, brand assets — organised</div></div>
+        <div class="feat"><div class="feat-label">Version Control</div><div class="feat-val">Full design history with rollback capabilities</div></div>
+        <div class="feat"><div class="feat-label">Developer Handoff</div><div class="feat-val">Specs, assets, and code snippets generated automatically</div></div>
+      </div>
+      <a href="https://prostudio.space" target="_blank" class="modal-btn">Visit prostudio.space &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-reporting">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-reporting')">&#10005;</button>
+    <img src="./projects/reportinghub-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Design Consulting</div>
+      <div class="modal-title">The Reporting Hub</div>
+      <div class="modal-sub">thereportinghub.com &middot; Power BI analytics portal</div>
+      <div class="modal-problem"><strong>The Problem:</strong> An enterprise Power BI platform lacked visual coherence, accessibility standards, and a scalable component system. Development was slow due to inconsistent UI patterns and no documented design language.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Full design overhaul — audit, redesign, and Bootstrap design system implementation for long-term scalability.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Modern design system with Bootstrap, improved accessibility, streamlined dev handoff, and clear implementation roadmap delivered.</p></div>
+      </div>
+      <div class="modal-h3">Scope of Work</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Design Audit</div><div class="feat-val">Comprehensive UI/UX and WCAG accessibility analysis</div></div>
+        <div class="feat"><div class="feat-label">UX Improvements</div><div class="feat-val">Redesigned flows, navigation, and interaction patterns</div></div>
+        <div class="feat"><div class="feat-label">Design System</div><div class="feat-val">Full component library built on Bootstrap framework</div></div>
+        <div class="feat"><div class="feat-label">Implementation Guide</div><div class="feat-val">Step-by-step setup, migration, and deployment documentation</div></div>
+      </div>
+      <a href="https://thereportinghub.com" target="_blank" class="modal-btn">Visit Reporting Hub &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-petfolk">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-petfolk')">&#10005;</button>
+    <img src="./projects/petfolk-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">AI &middot; Dev &middot; Des &middot; Deploy</div>
+      <div class="modal-title">Petfolk</div>
+      <div class="modal-sub">petfolk.in &middot; Luxury pet care &amp; franchise management</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Pet parents across India lack access to reliable, premium grooming and wellness services. Pet businesses have no centralised platform for franchise operations, bookings, and customer management.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Build end-to-end AI-powered platform for premium pet care — from booking and grooming to franchise operations and community.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Launched across Pan India. Highly rated on Google &amp; Trustpilot. Multiple pet centers operational. Built: Dev, Des, Deploy — full ownership.</p></div>
+      </div>
+      <div class="modal-h3">Platform Features</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Grooming Services</div><div class="feat-val">Professional grooming with mobile van and experience centers</div></div>
+        <div class="feat"><div class="feat-label">Spa &amp; Wellness</div><div class="feat-val">Complete wellness programs and specialised pet care</div></div>
+        <div class="feat"><div class="feat-label">AI Marketplace</div><div class="feat-val">AI-recommended pet supplies and product discovery</div></div>
+        <div class="feat"><div class="feat-label">Franchise Management</div><div class="feat-val">Centralised ops, bookings, and multi-location management</div></div>
+      </div>
+      <a href="https://petfolk.in" target="_blank" class="modal-btn">Visit Petfolk &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-labh">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-labh')">&#10005;</button>
+    <img src="./projects/labh-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Product Design &middot; FinTech</div>
+      <div class="modal-title">Labh</div>
+      <div class="modal-sub">labh.io &middot; SEBI &amp; AMFI certified investment platform</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Retail investors lack access to professional-grade wealth management. Mutual fund investing is opaque, intimidating, and poorly designed — creating a gap between intent and action.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Democratise wealth creation through simple, transparent, expert-designed fund baskets with clean product design and intelligent automation.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>SEBI &amp; AMFI certified. Quant-driven models. Intelligent rebalancing. NSE/BSE direct processing. Minimal, research-led product design.</p></div>
+      </div>
+      <div class="modal-h3">Core Offerings</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Expert Baskets</div><div class="feat-val">Curated portfolios based on quant models and research</div></div>
+        <div class="feat"><div class="feat-label">Real-Time Monitoring</div><div class="feat-val">Advanced risk detection and live performance tracking</div></div>
+        <div class="feat"><div class="feat-label">Intelligent Rebalancing</div><div class="feat-val">Periodic adjustments to stay aligned with market conditions</div></div>
+        <div class="feat"><div class="feat-label">Demat Integration</div><div class="feat-val">Direct NSE/BSE order processing with Demat account</div></div>
+      </div>
+      <a href="https://labh.io" target="_blank" class="modal-btn">Visit Labh &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-itihasa">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-itihasa')">&#10005;</button>
+    <img src="./projects/itihasa-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Dev &middot; Des &middot; Deploy</div>
+      <div class="modal-title">Itihasa Collective</div>
+      <div class="modal-sub">app.itihasa.co &middot; Secure script sharing for filmmakers</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Filmmakers share sensitive screenplays over WhatsApp and email — exposing IP to theft and plagiarism. No secure, traceable collaboration platform exists for the industry.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Build an invite-only platform with IP protection, encrypted document management, and collaboration layer for the filmmaking ecosystem.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Launched on Bubble. Encrypted access-controlled sharing, script versioning, feedback loops, and opportunity board for community members.</p></div>
+      </div>
+      <div class="modal-h3">Platform Modules</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Secure Sharing</div><div class="feat-val">Encrypted documents with authenticated access control</div></div>
+        <div class="feat"><div class="feat-label">Script Management</div><div class="feat-val">Pitch decks, screenplays, and treatments by project</div></div>
+        <div class="feat"><div class="feat-label">Opportunities Board</div><div class="feat-val">Job board and application management for community</div></div>
+        <div class="feat"><div class="feat-label">Feedback &amp; Notes</div><div class="feat-val">Admin and collaborator notes for story development</div></div>
+      </div>
+      <a href="https://app.itihasa.co" target="_blank" class="modal-btn">Visit Itihasa &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-imux">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-imux')">&#10005;</button>
+    <img src="./projects/imux-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Co-Founded &middot; NLI-DB SaaS</div>
+      <div class="modal-title">Imux</div>
+      <div class="modal-sub">Natural language interface to databases</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Non-technical stakeholders cannot self-serve data insights due to SQL complexity. Data teams spend disproportionate time writing queries rather than driving decisions.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Democratise enterprise data access by letting anyone query databases in plain English — no technical knowledge required.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>NLI-DB technology enabling natural language queries on complex schemas. Enterprise-ready with schema auto-detection, visualisation, and reporting.</p></div>
+      </div>
+      <div class="modal-h3">Key Capabilities</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Plain English Queries</div><div class="feat-val">Ask questions naturally, get structured results instantly</div></div>
+        <div class="feat"><div class="feat-label">Smart Schema Detection</div><div class="feat-val">Auto-comprehension of database structure and relationships</div></div>
+        <div class="feat"><div class="feat-label">Enterprise Security</div><div class="feat-val">Secure, role-based access for business-critical data</div></div>
+        <div class="feat"><div class="feat-label">Analytics &amp; Export</div><div class="feat-val">Visualisation, charting, and data export tools</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-station91">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-station91')">&#10005;</button>
+    <img src="./projects/station91-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Co-Founded &middot; Learning App</div>
+      <div class="modal-title">Station91</div>
+      <div class="modal-sub">Bite-sized learning for startup founders</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Founders lack time for long-form learning while managing day-to-day operations. Most existing content is theoretical, not practitioner-led or immediately applicable.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Deliver curated, bite-sized practitioner lessons designed for founders to absorb and apply in under 10 minutes.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>5–10 min expert-led lessons with actionable takeaways. Tracks across product, GTM, fundraising, and operations.</p></div>
+      </div>
+      <div class="modal-h3">Learning Tracks</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Product Strategy</div><div class="feat-val">Build products users love and markets need</div></div>
+        <div class="feat"><div class="feat-label">Go-to-Market</div><div class="feat-val">Launch playbooks, growth tactics, customer acquisition</div></div>
+        <div class="feat"><div class="feat-label">Fundraising</div><div class="feat-val">Pitch decks, investor relations, and funding mechanics</div></div>
+        <div class="feat"><div class="feat-label">Operations</div><div class="feat-val">Team building, processes, and scaling efficiently</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-cabdost">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-cabdost')">&#10005;</button>
+    <img src="./projects/cabdost-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag">Co-Founded &middot; FinTech</div>
+      <div class="modal-title">Cabdost</div>
+      <div class="modal-sub">Tax &amp; financial management for cab drivers</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Gig economy workers lack tools and financial literacy for ITR compliance. Manual income tracking and complex tax processes result in missed deductions and penalties.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Empower gig workers with simple, guided tools for tax filing, income tracking, and financial literacy at an accessible price point.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Simplified ITR filing, expense tracking, compliance guidance, and tax savings education helping thousands of drivers stay financially healthy.</p></div>
+      </div>
+      <div class="modal-h3">Core Features</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Tax Filing</div><div class="feat-val">Guided ITR workflows with document collection and filing support</div></div>
+        <div class="feat"><div class="feat-label">Financial Tracking</div><div class="feat-val">Income, expenses, and profit analytics in one dashboard</div></div>
+        <div class="feat"><div class="feat-label">Compliance Tools</div><div class="feat-val">Stay compliant with tax and regulatory requirements</div></div>
+        <div class="feat"><div class="feat-label">Financial Literacy</div><div class="feat-val">Learn deductions, savings strategies, and tax planning</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-shelf">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-shelf')">&#10005;</button>
+    <img src="./projects/shelf-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag red">OnePlus &middot; Product Redesign</div>
+      <div class="modal-title">OnePlus Shelf</div>
+      <div class="modal-sub">Senior PM &middot; Ground-up UX redesign &amp; partner integration platform</div>
+      <div class="modal-problem"><strong>The Problem:</strong> The original OnePlus Shelf had low engagement, poor discoverability, and no framework to integrate third-party apps. Users found it cluttered and avoided it — wasting premium homescreen real estate.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Redesign Shelf from the ground up to improve UX, increase engagement, and build a scalable partner integration framework.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>4x MAU growth. Unlocked Spotify, Zomato, and Blinkit integrations. Became OnePlus's primary partner surface. EOTY recognition.</p></div>
+      </div>
+      <div class="modal-h3">What I Did</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">UX Architecture</div><div class="feat-val">Rebuilt information hierarchy and widget layout system from scratch</div></div>
+        <div class="feat"><div class="feat-label">Partner SDK</div><div class="feat-val">Designed integration framework enabling 3rd-party widget development</div></div>
+        <div class="feat"><div class="feat-label">User Research</div><div class="feat-val">Led discovery research, usability testing, and A/B optimisation</div></div>
+        <div class="feat"><div class="feat-label">Roadmap Ownership</div><div class="feat-val">Full PM ownership from concept through global launch</div></div>
+      </div>
+      <a href="https://www.kireetivarma.me/post/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations" target="_blank" class="modal-btn">Read Case Study &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-scout">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-scout')">&#10005;</button>
+    <img src="./projects/scout-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag red">OnePlus &middot; Global Scaling</div>
+      <div class="modal-title">OnePlus Scout</div>
+      <div class="modal-sub">Senior PM &middot; Scaled device search from regional to global</div>
+      <div class="modal-problem"><strong>The Problem:</strong> OnePlus Scout was a regional search feature with limited content coverage, poor multilingual support, and declining CTR — needing structural overhaul to serve a growing global user base.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Scale Scout to a globally relevant, high-performance search and discovery feature with expanded content types and multilingual support.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>200%+ CTR improvement. Expanded to 50+ countries. New content categories, faster indexing, and significantly improved user satisfaction.</p></div>
+      </div>
+      <div class="modal-h3">What I Did</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Architecture Overhaul</div><div class="feat-val">Redesigned search indexing and content ranking system</div></div>
+        <div class="feat"><div class="feat-label">Global Localisation</div><div class="feat-val">Multilingual support and region-specific content strategies</div></div>
+        <div class="feat"><div class="feat-label">Content Expansion</div><div class="feat-label">New verticals: apps, settings, contacts, and web results</div></div>
+        <div class="feat"><div class="feat-label">Performance</div><div class="feat-val">Reduced latency and improved result relevance across queries</div></div>
+      </div>
+      <a href="https://www.kireetivarma.me/post/scaling-oneplus-scout-globally-users" target="_blank" class="modal-btn">Read Case Study &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-charging">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-charging')">&#10005;</button>
+    <img src="./projects/charging-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag red">OnePlus &middot; IoT Feature</div>
+      <div class="modal-title">Nearby Charging Stations</div>
+      <div class="modal-sub">Senior PM &middot; Find charging pods at airports &amp; public spaces</div>
+      <div class="modal-problem"><strong>The Problem:</strong> OnePlus users at airports and public spaces struggled to locate charging stations, relying on maps apps not built for this need. An opportunity to add contextual utility directly in the OS.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Ship a native feature enabling users to discover nearby charging stations — airport gate pods, malls, and public spaces — from the device.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Feature shipped globally. Strong adoption at travel-heavy user segments. Covered airport gates, malls, and public infrastructure across markets.</p></div>
+      </div>
+      <div class="modal-h3">What I Did</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Location Intelligence</div><div class="feat-val">Integrated real-time data from charging infrastructure partners</div></div>
+        <div class="feat"><div class="feat-label">UX Design</div><div class="feat-val">Designed the discovery UI and map view for contextual use</div></div>
+        <div class="feat"><div class="feat-label">Data Partnerships</div><div class="feat-val">Coordinated data agreements with charging network providers</div></div>
+        <div class="feat"><div class="feat-label">Smart Notifications</div><div class="feat-val">Low-battery and location-based contextual triggers</div></div>
+      </div>
+      <a href="https://www.kireetivarma.me/post/oneplus-nearby-charging-stations-at-airport-gates" target="_blank" class="modal-btn">Read Case Study &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-foodaod">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-foodaod')">&#10005;</button>
+    <img src="./projects/foodaod-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag red">OnePlus &times; Zomato &times; Swiggy &middot; Partnership</div>
+      <div class="modal-title">Food Delivery on AOD</div>
+      <div class="modal-sub">India's first food delivery tracking on Always-on-Display</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Food delivery users constantly unlocked their phones to check order status — creating friction and battery drain. OnePlus AOD was underutilised beyond clock and notification previews.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Launch India's first AOD food delivery integration — Zomato and Swiggy live order tracking visible without unlocking the device.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Reached 50M+ users at launch. Industry-first feature with significant media coverage. Cemented OnePlus as a lifestyle-first Android brand.</p></div>
+      </div>
+      <div class="modal-h3">What I Did</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Partnership Lead</div><div class="feat-val">Led commercial and technical discussions with Zomato &amp; Swiggy PMs</div></div>
+        <div class="feat"><div class="feat-label">API Integration Design</div><div class="feat-val">Defined data contracts for real-time order status on AOD</div></div>
+        <div class="feat"><div class="feat-label">AOD UX</div><div class="feat-val">Designed minimal, glanceable order tracking UI for AOD constraints</div></div>
+        <div class="feat"><div class="feat-label">Launch Strategy</div><div class="feat-val">Coordinated joint GTM, PR, and OEM marketing campaigns</div></div>
+      </div>
+      <a href="https://www.kireetivarma.me/post/oneplus-partnership-integration-with-zomato-swiggy-for-food-deliveries-on-aod-always-on-display" target="_blank" class="modal-btn">Read Case Study &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-spotify">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-spotify')">&#10005;</button>
+    <img src="./projects/spotify-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag red">OnePlus &times; Spotify &middot; Partnership</div>
+      <div class="modal-title">Spotify on OnePlus Shelf</div>
+      <div class="modal-sub">Global music control without unlocking &middot; 30M+ device installs</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Music listeners interrupted their workflow constantly to unlock phones and manage Spotify playback. Shelf had the real estate but no high-quality media integration to justify opening it.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Launch a Spotify widget on OnePlus Shelf — enabling real-time playback control, track info, and queue management without unlocking.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Shipped globally to 30M+ device installs. Covered by XDA, 9to5Google, and Android Authority. Became Shelf's highest-engagement widget at launch.</p></div>
+      </div>
+      <div class="modal-h3">What I Did</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Partnership Lead</div><div class="feat-val">Primary contact between OnePlus and Spotify product teams</div></div>
+        <div class="feat"><div class="feat-label">Widget UX</div><div class="feat-val">Designed playback controls, album art, and now-playing UI</div></div>
+        <div class="feat"><div class="feat-label">API Framework</div><div class="feat-val">Defined Shelf's media widget SDK enabling future audio partners</div></div>
+        <div class="feat"><div class="feat-label">Global Rollout</div><div class="feat-val">Coordinated staged release across OxygenOS 12 globally</div></div>
+      </div>
+      <a href="https://www.kireetivarma.me/post/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations" target="_blank" class="modal-btn">Read Case Study &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-zomshelf">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-zomshelf')">&#10005;</button>
+    <img src="./projects/zomshelf-banner.jpg" alt="" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-tag red">OnePlus &times; Zomato &times; Blinkit &middot; 2024</div>
+      <div class="modal-title">Zomato &amp; Blinkit on Shelf</div>
+      <div class="modal-sub">"Eternal Never Settles" &middot; Quick commerce on the homescreen</div>
+      <div class="modal-problem"><strong>The Problem:</strong> Food and quick-commerce ordering required multiple app-switching steps. Shelf had evolved to support commerce widgets but needed high-value partners with real daily frequency to prove the model.</div>
+      <div class="goal-outcome-row">
+        <div class="go-box goal"><h5>&#127919; Goal</h5><p>Integrate Zomato and Blinkit as commerce widgets on Shelf — order tracking, reordering, and quick-commerce access from the homescreen layer.</p></div>
+        <div class="go-box outcome"><h5>&#10003; Outcome</h5><p>Launched Q4 2024. "Eternal Never Settles" campaign drove major press coverage. Validated Shelf as OnePlus's ambient commerce surface.</p></div>
+      </div>
+      <div class="modal-h3">What I Did</div>
+      <div class="features-grid">
+        <div class="feat"><div class="feat-label">Commerce Widget Design</div><div class="feat-val">Designed order status, reorder, and quick-add UX for Shelf</div></div>
+        <div class="feat"><div class="feat-label">Dual Partnership</div><div class="feat-val">Managed simultaneous Zomato and Blinkit integration tracks</div></div>
+        <div class="feat"><div class="feat-label">Campaign Co-Design</div><div class="feat-val">Co-created "Eternal Never Settles" brand campaign with partners</div></div>
+        <div class="feat"><div class="feat-label">SDK Standardisation</div><div class="feat-val">Used Shelf widget SDK to set commerce integration standards</div></div>
+      </div>
+      <a href="https://www.kireetivarma.me/post/eternal-never-settles-zomato-blinkit-on-oneplus-shelf" target="_blank" class="modal-btn">Read Case Study &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const root = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('kvTheme') || 'dark';
+root.setAttribute('data-theme', theme);
+themeBtn.textContent = theme === 'dark' ? '\u2600' : '\u263E';
+
+function toggleTheme() {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', theme);
+  themeBtn.textContent = theme === 'dark' ? '\u2600' : '\u263E';
+  localStorage.setItem('kvTheme', theme);
+}
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function toggleMenu() {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+}
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+const scrollTopBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+}, { passive: true });
+
+function openModal(id) {
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('open'); document.body.style.overflow = 'hidden'; }
+}
+function closeModal(id) {
+  const el = document.getElementById(id);
+  if (el) { el.classList.remove('open'); document.body.style.overflow = ''; }
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+});
+
+const revealEls = document.querySelectorAll('.reveal, .stagger');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
