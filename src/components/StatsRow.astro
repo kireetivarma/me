@@ -1,0 +1,44 @@
+---
+import { profile } from '../data/profile';
+---
+
+<div class="stats stagger">
+  {
+    profile.stats.map((s) => (
+      <div class="stat">
+        <span class="stat-value art-mono">{s.value}</span>
+        <span class="stat-label">{s.label}</span>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .stat {
+    border-top: 2px solid var(--border);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    transition: border-color 0.3s;
+  }
+  .stat:hover {
+    border-top-color: var(--red);
+  }
+  .stat-value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--text-1);
+  }
+  .stat-label {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+</style>

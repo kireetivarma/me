@@ -1,0 +1,98 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'prostudio-art', size]} aria-hidden="true">
+  <div class="board">
+    <div class="frame f1"><span class="scene art-mono">SC 01</span></div>
+    <div class="frame f2"><span class="scene art-mono">SC 02</span></div>
+    <div class="frame f3"><span class="scene art-mono">SC 03</span></div>
+    <div class="playhead"></div>
+    <span class="cursor c1">▲<i class="art-mono">director</i></span>
+    <span class="cursor c2">▲<i class="art-mono">writer</i></span>
+  </div>
+</div>
+
+<style>
+  .prostudio-art { background: radial-gradient(ellipse at 20% 20%, rgba(96, 165, 250, 0.12), transparent 60%); }
+  .board {
+    width: 70cqw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3cqw;
+    position: relative;
+    padding-bottom: 6cqw;
+  }
+  .frame {
+    aspect-ratio: 16 / 10;
+    border-radius: 2.5cqw;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: linear-gradient(150deg, rgba(96, 165, 250, 0.18), rgba(255, 255, 255, 0.03));
+    display: grid;
+    place-items: end start;
+    padding: 2cqw;
+    animation: focus 7.5s ease infinite;
+  }
+  [data-theme='light'] .frame { border-color: rgba(0, 0, 0, 0.1); }
+  .f2 { animation-delay: 2.5s; }
+  .f3 { animation-delay: 5s; }
+  .scene { font-size: 2.4cqw; color: var(--text-2); }
+  .playhead {
+    position: absolute;
+    bottom: 2.5cqw;
+    left: 0;
+    right: 0;
+    height: 1cqw;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .playhead::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 30%;
+    border-radius: 99px;
+    background: #60a5fa;
+    animation: scrub 7.5s linear infinite;
+  }
+  .cursor {
+    position: absolute;
+    font-size: 2.6cqw;
+    color: #f472b6;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+    animation: roam1 9s ease-in-out infinite;
+  }
+  .cursor i {
+    font-style: normal;
+    font-size: 2.2cqw;
+    background: #f472b6;
+    color: #1b0711;
+    border-radius: 99px;
+    padding: 0.3cqw 1.5cqw;
+  }
+  .c2 { color: #4ade80; animation: roam2 11s ease-in-out infinite; }
+  .c2 i { background: #4ade80; color: #06170c; }
+  @keyframes focus {
+    0%, 100% { border-color: rgba(255, 255, 255, 0.14); }
+    12% { border-color: #60a5fa; box-shadow: 0 0 6cqw rgba(96, 165, 250, 0.35); }
+  }
+  @keyframes scrub {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(333%); }
+  }
+  @keyframes roam1 {
+    0%, 100% { top: 18%; left: 12%; }
+    40% { top: 30%; left: 55%; }
+    70% { top: 8%; left: 38%; }
+  }
+  @keyframes roam2 {
+    0%, 100% { top: 55%; left: 70%; }
+    35% { top: 25%; left: 25%; }
+    70% { top: 50%; left: 45%; }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'pf-art', size]} aria-hidden="true">
+  <div class="pipeline art-mono">
+    <span class="fn f1">f(<em>research</em>)</span>
+    <span class="arrow">→</span>
+    <span class="fn f2">f(<em>ideate</em>)</span>
+    <span class="arrow">→</span>
+    <span class="fn f3">f(<em>version</em>)</span>
+  </div>
+  <div class="pulse"></div>
+</div>
+
+<style>
+  .pf-art { background: radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.12), transparent 65%); }
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 2.5cqw;
+    font-size: 4.4cqw;
+    color: var(--text-2);
+    position: relative;
+    z-index: 1;
+  }
+  .fn {
+    padding: 2cqw 3cqw;
+    border-radius: 2.5cqw;
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    background: rgba(139, 92, 246, 0.08);
+    animation: glow 6s ease infinite;
+  }
+  .fn em { font-style: normal; color: var(--text-1); }
+  .f2 { animation-delay: 2s; }
+  .f3 { animation-delay: 4s; }
+  .arrow { color: var(--text-3); }
+  .pulse {
+    position: absolute;
+    width: 3cqw;
+    height: 3cqw;
+    border-radius: 50%;
+    background: #8b5cf6;
+    box-shadow: 0 0 10cqw #8b5cf6;
+    animation: travel 6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+  @keyframes glow {
+    0%, 100% { border-color: rgba(139, 92, 246, 0.35); box-shadow: none; }
+    16% { border-color: #8b5cf6; box-shadow: 0 0 8cqw rgba(139, 92, 246, 0.45); }
+  }
+  @keyframes travel {
+    0% { transform: translateX(-32cqw); opacity: 0; }
+    10%, 90% { opacity: 1; }
+    100% { transform: translateX(32cqw); opacity: 0; }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, categories, heroImage, heroImageAlt } = post.data;
+const date = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<a href={`/post/${post.id}/`} class="post-card" data-categories={categories.map((c) => c.toLowerCase()).join(' ')}>
+  {
+    heroImage && (
+      <div class="post-img">
+        <Image src={heroImage} alt={heroImageAlt ?? ''} width={640} height={360} loading="lazy" />
+      </div>
+    )
+  }
+  <div class="post-body">
+    <div class="post-meta">
+      <time datetime={pubDate.toISOString()}>{date}</time>
+      {categories.map((c) => <span class="tag">{c}</span>)}
+    </div>
+    <h3 class="post-title">{title}</h3>
+    <p class="post-desc">{description}</p>
+  </div>
+</a>
+
+<style>
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+  }
+  .post-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-hover);
+  }
+  .post-img {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .post-card:hover .post-img :global(img) {
+    transform: scale(1.04);
+  }
+  .post-body {
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-3);
+  }
+  .post-title {
+    font-size: var(--text-lg);
+    color: var(--text-1);
+  }
+  .post-desc {
+    color: var(--text-2);
+    font-size: var(--text-sm);
+  }
+</style>

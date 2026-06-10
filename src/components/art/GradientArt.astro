@@ -1,0 +1,24 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'gradient-art', size]} aria-hidden="true">
+  <div class="blob"></div>
+</div>
+
+<style>
+  .gradient-art { background: var(--bg-2); }
+  .blob {
+    width: 60cqw;
+    height: 60cqw;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--accent), transparent 70%);
+    opacity: 0.25;
+    filter: blur(8cqw);
+    animation: drift 10s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    to { transform: translate(8%, -8%) scale(1.15); }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'charging-art', size]} aria-hidden="true">
+  <div class="scene">
+    <div class="map-bg">
+      <span class="pin p1">📍</span>
+      <span class="pin p2">📍</span>
+      <span class="ring"></span>
+    </div>
+    <div class="art-widget chip">
+      <span class="bolt">⚡</span>
+      <div>
+        <div class="line lg"></div>
+        <div class="line"></div>
+      </div>
+      <span class="dist art-mono">120m</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .charging-art { background: radial-gradient(ellipse at 70% 20%, rgba(16, 185, 129, 0.12), transparent 60%); }
+  .scene { width: 70cqw; position: relative; }
+  .map-bg {
+    height: 30cqw;
+    border-radius: 5cqw;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10cqw 10cqw;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  [data-theme='light'] .map-bg {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 10cqw 10cqw;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  .pin { position: absolute; font-size: 5cqw; }
+  .p1 { top: 18%; left: 24%; animation: drop 5s ease infinite; }
+  .p2 { top: 45%; left: 64%; animation: drop 5s ease 0.6s infinite; }
+  .ring {
+    position: absolute;
+    top: 52%;
+    left: 67%;
+    width: 4cqw;
+    height: 4cqw;
+    border-radius: 50%;
+    border: 0.6cqw solid #10b981;
+    animation: pulse 2.4s ease-out infinite;
+  }
+  .chip {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 4cqw;
+    align-items: center;
+    margin-top: -6cqw;
+    position: relative;
+    width: 85%;
+    margin-inline: auto;
+  }
+  .bolt { font-size: 6cqw; }
+  .dist { font-size: 4cqw; color: #10b981; }
+  .line { height: 2.2cqw; width: 55%; border-radius: 99px; background: rgba(255, 255, 255, 0.2); }
+  .line.lg { width: 85%; background: rgba(255, 255, 255, 0.42); margin-bottom: 1.8cqw; }
+  [data-theme='light'] .line { background: rgba(0, 0, 0, 0.13); }
+  [data-theme='light'] .line.lg { background: rgba(0, 0, 0, 0.32); }
+  @keyframes drop {
+    0%, 8% { opacity: 0; transform: translateY(-60%); }
+    18%, 100% { opacity: 1; transform: none; }
+  }
+  @keyframes pulse {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+interface Props {
+  metrics: { value: string; label: string }[];
+}
+const { metrics } = Astro.props;
+---
+
+<div class="metrics-band stagger">
+  {
+    metrics.map((m) => (
+      <div class="metric">
+        <span class="metric-value">{m.value}</span>
+        <span class="metric-label">{m.label}</span>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .metrics-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .metric {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .metric-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .metric-label {
+    font-size: var(--text-xs);
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+</style>

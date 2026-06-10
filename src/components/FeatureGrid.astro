@@ -1,0 +1,50 @@
+---
+interface Props {
+  title?: string;
+  features: { label: string; value: string }[];
+}
+const { title, features } = Astro.props;
+---
+
+{title && <h3 class="fg-title">{title}</h3>}
+<div class="feature-grid">
+  {
+    features.map((f) => (
+      <div class="feat">
+        <span class="feat-label">{f.label}</span>
+        <span class="feat-val">{f.value}</span>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .fg-title {
+    margin: 2rem 0 1rem;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.2rem 0 2rem;
+  }
+  .feat {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .feat-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text-1);
+    font-size: var(--text-sm);
+  }
+  .feat-val {
+    color: var(--text-2);
+    font-size: var(--text-sm);
+  }
+</style>

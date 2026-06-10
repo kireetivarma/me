@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+}
+
+const { posts } = Astro.props;
+const filters = ['All', 'Product', 'Design', 'Development', 'Consulting', 'Review', 'Partnership', 'Personal', 'Tech'];
+---
+
+<div class="grid-wrap" data-filter-grid>
+  <div class="filter-bar" role="group" aria-label="Filter posts by category">
+    {
+      filters.map((f, i) => (
+        <a
+          href={f === 'All' ? Astro.url.pathname : `?category=${f.toLowerCase()}`}
+          class="filter-pill"
+          data-filter={f.toLowerCase()}
+          role="button"
+          aria-pressed={i === 0 ? 'true' : 'false'}
+        >
+          {f}
+        </a>
+      ))
+    }
+  </div>
+  <div class="grid stagger">
+    {posts.map((p) => <PostCard post={p} />)}
+  </div>
+</div>
+
+<style>
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .filter-pill {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .filter-pill:hover {
+    color: var(--text-1);
+    border-color: var(--border-hover);
+  }
+  .filter-pill[aria-pressed='true'] {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 1.5rem;
+  }
+</style>
+
+<script>
+  // Same filter behavior as ProjectGrid; selector scoped per grid wrapper.
+  for (const wrap of document.querySelectorAll('[data-filter-grid]')) {
+    const pills = wrap.querySelectorAll<HTMLAnchorElement>('.filter-pill');
+    const cards = wrap.querySelectorAll<HTMLElement>('[data-categories]');
+
+    function apply(filter: string) {
+      for (const pill of pills) pill.setAttribute('aria-pressed', String(pill.dataset.filter === filter));
+      for (const card of cards) {
+        card.hidden = filter !== 'all' && !(card.dataset.categories ?? '').split(' ').includes(filter);
+      }
+    }
+
+    for (const pill of pills) {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        const f = pill.dataset.filter ?? 'all';
+        apply(f);
+        const url = new URL(location.href);
+        if (f === 'all') url.searchParams.delete('category');
+        else url.searchParams.set('category', f);
+        history.replaceState(null, '', url);
+      });
+    }
+
+    const initial = new URLSearchParams(location.search).get('category');
+    if (initial) apply(initial.toLowerCase());
+  }
+</script>

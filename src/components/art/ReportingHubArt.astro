@@ -1,0 +1,83 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'rh-art', size]} aria-hidden="true">
+  <div class="dash">
+    <div class="tile kpi">
+      <span class="v art-mono">98.2%</span>
+      <span class="l"></span>
+    </div>
+    <div class="tile bars">
+      <i style="--h: 45%"></i><i style="--h: 75%"></i><i style="--h: 55%"></i><i style="--h: 92%"></i><i style="--h: 65%"></i>
+    </div>
+    <div class="tile donut">
+      <span class="ring"></span>
+    </div>
+    <div class="tile wide">
+      <span class="l w80"></span>
+      <span class="l w55"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .rh-art { background: radial-gradient(ellipse at 80% 80%, rgba(245, 158, 11, 0.1), transparent 60%); }
+  .dash {
+    width: 68cqw;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 3cqw;
+  }
+  .tile {
+    border-radius: 3cqw;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 3.5cqw;
+    min-height: 18cqw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2cqw;
+  }
+  [data-theme='light'] .tile { background: rgba(255, 255, 255, 0.8); border-color: rgba(0, 0, 0, 0.08); }
+  .wide { grid-column: 1 / -1; min-height: 10cqw; flex-direction: column; align-items: flex-start; }
+  .v { font-size: 5.5cqw; font-weight: 700; color: #f59e0b; }
+  .l { height: 2cqw; width: 60%; border-radius: 99px; background: rgba(255, 255, 255, 0.18); }
+  .l.w80 { width: 80%; }
+  .l.w55 { width: 55%; }
+  [data-theme='light'] .l { background: rgba(0, 0, 0, 0.12); }
+  .bars {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1.8cqw;
+  }
+  .bars i {
+    flex: 1;
+    height: var(--h);
+    border-radius: 1cqw 1cqw 0 0;
+    background: linear-gradient(to top, rgba(245, 158, 11, 0.4), #f59e0b);
+    transform-origin: bottom;
+    animation: rise 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+  .bars i:nth-child(2) { animation-delay: 0.1s; }
+  .bars i:nth-child(3) { animation-delay: 0.2s; }
+  .bars i:nth-child(4) { animation-delay: 0.3s; }
+  .bars i:nth-child(5) { animation-delay: 0.4s; }
+  .donut { align-items: center; }
+  .ring {
+    width: 11cqw;
+    height: 11cqw;
+    border-radius: 50%;
+    border: 2cqw solid rgba(255, 255, 255, 0.12);
+    border-top-color: #f59e0b;
+    border-right-color: #f59e0b;
+    animation: spin 4s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+  @keyframes rise {
+    0% { transform: scaleY(0.2); }
+    30%, 100% { transform: scaleY(1); }
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>

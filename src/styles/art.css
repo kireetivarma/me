@@ -1,0 +1,69 @@
+/*
+ * Shared chrome for project component-art.
+ * Every art root is a container so internals scale with cqw units across
+ * thumb / hero / ambient sizes from one markup.
+ */
+.art {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+/* Animations idle until IntersectionObserver adds .in to a .reveal ancestor
+   (or .art itself). */
+.art * {
+  animation-play-state: paused;
+}
+.in .art *,
+.art.in * {
+  animation-play-state: running;
+}
+
+/* Widget card — the OnePlus Shelf visual primitive */
+.art-widget {
+  background: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9cqw;
+  padding: 5cqw;
+  box-shadow: 0 4cqw 12cqw rgba(0, 0, 0, 0.35);
+}
+[data-theme='light'] .art-widget {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Phone frame */
+.art-phone {
+  border-radius: 12cqw;
+  border: 1.2cqw solid rgba(255, 255, 255, 0.18);
+  background: #06070a;
+  box-shadow: 0 6cqw 18cqw rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Search pill (Scout) */
+.art-pill {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 3.5cqw 5cqw;
+}
+[data-theme='light'] .art-pill {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Mono code text inside art */
+.art-mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}

@@ -1,0 +1,97 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  projects: CollectionEntry<'work'>[];
+  id?: string;
+}
+
+const { projects, id = 'work-grid' } = Astro.props;
+const filters = ['All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', 'OnePlus'];
+---
+
+<div class="grid-wrap" id={id} data-filter-grid>
+  <div class="filter-bar" role="group" aria-label="Filter projects by category">
+    {
+      filters.map((f, i) => (
+        <a
+          href={f === 'All' ? Astro.url.pathname : `?category=${f.toLowerCase()}`}
+          class="filter-pill"
+          data-filter={f.toLowerCase()}
+          role="button"
+          aria-pressed={i === 0 ? 'true' : 'false'}
+        >
+          {f}
+        </a>
+      ))
+    }
+  </div>
+  <div class="grid stagger">
+    {projects.map((p) => <ProjectCard project={p} />)}
+  </div>
+</div>
+
+<style>
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .filter-pill {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .filter-pill:hover {
+    color: var(--text-1);
+    border-color: var(--border-hover);
+  }
+  .filter-pill[aria-pressed='true'] {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 1.5rem;
+  }
+</style>
+
+<script>
+  // Category filter: progressive enhancement over real ?category= links.
+  for (const wrap of document.querySelectorAll('[data-filter-grid]')) {
+    const pills = wrap.querySelectorAll<HTMLAnchorElement>('.filter-pill');
+    const cards = wrap.querySelectorAll<HTMLElement>('[data-categories]');
+
+    function apply(filter: string) {
+      for (const pill of pills) pill.setAttribute('aria-pressed', String(pill.dataset.filter === filter));
+      for (const card of cards) {
+        card.hidden = filter !== 'all' && !(card.dataset.categories ?? '').split(' ').includes(filter);
+      }
+    }
+
+    for (const pill of pills) {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        const f = pill.dataset.filter ?? 'all';
+        apply(f);
+        const url = new URL(location.href);
+        if (f === 'all') url.searchParams.delete('category');
+        else url.searchParams.set('category', f);
+        history.replaceState(null, '', url);
+      });
+    }
+
+    const initial = new URLSearchParams(location.search).get('category');
+    if (initial) apply(initial.toLowerCase());
+  }
+</script>

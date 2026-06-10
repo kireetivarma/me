@@ -1,0 +1,64 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'imux-art', size]} aria-hidden="true">
+  <div class="scene">
+    <div class="q art-mono">"top customers by revenue"</div>
+    <div class="sql art-mono">SELECT name, SUM(amount) …</div>
+    <div class="table">
+      <div class="row head"><i></i><i></i><i></i></div>
+      <div class="row"><i></i><i></i><i></i></div>
+      <div class="row"><i></i><i></i><i></i></div>
+      <div class="row"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .imux-art { background: radial-gradient(ellipse at 30% 30%, rgba(56, 189, 248, 0.12), transparent 60%); }
+  .scene { width: 68cqw; }
+  .q {
+    font-size: 4cqw;
+    color: var(--text-1);
+    margin-bottom: 2.5cqw;
+  }
+  .sql {
+    font-size: 3cqw;
+    color: #38bdf8;
+    margin-bottom: 4cqw;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typeout 6s steps(28) infinite;
+  }
+  .table { display: grid; gap: 1.8cqw; }
+  .row {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr;
+    gap: 2cqw;
+    opacity: 0;
+    animation: appear 6s ease infinite;
+  }
+  .row:nth-child(2) { animation-delay: 0.25s; }
+  .row:nth-child(3) { animation-delay: 0.5s; }
+  .row:nth-child(4) { animation-delay: 0.75s; }
+  .row i {
+    height: 3.6cqw;
+    border-radius: 1.2cqw;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .row.head i { background: rgba(56, 189, 248, 0.35); }
+  [data-theme='light'] .row i { background: rgba(0, 0, 0, 0.1); }
+  [data-theme='light'] .row.head i { background: rgba(2, 132, 199, 0.35); }
+  @keyframes typeout {
+    0% { width: 0; }
+    35%, 100% { width: 100%; }
+  }
+  @keyframes appear {
+    0%, 38% { opacity: 0; transform: translateY(25%); }
+    50%, 95% { opacity: 1; transform: none; }
+    100% { opacity: 0; }
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { profile } from '../data/profile';
+
+const tools = ['Figma', 'Sketch', 'Miro', 'Claude & LLM tooling', 'Bubble', 'Power BI', 'Google Analytics', 'UserTesting', 'Asana', 'Trello'];
+---
+
+<BaseLayout title="About — Kireeti Varma" description="Designer turned PM turned AI builder. 11+ years building software, ex-OnePlus Senior PM & Lead Product Strategy, Employee of the Year 2021, 1x founder.">
+  <section class="section">
+    <div class="container about">
+      <p class="section-label reveal">// about</p>
+      <h1 class="section-title reveal">Pixels first.<br />Then platforms. Now intelligence.</h1>
+
+      <div class="about-grid">
+        <div class="prose about-prose reveal">
+          <p>
+            I'm Kireeti — a passionate product leader with <strong>11+ years building software</strong> and 7+ years
+            in product management. I started as a designer, learned to build, and ended up leading products used by
+            hundreds of millions of people.
+          </p>
+          <p>
+            At <strong>OnePlus</strong> I was Senior Product Manager &amp; Lead, Product Strategy — redesigning Shelf
+            from the ground up and rolling it out globally, scaling Scout to 50+ countries, and shipping India's first
+            food-delivery tracking on Always-on Display. I led partnerships with
+            <strong>Spotify, Snapchat, Netflix, Zomato, Blinkit, Swiggy and Grab</strong>, and was named
+            <strong>Employee of the Year 2021</strong>.
+          </p>
+          <p>
+            Before that, I co-founded a product design agency (clients across fintech and health — Labh, Pluto Money,
+            Dvara Money, Leucine) and co-founded <strong>Imux</strong>, a seed-funded natural-language-interface-to-databases
+            SaaS.
+          </p>
+          <p>
+            Today I build AI-native products end-to-end — <a href="/work/product-f/">Product f()</a>, an AI operating
+            system for product teams, plus <a href="/work/petfolk/">Petfolk</a>, <a href="/work/labh/">Labh</a>,
+            <a href="/work/pro-studio-space/">Pro Studio</a> and <a href="/work/itihasa-collective/">Itihasa Collective</a> —
+            designing, developing and deploying solo with AI in the loop.
+          </p>
+          <p>Based in {profile.location.replace(' — ', ', ')}.</p>
+        </div>
+
+        <aside class="about-side reveal">
+          <div class="side-block">
+            <h2 class="side-title art-mono">// highlights</h2>
+            <ul class="side-list">
+              <li>200M+ users reached across 50+ countries</li>
+              <li>OnePlus Employee of the Year 2021</li>
+              <li>9+ products built &amp; shipped</li>
+              <li>1x founder, seed-funded (Imux)</li>
+              <li>SEBI-certified fintech (Labh)</li>
+              <li>~₹1.5 Cr recovered for 5,000 drivers (Cabdost)</li>
+            </ul>
+          </div>
+          <div class="side-block">
+            <h2 class="side-title art-mono">// toolkit</h2>
+            <div class="side-tags">
+              {tools.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+          <div class="side-block">
+            <h2 class="side-title art-mono">// elsewhere</h2>
+            <ul class="side-list links">
+              <li><a href={profile.social.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></li>
+              <li><a href={profile.social.x} target="_blank" rel="noopener">X / Twitter ↗</a></li>
+              <li><a href={profile.social.calendly} target="_blank" rel="noopener">Calendly ↗</a></li>
+              <li><a href="/rss.xml">RSS feed</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+  <ContactSection />
+</BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(300px, 7fr) 4fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: 2.5rem;
+  }
+  @media (max-width: 820px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  .side-block {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    padding: 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .side-title {
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.9rem;
+  }
+  .side-list {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--text-2);
+    font-size: var(--text-sm);
+  }
+  .side-list li::before {
+    content: '— ';
+    color: var(--text-3);
+  }
+  .side-list.links li::before { content: ''; }
+  .side-list a { color: var(--text-1); text-decoration: none; }
+  .side-list a:hover { color: var(--red); }
+  .side-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+</style>

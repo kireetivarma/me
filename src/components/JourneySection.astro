@@ -1,0 +1,376 @@
+---
+import { journey } from '../data/journey';
+import { cities } from '../data/cities';
+import worldMap from '../data/world-map.json';
+import { getCollection } from 'astro:content';
+
+const work = await getCollection('work', ({ data }) => !data.draft);
+const titleOf = (slug: string) => work.find((w) => w.id === slug)?.data.title ?? slug;
+
+const X = (lng: number) => ((lng + 180) / 360) * worldMap.width;
+const Y = (lat: number) => ((90 - lat) / 180) * worldMap.height;
+
+type MarkerKind = 'base' | 'hq' | 'loc';
+interface Marker { kind: MarkerKind; x: number; y: number; name: string }
+
+function markersFor(geo: (typeof journey)[number]['geo']): Marker[] {
+  const out: Marker[] = [];
+  const push = (kind: MarkerKind, key?: string) => {
+    const c = key ? cities[key] : undefined;
+    if (c) out.push({ kind, x: X(c.lng), y: Y(c.lat), name: c.name });
+  };
+  push('base', geo.base);
+  push('hq', geo.hq);
+  for (const l of geo.locations ?? []) push('loc', l);
+  return out;
+}
+
+// Aggregate "all" view shown by default.
+const allCountries = new Set<string>();
+let allWorldwide = false;
+for (const m of journey) {
+  if (m.geo.reach === 'worldwide') allWorldwide = true;
+  else for (const c of m.geo.reach) allCountries.add(c);
+}
+
+const mapState: Record<string, { reach: string[] | 'worldwide'; markers: Marker[]; users?: string }> = {
+  all: {
+    reach: allWorldwide ? 'worldwide' : [...allCountries],
+    markers: journey.flatMap((m) => markersFor(m.geo)),
+    users: '200M+ users · 50+ countries',
+  },
+};
+for (const m of journey) {
+  mapState[m.id] = { reach: m.geo.reach, markers: markersFor(m.geo), users: m.geo.users };
+}
+---
+
+<section class="section journey" id="journey">
+  <div class="container">
+    <p class="section-label reveal">// the journey</p>
+    <h2 class="section-title reveal">A decade across design, product &amp; AI</h2>
+    <p class="section-sub reveal">
+      From design consulting in Hyderabad to 200M+ users at OnePlus to building AI products from Calgary —
+      select a chapter to see where it happened and who it reached.
+    </p>
+
+    <div class="journey-grid">
+      <ol class="timeline" id="timeline">
+        {
+          journey.map((m, i) => (
+            <li class:list={['milestone', { active: i === 0 }]} data-milestone={m.id}>
+              <button class="ms-head" aria-expanded={i === 0 ? 'true' : 'false'}>
+                <span class="ms-years art-mono">{m.years}</span>
+                <span class="ms-title">{m.title}</span>
+                <span class="ms-role">{m.role}</span>
+              </button>
+              <div class="ms-body">
+                <p class="ms-desc">{m.description}</p>
+                {m.highlight && <p class="ms-highlight art-mono">★ {m.highlight}</p>}
+                {m.workSlugs.length > 0 && (
+                  <div class="ms-links">
+                    {m.workSlugs.map((s) => (
+                      <a href={`/work/${s}/`} class="ms-link">
+                        {titleOf(s)} →
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="map-panel reveal">
+        <svg
+          id="impact-map"
+          viewBox={worldMap.viewBox}
+          role="img"
+          aria-label="World map of cities worked from and countries reached"
+          data-mode="all"
+        >
+          <g class="countries">
+            {worldMap.countries.map((c) => <path class="country" data-iso={c.iso} d={c.d}><title>{c.name}</title></path>)}
+          </g>
+          {
+            Object.entries(mapState).map(([id, s]) => (
+              <g class="markers" data-milestone={id} data-active={id === 'all' ? 'true' : 'false'}>
+                {s.markers.map((mk) => (
+                  <g class={`marker ${mk.kind}`} transform={`translate(${mk.x.toFixed(1)} ${mk.y.toFixed(1)})`}>
+                    {mk.kind === 'hq' ? (
+                      <rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" />
+                    ) : (
+                      <circle r={mk.kind === 'base' ? 5 : 3.5} />
+                    )}
+                    {mk.kind === 'base' && <circle class="pulse" r="5" />}
+                    <text y="-9">{mk.name}</text>
+                  </g>
+                ))}
+              </g>
+            ))
+          }
+        </svg>
+        <div class="map-foot">
+          <span class="map-users art-mono" id="map-users">200M+ users · 50+ countries</span>
+          <ul class="legend">
+            <li><i class="lg-base"></i> Base</li>
+            <li><i class="lg-hq"></i> HQ</li>
+            <li><i class="lg-loc"></i> Business locations</li>
+            <li><i class="lg-reach"></i> Users reached</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="map-state" set:html={JSON.stringify(
+  Object.fromEntries(Object.entries(mapState).map(([k, v]) => [k, { reach: v.reach, users: v.users }]))
+)} />
+
+<style define:vars={{}}>
+  .journey-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 5fr) 7fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .journey-grid { grid-template-columns: 1fr; }
+    .map-panel { position: static; order: -1; }
+  }
+
+  /* Timeline */
+  .timeline {
+    list-style: none;
+    position: relative;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .milestone {
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    position: relative;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .milestone::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 1.45rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text-3);
+    transition: background 0.25s, box-shadow 0.25s;
+  }
+  .milestone:hover {
+    background: var(--bg-card);
+    border-color: var(--border);
+  }
+  .milestone.active {
+    background: var(--bg-card);
+    border-color: var(--border-hover);
+  }
+  .milestone.active::before {
+    background: var(--red);
+    box-shadow: 0 0 12px rgba(245, 5, 20, 0.7);
+  }
+  .ms-head {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: 1.1rem 1.2rem 0.2rem 1.6rem;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    display: grid;
+    gap: 0.3rem;
+  }
+  .ms-body {
+    padding: 0 1.2rem 1.1rem 1.6rem;
+    display: none;
+    gap: 0.45rem;
+    flex-direction: column;
+  }
+  .milestone.active .ms-body { display: flex; }
+  .ms-years {
+    font-size: var(--text-xs);
+    color: var(--red);
+    letter-spacing: 0.1em;
+  }
+  .ms-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: var(--text-1);
+  }
+  .ms-role {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .ms-desc {
+    font-size: var(--text-sm);
+    color: var(--text-2);
+  }
+  .ms-highlight {
+    font-size: var(--text-xs);
+    color: #fbbf24;
+  }
+  .ms-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+    margin-top: 0.3rem;
+  }
+  .ms-link {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--text-1);
+    text-decoration: none;
+    border-bottom: 1px solid var(--red);
+    padding-bottom: 1px;
+  }
+  .ms-link:hover { color: var(--red); }
+
+  /* Map */
+  .map-panel {
+    position: sticky;
+    top: 80px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    padding: 1.2rem;
+  }
+  #impact-map { width: 100%; height: auto; }
+  .country {
+    fill: var(--map-land);
+    stroke: var(--bg);
+    stroke-width: 0.4;
+    transition: fill 0.5s;
+  }
+  .country.lit,
+  #impact-map[data-mode='worldwide'] .country {
+    fill: var(--map-land-active);
+  }
+  .markers { opacity: 0; transition: opacity 0.45s; pointer-events: none; }
+  .markers[data-active='true'] { opacity: 1; }
+  .marker circle, .marker rect { fill: var(--red); }
+  .marker.hq rect { fill: #fbbf24; }
+  .marker.loc circle { fill: var(--text-2); }
+  .marker text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--text-2);
+    text-anchor: middle;
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 3;
+  }
+  .marker .pulse {
+    fill: none;
+    stroke: var(--red);
+    stroke-width: 1.5;
+    animation: map-pulse 2.2s ease-out infinite;
+  }
+  @keyframes map-pulse {
+    from { transform: scale(1); opacity: 0.9; }
+    to { transform: scale(3.2); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marker .pulse { animation: none; opacity: 0; }
+  }
+  .map-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border);
+  }
+  .map-users {
+    font-size: var(--text-sm);
+    color: var(--text-1);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    list-style: none;
+    font-size: var(--text-xs);
+    color: var(--text-3);
+  }
+  .legend li { display: flex; align-items: center; gap: 0.35rem; }
+  .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .lg-base { background: var(--red); }
+  .lg-hq { background: #fbbf24; border-radius: 2px !important; transform: rotate(45deg); }
+  .lg-loc { background: var(--text-2); }
+  .lg-reach { background: var(--map-land-active); border-radius: 2px !important; }
+</style>
+
+<script>
+  const svg = document.getElementById('impact-map');
+  const usersEl = document.getElementById('map-users');
+  const state = JSON.parse(document.getElementById('map-state')?.textContent ?? '{}') as Record<
+    string,
+    { reach: string[] | 'worldwide'; users?: string }
+  >;
+  const milestones = document.querySelectorAll<HTMLLIElement>('.milestone');
+  const markerGroups = document.querySelectorAll<SVGGElement>('.markers');
+  const countryEls = new Map<string, SVGPathElement[]>();
+  document.querySelectorAll<SVGPathElement>('.country').forEach((p) => {
+    const iso = p.dataset.iso!;
+    if (!countryEls.has(iso)) countryEls.set(iso, []);
+    countryEls.get(iso)!.push(p);
+  });
+
+  function show(id: string) {
+    const s = state[id];
+    if (!svg || !s) return;
+    svg.dataset.mode = s.reach === 'worldwide' ? 'worldwide' : 'select';
+    document.querySelectorAll('.country.lit').forEach((c) => c.classList.remove('lit'));
+    if (Array.isArray(s.reach)) for (const iso of s.reach) countryEls.get(iso)?.forEach((c) => c.classList.add('lit'));
+    for (const g of markerGroups) g.dataset.active = String(g.dataset.milestone === id);
+    if (usersEl && s.users) usersEl.textContent = s.users;
+    for (const m of milestones) {
+      const on = m.dataset.milestone === id;
+      m.classList.toggle('active', on);
+      m.querySelector('.ms-head')?.setAttribute('aria-expanded', String(on));
+    }
+  }
+
+  for (const m of milestones) {
+    m.querySelector('.ms-head')?.addEventListener('click', () => show(m.dataset.milestone!));
+  }
+
+  // Show the first milestone once the section scrolls into view; aggregate before that.
+  const first = milestones[0];
+  if (first) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting && !document.querySelector('.milestone.active')) {
+          show(first.dataset.milestone!);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(first);
+  }
+  show('all');
+</script>
