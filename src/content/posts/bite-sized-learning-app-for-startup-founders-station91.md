@@ -34,7 +34,7 @@ With our initial discovery of problem scenarios, we had 3-4 meetings before the 
 
 The 5 member startup team consists of one product designer, one product engineer, one mobile developer, one marketing & growth specialist and one content strategist.
 
-See [Product Brief](https://www.kireetivarma.me/_files/ugd/5436f8_9cfdd5df58eb430392cc780eb56fdf6a.pdf)
+See [Product Brief](/files/5436f8_9cfdd5df58eb430392cc780eb56fdf6a.pdf)
 
 Sprint began on 31 March 2019
 
@@ -46,19 +46,19 @@ I started to teardown these products to analyse and understand how each of them 
 
 In my research to understand the in Interface and Interaction trends, I have identified the latest usability approaches keeping in mind how large the mobile screens are becoming.
 
-See [Product Comparison Sheet](https://www.kireetivarma.me/_files/ugd/5436f8_0a8d464a7c3b45cb8c22d2672b395863.pdf?index=true)
+See [Product Comparison Sheet](/files/5436f8_0a8d464a7c3b45cb8c22d2672b395863.pdf)
 
 ### Designing the User Experience
 
 With our research findings, I started to draft the User Persona and then identify the Use Cases and Job Scenarios. I broke them down further to smaller situation, motivations and outcomes to derive the interactions based on Jobs-to-be-done framework.
 
-See [Job Scenarios Sheet](https://www.kireetivarma.me/_files/ugd/5436f8_22470ea0594243e3aedc32f8a0d1cff8.pdf)
+See [Job Scenarios Sheet](/files/5436f8_22470ea0594243e3aedc32f8a0d1cff8.pdf)
 
 From the identified interactions, I have built a component meta-data sheet that defines the nouns, properties and their types to help the designers and developers. This also helps to frame the Information Architecture.
 
 This level of detailed information now allowed me to sketch my ideas and prepare the wireframes for the minimum viable product for Station91. I presented them to the team, took feedback and iterated.
 
-See [Metadata Sheet](https://www.kireetivarma.me/_files/ugd/5436f8_9a72ab5b7d8b4f89b0c7f0f4116424c7.pdf)
+See [Metadata Sheet](/files/5436f8_9a72ab5b7d8b4f89b0c7f0f4116424c7.pdf)
 
 ![Station91 app wireframe](../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/02.jpg)
 
