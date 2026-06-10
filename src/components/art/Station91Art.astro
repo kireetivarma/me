@@ -1,0 +1,74 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 's91-art', size]} aria-hidden="true">
+  <div class="deck">
+    <div class="lesson l3"></div>
+    <div class="lesson l2"></div>
+    <div class="lesson l1">
+      <span class="num art-mono">02</span>
+      <div>
+        <div class="line lg"></div>
+        <div class="line"></div>
+      </div>
+      <div class="prog"><i></i></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .s91-art { background: radial-gradient(ellipse at 70% 30%, rgba(250, 204, 21, 0.1), transparent 60%); }
+  .deck { width: 62cqw; position: relative; height: 36cqw; }
+  .lesson {
+    position: absolute;
+    inset: 0;
+    border-radius: 5cqw;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--bg-2);
+    box-shadow: 0 4cqw 12cqw rgba(0, 0, 0, 0.3);
+  }
+  .l2 { transform: translateY(-9%) scale(0.92); opacity: 0.55; }
+  .l3 { transform: translateY(-17%) scale(0.84); opacity: 0.3; }
+  .l1 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 3.5cqw;
+    align-items: center;
+    padding: 5cqw;
+    animation: swipe 6s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+  .num {
+    font-size: 8cqw;
+    font-weight: 700;
+    color: #facc15;
+  }
+  .line { height: 2.4cqw; width: 60%; border-radius: 99px; background: rgba(255, 255, 255, 0.2); }
+  .line.lg { width: 90%; background: rgba(255, 255, 255, 0.45); margin-bottom: 2cqw; }
+  [data-theme='light'] .line { background: rgba(0, 0, 0, 0.13); }
+  [data-theme='light'] .line.lg { background: rgba(0, 0, 0, 0.32); }
+  .prog {
+    grid-column: 1 / -1;
+    height: 1.4cqw;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .prog i {
+    display: block;
+    height: 100%;
+    background: #facc15;
+    transform-origin: left;
+    animation: load 6s linear infinite;
+  }
+  @keyframes load {
+    0% { transform: scaleX(0); }
+    78%, 100% { transform: scaleX(1); }
+  }
+  @keyframes swipe {
+    0%, 78% { transform: none; opacity: 1; }
+    92%, 100% { transform: translateX(35%) rotate(5deg); opacity: 0; }
+  }
+</style>

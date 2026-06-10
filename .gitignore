@@ -9,6 +9,7 @@ Thumbs.db
 # Node (if you ever add build tools)
 node_modules/
 dist/
+.astro/
 .env
 
 # Temp/local files

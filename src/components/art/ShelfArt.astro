@@ -1,0 +1,87 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'shelf-art', size]} aria-hidden="true">
+  <div class="stack">
+    <div class="art-widget w-weather">
+      <span class="w-icon">☀</span>
+      <div>
+        <div class="w-line lg"></div>
+        <div class="w-line"></div>
+      </div>
+      <span class="w-temp art-mono">24°</span>
+    </div>
+    <div class="art-widget w-steps">
+      <div class="ring"><div class="ring-fill"></div></div>
+      <div>
+        <div class="w-line lg"></div>
+        <div class="w-line"></div>
+      </div>
+    </div>
+    <div class="art-widget w-new">
+      <span class="dot"></span>
+      <div>
+        <div class="w-line lg"></div>
+        <div class="w-line"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .shelf-art { background: linear-gradient(160deg, rgba(245, 5, 20, 0.12), transparent 55%); }
+  .stack {
+    width: 64cqw;
+    display: grid;
+    gap: 4cqw;
+  }
+  .art-widget {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 4cqw;
+  }
+  .w-line {
+    height: 2.4cqw;
+    width: 55%;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .w-line.lg { width: 85%; margin-bottom: 2cqw; background: rgba(255, 255, 255, 0.45); }
+  [data-theme='light'] .w-line { background: rgba(0, 0, 0, 0.15); }
+  [data-theme='light'] .w-line.lg { background: rgba(0, 0, 0, 0.35); }
+  .w-icon { font-size: 7cqw; }
+  .w-temp { font-size: 6cqw; color: var(--text-1); }
+  .ring {
+    width: 10cqw;
+    height: 10cqw;
+    border-radius: 50%;
+    border: 1.6cqw solid rgba(255, 255, 255, 0.15);
+    position: relative;
+  }
+  .ring-fill {
+    position: absolute;
+    inset: -1.6cqw;
+    border-radius: 50%;
+    border: 1.6cqw solid transparent;
+    border-top-color: var(--red);
+    border-right-color: var(--red);
+    animation: spin 3.2s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+  .dot {
+    width: 3cqw;
+    height: 3cqw;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 8cqw var(--red);
+  }
+  .w-new { animation: slide-in 4.5s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+  @keyframes slide-in {
+    0%, 12% { opacity: 0; transform: translateY(45%) scale(0.96); }
+    28%, 88% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: translateY(-12%); }
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>

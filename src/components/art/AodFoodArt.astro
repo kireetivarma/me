@@ -1,0 +1,94 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'aod-art', size]} aria-hidden="true">
+  <div class="art-phone phone">
+    <div class="clock art-mono">21:42</div>
+    <div class="order">
+      <div class="order-title">Your order is on the way</div>
+      <div class="track">
+        <span class="node done"></span>
+        <span class="bar"><i></i></span>
+        <span class="node rider">🛵</span>
+        <span class="bar dim"><i></i></span>
+        <span class="node"></span>
+      </div>
+      <div class="eta art-mono">ETA 12 min</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .aod-art { background: radial-gradient(ellipse at 50% 100%, rgba(245, 5, 20, 0.14), transparent 60%); }
+  .phone {
+    width: 46cqw;
+    aspect-ratio: 9 / 17;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8cqw;
+  }
+  .clock {
+    font-size: 9cqw;
+    font-weight: 200;
+    color: #e2e8f0;
+    letter-spacing: 0.04em;
+  }
+  .order { width: 80%; text-align: center; }
+  .order-title {
+    font-size: 2.6cqw;
+    color: #94a3b8;
+    margin-bottom: 3cqw;
+  }
+  .track {
+    display: flex;
+    align-items: center;
+    gap: 1cqw;
+  }
+  .node {
+    width: 2.6cqw;
+    height: 2.6cqw;
+    border-radius: 50%;
+    background: #334155;
+    flex-shrink: 0;
+  }
+  .node.done { background: var(--red); }
+  .node.rider {
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 4.5cqw;
+    animation: bob 1.6s ease-in-out infinite;
+  }
+  .bar {
+    flex: 1;
+    height: 0.8cqw;
+    border-radius: 99px;
+    background: #1e293b;
+    overflow: hidden;
+  }
+  .bar i {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: var(--red);
+    transform-origin: left;
+    animation: fill 5s ease-in-out infinite;
+  }
+  .bar.dim i { animation: fill2 5s ease-in-out infinite; }
+  .eta { font-size: 2.8cqw; color: #64748b; margin-top: 3cqw; }
+  @keyframes bob {
+    50% { transform: translateY(-12%); }
+  }
+  @keyframes fill {
+    0% { transform: scaleX(0); }
+    45%, 100% { transform: scaleX(1); }
+  }
+  @keyframes fill2 {
+    0%, 45% { transform: scaleX(0); }
+    90%, 100% { transform: scaleX(0.7); }
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+import { profile } from '../data/profile';
+import * as simpleIcons from 'simple-icons';
+
+interface IconDef {
+  path: string;
+  hex: string;
+  title: string;
+}
+
+const cells = profile.brands.map((b) => {
+  const icon = 'icon' in b && b.icon ? ((simpleIcons as Record<string, unknown>)[b.icon] as IconDef | undefined) : undefined;
+  return {
+    name: b.name,
+    path: icon?.path,
+    color: icon ? `#${icon.hex}` : ('color' in b ? b.color : undefined),
+  };
+});
+---
+
+<section class="section">
+  <div class="container">
+    <p class="section-label reveal">// collaborated with</p>
+    <h2 class="section-title reveal">Global brands &amp; teams</h2>
+    <p class="section-sub reveal">
+      Brands, platforms, and product teams across consumer tech, fintech, food delivery, and entertainment.
+    </p>
+    <div class="brand-grid stagger">
+      {
+        cells.map((b) => (
+          <div class="brand-cell" style={b.color ? `--brand:${b.color}` : undefined} title={b.name}>
+            {b.path ? (
+              <svg viewBox="0 0 24 24" class="brand-logo" role="img" aria-label={b.name}>
+                <path d={b.path} />
+              </svg>
+            ) : (
+              <span class="brand-name">{b.name}</span>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .brand-cell {
+    --brand: var(--text-1);
+    background: var(--bg);
+    padding: 1.7rem 1rem;
+    display: grid;
+    place-items: center;
+    min-height: 86px;
+    transition: background 0.3s;
+  }
+  .brand-cell:hover {
+    background: var(--bg-card-hover);
+  }
+  .brand-logo {
+    width: 34px;
+    height: 34px;
+  }
+  .brand-logo path {
+    fill: var(--text-3);
+    transition: fill 0.3s;
+  }
+  .brand-cell:hover .brand-logo path {
+    fill: var(--brand);
+  }
+  .brand-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    color: var(--text-3);
+    letter-spacing: 0.01em;
+    transition: color 0.3s;
+    text-align: center;
+  }
+  .brand-cell:hover .brand-name {
+    color: var(--brand);
+  }
+</style>

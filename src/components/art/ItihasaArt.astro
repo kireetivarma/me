@@ -1,0 +1,63 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'itihasa-art', size]} aria-hidden="true">
+  <div class="script">
+    <div class="slug art-mono">INT. WRITERS ROOM — NIGHT</div>
+    <div class="line w90"></div>
+    <div class="line w70"></div>
+    <div class="char art-mono">WRITER</div>
+    <div class="line w60 c"></div>
+    <div class="line w50 c"></div>
+    <div class="lock">🔒 <span class="art-mono">IP protected</span></div>
+  </div>
+</div>
+
+<style>
+  .itihasa-art { background: radial-gradient(ellipse at 75% 75%, rgba(244, 114, 182, 0.1), transparent 60%); }
+  .script {
+    width: 60cqw;
+    background: var(--bg-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 3cqw;
+    padding: 5cqw;
+    position: relative;
+    box-shadow: 0 4cqw 14cqw rgba(0, 0, 0, 0.35);
+  }
+  [data-theme='light'] .script { border-color: rgba(0, 0, 0, 0.1); }
+  .slug { font-size: 2.8cqw; color: var(--text-1); margin-bottom: 3cqw; }
+  .char {
+    font-size: 2.6cqw;
+    color: var(--text-2);
+    text-align: center;
+    margin: 3cqw 0 2cqw;
+  }
+  .line {
+    height: 2cqw;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.18);
+    margin-bottom: 2.2cqw;
+    transform-origin: left;
+    animation: write 7s ease infinite;
+  }
+  [data-theme='light'] .line { background: rgba(0, 0, 0, 0.12); }
+  .line.c { margin-inline: auto; transform-origin: center; }
+  .w90 { width: 90%; }
+  .w70 { width: 70%; animation-delay: 0.4s; }
+  .w60 { width: 60%; animation-delay: 0.8s; }
+  .w50 { width: 50%; animation-delay: 1.2s; }
+  .lock {
+    display: flex;
+    align-items: center;
+    gap: 1.5cqw;
+    font-size: 2.6cqw;
+    color: #f472b6;
+    margin-top: 3.5cqw;
+  }
+  @keyframes write {
+    0% { transform: scaleX(0); }
+    25%, 100% { transform: scaleX(1); }
+  }
+</style>

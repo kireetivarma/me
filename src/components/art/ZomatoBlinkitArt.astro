@@ -1,0 +1,54 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'zb-art', size]} aria-hidden="true">
+  <div class="duo">
+    <div class="art-widget w zomato">
+      <span class="brand art-mono">zomato</span>
+      <div class="line lg"></div>
+      <div class="line"></div>
+      <span class="status">🛵 Arriving in 8 min</span>
+    </div>
+    <div class="art-widget w blinkit">
+      <span class="brand art-mono">blinkit</span>
+      <div class="line lg"></div>
+      <div class="line"></div>
+      <span class="status">⚡ Delivered in 10 min</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .zb-art {
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(226, 55, 68, 0.14), transparent 55%),
+      radial-gradient(ellipse at 85% 85%, rgba(249, 209, 0, 0.12), transparent 55%);
+  }
+  .duo {
+    width: 72cqw;
+    display: grid;
+    gap: 4cqw;
+  }
+  .w { display: grid; gap: 1.8cqw; }
+  .brand { font-size: 3.4cqw; font-weight: 700; }
+  .zomato .brand { color: #e23744; }
+  .blinkit .brand { color: #f9d100; }
+  .line {
+    height: 2.2cqw;
+    width: 55%;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .line.lg { width: 80%; background: rgba(255, 255, 255, 0.4); }
+  [data-theme='light'] .line { background: rgba(0, 0, 0, 0.12); }
+  [data-theme='light'] .line.lg { background: rgba(0, 0, 0, 0.3); }
+  .status { font-size: 2.8cqw; color: var(--text-2); }
+  .zomato { animation: nudge 6s ease-in-out infinite; }
+  .blinkit { animation: nudge 6s ease-in-out 3s infinite; }
+  @keyframes nudge {
+    0%, 100% { transform: none; box-shadow: 0 4cqw 12cqw rgba(0, 0, 0, 0.35); }
+    8%, 20% { transform: translateY(-4%) scale(1.02); }
+  }
+</style>

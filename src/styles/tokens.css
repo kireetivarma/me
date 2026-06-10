@@ -1,0 +1,68 @@
+/* Design tokens — single source of truth for both themes. */
+:root {
+  /* Signature accent: OnePlus red, the one brand constant. */
+  --red: #f50514;
+  --red-dark: #c8102e;
+  /* Per-page accent — case studies override via frontmatter. */
+  --accent: var(--red);
+
+  --bg: #0c0d11;
+  --bg-2: #12141b;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --text-1: #f1f5f9;
+  --text-2: #94a3b8;
+  --text-3: #64748b;
+  --tag-bg: rgba(255, 255, 255, 0.06);
+  --tag-color: #cbd5e1;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --nav-bg: rgba(12, 13, 17, 0.85);
+  --goal-bg: rgba(255, 255, 255, 0.04);
+  --outcome-bg: rgba(16, 185, 129, 0.08);
+  --map-land: rgba(255, 255, 255, 0.08);
+  --map-land-active: rgba(245, 5, 20, 0.35);
+
+  /* Type */
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.85rem;
+  --text-base: 0.95rem;
+  --text-lg: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  --text-xl: clamp(1.3rem, 1.1rem + 0.8vw, 1.7rem);
+  --text-2xl: clamp(1.7rem, 1.3rem + 1.6vw, 2.6rem);
+  --text-hero: clamp(2.4rem, 1.6rem + 3.6vw, 4.6rem);
+
+  /* Space & shape */
+  --space-section: clamp(4.5rem, 3rem + 6vw, 8rem);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --container: 1200px;
+}
+
+[data-theme='light'] {
+  --bg: #f8fafc;
+  --bg-2: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(255, 255, 255, 1);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.2);
+  --text-1: #0f172a;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+  --tag-bg: rgba(15, 23, 42, 0.05);
+  --tag-color: #334155;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.14);
+  --nav-bg: rgba(248, 250, 252, 0.92);
+  --goal-bg: rgba(15, 23, 42, 0.04);
+  --outcome-bg: rgba(16, 185, 129, 0.07);
+  --map-land: rgba(15, 23, 42, 0.1);
+  --map-land-active: rgba(245, 5, 20, 0.3);
+}

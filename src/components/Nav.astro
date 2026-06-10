@@ -1,0 +1,144 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const links = [
+  { href: '/work/', label: 'Work' },
+  { href: '/about/', label: 'About' },
+  { href: '/posts/', label: 'Posts' },
+  { href: '/#contact', label: 'Contact' },
+];
+const path = Astro.url.pathname;
+---
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Kireeti Varma — home">
+      <span class="logo-mono">kv</span><span class="logo-cursor" aria-hidden="true">_</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} aria-current={path.startsWith(l.href) && l.href !== '/#contact' ? 'page' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="nav-right">
+      <ThemeToggle />
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(24px) saturate(1.8);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    color: var(--text-1);
+  }
+  .logo-cursor {
+    color: var(--red);
+    animation: blink 1.2s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover,
+  .nav-links a[aria-current='page'] {
+    color: var(--text-1);
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .nav-burger span {
+    width: 20px;
+    height: 2px;
+    background: var(--text-1);
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  @media (max-width: 768px) {
+    .nav-burger { display: flex; }
+    .nav-links {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-top: 1px solid var(--border); }
+    .nav-links a {
+      display: block;
+      padding: 1rem clamp(1.25rem, 4vw, 2.5rem);
+    }
+  }
+</style>
+
+<script>
+  const burger = document.getElementById('nav-burger');
+  const links = document.getElementById('nav-links');
+  burger?.addEventListener('click', () => {
+    const open = links?.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(!!open));
+  });
+  links?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).tagName === 'A') {
+      links.classList.remove('open');
+      burger?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>

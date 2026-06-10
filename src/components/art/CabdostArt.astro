@@ -1,0 +1,72 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'cabdost-art', size]} aria-hidden="true">
+  <div class="receipt">
+    <div class="title art-mono">TAX REFUND</div>
+    <div class="amount art-mono">₹<span class="digits"></span></div>
+    <div class="rows">
+      <div class="r"><i></i><b></b></div>
+      <div class="r"><i></i><b></b></div>
+      <div class="r"><i></i><b></b></div>
+    </div>
+    <div class="stamp">FILED ✓</div>
+  </div>
+</div>
+
+<style>
+  .cabdost-art { background: radial-gradient(ellipse at 30% 70%, rgba(34, 197, 94, 0.12), transparent 60%); }
+  .receipt {
+    width: 52cqw;
+    background: var(--bg-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 3cqw 3cqw 5cqw 5cqw;
+    padding: 5cqw;
+    position: relative;
+    box-shadow: 0 4cqw 14cqw rgba(0, 0, 0, 0.35);
+  }
+  [data-theme='light'] .receipt { border-color: rgba(0, 0, 0, 0.1); }
+  .title { font-size: 2.6cqw; letter-spacing: 0.25em; color: var(--text-3); }
+  .amount {
+    font-size: 8.5cqw;
+    font-weight: 700;
+    color: #22c55e;
+    margin: 1.5cqw 0 4cqw;
+  }
+  .digits::before {
+    content: '0';
+    animation: count 5s steps(1) infinite;
+  }
+  @keyframes count {
+    0% { content: '4,200'; }
+    20% { content: '12,840'; }
+    40% { content: '18,375'; }
+    60% { content: '24,990'; }
+    80% { content: '29,500'; }
+  }
+  .rows { display: grid; gap: 2.4cqw; margin-bottom: 4cqw; }
+  .r { display: flex; justify-content: space-between; }
+  .r i { width: 50%; height: 2cqw; border-radius: 99px; background: rgba(255, 255, 255, 0.16); }
+  .r b { width: 20%; height: 2cqw; border-radius: 99px; background: rgba(255, 255, 255, 0.28); }
+  [data-theme='light'] .r i { background: rgba(0, 0, 0, 0.1); }
+  [data-theme='light'] .r b { background: rgba(0, 0, 0, 0.2); }
+  .stamp {
+    position: absolute;
+    right: 4cqw;
+    bottom: 4cqw;
+    font-family: var(--font-mono);
+    font-size: 2.8cqw;
+    color: #22c55e;
+    border: 0.5cqw solid #22c55e;
+    border-radius: 1.5cqw;
+    padding: 0.8cqw 2cqw;
+    transform: rotate(-8deg);
+    animation: stamp 5s ease infinite;
+  }
+  @keyframes stamp {
+    0%, 55% { opacity: 0; transform: rotate(-8deg) scale(2.2); }
+    62%, 100% { opacity: 1; transform: rotate(-8deg) scale(1); }
+  }
+</style>

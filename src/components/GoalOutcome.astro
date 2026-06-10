@@ -1,0 +1,45 @@
+---
+interface Props {
+  goal: string;
+  outcome: string;
+}
+const { goal, outcome } = Astro.props;
+---
+
+<div class="go-grid">
+  <div class="go goal">
+    <span class="go-label">Goal</span>
+    <p>{goal}</p>
+  </div>
+  <div class="go outcome">
+    <span class="go-label">Outcome</span>
+    <p>{outcome}</p>
+  </div>
+</div>
+
+<style>
+  .go-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .go {
+    border-radius: var(--radius);
+    padding: 1.3rem;
+    border: 1px solid var(--border);
+  }
+  .goal { background: var(--goal-bg); }
+  .outcome { background: var(--outcome-bg); }
+  .go-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+  .goal .go-label { color: var(--text-2); }
+  .outcome .go-label { color: #10b981; }
+  .go p { color: var(--text-2); margin: 0; }
+</style>

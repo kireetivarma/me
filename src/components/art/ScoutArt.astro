@@ -1,0 +1,67 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'scout-art', size]} aria-hidden="true">
+  <div class="scene">
+    <div class="art-pill">
+      <svg viewBox="0 0 24 24" class="mag" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-3.5-3.5"></path>
+      </svg>
+      <span class="query art-mono"></span>
+      <span class="caret"></span>
+    </div>
+    <div class="results">
+      <div class="r"></div>
+      <div class="r"></div>
+      <div class="r"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .scout-art { background: radial-gradient(ellipse at 50% 0%, rgba(245, 5, 20, 0.1), transparent 65%); }
+  .scene { width: 70cqw; }
+  .mag { width: 5.5cqw; color: var(--red); flex-shrink: 0; }
+  .art-pill { font-size: 4.6cqw; color: var(--text-1); }
+  .query::before {
+    content: '';
+    animation: queries 9s steps(1) infinite;
+  }
+  @keyframes queries {
+    0% { content: 'flight AI 204'; }
+    33% { content: 'parking receipt'; }
+    66% { content: 'cricket score'; }
+  }
+  .caret {
+    width: 0.6cqw;
+    height: 5cqw;
+    background: var(--red);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .results { margin-top: 4cqw; display: grid; gap: 2.5cqw; }
+  .r {
+    height: 7cqw;
+    border-radius: 3cqw;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    animation: pop 9s ease infinite;
+  }
+  [data-theme='light'] .r { background: rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.06); }
+  .r:nth-child(1) { animation-delay: 0.5s; }
+  .r:nth-child(2) { animation-delay: 0.8s; width: 84%; }
+  .r:nth-child(3) { animation-delay: 1.1s; width: 68%; }
+  @keyframes pop {
+    0%, 4% { opacity: 0; transform: translateY(20%); }
+    10%, 30% { opacity: 1; transform: none; }
+    33%, 37% { opacity: 0; transform: translateY(20%); }
+    43%, 63% { opacity: 1; transform: none; }
+    66%, 70% { opacity: 0; transform: translateY(20%); }
+    76%, 96% { opacity: 1; transform: none; }
+    100% { opacity: 0; }
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section class="section contact" id="contact">
+  <div class="container contact-inner reveal">
+    <p class="section-label">// contact</p>
+    <h2 class="contact-title">Let's build something<br />worth obsessing over.</h2>
+    <p class="contact-sub">
+      Open to product leadership roles, advisory and ambitious collaborations — remote-first, worldwide.
+    </p>
+    <div class="contact-cta">
+      <a href={`mailto:${profile.email}`} class="btn btn-primary">{profile.email}</a>
+      <a href={profile.social.linkedin} target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+      <a href={profile.social.x} target="_blank" rel="noopener" class="btn btn-outline">X / Twitter</a>
+      <a href={profile.social.calendly} target="_blank" rel="noopener" class="btn btn-outline">Schedule a call</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-inner {
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: clamp(2.5rem, 6vw, 5rem);
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 110%, rgba(245, 5, 20, 0.12), transparent 70%),
+      var(--bg-card);
+  }
+  .contact-inner .section-label {
+    margin-bottom: 1rem;
+  }
+  .contact-title {
+    font-size: var(--text-2xl);
+    margin-bottom: 1rem;
+  }
+  .contact-sub {
+    color: var(--text-2);
+    max-width: 48ch;
+    margin: 0 auto 2.2rem;
+  }
+  .contact-cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+</style>

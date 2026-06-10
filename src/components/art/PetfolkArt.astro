@@ -1,0 +1,73 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'petfolk-art', size]} aria-hidden="true">
+  <div class="card-stack">
+    <div class="art-widget booking">
+      <span class="paw">🐾</span>
+      <div>
+        <div class="line lg"></div>
+        <div class="line"></div>
+      </div>
+      <span class="badge art-mono">SPA</span>
+    </div>
+    <div class="confirm">
+      <span class="check">✓</span> Grooming booked · Sat 11:00
+    </div>
+  </div>
+</div>
+
+<style>
+  .petfolk-art { background: radial-gradient(ellipse at 25% 25%, rgba(251, 146, 60, 0.14), transparent 60%); }
+  .card-stack { width: 68cqw; display: grid; gap: 3.5cqw; }
+  .booking {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 4cqw;
+    align-items: center;
+  }
+  .paw { font-size: 7cqw; animation: wiggle 4s ease-in-out infinite; }
+  .badge {
+    font-size: 2.8cqw;
+    color: #fb923c;
+    border: 1px solid rgba(251, 146, 60, 0.4);
+    border-radius: 99px;
+    padding: 0.8cqw 2.4cqw;
+  }
+  .line { height: 2.4cqw; width: 55%; border-radius: 99px; background: rgba(255, 255, 255, 0.2); }
+  .line.lg { width: 85%; background: rgba(255, 255, 255, 0.45); margin-bottom: 2cqw; }
+  [data-theme='light'] .line { background: rgba(0, 0, 0, 0.13); }
+  [data-theme='light'] .line.lg { background: rgba(0, 0, 0, 0.32); }
+  .confirm {
+    font-size: 3.2cqw;
+    color: var(--text-2);
+    display: flex;
+    align-items: center;
+    gap: 2cqw;
+    opacity: 0;
+    animation: slide 5s ease infinite;
+  }
+  .check {
+    width: 5cqw;
+    height: 5cqw;
+    border-radius: 50%;
+    background: #10b981;
+    color: #04130a;
+    display: grid;
+    place-items: center;
+    font-size: 3cqw;
+    flex-shrink: 0;
+  }
+  @keyframes wiggle {
+    8%, 24% { transform: rotate(-8deg); }
+    16%, 32% { transform: rotate(8deg); }
+    40% { transform: none; }
+  }
+  @keyframes slide {
+    0%, 25% { opacity: 0; transform: translateY(40%); }
+    40%, 92% { opacity: 1; transform: none; }
+    100% { opacity: 0; }
+  }
+</style>

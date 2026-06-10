@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Kireeti Varma" description="Page not found.">
+  <script is:inline>
+    // Legacy nicety: /posts/<slug> (plural) was never a post URL — posts live
+    // at /post/<slug>. Forward any stray variant before showing the 404.
+    (function () {
+      var m = location.pathname.match(/^\/posts\/([^\/]+?)(?:\.html)?\/?$/);
+      if (m) location.replace('/post/' + m[1] + '/' + location.search + location.hash);
+    })();
+  </script>
+  <section class="section">
+    <div class="container nf">
+      <p class="nf-code art-mono">404</p>
+      <h1 class="section-title">This page wandered off.</h1>
+      <p class="section-sub">It may have moved during the redesign — the work and writing are still here.</p>
+      <div class="nf-cta">
+        <a href="/" class="btn btn-primary">Home</a>
+        <a href="/work/" class="btn btn-outline">Work</a>
+        <a href="/posts/" class="btn btn-outline">Posts</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { text-align: center; padding: 4rem 0; }
+  .nf-code {
+    font-size: var(--text-hero);
+    color: var(--red);
+    font-weight: 700;
+  }
+  .nf-cta {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+</style>

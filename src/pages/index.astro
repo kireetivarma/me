@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import JourneySection from '../components/JourneySection.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import BrandGrid from '../components/BrandGrid.astro';
+import ContactSection from '../components/ContactSection.astro';
+import PostCard from '../components/PostCard.astro';
+
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Kireeti Varma — Designer turned Product Builder" description="Senior Product Manager & AI builder. Ex-OnePlus, 1x founder. 200M+ users reached across 50+ countries with products spanning AI, fintech, design and partnerships.">
+  <Hero />
+
+  <JourneySection />
+
+  <section class="section" id="work">
+    <div class="container">
+      <p class="section-label reveal">// selected work</p>
+      <h2 class="section-title reveal">Products, partnerships &amp; everything between</h2>
+      <p class="section-sub reveal">
+        Fifteen products across consumer tech, AI, fintech and design — filter by what you care about.
+      </p>
+      <ProjectGrid projects={work} />
+    </div>
+  </section>
+
+  <BrandGrid />
+
+  {
+    posts.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <p class="section-label reveal">// latest writing</p>
+          <h2 class="section-title reveal">Notes from the field</h2>
+          <div class="latest-grid stagger">
+            {posts.map((p) => (
+              <PostCard post={p} />
+            ))}
+          </div>
+          <a href="/posts/" class="btn btn-outline all-posts reveal">
+            All posts →
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  <ContactSection />
+</BaseLayout>
+
+<style>
+  .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+</style>

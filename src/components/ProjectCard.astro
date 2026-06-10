@@ -1,0 +1,119 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { resolveArt } from './art/index';
+
+interface Props {
+  project: CollectionEntry<'work'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, categories, metrics, art, accent, role, timeframe } = project.data;
+const Art = resolveArt(art);
+const topMetric = metrics[0];
+---
+
+<a
+  href={`/work/${project.id}/`}
+  class="project-card"
+  data-categories={categories.map((c) => c.toLowerCase()).join(' ')}
+  style={accent ? `--accent:${accent}` : undefined}
+>
+  <div class="card-art">
+    <Art size="thumb" />
+  </div>
+  <div class="card-body">
+    <div class="card-tags">
+      {categories.map((c) => <span class="tag">{c}</span>)}
+    </div>
+    <h3 class="card-title">{title}</h3>
+    <p class="card-summary">{summary}</p>
+    <div class="card-foot">
+      {topMetric && (
+        <span class="card-metric">
+          <b class="metric-value">{topMetric.value}</b> {topMetric.label}
+        </span>
+      )}
+      <span class="card-meta">{role} · {timeframe}</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    position: relative;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-hover);
+  }
+  .project-card:hover::after {
+    transform: scaleX(1);
+  }
+  .card-art {
+    aspect-ratio: 16 / 10;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-2);
+  }
+  .card-body {
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .card-title {
+    font-size: var(--text-xl);
+    color: var(--text-1);
+  }
+  .card-summary {
+    color: var(--text-2);
+    font-size: var(--text-sm);
+    flex: 1;
+  }
+  .card-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.4rem;
+  }
+  .card-metric {
+    font-size: var(--text-sm);
+    color: var(--text-2);
+  }
+  .metric-value {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 1.05em;
+  }
+  .card-meta {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+  }
+</style>

@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostGrid from '../../components/PostGrid.astro';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="Posts — Kireeti Varma" description="Writing on product, design, partnerships and building — case-study deep dives from OnePlus, founding stories, and reviews.">
+  <section class="section">
+    <div class="container">
+      <p class="section-label reveal">// posts</p>
+      <h1 class="section-title reveal">Writing</h1>
+      <p class="section-sub reveal">
+        A decade of product notes — partnership launches, design deep dives, founding lessons and the occasional
+        hypothetical.
+      </p>
+      <PostGrid posts={posts} />
+    </div>
+  </section>
+</BaseLayout>

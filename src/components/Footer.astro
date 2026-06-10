@@ -1,0 +1,48 @@
+---
+import { profile } from '../data/profile';
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container footer-inner">
+    <p class="footer-copy">© {year} {profile.name}. Designed & built from scratch.</p>
+    <ul class="footer-links">
+      <li><a href={`mailto:${profile.email}`}>Email</a></li>
+      <li><a href={profile.social.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href={profile.social.x} target="_blank" rel="noopener">X</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    margin-top: var(--space-section);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-copy {
+    color: var(--text-3);
+    font-size: var(--text-sm);
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .footer-links a {
+    color: var(--text-2);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+  .footer-links a:hover {
+    color: var(--text-1);
+  }
+</style>
