@@ -60,7 +60,8 @@ const filters = ['All', 'Product', 'Design', 'Development', 'Consulting', 'Revie
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    /* min() keeps cards from overflowing viewports narrower than 310px + padding */
+    grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
     gap: 1.5rem;
   }
 </style>
