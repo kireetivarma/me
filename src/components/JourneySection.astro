@@ -137,15 +137,7 @@ for (const m of journey) {
   }
   @media (max-width: 900px) {
     .journey-grid { grid-template-columns: 1fr; }
-    /* Map stays pinned under the nav; chapters scroll underneath it, so the
-       panel needs an opaque background and a higher stacking order. */
-    .map-panel {
-      position: sticky;
-      top: 60px;
-      order: -1;
-      z-index: 5;
-      background: var(--bg);
-    }
+    .map-panel { order: -1; }
   }
 
   /* Timeline */
@@ -261,6 +253,29 @@ for (const m of journey) {
     border-radius: var(--radius-lg);
     background: var(--bg-card);
     padding: 1.2rem;
+  }
+  @media (max-width: 900px) {
+    /* The map floats pinned under the nav while chapters scroll beneath it:
+       it must paint fully opaque (--bg-card is translucent) and sit above
+       the timeline. Declared after the base rule so it wins the cascade. */
+    .map-panel {
+      top: 68px;
+      z-index: 5;
+      background: var(--bg);
+      box-shadow: var(--shadow);
+    }
+    /* Opaque strip masking the nav gap + rounded-corner notches so scrolling
+       text never peeks around the floating panel. */
+    .map-panel::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      right: -1px;
+      top: -8px;
+      height: calc(8px + var(--radius-lg));
+      background: var(--bg);
+      z-index: -1;
+    }
   }
   #impact-map { width: 100%; height: auto; }
   .country {

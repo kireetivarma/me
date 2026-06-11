@@ -4,8 +4,7 @@ export const profile = {
   tagline: 'Designer turned Product Builder at global scale',
   description:
     'Product Manager, Designer, 1x founder, ex-OnePlus, now building with AI. Crafting mobile & web experiences for 200M+ users globally, with partnerships spanning Spotify, Snapchat, Zomato, Grab & more.',
-  email: 'hello@kireetivarma.me',
-  emailAlt: 'mail@kireetivarma.me',
+  email: 'mail@kireetivarma.me',
   location: 'Calgary, Canada 🇨🇦',
   availability: {
     company: 'Coalition House Products Inc',
