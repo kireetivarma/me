@@ -52,4 +52,4 @@ While we are focussed on scaling up Cab Dost’s efficiency, our interests stay 
 
 We had many such drivers who were happy to file IT Returns, online!
 
-\* From the survey conducted with cab drivers from Ola, Uber in Bengaluru during May — July 2018.
+\* From the survey conducted with cab drivers from Ola, Uber in Bengaluru during May, July 2018.

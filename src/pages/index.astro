@@ -9,12 +9,14 @@ import ContactSection from '../components/ContactSection.astro';
 import PostCard from '../components/PostCard.astro';
 
 const work = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const HOME_HIDDEN_CATEGORIES = ['Personal', 'Review', 'Tech'];
 const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .filter((p) => p.data.categories.some((c) => !HOME_HIDDEN_CATEGORIES.includes(c)))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 ---
 
-<BaseLayout title="Kireeti Varma — Designer turned Product Builder" description="Senior Product Manager & AI builder. Ex-OnePlus, 1x founder. 200M+ users reached across 50+ countries with products spanning AI, fintech, design and partnerships.">
+<BaseLayout title="Kireeti Varma · Designer turned Product Builder" description="Product Manager, Designer, 1x founder, ex-OnePlus, now building with AI. 200M+ users reached globally with products spanning AI, fintech, design and partnerships.">
   <Hero />
 
   <JourneySection />
@@ -24,7 +26,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft))
       <p class="section-label reveal">// selected work</p>
       <h2 class="section-title reveal">Products, partnerships &amp; everything between</h2>
       <p class="section-sub reveal">
-        Fifteen products across consumer tech, AI, fintech and design — filter by what you care about.
+        20+ products across consumer tech, AI, fintech and design. Filter by what you care about.
       </p>
       <ProjectGrid projects={work} />
     </div>

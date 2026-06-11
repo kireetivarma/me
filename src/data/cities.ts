@@ -19,6 +19,14 @@ export const cities: Record<string, { name: string; lat: number; lng: number }> 
   kochi: { name: 'Kochi', lat: 9.9312, lng: 76.2673 },
   toronto: { name: 'Toronto', lat: 43.6532, lng: -79.3832 },
   vancouver: { name: 'Vancouver', lat: 49.2827, lng: -123.1207 },
+  vizag: { name: 'Vizag', lat: 17.6868, lng: 83.2185 },
+  newyork: { name: 'New York', lat: 40.7128, lng: -74.006 },
+  brisbane: { name: 'Brisbane', lat: -27.4698, lng: 153.0251 },
+  seoul: { name: 'Seoul', lat: 37.5665, lng: 126.978 },
+  bangkok: { name: 'Bangkok', lat: 13.7563, lng: 100.5018 },
+  noida: { name: 'Noida', lat: 28.5355, lng: 77.391 },
+  jakarta: { name: 'Jakarta', lat: -6.2088, lng: 106.8456 },
+  seattle: { name: 'Seattle', lat: 47.6062, lng: -122.3321 },
 };
 
 export type CityKey = keyof typeof cities;

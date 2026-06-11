@@ -4,14 +4,22 @@ import { Image } from 'astro:assets';
 
 interface Props {
   post: CollectionEntry<'posts'>;
+  /** Exclude from the grid's default "All" view (still shown under its own category pill). */
+  hideFromAll?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, hideFromAll = false } = Astro.props;
 const { title, description, pubDate, categories, heroImage, heroImageAlt } = post.data;
 const date = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
 
-<a href={`/post/${post.id}/`} class="post-card" data-categories={categories.map((c) => c.toLowerCase()).join(' ')}>
+<a
+  href={`/post/${post.id}/`}
+  class="post-card"
+  data-categories={categories.map((c) => c.toLowerCase()).join(' ')}
+  data-hide-all={hideFromAll ? 'true' : undefined}
+  style={hideFromAll ? 'display:none' : undefined}
+>
   {
     heroImage && (
       <div class="post-img">

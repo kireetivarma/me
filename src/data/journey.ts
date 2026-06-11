@@ -1,9 +1,8 @@
 /**
  * Career journey milestones for the homepage timeline + impact map.
  *
- * NOTE: geo data (cities, reach) is drafted from verified public facts and
- * reasonable inference — flagged for Kireeti's review. Reach values are ISO
- * 3166-1 alpha-2 country codes, or 'worldwide'.
+ * Reach values are ISO 3166-1 alpha-2 country codes, or 'worldwide'.
+ * `users` is the map-footer legend line for the chapter.
  */
 export interface Milestone {
   id: string;
@@ -14,7 +13,7 @@ export interface Milestone {
   workSlugs: string[];
   highlight?: string;
   geo: {
-    base?: string;
+    base?: string | string[];
     hq?: string;
     locations?: string[];
     reach: 'worldwide' | string[];
@@ -26,50 +25,53 @@ export const journey: Milestone[] = [
   {
     id: 'design-roots',
     years: '2014–2017',
-    title: 'Design roots',
-    role: 'Product & Visual Designer',
+    title: 'Startups, and Product Management',
+    role: 'Product Manager & Visual Design',
     description:
-      'Started in design — interfaces, identities and interaction. Built Tymline for short-form blogging and shipped the first client products that turned craft into a career.',
+      'Overviewed incubation of 150+ startups. Learnt the roots of Product, Design, Operations and their importance in building. Self-learnt design Interfaces, visual, experience, interactions.',
     workSlugs: [],
     geo: {
-      base: 'hyderabad',
+      base: 'vizag',
+      hq: 'kochi',
       reach: ['IN'],
+      users: '150+ startups · 500+ builders',
     },
   },
   {
     id: 'agency',
     years: '2017–2019',
-    title: 'Design consulting & founding teams',
-    role: 'Co-founder, Design Agency',
+    title: 'Product Agency & founding teams',
+    role: 'Founder, Coalition House',
     description:
-      'Co-founded a product design agency. Helped cab drivers recover taxes with Cabdost, built bite-sized founder learning with Station91, a data-collection PWA for a medical NGO, and design systems for fintech clients.',
+      'Founded a product agency. Helped cab drivers recover taxes with Cabdost, built bite-sized founder learning with Station91, a data-collection PWA for a medical NGO, and design systems for fintech clients.',
     workSlugs: ['cabdost', 'station91'],
     highlight: '5,000 drivers · ~$175K recovered · 35x business growth',
     geo: {
-      base: 'hyderabad',
-      locations: ['chennai', 'bangalore'],
-      reach: ['IN'],
-      users: '100K+',
+      base: 'bangalore',
+      locations: ['mumbai', 'delhi', 'newyork', 'brisbane'],
+      reach: ['IN', 'AU', 'US'],
+      users: '100k+ users',
     },
   },
   {
     id: 'imux',
-    years: '2019–2020',
+    years: '2018–2019',
     title: 'Founding Imux',
     role: 'Co-founder',
     description:
-      'Co-founded Imux — a natural-language interface to databases (NLiDB) SaaS. Raised seed funding and learned what zero-to-one really costs.',
+      'Co-founded Imux, a natural-language interface to databases (NLiDB) SaaS. Raised seed funding and learned what zero-to-one really costs.',
     workSlugs: ['imux'],
     highlight: 'Seed funded',
     geo: {
-      base: 'hyderabad',
-      locations: ['sanfrancisco'],
-      reach: ['IN', 'US'],
+      base: 'bangalore',
+      locations: ['mumbai', 'seoul', 'bangkok'],
+      reach: ['IN', 'KR', 'TH'],
+      users: '$150k seed fund · 5 paying customers',
     },
   },
   {
     id: 'oneplus',
-    years: '2020–2024',
+    years: '2019–2025',
     title: 'OnePlus at global scale',
     role: 'Senior PM & Lead, Product Strategy',
     description:
@@ -84,26 +86,27 @@ export const journey: Milestone[] = [
     ],
     highlight: 'Employee of the Year 2021 · 200M+ users',
     geo: {
-      base: 'hyderabad',
+      base: ['hyderabad', 'bangalore'],
       hq: 'shenzhen',
-      locations: ['bangalore', 'gurgaon', 'stockholm'],
+      locations: ['noida', 'gurgaon', 'bangkok', 'singapore', 'jakarta', 'newyork', 'seattle', 'london', 'stockholm'],
       reach: 'worldwide',
-      users: '200M+',
+      users: '200Mn+ users · 10+ products',
     },
   },
   {
     id: 'builder',
-    years: '2024–present',
+    years: '2025–present',
     title: 'Independent builder & AI',
-    role: 'Founder · AI Builder',
+    role: 'Product Consultant · AI Builder',
     description:
-      'Building with AI end-to-end: Product f() — an AI operating system for product teams; Labh, a SEBI-certified investment platform; Petfolk luxury pet care; Pro Studio for film pre-production; Itihasa Collective for screenwriters.',
+      'Building with AI end-to-end: Product f(), an AI operating system for product teams; Labh, a SEBI-certified investment platform; Petfolk luxury pet care; Pro Studio for film pre-production; Itihasa Collective for screenwriters.',
     workSlugs: ['product-f', 'labh', 'petfolk', 'pro-studio-space', 'itihasa-collective', 'reporting-hub'],
     highlight: 'Currently building Product f()',
     geo: {
       base: 'calgary',
-      locations: ['hyderabad', 'mumbai'],
+      locations: ['bangalore', 'hyderabad', 'mumbai', 'vizag'],
       reach: ['CA', 'IN', 'US'],
+      users: '100k+ users',
     },
   },
 ];

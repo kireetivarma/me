@@ -5,7 +5,7 @@ const { size = 'thumb' } = Astro.props;
 
 <div class:list={['art', 'itihasa-art', size]} aria-hidden="true">
   <div class="script">
-    <div class="slug art-mono">INT. WRITERS ROOM — NIGHT</div>
+    <div class="slug art-mono">INT. WRITERS ROOM - NIGHT</div>
     <div class="line w90"></div>
     <div class="line w70"></div>
     <div class="char art-mono">WRITER</div>
@@ -26,7 +26,6 @@ const { size = 'thumb' } = Astro.props;
     position: relative;
     box-shadow: 0 4cqw 14cqw rgba(0, 0, 0, 0.35);
   }
-  [data-theme='light'] .script { border-color: rgba(0, 0, 0, 0.1); }
   .slug { font-size: 2.8cqw; color: var(--text-1); margin-bottom: 3cqw; }
   .char {
     font-size: 2.6cqw;
@@ -42,7 +41,6 @@ const { size = 'thumb' } = Astro.props;
     transform-origin: left;
     animation: write 7s ease infinite;
   }
-  [data-theme='light'] .line { background: rgba(0, 0, 0, 0.12); }
   .line.c { margin-inline: auto; transform-origin: center; }
   .w90 { width: 90%; }
   .w70 { width: 70%; animation-delay: 0.4s; }

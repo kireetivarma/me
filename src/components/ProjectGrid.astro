@@ -38,6 +38,17 @@ const filters = ['All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', '
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 2rem;
+    /* Stays pinned below the nav while the grid is in view */
+    position: sticky;
+    top: 60px;
+    z-index: 20;
+    padding: 0.7rem 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  }
+  .filter-pill {
+    background: var(--bg);
   }
   .filter-pill {
     font-family: var(--font-mono);
@@ -68,31 +79,6 @@ const filters = ['All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', '
 </style>
 
 <script>
-  // Category filter: progressive enhancement over real ?category= links.
-  for (const wrap of document.querySelectorAll('[data-filter-grid]')) {
-    const pills = wrap.querySelectorAll<HTMLAnchorElement>('.filter-pill');
-    const cards = wrap.querySelectorAll<HTMLElement>('[data-categories]');
-
-    function apply(filter: string) {
-      for (const pill of pills) pill.setAttribute('aria-pressed', String(pill.dataset.filter === filter));
-      for (const card of cards) {
-        card.hidden = filter !== 'all' && !(card.dataset.categories ?? '').split(' ').includes(filter);
-      }
-    }
-
-    for (const pill of pills) {
-      pill.addEventListener('click', (e) => {
-        e.preventDefault();
-        const f = pill.dataset.filter ?? 'all';
-        apply(f);
-        const url = new URL(location.href);
-        if (f === 'all') url.searchParams.delete('category');
-        else url.searchParams.set('category', f);
-        history.replaceState(null, '', url);
-      });
-    }
-
-    const initial = new URLSearchParams(location.search).get('category');
-    if (initial) apply(initial.toLowerCase());
-  }
+  import { initFilterGrids } from '../scripts/filter-grid';
+  initFilterGrids();
 </script>

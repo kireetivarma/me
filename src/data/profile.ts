@@ -1,21 +1,25 @@
 export const profile = {
   name: 'Kireeti Varma',
-  title: 'Product Design & Strategy',
+  title: 'Product, Design & Strategy',
   tagline: 'Designer turned Product Builder at global scale',
   description:
-    'Senior Product Manager with 11+ years building digital products at global scale. Ex-OnePlus, 1x founder, AI builder. 200M+ users reached across 50+ countries.',
+    'Product Manager, Designer, 1x founder, ex-OnePlus, now building with AI. Crafting mobile & web experiences for 200M+ users globally, with partnerships spanning Spotify, Snapchat, Zomato, Grab & more.',
   email: 'hello@kireetivarma.me',
   emailAlt: 'mail@kireetivarma.me',
-  location: 'Calgary, Canada 🇨🇦 — open to remote-first roles worldwide',
+  location: 'Calgary, Canada 🇨🇦',
+  availability: {
+    company: 'Coalition House Products Inc',
+    url: 'https://www.coalition.house',
+  },
   social: {
     linkedin: 'https://linkedin.com/in/kireetivarma',
     x: 'https://x.com/kireetivarma',
-    calendly: 'https://calendly.com/kireetivarma',
+    calendly: 'https://calendly.com/kireeti/25',
   },
   stats: [
     { value: '200M+', label: 'Users Reached' },
-    { value: '9+', label: 'Products Built & Shipped' },
-    { value: '15+', label: 'Global Brands & Teams' },
+    { value: '20+', label: 'Products Built & Shipped' },
+    { value: '25+', label: 'Teams Globally' },
     { value: '11+', label: 'Years Experience' },
   ],
   /**

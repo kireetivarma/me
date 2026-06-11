@@ -41,13 +41,11 @@ const { size = 'thumb' } = Astro.props;
     justify-content: center;
     gap: 2cqw;
   }
-  [data-theme='light'] .tile { background: rgba(255, 255, 255, 0.8); border-color: rgba(0, 0, 0, 0.08); }
   .wide { grid-column: 1 / -1; min-height: 10cqw; flex-direction: column; align-items: flex-start; }
   .v { font-size: 5.5cqw; font-weight: 700; color: #f59e0b; }
   .l { height: 2cqw; width: 60%; border-radius: 99px; background: rgba(255, 255, 255, 0.18); }
   .l.w80 { width: 80%; }
   .l.w55 { width: 55%; }
-  [data-theme='light'] .l { background: rgba(0, 0, 0, 0.12); }
   .bars {
     flex-direction: row;
     align-items: flex-end;

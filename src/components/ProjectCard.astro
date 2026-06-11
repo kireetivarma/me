@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { resolveArt } from './art/index';
+import { testimonialsFor } from '../data/testimonials';
 
 interface Props {
   project: CollectionEntry<'work'>;
@@ -10,6 +11,7 @@ const { project } = Astro.props;
 const { title, summary, categories, metrics, art, accent, role, timeframe } = project.data;
 const Art = resolveArt(art);
 const topMetric = metrics[0];
+const testimonial = testimonialsFor(project.id)[0];
 ---
 
 <a
@@ -27,6 +29,13 @@ const topMetric = metrics[0];
     </div>
     <h3 class="card-title">{title}</h3>
     <p class="card-summary">{summary}</p>
+    {
+      testimonial && (
+        <p class="card-quote">
+          “{testimonial.short}” <span class="quote-by">· {testimonial.author}</span>
+        </p>
+      )
+    }
     <div class="card-foot">
       {topMetric && (
         <span class="card-metric">
@@ -96,6 +105,18 @@ const topMetric = metrics[0];
     color: var(--text-2);
     font-size: var(--text-sm);
     flex: 1;
+  }
+  .card-quote {
+    font-size: var(--text-xs);
+    font-style: italic;
+    color: var(--text-3);
+    border-left: 2px solid var(--accent);
+    padding-left: 0.7rem;
+    line-height: 1.55;
+  }
+  .quote-by {
+    font-style: normal;
+    white-space: nowrap;
   }
   .card-foot {
     display: flex;

@@ -27,7 +27,6 @@ const { size = 'thumb' } = Astro.props;
     position: relative;
     box-shadow: 0 4cqw 14cqw rgba(0, 0, 0, 0.35);
   }
-  [data-theme='light'] .receipt { border-color: rgba(0, 0, 0, 0.1); }
   .title { font-size: 2.6cqw; letter-spacing: 0.25em; color: var(--text-3); }
   .amount {
     font-size: 8.5cqw;
@@ -50,8 +49,6 @@ const { size = 'thumb' } = Astro.props;
   .r { display: flex; justify-content: space-between; }
   .r i { width: 50%; height: 2cqw; border-radius: 99px; background: rgba(255, 255, 255, 0.16); }
   .r b { width: 20%; height: 2cqw; border-radius: 99px; background: rgba(255, 255, 255, 0.28); }
-  [data-theme='light'] .r i { background: rgba(0, 0, 0, 0.1); }
-  [data-theme='light'] .r b { background: rgba(0, 0, 0, 0.2); }
   .stamp {
     position: absolute;
     right: 4cqw;

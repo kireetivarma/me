@@ -4,6 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 import MetricsBand from '../components/MetricsBand.astro';
 import PostCard from '../components/PostCard.astro';
 import { resolveArt } from '../components/art/index';
+import { testimonialsFor } from '../data/testimonials';
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -16,12 +17,13 @@ const { entry, prev, next } = Astro.props;
 const { title, tagline, summary, categories, role, timeframe, metrics, art, accent, externalUrl, relatedPosts } =
   entry.data;
 const Art = resolveArt(art);
+const quotes = testimonialsFor(entry.id);
 
 const allPosts = await getCollection('posts', ({ data }) => !data.draft);
 const related = relatedPosts.map((slug) => allPosts.find((p) => p.id === slug)).filter((p) => p !== undefined);
 ---
 
-<BaseLayout title={`${title} — Kireeti Varma`} description={summary} accent={accent}>
+<BaseLayout title={`${title} · Kireeti Varma`} description={summary} accent={accent}>
   <article>
     <header class="cs-header">
       <div class="cs-ambient" aria-hidden="true"><Art size="ambient" /></div>
@@ -55,6 +57,21 @@ const related = relatedPosts.map((slug) => allPosts.find((p) => p.id === slug)).
       <div class="prose cs-prose">
         <slot />
       </div>
+
+      {
+        quotes.length > 0 && (
+          <aside class="cs-quotes" aria-label="What collaborators say">
+            {quotes.map((t) => (
+              <figure class="cs-quote reveal">
+                <blockquote>“{t.quote}”</blockquote>
+                <figcaption>
+                  <b>{t.author}</b> · {t.role} <span class="quote-rel">({t.relation})</span>
+                </figcaption>
+              </figure>
+            ))}
+          </aside>
+        )
+      }
 
       {
         related.length > 0 && (
@@ -137,6 +154,36 @@ const related = relatedPosts.map((slug) => allPosts.find((p) => p.id === slug)).
   }
   .cs-prose {
     margin: 3rem auto 0;
+  }
+  .cs-quotes {
+    margin-top: 3.5rem;
+    display: grid;
+    gap: 1.2rem;
+    max-width: 70ch;
+  }
+  .cs-quote {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    padding: 1.4rem 1.6rem;
+  }
+  .cs-quote blockquote {
+    font-size: var(--text-base);
+    font-style: italic;
+    color: var(--text-2);
+    margin-bottom: 0.8rem;
+  }
+  .cs-quote figcaption {
+    font-size: var(--text-sm);
+    color: var(--text-3);
+  }
+  .cs-quote figcaption b {
+    color: var(--text-1);
+    font-weight: 600;
+  }
+  .quote-rel {
+    font-size: var(--text-xs);
   }
   .cs-related {
     margin-top: var(--space-section);

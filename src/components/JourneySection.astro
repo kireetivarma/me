@@ -19,7 +19,7 @@ function markersFor(geo: (typeof journey)[number]['geo']): Marker[] {
     const c = key ? cities[key] : undefined;
     if (c) out.push({ kind, x: X(c.lng), y: Y(c.lat), name: c.name });
   };
-  push('base', geo.base);
+  for (const b of Array.isArray(geo.base) ? geo.base : geo.base ? [geo.base] : []) push('base', b);
   push('hq', geo.hq);
   for (const l of geo.locations ?? []) push('loc', l);
   return out;
@@ -50,8 +50,7 @@ for (const m of journey) {
     <p class="section-label reveal">// the journey</p>
     <h2 class="section-title reveal">A decade across design, product &amp; AI</h2>
     <p class="section-sub reveal">
-      From design consulting in Hyderabad to 200M+ users at OnePlus to building AI products from Calgary —
-      select a chapter to see where it happened and who it reached.
+      From product &amp; design consulting in Bengaluru to 200M+ users at OnePlus to building AI products.
     </p>
 
     <div class="journey-grid">
@@ -138,7 +137,15 @@ for (const m of journey) {
   }
   @media (max-width: 900px) {
     .journey-grid { grid-template-columns: 1fr; }
-    .map-panel { position: static; order: -1; }
+    /* Map stays pinned under the nav; chapters scroll underneath it, so the
+       panel needs an opaque background and a higher stacking order. */
+    .map-panel {
+      position: sticky;
+      top: 60px;
+      order: -1;
+      z-index: 5;
+      background: var(--bg);
+    }
   }
 
   /* Timeline */
@@ -354,23 +361,50 @@ for (const m of journey) {
     }
   }
 
+  // Scroll-driven chapters: the aggregate "all" view shows first; as the user
+  // scrolls, the last chapter whose top has crossed the reading line becomes
+  // active. Tapping a chapter still works between scrolls.
+  let current = 'all';
+
   for (const m of milestones) {
-    m.querySelector('.ms-head')?.addEventListener('click', () => show(m.dataset.milestone!));
+    m.querySelector('.ms-head')?.addEventListener('click', () => {
+      current = m.dataset.milestone!;
+      show(current);
+    });
+  }
+  const mapPanel = document.querySelector<HTMLElement>('.map-panel');
+  const mobile = window.matchMedia('(max-width: 900px)');
+
+  function readingLine() {
+    // On mobile the map is pinned to the top, so the reading line sits just
+    // below it; on desktop it sits a bit above the viewport centre.
+    if (mobile.matches && mapPanel) {
+      const b = mapPanel.getBoundingClientRect().bottom;
+      return Math.min(b + 90, window.innerHeight * 0.85);
+    }
+    return window.innerHeight * 0.42;
   }
 
-  // Show the first milestone once the section scrolls into view; aggregate before that.
-  const first = milestones[0];
-  if (first) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting && !document.querySelector('.milestone.active')) {
-          show(first.dataset.milestone!);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.4 }
-    );
-    io.observe(first);
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const line = readingLine();
+      let id = 'all';
+      for (const m of milestones) {
+        if (m.getBoundingClientRect().top <= line) id = m.dataset.milestone!;
+      }
+      if (id !== current) {
+        current = id;
+        show(id);
+      }
+    });
   }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll, { passive: true });
+
   show('all');
+  onScroll();
 </script>

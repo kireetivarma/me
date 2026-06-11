@@ -6,10 +6,5 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://kireetivarma.me',
   trailingSlash: 'ignore',
-  integrations: [
-    mdx(),
-    sitemap({
-      filter: (page) => !/\/(post|posts)\/[^/]+\/$/.test(page),
-    }),
-  ],
+  integrations: [mdx(), sitemap()],
 });

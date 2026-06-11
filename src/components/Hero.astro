@@ -12,11 +12,14 @@ import StatsRow from './StatsRow.astro';
       at global scale.
     </h1>
     <p class="hero-sub reveal">
-      Senior Product Manager, ex-OnePlus, 1x founder — now building with AI.
-      Crafting mobile &amp; web experiences for <b>200M+ users</b> across <b>50+ countries</b>,
-      with partnerships spanning Spotify, Netflix, Snapchat, Zomato &amp; more.
+      Product Manager, Designer, 1x founder, ex-OnePlus, now building with AI.
+      Crafting mobile &amp; web experiences for <b>200M+ users</b> globally,
+      with partnerships spanning Spotify, Snapchat, Zomato, Grab &amp; more.
     </p>
-    <p class="hero-loc reveal">{profile.location}</p>
+    <p class="hero-loc reveal">
+      Available on contract at <a href={profile.availability.url} target="_blank" rel="noopener">{profile.availability.company}</a>.
+      Open to Product roles, in Canada 🇨🇦, or remote globally.
+    </p>
     <div class="hero-cta reveal">
       <a href="/work/" class="btn btn-primary">Explore my work →</a>
       <a href={profile.social.calendly} target="_blank" rel="noopener" class="btn btn-outline">Schedule a call</a>
@@ -59,6 +62,15 @@ import StatsRow from './StatsRow.astro';
     color: var(--text-3);
     font-size: var(--text-sm);
     margin-bottom: 2.2rem;
+    max-width: 56ch;
+  }
+  .hero-loc a {
+    color: var(--text-2);
+    text-decoration-color: var(--red);
+    text-underline-offset: 3px;
+  }
+  .hero-loc a:hover {
+    color: var(--text-1);
   }
   .hero-cta {
     display: flex;

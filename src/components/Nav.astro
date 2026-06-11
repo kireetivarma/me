@@ -2,7 +2,10 @@
 import ThemeToggle from './ThemeToggle.astro';
 
 const links = [
-  { href: '/work/', label: 'Work' },
+  { href: '/work/?category=products', label: 'Products' },
+  { href: '/work/?category=design', label: 'Design' },
+  { href: '/work/?category=ai', label: 'AI' },
+  { href: '/work/?category=partnerships', label: 'Partnerships' },
   { href: '/about/', label: 'About' },
   { href: '/posts/', label: 'Posts' },
   { href: '/#contact', label: 'Contact' },
@@ -12,8 +15,8 @@ const path = Astro.url.pathname;
 
 <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="Kireeti Varma — home">
-      <span class="logo-mono">kv</span><span class="logo-cursor" aria-hidden="true">_</span>
+    <a href="/" class="nav-logo" aria-label="Kireeti Varma, home">
+      <span class="logo-mono" id="logo-type" data-full="kireeti varma">kv</span><span class="logo-cursor" aria-hidden="true">_</span>
     </a>
     <ul class="nav-links" id="nav-links">
       {
@@ -129,6 +132,19 @@ const path = Astro.url.pathname;
 </style>
 
 <script>
+  // Logo typewriter: "kv" expands to "kireeti varma" shortly after load,
+  // then settles. Skipped for reduced-motion users.
+  const logo = document.getElementById('logo-type');
+  if (logo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const full = logo.dataset.full ?? 'kireeti varma';
+    const type = (i: number) => {
+      // grow "k" -> "kireeti ", keep typing through "varma"
+      logo.textContent = i <= 8 ? full.slice(0, i) + 'v' : full.slice(0, i);
+      if (i < full.length) setTimeout(() => type(i + 1), 85);
+    };
+    setTimeout(() => type(1), 900);
+  }
+
   const burger = document.getElementById('nav-burger');
   const links = document.getElementById('nav-links');
   burger?.addEventListener('click', () => {

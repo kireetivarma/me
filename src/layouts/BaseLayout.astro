@@ -37,6 +37,17 @@ const { accent, ...seo } = Astro.props;
     </script>
     <Seo {...seo} />
     {accent && <style set:html={`:root{--accent:${accent}}`}></style>}
+
+    <!-- Google Analytics 4 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-H9B2C9ETDC"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-H9B2C9ETDC');
+    </script>
   </head>
   <body>
     <Nav />

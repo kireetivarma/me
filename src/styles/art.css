@@ -12,6 +12,15 @@
   display: grid;
   place-items: center;
   isolation: isolate;
+  /* Art is always a dark scene (like a device screen), in both themes:
+     the white-glass primitives and per-art colors are tuned for it, so the
+     theme-dependent text/bg tokens are pinned to their dark values here. */
+  background: #0e1016;
+  --text-1: #f1f5f9;
+  --text-2: #94a3b8;
+  --text-3: #64748b;
+  --bg: #0c0d11;
+  --bg-2: #12141b;
 }
 
 /* Animations idle until IntersectionObserver adds .in to a .reveal ancestor
@@ -33,10 +42,6 @@
   padding: 5cqw;
   box-shadow: 0 4cqw 12cqw rgba(0, 0, 0, 0.35);
 }
-[data-theme='light'] .art-widget {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(0, 0, 0, 0.08);
-}
 
 /* Phone frame */
 .art-phone {
@@ -56,10 +61,6 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
   padding: 3.5cqw 5cqw;
-}
-[data-theme='light'] .art-pill {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Mono code text inside art */
