@@ -1,12 +1,16 @@
 /**
- * Press outlets that covered shipped features (sources: the migrated posts on
- * Nearby Charging Stations, Shelf and the AOD food-delivery launch).
+ * Press outlets that covered shipped features (verified links live in each
+ * case study's `coverage` frontmatter).
  */
 export const press = [
   'Android Police',
+  'XDA Developers',
+  'Android Authority',
   '9to5Google',
-  'BGR India',
-  'Mint',
-  'Gadgets360',
+  'TechRadar',
+  'GSMArena',
+  'YourStory',
+  'The Better India',
+  'Business Standard',
   'Times of India',
 ];

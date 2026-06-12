@@ -14,7 +14,7 @@ export interface Milestone {
   highlight?: string;
   geo: {
     base?: string | string[];
-    hq?: string;
+    hq?: string | string[];
     locations?: string[];
     reach: 'worldwide' | string[];
     users?: string;
@@ -28,7 +28,7 @@ export const journey: Milestone[] = [
     title: 'Startups, and Product Management',
     role: 'Product Manager & Visual Design',
     description:
-      'Spent three years inside India’s early-stage ecosystem, across 150+ startup teams at incubation stage, watching the same mistakes repeat: building before validating, designing before understanding. Started doing the product and design work myself, interfaces, visual, experience, interactions, because no one else was doing it systematically.',
+      'Spent three years at Startup Village, India’s early-stage ecosystem, across 150+ startup teams at incubation stage, watching the same mistakes repeat: building before validating, designing before understanding. Started doing the product and design work myself, interfaces, visual, experience, interactions, because no one else was doing it systematically.',
     workSlugs: [],
     geo: {
       base: 'vizag',
@@ -40,24 +40,24 @@ export const journey: Milestone[] = [
   {
     id: 'agency',
     years: '2017–2019',
-    title: 'Product Agency & founding teams',
+    title: 'Product & Design Agency',
     role: 'Founder, Coalition House',
     description:
-      'Founded a product agency. Helped cab drivers recover taxes with Cabdost, built bite-sized founder learning with Station91, a data-collection PWA for a medical NGO, and design systems for fintech clients.',
+      'Founded a product agency. Helped cab drivers recover taxes with Cabdost, built bite-sized founder learning with Station91 and Tymline for short-form blogging, designed Leucine’s CLEEN OS and Instoried, plus a data-collection PWA for a medical NGO.',
     workSlugs: ['cabdost', 'station91'],
     highlight: '5,000 drivers · ~$175K recovered · 35x business growth',
     geo: {
       base: 'bangalore',
       locations: ['mumbai', 'delhi', 'newyork', 'brisbane'],
       reach: ['IN', 'AU', 'US'],
-      users: '100k+ users',
+      users: '100k users · 4 fundraised',
     },
   },
   {
     id: 'imux',
     years: '2018–2019',
     title: 'Founding Imux',
-    role: 'Co-founder',
+    role: 'Cofounder, Product & Design',
     description:
       'Co-founded Imux, a natural-language interface to databases (NLiDB) SaaS. Raised seed funding and learned what zero-to-one really costs.',
     workSlugs: ['imux'],
@@ -87,10 +87,11 @@ export const journey: Milestone[] = [
     highlight: 'Employee of the Year 2021 · 200M+ users',
     geo: {
       base: ['hyderabad', 'bangalore'],
-      hq: 'shenzhen',
-      locations: ['noida', 'gurgaon', 'bangkok', 'singapore', 'jakarta', 'newyork', 'seattle', 'london', 'stockholm'],
-      reach: 'worldwide',
-      users: '200Mn+ users · 10+ products',
+      hq: ['shenzhen', 'newyork'],
+      locations: ['noida', 'gurgaon', 'bangkok', 'singapore', 'jakarta', 'seattle', 'london', 'stockholm'],
+      // NA · EU · SEA · India: the four OnePlus regions these products served
+      reach: ['US', 'CA', 'GB', 'IE', 'FR', 'DE', 'IT', 'ES', 'PT', 'NL', 'BE', 'AT', 'CH', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'SK', 'HU', 'RO', 'BG', 'GR', 'HR', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'ID', 'PH', 'VN', 'IN'],
+      users: '200Mn+ users · NA · EU · SEA · India',
     },
   },
   {

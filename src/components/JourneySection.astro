@@ -20,7 +20,7 @@ function markersFor(geo: (typeof journey)[number]['geo']): Marker[] {
     if (c) out.push({ kind, x: X(c.lng), y: Y(c.lat), name: c.name });
   };
   for (const b of Array.isArray(geo.base) ? geo.base : geo.base ? [geo.base] : []) push('base', b);
-  push('hq', geo.hq);
+  for (const h of Array.isArray(geo.hq) ? geo.hq : geo.hq ? [geo.hq] : []) push('hq', h);
   for (const l of geo.locations ?? []) push('loc', l);
   return out;
 }
@@ -37,7 +37,7 @@ const mapState: Record<string, { reach: string[] | 'worldwide'; markers: Marker[
   all: {
     reach: allWorldwide ? 'worldwide' : [...allCountries],
     markers: journey.flatMap((m) => markersFor(m.geo)),
-    users: '200M+ users · 50+ countries',
+    users: '200M+ users · NA · EU · SEA · India',
   },
 };
 for (const m of journey) {
@@ -111,7 +111,7 @@ for (const m of journey) {
           }
         </svg>
         <div class="map-foot">
-          <span class="map-users art-mono" id="map-users">200M+ users · 50+ countries</span>
+          <span class="map-users art-mono" id="map-users">200M+ users · NA · EU · SEA · India</span>
           <ul class="legend">
             <li><i class="lg-base"></i> Base</li>
             <li><i class="lg-hq"></i> HQ</li>

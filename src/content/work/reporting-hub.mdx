@@ -1,6 +1,7 @@
 ---
 title: 'The Reporting Hub'
-summary: 'White-label Power BI analytics portal. End-to-end design audit, UX improvements, and complete Bootstrap design system implementation.'
+seoTitle: 'The Reporting Hub, design audit to BS5 design system'
+summary: 'White-label Power BI analytics portal. Design audit for a lean team with paying customers, in-product information visibility, and a Bootstrap 5 design system developers could actually adopt.'
 tagline: 'A design system that made enterprise analytics feel designed'
 categories: [Design]
 role: 'Design Consultant'
@@ -8,7 +9,8 @@ timeframe: '2025–2026'
 metrics:
   - { value: 'WCAG', label: 'Accessibility audit' }
   - { value: 'Full', label: 'Component library' }
-  - { value: 'Bootstrap', label: 'Design system' }
+  - { value: 'BS5', label: 'Design system' }
+decision: 'Met the developers where they were: standardised on Bootstrap 5 and spec’d every custom component into it, instead of pushing a bespoke design system a lean team couldn’t maintain.'
 art: 'reporting-hub'
 accent: '#f59e0b'
 externalUrl: 'https://thereportinghub.com'
@@ -18,24 +20,68 @@ geo:
   reach: [US, GB, IN]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import DecisionTable from '../../components/DecisionTable.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    'Early-stage team with <b>paying customers</b> but no bandwidth for design; I took up the design audit and presented findings and improvements',
+    'Customer success was weak because key information lived in docs; with the product <b>deployed on client servers</b>, no telemetry coming back, no chat support, the UI itself had to carry the knowledge',
+    'Key decision: standardised on <b>Bootstrap 5</b> and delivered design specs for every custom component, a common language the developers could actually build',
+  ]}
+/>
 
-An enterprise Power BI platform lacked visual coherence, accessibility standards, and a scalable component system. Development was slow due to inconsistent UI patterns and no documented design language.
+## The real problem
+
+The Reporting Hub is a white-label Power BI portal built by a lean, early-stage team that already had paying customers, which is exactly why design kept losing to the roadmap. Three problems compounded:
+
+1. **No design bandwidth.** The team couldn't focus on design while serving customers, so I took up the responsibility: a full design audit, findings presented with concrete improvements.
+2. **Information invisibility.** Customer success was weak because the answers existed, in the docs, but not where users were. And this isn't a traditional SaaS deployment: the product runs on client servers, with no telemetry coming back and no chat support to catch confusion live. Whatever users needed to know, the interface itself had to teach.
+3. **A fast-built stack.** The web app had grown quickly, accumulating custom components. The redesign looked great, but needed a common language with the developers to ever ship.
 
 <GoalOutcome
-  goal="Full design overhaul, audit, redesign, and Bootstrap design system implementation for long-term scalability."
-  outcome="Modern design system with Bootstrap, improved accessibility, streamlined dev handoff, and a clear implementation roadmap delivered."
+  goal="Audit the product, make its knowledge visible in-context, and deliver a design system the existing team could implement and maintain."
+  outcome="WCAG-checked audit with prioritised improvements; key information surfaced as tooltips, hover-to-view and purposeful popups with visible cues; Bootstrap 5 chosen as the shared language, with design specs for every custom component."
+/>
+
+<DecisionTable
+  options={[
+    {
+      option: 'Rely on documentation',
+      why: 'The information already existed there',
+      whyNot: 'Users don’t leave the product to read docs; with no telemetry or chat support, every confusion died silently on a client server',
+    },
+    {
+      option: 'In-product visibility (chosen)',
+      why: 'Tooltips, hover-to-view and popups where necessary, each with a visible cue, make the product feel relevant and human at the moment of need',
+      whyNot: 'Every surfaced hint had to be curated; over-tooltipping is its own UX failure',
+      chosen: true,
+    },
+    {
+      option: 'Bespoke design system',
+      why: 'Maximum design control and brand expression',
+      whyNot: 'A lean team can’t maintain a custom framework; Bootstrap 5 plus specs for the custom components met the developers where they were',
+    },
+  ]}
 />
 
 <FeatureGrid
   title="Scope of work"
   features={[
-    { label: 'Design Audit', value: 'Comprehensive UI/UX and WCAG accessibility analysis' },
-    { label: 'UX Improvements', value: 'Redesigned flows, navigation, and interaction patterns' },
-    { label: 'Design System', value: 'Full component library built on Bootstrap framework' },
+    { label: 'Design Audit', value: 'Comprehensive UI/UX and WCAG accessibility analysis, presented with improvements' },
+    { label: 'Information Visibility', value: 'Tooltips, hover-to-view and popups with visible cues, doc knowledge moved into the UI' },
+    { label: 'Design System', value: 'Bootstrap 5 foundation with design specs for every custom component' },
     { label: 'Implementation Guide', value: 'Step-by-step setup, migration, and deployment documentation' },
   ]}
 />
+
+<Lesson>
+  <p>
+    The deployment model changed the design brief: when software ships to client servers with nothing reporting
+    back, the interface is your only support channel. Designing for that constraint, knowledge in context, cues that
+    invite rather than interrupt, mattered more than any visual refresh.
+  </p>
+</Lesson>

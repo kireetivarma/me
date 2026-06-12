@@ -15,6 +15,11 @@ art: 'shelf'
 externalUrl: 'https://www.oneplus.com'
 relatedPosts:
   - redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations
+coverage:
+  - { outlet: '9to5Google', title: "OxygenOS 12 review: the redesigned Shelf", url: 'https://9to5google.com/2021/12/10/oxygenos-12-review-unsettling-ui-alterations-video/' }
+  - { outlet: 'Android Central', title: "OxygenOS 12: everything you need to know", url: 'https://www.androidcentral.com/oneplus-oxygenos-12' }
+  - { outlet: 'Oxygen Updater', title: "OnePlus Shelf can now be updated via the Play Store", url: 'https://oxygenupdater.com/article/304/' }
+  - { outlet: 'Trusted Reviews', title: "How to use the Shelf on OnePlus phones", url: 'https://www.trustedreviews.com/how-to/use-the-shelf-on-oneplus-phones-4300707' }
 order: 10
 featured: true
 geo:
@@ -32,6 +37,7 @@ import ArtefactGallery from '../../components/ArtefactGallery.astro';
 import budsWidget from '../../assets/legacy/buds-widget.png';
 import weatherWidget from '../../assets/legacy/weather-widget.png';
 import DecisionTable from '../../components/DecisionTable.astro';
+import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
 
 <Tldr
@@ -48,7 +54,12 @@ The stated request was "improve Shelf engagement." The underlying problem was ac
 
 I validated this with collated community feedback, a user survey, and one-on-one interviews before committing to a direction.
 
-{/* TODO(Kireeti): baseline MAU number pre-redesign, and your scope of authority (what shipped without sign-off vs. what needed HQ approval). */}
+<Baseline
+  metric="Monthly active share of the global user base"
+  before="Single-digit %"
+  after="~1 in 3 users"
+  method="internal MAU share, pre- vs post-redesign"
+/>
 
 <GoalOutcome
   goal="Redesign Shelf from the ground up to improve UX, increase engagement, and build a scalable partner integration framework."

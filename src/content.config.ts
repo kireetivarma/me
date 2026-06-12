@@ -39,6 +39,8 @@ const work = defineCollection({
     accent: z.string().optional(),
     externalUrl: z.string().url().optional(),
     relatedPosts: z.array(z.string()).default([]),
+    /** Verified press links rendered as a "// coverage" list on the case page. */
+    coverage: z.array(z.object({ outlet: z.string(), title: z.string(), url: z.string().url() })).default([]),
     order: z.number(),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),

@@ -1,17 +1,22 @@
 ---
 title: 'Petfolk'
-summary: 'Full-stack AI-powered luxury pet care platform with grooming services, spa, marketplace, and franchise management for Pan India expansion.'
-tagline: 'AI-powered luxury pet care, built end-to-end'
+seoTitle: 'Petfolk, custom booking platform for India’s pet grooming'
+summary: 'India’s new player in pet grooming. Replaced Shopify pages and WhatsApp routing with a custom booking platform built for multi-format locations and franchise operations.'
+tagline: 'From Shopify pages to a real booking platform for pet care'
 categories: [AI, Products]
 role: 'Fractional Advisor, Product & Strategy'
 timeframe: '2024–present'
 metrics:
-  - { value: 'Pan India', label: 'Launched' }
+  - { value: 'Pan India', label: 'Stores, Pods & Vans' }
   - { value: '★★★★★', label: 'Google & Trustpilot rated' }
   - { value: 'Full-stack', label: 'Solo ownership' }
+decision: 'Replaced Shopify pages and WhatsApp routing with a custom booking platform purpose-built for multi-format locations (Stores, Pods, Vans) and franchise operations.'
 art: 'petfolk'
 accent: '#fb923c'
 externalUrl: 'https://petfolk.in'
+coverage:
+  - { outlet: 'Telangana Today', title: "Hyderabad-based Petfolk, one-stop portal for pet parents", url: 'https://telanganatoday.com/hyderabad-based-petfolk-one-stop-portal-for-pet-parents' }
+  - { outlet: 'Start-Up Hyderabad', title: "Petfolk, a pet parents' paradise", url: 'https://startuphyderabad.com/petfolk-a-pet-parents-paradise/' }
 order: 4
 geo:
   base: hyderabad
@@ -19,24 +24,70 @@ geo:
   reach: [IN]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import DecisionTable from '../../components/DecisionTable.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    'Petfolk had burned infra on native Android/iOS apps it couldn’t maintain without a tech team, then retreated to <b>Shopify pages</b>; visitors had nothing to do but get routed to WhatsApp',
+    'Key decision: a <b>custom booking platform</b> purpose-built for Petfolk’s multi-format operation (Stores, Pods, Vans), service types and franchise management',
+    'Customers now browse every branch across India, book services, manage pet profiles with pet-specific catalogs, and even <b>live-stream their pet’s grooming session</b>; built entirely with Claude on Emergent',
+  ]}
+/>
 
-Pet parents across India lack access to reliable, premium grooming and wellness services. Pet businesses have no centralised platform for franchise operations, bookings, and customer management.
+## The real problem
+
+Petfolk is India's new player in pet grooming services. Before this engagement the team had spent heavily building native apps on Android and iOS, and failed to maintain them without a tech team. The fallback was running a pet booking service on Shopify pages, chosen with a future commerce play in mind, but the problems were plain: visitors to the website had nothing to do, there was no booking schedule, and users were routed to a WhatsApp account.
 
 <GoalOutcome
-  goal="Build end-to-end AI-powered platform for premium pet care, from booking and grooming to franchise operations and community."
-  outcome="Launched across Pan India. Highly rated on Google & Trustpilot. Multiple pet centers operational. Built: Dev, Des, Deploy, full ownership."
+  goal="Give Petfolk a platform that actually books: multi-location, multi-format (Stores, Pods, Vans), multi-service, with franchise operations built in."
+  outcome="Customers browse all Petfolk branches across India, view catalogs, book services and get an operations response. Franchisee owners, staff and groomers run on the same platform, with ecommerce in the pipeline."
 />
+
+<DecisionTable
+  options={[
+    {
+      option: 'Stay on Shopify',
+      why: 'Already live; commerce-ready for the planned product sales',
+      whyNot: 'Shopify pages can’t model branches, service schedules or franchise ops; every booking died in a WhatsApp thread',
+    },
+    {
+      option: 'Revive the native apps',
+      why: 'The investment already existed',
+      whyNot: 'Maintaining two app codebases without a tech team is exactly what failed the first time',
+    },
+    {
+      option: 'Custom web platform (chosen)',
+      why: 'Purpose-built for multi-format locations, service types and franchise management; one codebase, AI-accelerated build',
+      whyNot: 'Built from scratch, but with Claude on Emergent the build cost collapsed',
+      chosen: true,
+    },
+  ]}
+/>
+
+## What was built
+
+A pet-grooming booking platform custom-built for Petfolk. Customers can view all branches across India (Stores, Pods and Vans), browse the catalog, book a service and get a response from operations. Logged-in customers add their pet's info and see a catalog tailored to their pets, and can opt for live streaming of grooming sessions. Franchisee owners, staff and groomers are onboarded onto the same platform for seamless operations, with ecommerce next in the pipeline. Built entirely with Claude on Emergent.
 
 <FeatureGrid
   title="Platform features"
   features={[
-    { label: 'Grooming Services', value: 'Professional grooming with mobile van and experience centers' },
-    { label: 'Spa & Wellness', value: 'Complete wellness programs and specialised pet care' },
-    { label: 'AI Marketplace', value: 'AI-recommended pet supplies and product discovery' },
-    { label: 'Franchise Management', value: 'Centralised ops, bookings, and multi-location management' },
+    { label: 'Branch Discovery', value: 'Every Petfolk location across India: Stores, Pods, and mobile Vans' },
+    { label: 'Booking & Ops', value: 'Service booking with operations response, schedules per location' },
+    { label: 'Pet Profiles', value: 'Customer login with pet info; catalog personalised per pet' },
+    { label: 'Live Streaming', value: 'Watch your pet’s grooming session live' },
+    { label: 'Franchise Management', value: 'Owners, staff and groomers onboarded on one operations platform' },
+    { label: 'Commerce Pipeline', value: 'Ecommerce for pet supplies built into the roadmap' },
   ]}
 />
+
+<Lesson>
+  <p>
+    The Shopify era wasn't a mistake, it proved demand cheaply. The mistake was the native apps: platform prestige
+    before operational fit. The rebuild worked because it started from how Petfolk actually operates, locations,
+    formats and franchisees first, screens second.
+  </p>
+</Lesson>

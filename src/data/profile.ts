@@ -19,7 +19,7 @@ export const profile = {
     { value: '200M+', label: 'Users Reached' },
     { value: '20+', label: 'Products Built & Shipped' },
     { value: '25+', label: 'Teams Globally' },
-    { value: '11+', label: 'Years Experience' },
+    { value: '12+', label: 'Years Experience' },
   ],
   /**
    * Brand grid entries. `icon` is a simple-icons export name (rendered as the

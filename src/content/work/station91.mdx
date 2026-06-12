@@ -27,6 +27,9 @@ import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
 import ArtefactGallery from '../../components/ArtefactGallery.astro';
 import s91Mock from '../../assets/legacy/station91.png';
+import s91Reviews from '../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/40.png';
+import s91Chat from '../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/39.jpg';
+import s91Comment from '../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/34.png';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Lesson from '../../components/Lesson.astro';
 
@@ -83,8 +86,13 @@ Four learning tracks of 5–10 minute practitioner lessons. The design process r
 />
 
 <ArtefactGallery
-  title="Artefacts"
-  items={[{ src: s91Mock, alt: 'Station91 app screens', caption: 'Lesson player and tracks' }]}
+  title="Artefacts & user feedback"
+  items={[
+    { src: s91Mock, alt: 'Station91 app screens', caption: 'Lesson player and tracks' },
+    { src: s91Reviews, alt: 'Station91 Play Store ratings and reviews at launch', caption: '5.0★ Play Store reviews at launch' },
+    { src: s91Chat, alt: 'User chat: "I would love spending time on the screen the way it\'s designed"', caption: 'Early user feedback, unprompted' },
+    { src: s91Comment, alt: 'User comment: "This app\'s UI is really cool, it\'s very engaging"', caption: 'Community reception' },
+  ]}
 />
 
 <Lesson>

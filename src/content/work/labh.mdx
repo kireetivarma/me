@@ -1,14 +1,16 @@
 ---
 title: 'Labh'
-summary: 'SEBI & AMFI certified investment platform. Research-led mutual fund baskets with quant models, intelligent rebalancing, and NSE/BSE direct processing.'
-tagline: 'Democratising wealth creation with expert-designed fund baskets'
+seoTitle: 'Labh, ground-up product design for a SEBI-certified platform'
+summary: 'SEBI & AMFI certified investment platform. Ground-up product design: every screen, interaction and the strategic design direction until the founder could hire a team.'
+tagline: 'Bringing "saving money" closer to the heart of Indian users'
 categories: [Fintech, Design, Products]
 role: 'Product Design & Strategy'
 timeframe: '2024–present'
 metrics:
   - { value: 'SEBI', label: '& AMFI certified' }
   - { value: 'NSE/BSE', label: 'Direct processing' }
-  - { value: 'Quant', label: 'Research-led models' }
+  - { value: 'Ground-up', label: 'Product design' }
+decision: 'Invoked Indian design elements to bring "saving money" closer to the heart, betting on joy and trust over another sterile fintech UI.'
 art: 'labh'
 accent: '#10b981'
 externalUrl: 'https://labh.io'
@@ -19,17 +21,31 @@ geo:
   reach: [IN]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    'Created the product design for Labh <b>from the ground up</b>: every app screen, every interaction, and the strategic design direction until the founder could hire a team',
+    'Key decision: invoked <b>Indian design elements</b> to bring "saving money" closer to the heart of Indian users, instead of another sterile fintech UI',
+    'With many savings apps already in the market, Labh’s core design bets on <b>joy, trust and intelligent suggestions</b>',
+  ]}
+/>
 
-Retail investors lack access to professional-grade wealth management. Mutual fund investing is opaque, intimidating, and poorly designed, creating a gap between intent and action.
+## The real problem
+
+Retail investors lack access to professional-grade wealth management. Mutual fund investing is opaque, intimidating, and poorly designed, creating a gap between intent and action. And the market is crowded: many apps already do savings. A new entrant doesn't win on features, it wins on how investing *feels*.
 
 <GoalOutcome
-  goal="Democratise wealth creation through simple, transparent, expert-designed fund baskets with clean product design and intelligent automation."
-  outcome="SEBI & AMFI certified. Quant-driven models. Intelligent rebalancing. NSE/BSE direct processing. Minimal, research-led product design."
+  goal="Design Labh from zero: all app screens, interactions and the strategic design direction, holding the bar until the founder could hire a design team."
+  outcome="A design language rooted in Indian visual elements that makes saving feel joyful and trustworthy, wrapped around SEBI & AMFI certified, quant-driven fund baskets with NSE/BSE direct processing."
 />
+
+## The design bet
+
+Most fintech UIs treat money as a spreadsheet. For Indian users, saving is emotional, familial, festival-linked, aspirational. The design invokes Indian elements to bring "saving money" closer to the heart: warmth in the visual language, joy in the moments that matter (first investment, goal reached), and intelligent suggestions delivered like advice from someone you trust, not notifications from a terminal.
 
 <FeatureGrid
   title="Core offerings"
@@ -40,3 +56,11 @@ Retail investors lack access to professional-grade wealth management. Mutual fun
     { label: 'Demat Integration', value: 'Direct NSE/BSE order processing with Demat account' },
   ]}
 />
+
+<Lesson>
+  <p>
+    Designing "until the founder can hire a team" is its own discipline: every screen had to be opinionated enough
+    to set direction and documented enough to survive a handoff. The strategic direction matters more than any
+    single screen, it's the part a future team can't reverse-engineer from pixels.
+  </p>
+</Lesson>

@@ -1,14 +1,16 @@
 ---
 title: 'Pro Studio Space'
-summary: 'Collaborative workspace for creative professionals. Real-time iteration, asset management, and seamless developer handoff in one integrated platform.'
-tagline: 'One workspace from first draft to developer handoff'
-categories: [Design, Products, AI]
+seoTitle: 'Pro Studio, SaaS for film pre-production and hiring'
+summary: 'SaaS for film pre-production and hiring. Production houses post casting calls, crew calls and opportunities, invite and conduct live auditions; talent side is free forever.'
+tagline: 'AI for pre-production: casting, crew and auditions in one place'
+categories: [Products, AI]
 role: 'Founder & Builder'
 timeframe: '2024–present'
 metrics:
   - { value: 'Live', label: 'prostudio.space' }
-  - { value: 'Real-time', label: 'Collaboration' }
-  - { value: 'Auto', label: 'Dev handoff' }
+  - { value: 'Live', label: 'Online auditions' }
+  - { value: 'Free forever', label: 'For talent' }
+decision: 'Made the talent side free forever with a streamlined profile; supply density is what makes a hiring marketplace worth paying for on the production side.'
 art: 'pro-studio'
 accent: '#60a5fa'
 externalUrl: 'https://prostudio.space'
@@ -18,24 +20,41 @@ geo:
   reach: [CA, US, IN, GB]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    'SaaS for <b>film pre-production and hiring</b>: production houses post casting calls, crew calls and opportunities, invite auditions, and conduct them live online',
+    'Key decision: the talent side is <b>free forever</b> with a streamlined profile; supply density is what makes a hiring marketplace worth paying for on the production side',
+    'Covers the pre-production stack: scripts, pre-visualisation, talent, calls and online auditions',
+  ]}
+/>
 
-Creative professionals juggle fragmented tools for design, feedback, and developer handoff. Context is lost between apps and teams waste hours on misaligned expectations.
+## The real problem
+
+Pre-production runs on fragmented tools and personal networks: casting calls circulate as posters and WhatsApp forwards, crew hiring lives in spreadsheets, and auditions mean travel or unstructured video files. Talent without connections never hears about the work; production houses drown in unstructured applications.
 
 <GoalOutcome
-  goal="Create a unified workspace where designers iterate, collaborate in real-time, and hand off seamlessly to engineers."
-  outcome="Real-time collaboration, structured asset library, version history, and automated developer handoff in one integrated product."
+  goal="One platform for the hiring side of pre-production: post casting and crew calls, surface opportunities, invite auditions, and run them live, online."
+  outcome="Production houses manage calls and auditions end-to-end on Pro Studio; talent gets a streamlined, free-forever profile and a fair shot at every open call."
 />
 
 <FeatureGrid
-  title="Key features"
+  title="Platform features"
   features={[
-    { label: 'Real-Time Collaboration', value: 'Multiple designers on the same project simultaneously' },
-    { label: 'Asset Library', value: 'Components, colours, typography, brand assets, organised' },
-    { label: 'Version Control', value: 'Full design history with rollback capabilities' },
-    { label: 'Developer Handoff', value: 'Specs, assets, and code snippets generated automatically' },
+    { label: 'Casting & Crew Calls', value: 'Production houses post roles and crew openings with structured requirements' },
+    { label: 'Opportunities Board', value: 'Open calls discoverable by every registered talent' },
+    { label: 'Live Auditions', value: 'Invite shortlists and conduct auditions online, in real time' },
+    { label: 'Talent Profiles', value: 'Streamlined portfolio profiles, free forever' },
   ]}
 />
+
+<Lesson>
+  <p>
+    Marketplaces die supply-side first. Making talent free forever was less generosity than physics: every paid
+    feature on the production side is only worth buying if the right people are on the other end of the call.
+  </p>
+</Lesson>

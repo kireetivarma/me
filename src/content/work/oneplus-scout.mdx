@@ -1,19 +1,24 @@
 ---
 title: 'OnePlus Scout'
-seoTitle: 'OnePlus Scout, 200%+ CTR, scaled to 50+ countries'
-summary: 'Scaled Scout from a regional product to a global search & discovery feature, improving CTR by 200%+ and expanding to 50+ countries.'
+seoTitle: 'OnePlus Scout, 2x CTR, scaled to 50+ countries'
+summary: 'Scaled Scout from a regional product to a global search & discovery feature, doubling CTR and expanding to 50+ countries.'
 tagline: 'Scaling device search from regional to global'
 categories: [OnePlus, Products]
 role: 'Senior PM'
 timeframe: '2020–2022'
 metrics:
-  - { value: '200%+', label: 'CTR improvement' }
+  - { value: '2x', label: 'CTR improvement' }
   - { value: '50+', label: 'Countries reached' }
   - { value: '4', label: 'New content verticals' }
 decision: 'Bet CTR recovery on rich result templates (e-commerce, streaming previews) rather than ranking tweaks; users choose faster when they can see the content.'
 art: 'scout'
 relatedPosts:
   - scaling-oneplus-scout-globally-users
+coverage:
+  - { outlet: 'Android Authority', title: "OnePlus Launcher update adds unified search for users in India", url: 'https://www.androidauthority.com/oneplus-launcher-scout-1149264/' }
+  - { outlet: 'XDA Developers', title: "OnePlus Launcher brings Scout unified search", url: 'https://www.xda-developers.com/oneplus-launcher-update-oneplus-scout-unified-search-india/' }
+  - { outlet: '9to5Google', title: "OnePlus Launcher v4.7.2 adds Scout unified device search", url: 'https://9to5google.com/2020/08/19/oneplus-launcher-v4-7-2-adds-oneplus-scout-unified-device-search-in-india/' }
+  - { outlet: 'TechRadar', title: "Meet Scout, the universal search feature for OnePlus phones", url: 'https://www.techradar.com/news/meet-scout-the-universal-search-feature-for-oneplus-phones' }
 order: 11
 geo:
   base: hyderabad
@@ -29,13 +34,14 @@ import FeatureGrid from '../../components/FeatureGrid.astro';
 import ArtefactGallery from '../../components/ArtefactGallery.astro';
 import scoutApp from '../../assets/legacy/scout-app.png';
 import DecisionTable from '../../components/DecisionTable.astro';
+import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
 
 <Tldr
   items={[
     'Took Scout from a regional, declining-CTR search feature to a <b>global product in 50+ countries</b>, packaged into the OnePlus Launcher on the Play Store',
     'Key decision: bet the CTR recovery on <b>rich result templates</b> (e-commerce, streaming) rather than ranking tweaks, because users choose faster when they can see the content',
-    'Result: <b>200%+ CTR improvement</b> across the v1 → v1.3 → v2.0 ladder',
+    'Result: <b>CTR doubled</b> across the v1 → v1.3 → v2.0 ladder',
   ]}
 />
 
@@ -43,11 +49,16 @@ import Lesson from '../../components/Lesson.astro';
 
 Scout v1 was a regional search feature with limited content coverage, weak multilingual support, and a CTR that was declining, the clearest possible signal that results weren't worth tapping. The direction for v1.3 came from pairing usage analytics with user interviews: the data said *where* people abandoned, the interviews said *why*.
 
-{/* TODO(Kireeti): baseline CTR figure pre-v1.3, if shareable, to pair with the 200%+ improvement. */}
+<Baseline
+  metric="Search result click-through rate"
+  before="1×"
+  after="2×"
+  method="usage analytics across the v1 → v2.0 ladder"
+/>
 
 <GoalOutcome
   goal="Scale Scout to a globally relevant, high-performance search and discovery feature with expanded content types and multilingual support."
-  outcome="200%+ CTR improvement. Expanded to 50+ countries. New content categories, faster indexing, and significantly improved user satisfaction."
+  outcome="CTR doubled. Expanded to 50+ countries. New content categories, faster indexing, and significantly improved user satisfaction."
 />
 
 <DecisionTable

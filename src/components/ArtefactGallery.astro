@@ -1,9 +1,9 @@
 ---
 /**
  * Grid of design artefacts (wireframes, widget shots, flows). Accepts images
- * already imported in the MDX file via astro:assets.
+ * already imported in the MDX file via astro:assets. Click to expand.
  */
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -11,15 +11,23 @@ interface Props {
   items: { src: ImageMetadata; alt: string; caption?: string }[];
 }
 const { title = 'Artefacts', items } = Astro.props;
+
+// Pre-render a high-res variant for the lightbox (capped at source width).
+const expanded = await Promise.all(
+  items.map((it) => getImage({ src: it.src, width: Math.min(it.src.width, 1800) }))
+);
 ---
 
 <div class="ag">
   <h3 class="ag-title">{title}</h3>
   <div class="ag-grid">
     {
-      items.map((it) => (
+      items.map((it, i) => (
         <figure class="ag-item">
-          <Image src={it.src} alt={it.alt} width={640} loading="lazy" />
+          <button class="ag-zoom" type="button" aria-label={`Expand: ${it.alt}`} data-full={expanded[i].src}>
+            <Image src={it.src} alt={it.alt} width={640} loading="lazy" />
+            <span class="ag-hint" aria-hidden="true">⤢</span>
+          </button>
           {it.caption && <figcaption>{it.caption}</figcaption>}
         </figure>
       ))
@@ -46,10 +54,42 @@ const { title = 'Artefacts', items } = Astro.props;
     overflow: hidden;
     background: var(--bg-card);
   }
-  .ag-item :global(img) {
+  .ag-zoom {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    position: relative;
+  }
+  .ag-zoom :global(img) {
     width: 100%;
     height: auto;
     display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ag-zoom:hover :global(img) {
+    transform: scale(1.02);
+  }
+  .ag-hint {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .ag-zoom:hover .ag-hint,
+  .ag-zoom:focus-visible .ag-hint {
+    opacity: 1;
   }
   .ag-item figcaption {
     font-size: var(--text-xs);
@@ -57,3 +97,43 @@ const { title = 'Artefacts', items } = Astro.props;
     padding: 0.6rem 0.8rem;
   }
 </style>
+
+<script>
+  // Shared lightbox: one overlay per page, filled from the clicked image.
+  function getLightbox() {
+    let lb = document.getElementById('ag-lightbox');
+    if (lb) return lb;
+    lb = document.createElement('div');
+    lb.id = 'ag-lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.style.cssText =
+      'position:fixed;inset:0;z-index:2000;display:none;place-items:center;background:rgba(5,6,9,0.92);backdrop-filter:blur(8px);cursor:zoom-out;padding:4vmin;';
+    lb.innerHTML =
+      '<img style="max-width:100%;max-height:92vh;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.6)" alt="" />' +
+      '<button aria-label="Close" style="position:fixed;top:14px;right:18px;background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer">×</button>';
+    const close = () => {
+      lb!.style.display = 'none';
+      document.documentElement.style.overflow = '';
+    };
+    lb.addEventListener('click', close);
+    addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+    document.body.appendChild(lb);
+    return lb;
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.ag-zoom').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const img = btn.querySelector('img');
+      if (!img) return;
+      const lb = getLightbox();
+      const big = lb.querySelector('img')!;
+      big.src = btn.dataset.full || img.currentSrc || img.src;
+      big.alt = img.alt;
+      lb.style.display = 'grid';
+      document.documentElement.style.overflow = 'hidden';
+    });
+  });
+</script>

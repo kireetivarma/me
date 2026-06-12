@@ -15,8 +15,21 @@ interface Props {
 }
 
 const { entry, prev, next } = Astro.props;
-const { title, seoTitle, tagline, summary, categories, role, timeframe, metrics, art, accent, externalUrl, relatedPosts } =
-  entry.data;
+const {
+  title,
+  seoTitle,
+  tagline,
+  summary,
+  categories,
+  role,
+  timeframe,
+  metrics,
+  art,
+  accent,
+  externalUrl,
+  relatedPosts,
+  coverage,
+} = entry.data;
 const Art = resolveArt(art);
 const quotes = testimonialsFor(entry.id);
 
@@ -69,6 +82,23 @@ const jsonLd = {
       <div class="prose cs-prose">
         <slot />
       </div>
+
+      {
+        coverage.length > 0 && (
+          <aside class="cs-coverage">
+            <p class="section-label">// coverage</p>
+            <ul class="coverage-list">
+              {coverage.map((c) => (
+                <li>
+                  <a href={c.url} target="_blank" rel="noopener">
+                    <b>{c.outlet}</b> · {c.title} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )
+      }
 
       {
         quotes.length > 0 && (
@@ -177,6 +207,31 @@ const jsonLd = {
   }
   .cs-prose {
     margin: 3rem auto 0;
+  }
+  .cs-coverage {
+    margin-top: 3.5rem;
+    max-width: 70ch;
+  }
+  .coverage-list {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+  }
+  .coverage-list a {
+    font-size: var(--text-sm);
+    color: var(--text-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+  }
+  .coverage-list a:hover {
+    color: var(--text-1);
+    border-color: var(--accent);
+  }
+  .coverage-list b {
+    color: var(--text-1);
+    font-weight: 600;
   }
   .cs-quotes {
     margin-top: 3.5rem;
