@@ -1,5 +1,6 @@
 ---
 title: 'Itihasa Collective'
+seoTitle: 'Itihasa Collective, secure script sharing for filmmakers'
 summary: 'Invite-only platform for filmmakers to share scripts securely, collaborate on stories, and protect IP, built on Bubble with Stripe integration.'
 tagline: 'Secure, IP-protected script collaboration for filmmakers'
 categories: [Products, Design]
@@ -9,6 +10,7 @@ metrics:
   - { value: 'Invite-only', label: 'Community platform' }
   - { value: 'Encrypted', label: 'Access-controlled sharing' }
   - { value: 'No-code', label: 'Built on Bubble' }
+decision: 'Built on Bubble (no-code) instead of a custom stack: two months to launch versus an eight-month engineering estimate, for a community that needed trust now.'
 art: 'itihasa'
 accent: '#f472b6'
 externalUrl: 'https://app.itihasa.co'
@@ -21,8 +23,18 @@ geo:
   reach: [IN, US]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import Lesson from '../../components/Lesson.astro';
+
+<Tldr
+  items={[
+    "Filmmakers were sharing scripts over <b>WhatsApp and email</b>, an IP breach waiting to happen; built them an invite-only, access-controlled home",
+    'Key decision: built on <b>Bubble (no-code)</b>, two months to launch versus an eight-month traditional engineering estimate',
+    'Shipped April 2024: encrypted script management, an opportunities board, and an admin review console',
+  ]}
+/>
 
 ## The problem
 
@@ -42,3 +54,11 @@ Filmmakers share sensitive screenplays over WhatsApp and email, exposing IP to t
     { label: 'Feedback & Notes', value: 'Admin and collaborator notes for story development' },
   ]}
 />
+
+<Lesson>
+  <p>
+    No-code was the right call for speed and for a client who needed to see the product to trust it. The honest
+    trade-off: platform lock-in and a ceiling on custom behaviour, which I documented for the client on day one so
+    the eventual migration is a plan, not a surprise.
+  </p>
+</Lesson>

@@ -1,5 +1,6 @@
 ---
 title: 'Zomato & Blinkit on Shelf'
+seoTitle: 'Zomato & Blinkit on OnePlus Shelf, ambient commerce'
 summary: '"Eternal Never Settles", Zomato & Blinkit commerce widgets on OnePlus Shelf enabling order tracking and quick-commerce from the homescreen layer.'
 tagline: 'Quick commerce on the homescreen, the "Eternal Never Settles" launch'
 categories: [OnePlus, Partnerships]
@@ -9,6 +10,7 @@ metrics:
   - { value: '2', label: 'Simultaneous partner tracks' }
   - { value: 'Q4 2024', label: 'Campaign launch' }
   - { value: 'SDK', label: 'Commerce standard set' }
+decision: 'Shipped both a compact 2x2 and a stacked swipeable widget rather than one format; order-tracking and quick-reorder are different jobs on the same surface.'
 art: 'zomato-blinkit'
 accent: '#e23744'
 relatedPosts:
@@ -22,8 +24,20 @@ geo:
   reach: [IN]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import shelfWidgets from '../../assets/legacy/shelf-zomato-blinkit.png';
+import Lesson from '../../components/Lesson.astro';
+
+<Tldr
+  items={[
+    'Ran <b>two partner integration tracks simultaneously</b> (Zomato + Blinkit) onto the Shelf commerce SDK, launched as the "Eternal Never Settles" campaign in Q4 2024',
+    'Key decision: shipped both a <b>compact 2x2 and a stacked, swipeable widget</b>; order-tracking and quick-reorder are different jobs on the same surface',
+    "Context that made the bet: Zomato saw a <b>30% increase in peak-meal orders</b> YoY and grocery quick-commerce demand rose <b>60%</b>, daily-frequency partners prove an ambient commerce surface",
+  ]}
+/>
 
 ## The problem
 
@@ -43,3 +57,18 @@ Food and quick-commerce ordering required multiple app-switching steps. Shelf ha
     { label: 'SDK Standardisation', value: 'Used Shelf widget SDK to set commerce integration standards' },
   ]}
 />
+
+<ArtefactGallery
+  title="The shipped widgets"
+  items={[
+    { src: shelfWidgets, alt: 'Zomato and Blinkit commerce widgets on OnePlus Shelf', caption: 'Zomato & Blinkit on Shelf' },
+  ]}
+/>
+
+<Lesson>
+  <p>
+    Launching India-only was right for partner relevance but produced predictable noise from global users seeing
+    features they couldn't have. The regional-exclusive playbook needs its own comms plan, not a footnote in the
+    global one.
+  </p>
+</Lesson>

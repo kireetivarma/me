@@ -1,0 +1,59 @@
+---
+/**
+ * Grid of design artefacts (wireframes, widget shots, flows). Accepts images
+ * already imported in the MDX file via astro:assets.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title?: string;
+  items: { src: ImageMetadata; alt: string; caption?: string }[];
+}
+const { title = 'Artefacts', items } = Astro.props;
+---
+
+<div class="ag">
+  <h3 class="ag-title">{title}</h3>
+  <div class="ag-grid">
+    {
+      items.map((it) => (
+        <figure class="ag-item">
+          <Image src={it.src} alt={it.alt} width={640} loading="lazy" />
+          {it.caption && <figcaption>{it.caption}</figcaption>}
+        </figure>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .ag {
+    margin: 2.5rem 0;
+  }
+  .ag-title {
+    margin-bottom: 1rem;
+  }
+  .ag-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .ag-item {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+  .ag-item :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .ag-item figcaption {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    padding: 0.6rem 0.8rem;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 title: 'OnePlus Scout'
+seoTitle: 'OnePlus Scout, 200%+ CTR, scaled to 50+ countries'
 summary: 'Scaled Scout from a regional product to a global search & discovery feature, improving CTR by 200%+ and expanding to 50+ countries.'
 tagline: 'Scaling device search from regional to global'
 categories: [OnePlus, Products]
@@ -9,6 +10,7 @@ metrics:
   - { value: '200%+', label: 'CTR improvement' }
   - { value: '50+', label: 'Countries reached' }
   - { value: '4', label: 'New content verticals' }
+decision: 'Bet CTR recovery on rich result templates (e-commerce, streaming previews) rather than ranking tweaks; users choose faster when they can see the content.'
 art: 'scout'
 relatedPosts:
   - scaling-oneplus-scout-globally-users
@@ -21,17 +23,57 @@ geo:
   users: '100M+'
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import scoutApp from '../../assets/legacy/scout-app.png';
+import DecisionTable from '../../components/DecisionTable.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    'Took Scout from a regional, declining-CTR search feature to a <b>global product in 50+ countries</b>, packaged into the OnePlus Launcher on the Play Store',
+    'Key decision: bet the CTR recovery on <b>rich result templates</b> (e-commerce, streaming) rather than ranking tweaks, because users choose faster when they can see the content',
+    'Result: <b>200%+ CTR improvement</b> across the v1 → v1.3 → v2.0 ladder',
+  ]}
+/>
 
-OnePlus Scout was a regional search feature with limited content coverage, poor multilingual support, and declining CTR, needing structural overhaul to serve a growing global user base.
+## The real problem
+
+Scout v1 was a regional search feature with limited content coverage, weak multilingual support, and a CTR that was declining, the clearest possible signal that results weren't worth tapping. The direction for v1.3 came from pairing usage analytics with user interviews: the data said *where* people abandoned, the interviews said *why*.
+
+{/* TODO(Kireeti): baseline CTR figure pre-v1.3, if shareable, to pair with the 200%+ improvement. */}
 
 <GoalOutcome
   goal="Scale Scout to a globally relevant, high-performance search and discovery feature with expanded content types and multilingual support."
   outcome="200%+ CTR improvement. Expanded to 50+ countries. New content categories, faster indexing, and significantly improved user satisfaction."
 />
+
+<DecisionTable
+  options={[
+    {
+      option: 'Tune ranking on existing results',
+      why: 'Lowest-effort lever; no UI change',
+      whyNot: 'Interviews showed the problem was presentation, not order: plain rows gave users nothing to judge results by',
+    },
+    {
+      option: 'Rich result templates (chosen)',
+      why: 'E-commerce and streaming results render as content previews, so users can make the choice visually',
+      whyNot: 'Each vertical needs its own template spec and partner content pipeline',
+      chosen: true,
+    },
+    {
+      option: 'Global launch in one shot',
+      why: 'Marketing moment; single release train',
+      whyNot: 'Multilingual indexing and typo/abbreviation tolerance needed proving first; we ran v1.3 closed beta (May 2021) before v2.0 global (Q3 2021)',
+    },
+  ]}
+/>
+
+## What was built
+
+v1.3 unified apps and shortcuts for visibility, added result templates for e-commerce and streaming content, sped up load, expanded into contacts and settings, and added typo and abbreviation tolerance. v2.0 took it global inside the OnePlus Launcher on the Play Store, decoupling search improvements from OS release trains.
 
 <FeatureGrid
   title="What I did"
@@ -42,3 +84,16 @@ OnePlus Scout was a regional search feature with limited content coverage, poor 
     { label: 'Performance', value: 'Reduced latency and improved result relevance across queries' },
   ]}
 />
+
+<ArtefactGallery
+  title="Artefacts"
+  items={[{ src: scoutApp, alt: 'OnePlus Scout search interface', caption: 'Scout search surface' }]}
+/>
+
+<Lesson>
+  <p>
+    Shipping v2.0 inside the Launcher on the Play Store was the most leveraged decision of the project, updates no
+    longer waited on OS trains, and I'd make it earlier next time. The slowest part of fixing a declining product
+    was the cadence at which fixes could reach users.
+  </p>
+</Lesson>

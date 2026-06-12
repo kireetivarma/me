@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, categories, metrics, art, accent, role, timeframe } = project.data;
+const { title, summary, categories, metrics, art, accent, role, timeframe, decision } = project.data;
 const Art = resolveArt(art);
 const topMetric = metrics[0];
 const testimonial = testimonialsFor(project.id)[0];
@@ -29,6 +29,14 @@ const testimonial = testimonialsFor(project.id)[0];
     </div>
     <h3 class="card-title">{title}</h3>
     <p class="card-summary">{summary}</p>
+    {
+      decision && (
+        <p class="card-decision">
+          <span class="decision-label art-mono">decision</span>
+          {decision}
+        </p>
+      )
+    }
     {
       testimonial && (
         <p class="card-quote">
@@ -105,6 +113,23 @@ const testimonial = testimonialsFor(project.id)[0];
     color: var(--text-2);
     font-size: var(--text-sm);
     flex: 1;
+  }
+  .card-decision {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    line-height: 1.55;
+  }
+  .decision-label {
+    display: inline-block;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+    margin-right: 0.5rem;
+    vertical-align: 1px;
   }
   .card-quote {
     font-size: var(--text-xs);

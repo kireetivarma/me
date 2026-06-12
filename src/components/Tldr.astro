@@ -1,0 +1,59 @@
+---
+/** Three scannable takeaways at the top of a case study. */
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+---
+
+<div class="tldr">
+  <span class="tldr-label">TL;DR</span>
+  <ul>
+    {items.map((i) => <li set:html={i} />)}
+  </ul>
+</div>
+
+<style>
+  .tldr {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    padding: 1.3rem 1.5rem;
+    margin: 0 0 2.5rem;
+  }
+  .tldr-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 0.7rem;
+  }
+  .tldr ul {
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+  }
+  .tldr li {
+    color: var(--text-2);
+    font-size: var(--text-base);
+    margin: 0;
+    padding-left: 1.4rem;
+    position: relative;
+  }
+  .tldr li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+  .tldr li :global(b),
+  .tldr li :global(strong) {
+    color: var(--text-1);
+  }
+</style>

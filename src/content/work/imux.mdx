@@ -1,5 +1,6 @@
 ---
 title: 'Imux'
+seoTitle: 'Imux, seed-funded natural-language database SaaS'
 summary: 'Natural language interface to databases. Query complex enterprise data in plain English, no SQL knowledge required. Democratising data access.'
 tagline: 'Ask your database anything, in plain English'
 categories: [AI, Products]
@@ -9,6 +10,7 @@ metrics:
   - { value: 'Seed', label: 'Funded' }
   - { value: 'NLiDB', label: 'Core technology' }
   - { value: 'Enterprise', label: 'Ready' }
+decision: 'Joined the Zeroth AI accelerator and sold across three verticals (InsurTech India, e-commerce Vietnam/Korea) early; direct customer engagement beat building in stealth.'
 art: 'imux'
 accent: '#38bdf8'
 relatedPosts:
@@ -20,8 +22,20 @@ geo:
   reach: [IN, US]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import imuxMock from '../../assets/legacy/imux.png';
+import Lesson from '../../components/Lesson.astro';
+
+<Tldr
+  items={[
+    'Co-founded an <b>NLiDB SaaS</b>: plain-English queries over enterprise databases, years before LLMs made it fashionable',
+    'Key decision: joined the <b>Zeroth AI accelerator</b> and engaged paying customers across three verticals (InsurTech India, e-commerce Vietnam/South Korea) instead of building in stealth',
+    'The accelerator network led directly to a <b>South Korea delegation and seed funding</b>',
+  ]}
+/>
 
 ## The problem
 
@@ -41,3 +55,16 @@ Non-technical stakeholders cannot self-serve data insights due to SQL complexity
     { label: 'Analytics & Export', value: 'Visualisation, charting, and data export tools' },
   ]}
 />
+
+<ArtefactGallery
+  title="Artefacts"
+  items={[{ src: imuxMock, alt: 'Imux natural-language query interface', caption: 'Plain-English query UI' }]}
+/>
+
+<Lesson>
+  <p>
+    Selling into three verticals at seed stage taught us more than any roadmap exercise, but it also split a tiny
+    team three ways. With hindsight I'd pick one vertical and let the other two wait; depth converts, breadth
+    educates.
+  </p>
+</Lesson>

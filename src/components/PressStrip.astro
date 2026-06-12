@@ -1,0 +1,33 @@
+---
+import { press } from '../data/press';
+---
+
+<div class="container">
+  <p class="press-strip reveal">
+    <span class="press-label art-mono">// features covered by</span>
+    {press.map((p) => <span class="press-name">{p}</span>)}
+  </p>
+</div>
+
+<style>
+  .press-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem 1.6rem;
+    padding: 1.4rem 0 0;
+  }
+  .press-label {
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .press-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--text-3);
+    letter-spacing: 0.01em;
+  }
+</style>

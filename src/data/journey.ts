@@ -28,7 +28,7 @@ export const journey: Milestone[] = [
     title: 'Startups, and Product Management',
     role: 'Product Manager & Visual Design',
     description:
-      'Overviewed incubation of 150+ startups. Learnt the roots of Product, Design, Operations and their importance in building. Self-learnt design Interfaces, visual, experience, interactions.',
+      'Spent three years inside India’s early-stage ecosystem, across 150+ startup teams at incubation stage, watching the same mistakes repeat: building before validating, designing before understanding. Started doing the product and design work myself, interfaces, visual, experience, interactions, because no one else was doing it systematically.',
     workSlugs: [],
     geo: {
       base: 'vizag',

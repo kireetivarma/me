@@ -25,12 +25,16 @@ const work = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/work' }),
   schema: z.object({
     title: z.string(),
+    /** Outcome-led <title> for search/social; falls back to title. */
+    seoTitle: z.string().optional(),
     summary: z.string(),
     tagline: z.string(),
     categories: z.array(z.enum(['AI', 'Products', 'Design', 'Partnerships', 'Fintech', 'OnePlus'])),
     role: z.string(),
     timeframe: z.string(),
     metrics: z.array(z.object({ value: z.string(), label: z.string() })),
+    /** One-line decision signal shown on project cards: "Chose X over Y because Z." */
+    decision: z.string().optional(),
     art: z.string(),
     accent: z.string().optional(),
     externalUrl: z.string().url().optional(),

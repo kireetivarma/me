@@ -1,5 +1,6 @@
 ---
 title: 'Cabdost'
+seoTitle: 'Cabdost, ~₹1.5 Cr recovered for 5,000 drivers'
 summary: 'Tax and financial management platform for cab drivers. Simplified ITR filing, expense tracking, and compliance guidance for the gig economy.'
 tagline: 'Financial dignity for gig workers, taxes made simple'
 categories: [Fintech, Design]
@@ -9,6 +10,7 @@ metrics:
   - { value: '5,000', label: 'Drivers served' }
   - { value: '~$175K', label: 'Taxes recovered' }
   - { value: '35x', label: 'Business growth' }
+decision: 'Borrowed the UI patterns drivers already knew from their cab apps instead of inventing a "finance app" language; familiarity beats novelty for low digital literacy.'
 art: 'cabdost'
 accent: '#22c55e'
 relatedPosts:
@@ -21,17 +23,55 @@ geo:
   users: '5,000+'
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import cabdostMock from '../../assets/legacy/cabdost.png';
+import DecisionTable from '../../components/DecisionTable.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    'Surveyed <b>100 drivers</b> before designing a screen: they forget passwords, distrust forms, and live inside their cab apps',
+    'Key decision: borrowed the <b>UI patterns of Uber/Ola</b>, the apps drivers already trusted, instead of inventing a new "finance app" language',
+    'In the alpha test, the first driver completed his application in <b>3 minutes without reading English</b>; the platform went on to recover <b>~₹1.5 Cr for 5,000 drivers</b>, with 35x business growth',
+  ]}
+/>
 
-Gig economy workers lack tools and financial literacy for ITR compliance. Manual income tracking and complex tax processes result in missed deductions and penalties.
+## The real problem
+
+Gig workers don't lack income, they lack the tooling and financial literacy to file returns, claim deductions and stay compliant. Talking to 100 drivers surfaced the real constraints: low digital literacy, forgotten passwords, fear of official-looking forms, and a daily life spent inside one or two cab apps. Above the drivers sat an agent workflow run on vulnerable Excel sheets.
 
 <GoalOutcome
   goal="Empower gig workers with simple, guided tools for tax filing, income tracking, and financial literacy at an accessible price point."
   outcome="Simplified ITR filing, expense tracking, compliance guidance, and tax-savings education, ~₹1.5 Cr recovered for 5,000 drivers, with 35x business growth."
 />
+
+<DecisionTable
+  options={[
+    {
+      option: 'A conventional finance-app UI',
+      why: 'Standard patterns, faster to design',
+      whyNot: 'Forms-and-tables language is exactly what drivers distrusted and abandoned',
+    },
+    {
+      option: 'Cab-app-familiar patterns (chosen)',
+      why: 'Drivers already navigate Uber/Ola daily; familiarity collapses the learning curve to near zero',
+      whyNot: 'Less conventional for the agents and accountants who also used the system',
+      chosen: true,
+    },
+    {
+      option: 'Driver self-serve only',
+      why: 'Cleanest product story',
+      whyNot: 'The agents doing the actual filings were drowning in Excel; an agent dashboard was where the operational leverage lived',
+    },
+  ]}
+/>
+
+## What was built
+
+A minimal, guided filing flow for drivers, plus an agent dashboard that replaced the Excel-sheet operation behind them. The roadmap extended to vernacular languages, a payment gateway and team chat.
 
 <FeatureGrid
   title="Core features"
@@ -42,3 +82,16 @@ Gig economy workers lack tools and financial literacy for ITR compliance. Manual
     { label: 'Financial Literacy', value: 'Learn deductions, savings strategies, and tax planning' },
   ]}
 />
+
+<ArtefactGallery
+  title="Artefacts"
+  items={[{ src: cabdostMock, alt: 'Cabdost driver app screens', caption: 'Driver-facing filing flow' }]}
+/>
+
+<Lesson>
+  <p>
+    The 3-minute alpha result came from designing for familiarity, not simplicity in the abstract, those are
+    different things. The lesson I've carried into every product since: meet users inside the interaction language
+    they already trust, especially when literacy, language or fear is in the room.
+  </p>
+</Lesson>

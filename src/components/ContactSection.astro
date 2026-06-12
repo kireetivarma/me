@@ -9,11 +9,12 @@ import { profile } from '../data/profile';
     <p class="contact-sub">
       Open to product leadership roles, advisory and ambitious collaborations, remote-first, worldwide.
     </p>
+    <p class="contact-note art-mono">Response time: usually same day. No decks needed to start a conversation.</p>
     <div class="contact-cta">
-      <a href={`mailto:${profile.email}`} class="btn btn-primary">{profile.email}</a>
+      <a href={profile.social.calendly} target="_blank" rel="noopener" class="btn btn-primary">Book a call →</a>
+      <a href={`mailto:${profile.email}`} class="btn btn-outline">{profile.email}</a>
       <a href={profile.social.linkedin} target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
       <a href={profile.social.x} target="_blank" rel="noopener" class="btn btn-outline">X / Twitter</a>
-      <a href={profile.social.calendly} target="_blank" rel="noopener" class="btn btn-outline">Schedule a call</a>
     </div>
   </div>
 </section>
@@ -38,7 +39,12 @@ import { profile } from '../data/profile';
   .contact-sub {
     color: var(--text-2);
     max-width: 48ch;
-    margin: 0 auto 2.2rem;
+    margin: 0 auto 0.8rem;
+  }
+  .contact-note {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    margin-bottom: 2.2rem;
   }
   .contact-cta {
     display: flex;

@@ -1,0 +1,68 @@
+---
+/** Before/after metric with how it was measured. */
+interface Props {
+  metric: string;
+  before: string;
+  after: string;
+  method?: string;
+}
+const { metric, before, after, method } = Astro.props;
+---
+
+<div class="bl">
+  <span class="bl-metric art-mono">{metric}</span>
+  <div class="bl-vals">
+    <span class="bl-before">{before}</span>
+    <span class="bl-arrow" aria-hidden="true">→</span>
+    <span class="bl-after">{after}</span>
+  </div>
+  {method && <p class="bl-method">Measured by: {method}</p>}
+</div>
+
+<style>
+  .bl {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    padding: 1.2rem 1.4rem;
+    margin: 1.5rem 0;
+  }
+  .bl-metric {
+    display: block;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-3);
+    margin-bottom: 0.5rem;
+  }
+  .bl-vals {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .bl-before {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    color: var(--text-3);
+    text-decoration: line-through;
+    text-decoration-color: color-mix(in srgb, var(--text-3) 60%, transparent);
+    text-decoration-thickness: 2px;
+  }
+  .bl-arrow {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+  }
+  .bl-after {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .bl-method {
+    margin: 0.6rem 0 0;
+    font-size: var(--text-xs);
+    color: var(--text-3);
+  }
+</style>

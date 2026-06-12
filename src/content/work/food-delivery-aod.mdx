@@ -1,5 +1,6 @@
 ---
 title: 'Food Delivery on AOD'
+seoTitle: "India's first food-delivery tracking on AOD, 50M+ users"
 summary: "OnePlus × Zomato & Swiggy, live food delivery tracking on Always-on-Display. India's first AOD food delivery feature, reaching 50M+ users."
 tagline: "India's first food-delivery tracking on Always-on-Display"
 categories: [OnePlus, Partnerships]
@@ -9,6 +10,7 @@ metrics:
   - { value: '50M+', label: 'Users at launch' }
   - { value: '#1', label: 'India-first feature' }
   - { value: '2', label: 'Partners (Zomato, Swiggy)' }
+decision: 'Put live order status on Always-on-Display instead of richer in-app notifications; a glance beats an unlock for a status users check a dozen times.'
 art: 'aod-food'
 accent: '#e23744'
 relatedPosts:
@@ -24,17 +26,61 @@ geo:
   users: '50M+'
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import aodZomato from '../../assets/legacy/aod-zomato.png';
+import aodSwiggy from '../../assets/legacy/aod-swiggy.png';
+import aodScreen from '../../assets/legacy/aod-screen.png';
+import DecisionTable from '../../components/DecisionTable.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    "Shipped <b>India's first</b> live food-delivery tracking on Always-on-Display, with Zomato and Swiggy as launch partners",
+    'Key decision: put order status on the <b>AOD itself</b>, not richer notifications; a glance beats an unlock for something users check a dozen times per order',
+    'Reached <b>50M+ users</b> at launch and became one of the most-covered OEM features in India that year',
+  ]}
+/>
 
-Food delivery users constantly unlocked their phones to check order status, creating friction and battery drain. OnePlus AOD was underutilised beyond clock and notification previews.
+## The real problem
+
+Food delivery users unlocked their phones over and over just to check order status; each check was an interruption, and collectively a battery drain. Meanwhile the Always-on-Display, glanceable by definition, was underused beyond the clock and notification icons. Zomato and Swiggy are the two dominant food-delivery ecosystems in India, so a single integration pattern could cover most orders in the market.
 
 <GoalOutcome
   goal="Launch India's first AOD food delivery integration, Zomato and Swiggy live order tracking visible without unlocking the device."
   outcome="Reached 50M+ users at launch. Industry-first feature with significant media coverage. Cemented OnePlus as a lifestyle-first Android brand."
 />
+
+<DecisionTable
+  options={[
+    {
+      option: 'Richer push notifications',
+      why: 'Simplest to ship; partners already send order events',
+      whyNot: 'Notifications still require waking and unlocking to read reliably, the exact friction we were trying to remove',
+    },
+    {
+      option: 'Shelf widget',
+      why: 'Shelf already had the partner SDK',
+      whyNot: 'Shelf needs the phone unlocked and opened; order status is a locked-phone, mid-task use case',
+    },
+    {
+      option: 'Always-on-Display status (chosen)',
+      why: 'Glanceable without touching the phone; turns a dead surface into a live one',
+      whyNot: 'AOD constraints are brutal: minimal pixels, strict battery budget, and a new data contract with each partner',
+      chosen: true,
+    },
+  ]}
+/>
+
+## What was built
+
+A minimal, glanceable order-status UI designed inside AOD's battery and pixel constraints, fed by real-time data contracts agreed with both partners' product teams. Launch was a coordinated GTM across OnePlus, Zomato and Swiggy.
+
+In the same period, Zomato reported a 30% increase in orders during peak meal times year-over-year; glanceable status was part of making frequent ordering feel effortless on OnePlus devices.
+
+{/* TODO(Kireeti): if available, add AOD feature adoption/opt-in numbers and any partner-reported engagement deltas. */}
 
 <FeatureGrid
   title="What I did"
@@ -45,3 +91,20 @@ Food delivery users constantly unlocked their phones to check order status, crea
     { label: 'Launch Strategy', value: 'Coordinated joint GTM, PR, and OEM marketing campaigns' },
   ]}
 />
+
+<ArtefactGallery
+  title="The shipped UI"
+  items={[
+    { src: aodZomato, alt: 'Zomato live order status on OnePlus Always-on-Display', caption: 'Zomato order status on AOD' },
+    { src: aodSwiggy, alt: 'Swiggy live order status on OnePlus Always-on-Display', caption: 'Swiggy order status on AOD' },
+    { src: aodScreen, alt: 'OnePlus Always-on-Display with delivery tracking', caption: 'AOD delivery tracking in context' },
+  ]}
+/>
+
+<Lesson>
+  <p>
+    The phased rollout protected quality but cost us goodwill: users who read launch coverage and didn't have the
+    feature yet were the loudest critics we had. Next time I'd match the PR wave to the rollout wave, even if it
+    means a quieter launch day.
+  </p>
+</Lesson>

@@ -1,5 +1,6 @@
 ---
 title: 'Station91'
+seoTitle: 'Station91, bite-sized founder education, JTBD-led design'
 summary: 'Bite-sized learning platform for startup founders. Curated 5–10 min lessons from practitioners on product, GTM, fundraising, and operations.'
 tagline: 'Founder education that fits between two meetings'
 categories: [Design, Products]
@@ -9,6 +10,7 @@ metrics:
   - { value: '5–10', label: 'Minute lessons' }
   - { value: '4', label: 'Learning tracks' }
   - { value: 'Practitioner', label: 'Led content' }
+decision: 'Framed research as Job Scenarios (jobs-to-be-done) instead of personas; founders hire content to solve this week’s problem, not to match a demographic.'
 art: 'station91'
 accent: '#facc15'
 relatedPosts:
@@ -20,17 +22,55 @@ geo:
   reach: [IN]
 ---
 
+import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import s91Mock from '../../assets/legacy/station91.png';
+import DecisionTable from '../../components/DecisionTable.astro';
+import Lesson from '../../components/Lesson.astro';
 
-## The problem
+<Tldr
+  items={[
+    'Designed a bite-sized founder-education product end to end: <b>competitor teardown → Job Scenarios → metadata spec → wireframes → 27 UI screens</b>',
+    'Key decision: framed research as <b>Jobs-to-be-Done scenarios</b> instead of personas; founders hire content to solve this week’s problem, not to match a demographic',
+    'Validated with <b>usability tests (15 users)</b> and ~150-person feedback groups before a Product Hunt Ship launch',
+  ]}
+/>
 
-Founders lack time for long-form learning while managing day-to-day operations. Most existing content is theoretical, not practitioner-led or immediately applicable.
+## The real problem
+
+Founders don't have a learning problem, they have a time problem. Long-form courses assume hours that don't exist between fundraising, hiring and shipping; most content is theoretical rather than practitioner-led. A five-person team (design, engineering, mobile, marketing, content) ran this as a structured sprint.
 
 <GoalOutcome
   goal="Deliver curated, bite-sized practitioner lessons designed for founders to absorb and apply in under 10 minutes."
   outcome="5–10 min expert-led lessons with actionable takeaways. Tracks across product, GTM, fundraising, and operations."
 />
+
+<DecisionTable
+  options={[
+    {
+      option: 'Persona-led research',
+      why: 'The default playbook for a new product',
+      whyNot: 'Founder demographics are noise; the useful unit is the job ("I need to scope an MVP this week"), so we wrote Job Scenarios instead',
+    },
+    {
+      option: 'Jobs-to-be-Done scenarios (chosen)',
+      why: 'Maps content directly to the moments founders would actually open the app',
+      whyNot: 'Harder to source content against; every lesson needed a job it answers',
+      chosen: true,
+    },
+    {
+      option: 'Long-form expert courses',
+      why: 'Higher perceived value per item',
+      whyNot: 'Directly contradicts the time-poverty insight that justified the product',
+    },
+  ]}
+/>
+
+## What was built
+
+Four learning tracks of 5–10 minute practitioner lessons. The design process ran from a competitor analysis sheet through a metadata spec (shared nouns/properties aligning designers and developers), eight wireframe iterations, and 27 final UI screens. Even typography was tested, the 12pt body type flagged too small in feedback and iterated, and the launch went through Product Hunt Ship to reach early adopters.
 
 <FeatureGrid
   title="Learning tracks"
@@ -41,3 +81,17 @@ Founders lack time for long-form learning while managing day-to-day operations. 
     { label: 'Operations', value: 'Team building, processes, and scaling efficiently' },
   ]}
 />
+
+<ArtefactGallery
+  title="Artefacts"
+  items={[{ src: s91Mock, alt: 'Station91 app screens', caption: 'Lesson player and tracks' }]}
+/>
+
+<Lesson>
+  <p>
+    The metadata sheet, a boring artefact on paper, was the highest-leverage one: defining the product's nouns
+    before the UI kept five people aligned without meetings. The miss was measuring completion: we tested usability
+    thoroughly but never instrumented whether founders finished lessons, which is the metric the whole thesis
+    rested on.
+  </p>
+</Lesson>

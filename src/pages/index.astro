@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import JourneySection from '../components/JourneySection.astro';
 import ProjectGrid from '../components/ProjectGrid.astro';
 import BrandGrid from '../components/BrandGrid.astro';
+import PressStrip from '../components/PressStrip.astro';
 import ContactSection from '../components/ContactSection.astro';
 import PostCard from '../components/PostCard.astro';
 
@@ -28,11 +29,17 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft))
       <p class="section-sub reveal">
         20+ products across consumer tech, AI, fintech and design. Filter by what you care about.
       </p>
+      <a href="/work/product-f/" class="now-building reveal">
+        <span class="nb-label art-mono">// currently building</span>
+        <span class="nb-name">Product f()</span>
+        <span class="nb-desc">The AI operating system for product teams. Waitlist open →</span>
+      </a>
       <ProjectGrid projects={work} />
     </div>
   </section>
 
   <BrandGrid />
+  <PressStrip />
 
   {
     posts.length > 0 && (
@@ -57,6 +64,39 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft))
 </BaseLayout>
 
 <style>
+  .now-building {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+      linear-gradient(90deg, rgba(139, 92, 246, 0.08), transparent 55%),
+      var(--bg-card);
+    padding: 1rem 1.3rem;
+    margin-bottom: 1.8rem;
+    text-decoration: none;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .now-building:hover {
+    border-color: var(--border-hover);
+  }
+  .nb-label {
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+  }
+  .nb-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-1);
+  }
+  .nb-desc {
+    font-size: var(--text-sm);
+    color: var(--text-2);
+  }
   .latest-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

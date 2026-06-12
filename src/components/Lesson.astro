@@ -1,0 +1,39 @@
+---
+/** "What I'd do differently" callout: the honesty section. */
+interface Props {
+  title?: string;
+}
+const { title = "What I'd do differently" } = Astro.props;
+---
+
+<aside class="lesson">
+  <span class="lesson-label art-mono">// {title.toLowerCase()}</span>
+  <div class="lesson-body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .lesson {
+    border: 1px dashed var(--border-hover);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.5rem;
+    margin: 2.5rem 0;
+    background: var(--goal-bg);
+  }
+  .lesson-label {
+    display: block;
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fbbf24;
+    margin-bottom: 0.6rem;
+  }
+  .lesson-body :global(p) {
+    color: var(--text-2);
+    margin: 0;
+  }
+  .lesson-body :global(p + p) {
+    margin-top: 0.8rem;
+  }
+</style>
