@@ -361,9 +361,13 @@ for (const m of journey) {
     countryEls.get(iso)!.push(p);
   });
 
-  function show(id: string) {
+  function show(id: string, anchor?: HTMLElement) {
     const s = state[id];
     if (!svg || !s) return;
+    // Expanding/collapsing chapters shifts the page: when the collapsing one
+    // sits above the activating one (scrolling down), the new chapter's head
+    // jumps up behind the pinned map. Anchor it: measure before, restore after.
+    const top0 = anchor?.getBoundingClientRect().top;
     svg.dataset.mode = s.reach === 'worldwide' ? 'worldwide' : 'select';
     document.querySelectorAll('.country.lit').forEach((c) => c.classList.remove('lit'));
     if (Array.isArray(s.reach)) for (const iso of s.reach) countryEls.get(iso)?.forEach((c) => c.classList.add('lit'));
@@ -373,6 +377,10 @@ for (const m of journey) {
       const on = m.dataset.milestone === id;
       m.classList.toggle('active', on);
       m.querySelector('.ms-head')?.setAttribute('aria-expanded', String(on));
+    }
+    if (anchor && top0 !== undefined) {
+      const delta = anchor.getBoundingClientRect().top - top0;
+      if (delta) window.scrollBy({ top: delta, behavior: 'instant' });
     }
   }
 
@@ -384,7 +392,7 @@ for (const m of journey) {
   for (const m of milestones) {
     m.querySelector('.ms-head')?.addEventListener('click', () => {
       current = m.dataset.milestone!;
-      show(current);
+      show(current, m);
     });
   }
   const mapPanel = document.querySelector<HTMLElement>('.map-panel');
@@ -408,12 +416,16 @@ for (const m of journey) {
       ticking = false;
       const line = readingLine();
       let id = 'all';
+      let active: HTMLElement | undefined;
       for (const m of milestones) {
-        if (m.getBoundingClientRect().top <= line) id = m.dataset.milestone!;
+        if (m.getBoundingClientRect().top <= line) {
+          id = m.dataset.milestone!;
+          active = m;
+        }
       }
       if (id !== current) {
         current = id;
-        show(id);
+        show(id, active);
       }
     });
   }
