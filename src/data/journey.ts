@@ -106,6 +106,7 @@ export const journey: Milestone[] = [
     highlight: 'Currently building Product f()',
     geo: {
       base: 'calgary',
+      locations: ['hyderabad'],
       reach: ['CA', 'IN', 'US'],
       users: '100k+ users',
     },
