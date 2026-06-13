@@ -85,7 +85,7 @@ const jsonLd = {
 
       {
         coverage.length > 0 && (
-          <aside class="cs-coverage">
+          <aside class="cs-coverage" id="coverage">
             <p class="section-label">// coverage</p>
             <ul class="coverage-list">
               {coverage.map((c) => (
@@ -211,6 +211,7 @@ const jsonLd = {
   .cs-coverage {
     margin-top: 3.5rem;
     max-width: 70ch;
+    scroll-margin-top: 80px;
   }
   .coverage-list {
     list-style: none;

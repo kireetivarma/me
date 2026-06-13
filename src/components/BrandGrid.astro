@@ -14,6 +14,7 @@ const cells = profile.brands.map((b) => {
     name: b.name,
     path: icon?.path,
     color: icon ? `#${icon.hex}` : ('color' in b ? b.color : undefined),
+    href: 'slug' in b && b.slug ? `/work/${b.slug}/` : undefined,
   };
 });
 ---
@@ -27,17 +28,20 @@ const cells = profile.brands.map((b) => {
     </p>
     <div class="brand-grid stagger">
       {
-        cells.map((b) => (
-          <div class="brand-cell" style={b.color ? `--brand:${b.color}` : undefined} title={b.name}>
-            {b.path ? (
-              <svg viewBox="0 0 24 24" class="brand-logo" role="img" aria-label={b.name}>
-                <path d={b.path} />
-              </svg>
-            ) : (
-              <span class="brand-name">{b.name}</span>
-            )}
-          </div>
-        ))
+        cells.map((b) => {
+          const Tag = b.href ? 'a' : 'div';
+          return (
+            <Tag class="brand-cell" href={b.href} style={b.color ? `--brand:${b.color}` : undefined} title={b.name}>
+              {b.path ? (
+                <svg viewBox="0 0 24 24" class="brand-logo" role="img" aria-label={b.name}>
+                  <path d={b.path} />
+                </svg>
+              ) : (
+                <span class="brand-name">{b.name}</span>
+              )}
+            </Tag>
+          );
+        })
       }
     </div>
   </div>
@@ -60,6 +64,7 @@ const cells = profile.brands.map((b) => {
     display: grid;
     place-items: center;
     min-height: 86px;
+    text-decoration: none;
     transition: background 0.3s;
   }
   .brand-cell:hover {
