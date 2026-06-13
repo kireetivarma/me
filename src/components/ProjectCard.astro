@@ -8,15 +8,14 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, categories, metrics, art, accent, role, timeframe, decision, coverage } = project.data;
+const { title, summary, categories, metrics, art, accent, role, timeframe, decision } = project.data;
 const Art = resolveArt(art);
 const topMetric = metrics[0];
 const testimonial = testimonialsFor(project.id)[0];
-const href = coverage && coverage.length > 0 ? `/work/${project.id}/#coverage` : `/work/${project.id}/`;
 ---
 
 <a
-  href={href}
+  href={`/work/${project.id}/`}
   class="project-card"
   data-categories={categories.map((c) => c.toLowerCase()).join(' ')}
   style={accent ? `--accent:${accent}` : undefined}
