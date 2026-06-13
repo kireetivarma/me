@@ -172,7 +172,6 @@ svg {
   text-underline-offset: 3px;
 }
 .prose blockquote {
-  border-left: 3px solid var(--accent);
   padding-left: 1.2rem;
   font-style: italic;
 }

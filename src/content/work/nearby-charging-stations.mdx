@@ -1,14 +1,14 @@
 ---
 title: 'Nearby Charging Stations'
-summary: 'Designed and shipped Nearby Charging Stations, enabling users to find airport gate charging pods directly from the device.'
-tagline: 'Contextual utility built into the OS, find a charge when it matters'
-categories: [OnePlus, Products]
+summary: 'A Marketing × Software OS collaboration: the phone notifies users when they’re near a OnePlus Charging Station, tracks how many steps away it is, and points to the closest one. Piloted at 2 airports, 25+ gates.'
+tagline: 'A charging station on your radar, right at the gate'
+categories: [OnePlus, Products, Partnerships]
 role: 'Senior PM'
 timeframe: '2020'
 metrics:
-  - { value: 'Global', label: 'Feature shipped' }
-  - { value: 'IoT', label: 'Infrastructure partners' }
-  - { value: 'OS-level', label: 'Contextual triggers' }
+  - { value: '2', label: 'Launch airports' }
+  - { value: '25+', label: 'Charging gates covered' }
+  - { value: 'OS-level', label: 'Proximity triggers' }
 art: 'charging'
 accent: '#10b981'
 relatedPosts:
@@ -20,7 +20,8 @@ order: 12
 geo:
   base: hyderabad
   hq: shenzhen
-  reach: worldwide
+  locations: [bangalore, delhi]
+  reach: [IN]
 ---
 
 import GoalOutcome from '../../components/GoalOutcome.astro';
@@ -28,19 +29,19 @@ import FeatureGrid from '../../components/FeatureGrid.astro';
 
 ## The problem
 
-OnePlus users at airports and public spaces struggled to locate charging stations, relying on maps apps not built for this need. An opportunity to add contextual utility directly in the OS.
+OnePlus users walking through an airport had no way of knowing a OnePlus Charging Station was nearby, maps apps aren't built to surface a single gate-side amenity. A Marketing × Software OS collaboration scoped a focused pilot: turn the phone itself into the discovery layer at the gate.
 
 <GoalOutcome
-  goal="Ship a native feature enabling users to discover nearby charging stations (airport gate pods, malls, and public spaces) from the device."
-  outcome="Feature shipped globally. Strong adoption in travel-heavy user segments. Covered airport gates, malls, and public infrastructure across markets."
+  goal="Pilot a native OS feature that notifies users when they're near a OnePlus Charging Station, tracks how many steps away it is, and points to the closest one if none are in range."
+  outcome="Shipped as a Marketing × Software OS collaboration across 2 launch airports and 25+ gates. The OS notifies users on approach, tracks distance to the station in steps, and surfaces the nearest station when none are nearby."
 />
 
 <FeatureGrid
   title="What I did"
   features={[
-    { label: 'Location Intelligence', value: 'Integrated real-time data from charging infrastructure partners' },
-    { label: 'UX Design', value: 'Designed the discovery UI and map view for contextual use' },
-    { label: 'Data Partnerships', value: 'Coordinated data agreements with charging network providers' },
-    { label: 'Smart Notifications', value: 'Low-battery and location-based contextual triggers' },
+    { label: 'Proximity Notifications', value: 'Phone notifies users on approach to a OnePlus Charging Station' },
+    { label: 'Distance Tracking', value: 'Shows how many steps away the nearest station is' },
+    { label: 'Nearest-Station Finder', value: 'Surfaces the closest station when none are in immediate range' },
+    { label: 'Marketing × OS Collab', value: 'Coordinated pilot rollout across airport gates with the marketing and infra teams' },
   ]}
 />

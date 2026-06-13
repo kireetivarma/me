@@ -1,14 +1,14 @@
 ---
 title: 'Cabdost'
-seoTitle: 'Cabdost, ~₹1.5 Cr recovered for 5,000 drivers'
+seoTitle: 'Cabdost, gig-worker tax filings scaled to 50,000+'
 summary: 'Tax and financial management platform for cab drivers. Simplified ITR filing, expense tracking, and compliance guidance for the gig economy.'
 tagline: 'Financial dignity for gig workers, taxes made simple'
 categories: [Fintech, Design]
 role: 'Product Consultant'
 timeframe: '2018–2019'
 metrics:
-  - { value: '5,000', label: 'Drivers served' }
-  - { value: '~$175K', label: 'Taxes recovered' }
+  - { value: '50,000', label: 'Applications processed' }
+  - { value: '~₹1.5 Cr', label: 'Recovered, early post-launch' }
   - { value: '35x', label: 'Business growth' }
 decision: 'Borrowed the UI patterns drivers already knew from their cab apps instead of inventing a "finance app" language; familiarity beats novelty for low digital literacy.'
 art: 'cabdost'
@@ -25,7 +25,7 @@ geo:
   base: hyderabad
   locations: [chennai, bangalore]
   reach: [IN]
-  users: '5,000+'
+  users: '50,000+ applications · 5,000+ drivers'
 ---
 
 import Tldr from '../../components/Tldr.astro';
@@ -34,23 +34,32 @@ import FeatureGrid from '../../components/FeatureGrid.astro';
 import ArtefactGallery from '../../components/ArtefactGallery.astro';
 import cabdostMock from '../../assets/legacy/cabdost.png';
 import DecisionTable from '../../components/DecisionTable.astro';
+import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
 
 <Tldr
   items={[
     'Surveyed <b>100 drivers</b> before designing a screen: they forget passwords, distrust forms, and live inside their cab apps',
     'Key decision: borrowed the <b>UI patterns of Uber/Ola</b>, the apps drivers already trusted, instead of inventing a new "finance app" language',
-    'In the alpha test, the first driver completed his application in <b>3 minutes without reading English</b>; the platform went on to recover <b>~₹1.5 Cr for 5,000 drivers</b>, with 35x business growth',
+    'In the alpha test, the first driver completed his application in <b>3 minutes without reading English</b>; in the early post-launch months the platform recovered <b>~₹1.5 Cr for 5,000 drivers</b>, with 35x business growth',
+    'Filing volume scaled from <b>~3,000 offline applications to 50,000+ processed on the platform</b>',
   ]}
 />
 
 ## The real problem
 
-Gig workers don't lack income, they lack the tooling and financial literacy to file returns, claim deductions and stay compliant. Talking to 100 drivers surfaced the real constraints: low digital literacy, forgotten passwords, fear of official-looking forms, and a daily life spent inside one or two cab apps. Above the drivers sat an agent workflow run on vulnerable Excel sheets.
+Gig workers don't lack income, they lack the tooling and financial literacy to file returns, claim deductions and stay compliant. Talking to 100 drivers surfaced the real constraints: low digital literacy, forgotten passwords, fear of official-looking forms, and a daily life spent inside one or two cab apps. Above the drivers sat an agent workflow run on vulnerable Excel sheets, processing roughly 3,000 applications a year by hand.
 
 <GoalOutcome
   goal="Empower gig workers with simple, guided tools for tax filing, income tracking, and financial literacy at an accessible price point."
-  outcome="Simplified ITR filing, expense tracking, compliance guidance, and tax-savings education, ~₹1.5 Cr recovered for 5,000 drivers, with 35x business growth."
+  outcome="Simplified ITR filing, expense tracking, compliance guidance, and tax-savings education. ~₹1.5 Cr recovered for 5,000 drivers in the early post-launch months, with 35x business growth, and filing volume has since scaled to 50,000+ applications processed."
+/>
+
+<Baseline
+  metric="Tax applications processed annually"
+  before="~3,000 (offline, agent-run)"
+  after="50,000+ (on the platform)"
+  method="Cabdost operations data, pre- vs post-platform"
 />
 
 <DecisionTable
