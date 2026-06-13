@@ -1,16 +1,15 @@
 /**
- * Press outlets that covered shipped features (verified links live in each
- * case study's `coverage` frontmatter).
+ * Press outlets that covered shipped features. Each links to the case study
+ * whose `coverage` frontmatter holds the verified link from that outlet.
  */
 export const press = [
-  'Android Police',
-  'XDA Developers',
-  'Android Authority',
-  '9to5Google',
-  'TechRadar',
-  'GSMArena',
-  'YourStory',
-  'The Better India',
-  'Business Standard',
-  'Times of India',
+  { name: 'Android Police', slug: 'food-delivery-aod' },
+  { name: 'XDA Developers', slug: 'spotify-on-shelf' },
+  { name: 'Android Authority', slug: 'oneplus-scout' },
+  { name: '9to5Google', slug: 'oneplus-shelf' },
+  { name: 'TechRadar', slug: 'oneplus-scout' },
+  { name: 'GSMArena', slug: 'nearby-charging-stations' },
+  { name: 'YourStory', slug: 'cabdost' },
+  { name: 'The Better India', slug: 'cabdost' },
+  { name: 'Business Standard', slug: 'food-delivery-aod' },
 ];

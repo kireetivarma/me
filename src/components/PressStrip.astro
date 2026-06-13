@@ -5,7 +5,9 @@ import { press } from '../data/press';
 <div class="container">
   <p class="press-strip reveal">
     <span class="press-label art-mono">// features covered by</span>
-    {press.map((p) => <span class="press-name">{p}</span>)}
+    {press.map((p) => (
+      <a class="press-name" href={`/work/${p.slug}/#coverage`}>{p.name}</a>
+    ))}
   </p>
 </div>
 
@@ -29,5 +31,10 @@ import { press } from '../data/press';
     font-size: var(--text-sm);
     color: var(--text-3);
     letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .press-name:hover {
+    color: var(--text-1);
   }
 </style>
