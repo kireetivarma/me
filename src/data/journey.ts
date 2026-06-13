@@ -26,13 +26,14 @@ export const journey: Milestone[] = [
     id: 'design-roots',
     years: '2014–2017',
     title: 'Startups, and Product Management',
-    role: 'Product Manager & Visual Design',
+    role: 'Product Manager, Program & Operations',
     description:
       'Spent three years at Startup Village, India’s early-stage ecosystem, across 150+ startup teams at incubation stage, watching the same mistakes repeat: building before validating, designing before understanding. Started doing the product and design work myself, interfaces, visual, experience, interactions, because no one else was doing it systematically.',
     workSlugs: [],
     geo: {
-      base: 'vizag',
+      base: 'bangalore',
       hq: 'kochi',
+      locations: ['vizag'],
       reach: ['IN'],
       users: '150+ startups · 500+ builders',
     },
@@ -41,14 +42,14 @@ export const journey: Milestone[] = [
     id: 'agency',
     years: '2017–2019',
     title: 'Product & Design Agency',
-    role: 'Founder, Coalition House',
+    role: 'Founder · Product & Design Consultant',
     description:
-      'Founded a product agency. Helped cab drivers recover taxes with Cabdost, built bite-sized founder learning with Station91 and Tymline for short-form blogging, designed Leucine’s CLEEN OS and Instoried, plus a data-collection PWA for a medical NGO.',
+      'Founded a product agency. Helped cab drivers recover taxes with Cabdost, built bite-sized founder learning with Station91 and Tymline for short-form blogging, designed Leucine’s CLEEN OS and Instoried, Incola (an Australian rental advance pay-later subscription), plus a data-collection PWA for a medical NGO.',
     workSlugs: ['cabdost', 'station91'],
     highlight: '5,000 drivers · ~$175K recovered · 35x business growth',
     geo: {
       base: 'bangalore',
-      locations: ['mumbai', 'delhi', 'newyork', 'brisbane'],
+      locations: ['mumbai', 'newyork', 'brisbane'],
       reach: ['IN', 'AU', 'US'],
       users: '100k users · 4 fundraised',
     },
@@ -73,7 +74,7 @@ export const journey: Milestone[] = [
     id: 'oneplus',
     years: '2019–2025',
     title: 'OnePlus at global scale',
-    role: 'Senior PM & Lead, Product Strategy',
+    role: 'Senior PM · Lead Product Strategy',
     description:
       'Led OnePlus Shelf ground-up redesign (4x MAU), scaled Scout to 50+ countries, shipped India’s first food-delivery tracking on Always-on Display, and drove partnerships with Spotify, Netflix, Snapchat, Zomato, Swiggy, Blinkit and Grab.',
     workSlugs: [
@@ -105,7 +106,7 @@ export const journey: Milestone[] = [
     highlight: 'Currently building Product f()',
     geo: {
       base: 'calgary',
-      locations: ['bangalore', 'hyderabad', 'mumbai', 'vizag'],
+      locations: ['bangalore', 'hyderabad', 'mumbai'],
       reach: ['CA', 'IN', 'US'],
       users: '100k+ users',
     },
