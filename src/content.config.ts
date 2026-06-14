@@ -50,6 +50,16 @@ const work = defineCollection({
     relatedPosts: z.array(z.string()).default([]),
     /** Verified press links rendered as a "// coverage" list on the case page. */
     coverage: z.array(z.object({ outlet: z.string(), title: z.string(), url: z.string().url() })).default([]),
+    /** Author's own launch posts (LinkedIn/X), rendered as click-to-expand embeds in the "// announced" section. */
+    announcements: z
+      .array(
+        z.object({
+          platform: z.enum(['linkedin', 'x']),
+          url: z.string().url(),
+          label: z.string().optional(),
+        })
+      )
+      .default([]),
     order: z.number(),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),

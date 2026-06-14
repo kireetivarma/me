@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import MetricsBand from '../components/MetricsBand.astro';
 import SkillTags from '../components/SkillTags.astro';
+import Announcements from '../components/Announcements.astro';
 import PostCard from '../components/PostCard.astro';
 import { resolveArt } from '../components/art/index';
 import { testimonialsFor } from '../data/testimonials';
@@ -32,6 +33,7 @@ const {
   externalUrl,
   relatedPosts,
   coverage,
+  announcements,
 } = entry.data;
 const Art = resolveArt(art);
 const quotes = testimonialsFor(entry.id);
@@ -103,6 +105,8 @@ const jsonLd = {
       </div>
 
       <SkillTags skills={skills} />
+
+      <Announcements announcements={announcements} />
 
       {
         coverage.length > 0 && (

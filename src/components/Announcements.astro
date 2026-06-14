@@ -1,0 +1,231 @@
+---
+/**
+ * Author's own launch posts (LinkedIn / X), shown as compact on-brand cards in
+ * the "// announced" section. Clicking a card expands the real post inline:
+ * LinkedIn via its embed iframe, X via the widgets.js blockquote. Both load
+ * their third-party content only on first expand, keeping the page fast.
+ */
+interface Announcement {
+  platform: 'linkedin' | 'x';
+  url: string;
+  label?: string;
+}
+interface Props {
+  announcements?: Announcement[];
+}
+const { announcements = [] } = Astro.props;
+
+const PLATFORM = {
+  linkedin: { name: 'LinkedIn', defaultLabel: 'Launch post on LinkedIn' },
+  x: { name: 'X', defaultLabel: 'Launch post on X' },
+} as const;
+
+// Derive the embed id from the canonical URL so the data needs only the URL.
+function embedId(a: Announcement): string | null {
+  const m = a.platform === 'linkedin' ? a.url.match(/activity[-:](\d+)/) : a.url.match(/status\/(\d+)/);
+  return m ? m[1] : null;
+}
+
+const cards = announcements
+  .map((a) => ({ ...a, id: embedId(a) }))
+  .filter((a) => a.id !== null);
+---
+
+{
+  cards.length > 0 && (
+    <aside class="cs-announcements" id="announced">
+      <p class="section-label">// announced</p>
+      <ul class="ann-list">
+        {cards.map((a) => (
+          <li
+            class="ann-card"
+            data-type={a.platform}
+            data-embed-id={a.id}
+            data-url={a.url}
+          >
+            <div class="ann-face">
+              <span class={`ann-pill ann-pill-${a.platform}`}>
+                {a.platform === 'linkedin' ? (
+                  <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"
+                    />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.6l5.24 6.93 6.06-6.93zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41z"
+                    />
+                  </svg>
+                )}
+                {PLATFORM[a.platform].name}
+              </span>
+              <a class="ann-label" href={a.url} target="_blank" rel="noopener">
+                {a.label ?? PLATFORM[a.platform].defaultLabel} ↗
+              </a>
+              <button type="button" class="ann-toggle" aria-expanded="false">
+                View post ↓
+              </button>
+            </div>
+            <div class="ann-embed" hidden />
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}
+
+<style>
+  .cs-announcements {
+    margin-top: 3.5rem;
+    max-width: 70ch;
+    scroll-margin-top: 80px;
+  }
+  .ann-list {
+    list-style: none;
+    display: grid;
+    gap: 0.7rem;
+    margin: 0.4rem 0 0;
+    padding: 0;
+  }
+  .ann-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    overflow: hidden;
+  }
+  .ann-face {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem 0.9rem;
+    flex-wrap: wrap;
+    padding: 0.85rem 1.1rem;
+  }
+  .ann-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.03em;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    flex-shrink: 0;
+  }
+  .ann-pill-linkedin svg {
+    color: #0a66c2;
+  }
+  .ann-pill-x svg {
+    color: var(--text-1);
+  }
+  .ann-label {
+    font-size: var(--text-sm);
+    color: var(--text-2);
+    text-decoration: none;
+    flex: 1 1 12rem;
+    min-width: 0;
+  }
+  .ann-label:hover {
+    color: var(--text-1);
+  }
+  .ann-toggle {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.03em;
+    color: var(--text-2);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .ann-toggle:hover {
+    color: var(--text-1);
+    border-color: var(--border-hover);
+  }
+  .ann-embed {
+    padding: 0 1.1rem 1.1rem;
+  }
+  .ann-embed :global(iframe) {
+    width: 100%;
+    max-width: 520px;
+    height: 540px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-2);
+  }
+  .ann-embed :global(.twitter-tweet) {
+    margin: 0 !important;
+  }
+</style>
+
+<script>
+  // Click-to-expand. Third-party content is built on first expand only.
+  let xWidgets: Promise<void> | null = null;
+  function loadXWidgets(): Promise<void> {
+    if (xWidgets) return xWidgets;
+    xWidgets = new Promise((resolve) => {
+      if ((window as any).twttr?.widgets) return resolve();
+      const s = document.createElement('script');
+      s.src = 'https://platform.twitter.com/widgets.js';
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = () => resolve();
+      document.head.appendChild(s);
+    });
+    return xWidgets;
+  }
+
+  function buildEmbed(card: HTMLElement, embed: HTMLElement) {
+    const type = card.dataset.type;
+    const id = card.dataset.embedId;
+    const url = card.dataset.url || '';
+    if (!id) return;
+    if (type === 'linkedin') {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.linkedin.com/embed/feed/update/urn:li:activity:${id}`;
+      iframe.loading = 'lazy';
+      iframe.title = 'LinkedIn post';
+      iframe.allowFullscreen = true;
+      embed.appendChild(iframe);
+    } else {
+      const bq = document.createElement('blockquote');
+      bq.className = 'twitter-tweet';
+      bq.dataset.dnt = 'true';
+      const a = document.createElement('a');
+      a.href = url.replace('x.com', 'twitter.com');
+      bq.appendChild(a);
+      embed.appendChild(bq);
+      loadXWidgets().then(() => (window as any).twttr?.widgets?.load(embed));
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('.ann-card').forEach((card) => {
+    const btn = card.querySelector<HTMLButtonElement>('.ann-toggle');
+    const embed = card.querySelector<HTMLElement>('.ann-embed');
+    if (!btn || !embed) return;
+    let built = false;
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      if (open) {
+        embed.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = 'View post ↓';
+      } else {
+        if (!built) {
+          buildEmbed(card, embed);
+          built = true;
+        }
+        embed.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = 'Hide post ↑';
+      }
+    });
+  });
+</script>
