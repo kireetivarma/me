@@ -32,11 +32,18 @@ const work = defineCollection({
     categories: z.array(z.enum(['AI', 'Products', 'Design', 'Partnerships', 'Fintech', 'OnePlus'])),
     role: z.string(),
     timeframe: z.string(),
-    /** Team composition / who I worked with, shown on the case-study header. */
-    team: z.string().optional(),
+    /** Team composition, shown on the case-study header. `led` = directly owned/managed; `collaborators` = cross-functional partners. */
+    team: z
+      .object({
+        led: z.string().optional(),
+        collaborators: z.string().optional(),
+      })
+      .optional(),
     metrics: z.array(z.object({ value: z.string(), label: z.string() })),
     /** One-line decision signal shown on project cards: "Chose X over Y because Z." */
     decision: z.string().optional(),
+    /** Skills demonstrated, shown as tags on the case page and the /work/ skills overview. */
+    skills: z.array(z.string()).default([]),
     art: z.string(),
     accent: z.string().optional(),
     externalUrl: z.string().url().optional(),

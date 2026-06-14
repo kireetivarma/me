@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import MetricsBand from '../components/MetricsBand.astro';
+import SkillTags from '../components/SkillTags.astro';
 import PostCard from '../components/PostCard.astro';
 import { resolveArt } from '../components/art/index';
 import { testimonialsFor } from '../data/testimonials';
@@ -24,6 +25,7 @@ const {
   role,
   timeframe,
   team,
+  skills,
   metrics,
   art,
   accent,
@@ -63,7 +65,22 @@ const jsonLd = {
               {categories.map((c) => <span class="tag">{c}</span>)}
               <span class="cs-role">{role} · {timeframe}</span>
             </div>
-            {team && <p class="cs-team reveal art-mono">team · {team}</p>}
+            {
+              team && (team.led || team.collaborators) && (
+                <div class="cs-team reveal">
+                  {team.led && (
+                    <p class="team-row">
+                      <span class="team-label team-label-led">Led</span> {team.led}
+                    </p>
+                  )}
+                  {team.collaborators && (
+                    <p class="team-row">
+                      <span class="team-label">Worked with</span> {team.collaborators}
+                    </p>
+                  )}
+                </div>
+              )
+            }
             {
               externalUrl && (
                 <a href={externalUrl} target="_blank" rel="noopener" class="btn btn-outline cs-visit reveal">
@@ -84,6 +101,8 @@ const jsonLd = {
       <div class="prose cs-prose">
         <slot />
       </div>
+
+      <SkillTags skills={skills} />
 
       {
         coverage.length > 0 && (
@@ -201,12 +220,33 @@ const jsonLd = {
     color: var(--text-3);
   }
   .cs-team {
-    font-size: var(--text-xs);
-    color: var(--text-3);
-    letter-spacing: 0.02em;
+    display: grid;
+    gap: 0.4rem;
     margin-bottom: 1.4rem;
     max-width: 60ch;
-    line-height: 1.5;
+  }
+  .team-row {
+    font-size: var(--text-xs);
+    color: var(--text-2);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+  .team-label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+    margin-right: 0.4rem;
+    vertical-align: 1px;
+  }
+  .team-label-led {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
   }
   .cs-hero-art {
     aspect-ratio: 4 / 3;

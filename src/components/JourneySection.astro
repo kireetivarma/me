@@ -66,7 +66,16 @@ for (const m of journey) {
               <div class="ms-body">
                 <p class="ms-desc">{m.description}</p>
                 {m.highlight && <p class="ms-highlight art-mono">★ {m.highlight}</p>}
-                {m.team && <p class="ms-team art-mono">team · {m.team}</p>}
+                {m.team?.led && (
+                  <p class="ms-team art-mono">
+                    <span class="ms-team-label ms-team-label-led">Led</span> {m.team.led}
+                  </p>
+                )}
+                {m.team?.collaborators && (
+                  <p class="ms-team art-mono ms-team-muted">
+                    <span class="ms-team-label">With</span> {m.team.collaborators}
+                  </p>
+                )}
                 {m.workSlugs.length > 0 && (
                   <div class="ms-links">
                     {m.workSlugs.map((s) => (
@@ -232,8 +241,27 @@ for (const m of journey) {
   }
   .ms-team {
     font-size: var(--text-xs);
-    color: var(--text-3);
+    color: var(--text-2);
     line-height: 1.5;
+  }
+  .ms-team-muted {
+    color: var(--text-3);
+  }
+  .ms-team-label {
+    display: inline-block;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+    margin-right: 0.4rem;
+    vertical-align: 1px;
+  }
+  .ms-team-label-led {
+    color: var(--red);
+    border-color: color-mix(in srgb, var(--red) 40%, transparent);
   }
   .ms-links {
     display: flex;

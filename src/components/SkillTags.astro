@@ -1,0 +1,35 @@
+---
+/** Skill tags demonstrated in this project, shown after the case-study prose. */
+interface Props {
+  skills?: string[];
+}
+const { skills = [] } = Astro.props;
+---
+
+{
+  skills.length > 0 && (
+    <aside class="skill-tags">
+      <p class="section-label">// skills applied</p>
+      <ul class="skill-list">
+        {skills.map((s) => (
+          <li class="tag tag-skill">{s}</li>
+        ))}
+      </ul>
+    </aside>
+  )
+}
+
+<style>
+  .skill-tags {
+    margin-top: 3.5rem;
+    max-width: 70ch;
+  }
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+    padding: 0;
+  }
+</style>

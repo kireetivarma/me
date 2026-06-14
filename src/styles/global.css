@@ -145,6 +145,13 @@ svg {
   letter-spacing: 0.02em;
 }
 
+/* Skill tag: outline variant, visually distinct from category .tag pills */
+.tag-skill {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+}
+
 /* Prose (blog + case study bodies) */
 .prose {
   max-width: 70ch;
