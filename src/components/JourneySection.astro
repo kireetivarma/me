@@ -414,7 +414,14 @@ for (const m of journey) {
     }
     if (anchor && top0 !== undefined) {
       const delta = anchor.getBoundingClientRect().top - top0;
-      if (delta) window.scrollBy({ top: delta, behavior: 'instant' });
+      // The compensating scroll fires its own scroll event. Left unguarded it
+      // re-enters onScroll, which sees the moved viewport and re-picks an
+      // earlier chapter, cascading the selection backwards (a light scroll past
+      // ch2 lands on ch1). Flag the echo so the next scroll tick ignores it.
+      if (Math.abs(delta) >= 1) {
+        ignoreScroll = true;
+        window.scrollBy({ top: delta, behavior: 'instant' });
+      }
     }
   }
 
@@ -443,11 +450,18 @@ for (const m of journey) {
   }
 
   let ticking = false;
+  // Set when show() performs a compensating scroll, so the resulting echo
+  // scroll event doesn't re-drive selection. See show() for the cascade it fixes.
+  let ignoreScroll = false;
   function onScroll() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
       ticking = false;
+      if (ignoreScroll) {
+        ignoreScroll = false;
+        return;
+      }
       const line = readingLine();
       let id = 'all';
       let active: HTMLElement | undefined;
