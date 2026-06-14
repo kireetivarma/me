@@ -23,6 +23,7 @@ const {
   categories,
   role,
   timeframe,
+  team,
   metrics,
   art,
   accent,
@@ -62,6 +63,7 @@ const jsonLd = {
               {categories.map((c) => <span class="tag">{c}</span>)}
               <span class="cs-role">{role} · {timeframe}</span>
             </div>
+            {team && <p class="cs-team reveal art-mono">team · {team}</p>}
             {
               externalUrl && (
                 <a href={externalUrl} target="_blank" rel="noopener" class="btn btn-outline cs-visit reveal">
@@ -192,11 +194,19 @@ const jsonLd = {
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1.4rem;
+    margin-bottom: 0.9rem;
   }
   .cs-role {
     font-size: var(--text-xs);
     color: var(--text-3);
+  }
+  .cs-team {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    letter-spacing: 0.02em;
+    margin-bottom: 1.4rem;
+    max-width: 60ch;
+    line-height: 1.5;
   }
   .cs-hero-art {
     aspect-ratio: 4 / 3;

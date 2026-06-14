@@ -1,15 +1,16 @@
 ---
-title: 'Zomato & Blinkit on Shelf'
-seoTitle: 'Zomato & Blinkit on OnePlus Shelf, ambient commerce'
-summary: '"Eternal Never Settles", Zomato & Blinkit commerce widgets on OnePlus Shelf enabling order tracking and quick-commerce from the homescreen layer.'
-tagline: 'Quick commerce on the homescreen, the "Eternal Never Settles" launch'
+title: 'Zomato, Blinkit & Live Alerts'
+seoTitle: 'Zomato, Blinkit & OxygenOS Live Alerts, ambient partner commerce'
+summary: 'From Zomato & Blinkit commerce widgets on OnePlus Shelf (OxygenOS 15) to opening the OxygenOS 16 Live Alerts space to more partner apps across food delivery, transit and music.'
+tagline: 'Partner apps in the live-activities space, from Shelf widgets to Live Alerts'
 categories: [OnePlus, Partnerships]
-role: 'Senior PM · Partnership Lead'
-timeframe: 'Q4 2024'
+role: 'Lead Product Strategy, Global Partnerships'
+timeframe: '2024–2025'
+team: '4 partner PMs, 3 R&D dev teams, 2 marketing, 2 BD'
 metrics:
-  - { value: '2', label: 'Simultaneous partner tracks' }
-  - { value: 'Q4 2024', label: 'Campaign launch' }
-  - { value: 'SDK', label: 'Commerce standard set' }
+  - { value: '2 phases', label: 'Shelf widgets → Live Alerts' }
+  - { value: 'Food · transit · music', label: 'Live-activity partners' }
+  - { value: 'SDK', label: 'Live-activities standard' }
 decision: 'Shipped both a compact 2x2 and a stacked swipeable widget rather than one format; order-tracking and quick-reorder are different jobs on the same surface.'
 art: 'zomato-blinkit'
 accent: '#e23744'
@@ -20,6 +21,9 @@ coverage:
   - { outlet: 'TechnoSports', title: "OnePlus adds Zomato & Blinkit widgets to OxygenOS 15", url: 'https://technosports.co.in/oneplus-zomato-blinkit-widgets-to-oxygenos-15/' }
   - { outlet: 'Gizbot', title: "Zomato and Blinkit widgets on Shelf: how to use them", url: 'https://www.gizbot.com/how-to/oneplus-brings-zomato-and-blinkit-widgets-to-shelf-for-indian-users-how-to-use-them-108165.html' }
   - { outlet: 'OnePlus Community', title: "[IN] Zomato and Blinkit, now on Shelf", url: 'https://community.oneplus.com/thread/1770601159820574729' }
+  - { outlet: 'OnePlus Community', title: "Live Alerts: more partner apps on OxygenOS", url: 'https://community.oneplus.com/thread/1824266543970648070' }
+  - { outlet: 'Android Authority', title: "OnePlus's big OxygenOS 16 update brings much more than just Android 16", url: 'https://www.androidauthority.com/oxygenos-16-features-3607625/' }
+  - { outlet: 'Android Central', title: "OxygenOS 16.1 unlocks a smarter, more secure and personal OnePlus 15", url: 'https://www.androidcentral.com/phones/oneplus/oxygenos-16-1-unlocks-a-smarter-more-secure-and-personal-oneplus-15' }
 order: 3
 geo:
   base: hyderabad
@@ -37,28 +41,35 @@ import Lesson from '../../components/Lesson.astro';
 
 <Tldr
   items={[
-    'Ran <b>two partner integration tracks simultaneously</b> (Zomato + Blinkit) onto the Shelf commerce SDK, launched as the "Eternal Never Settles" campaign in Q4 2024',
+    'Phase 1: ran <b>two partner integration tracks simultaneously</b> (Zomato + Blinkit) onto the Shelf commerce SDK, launched as the "Eternal Never Settles" campaign on OxygenOS 15',
+    'Phase 2: orchestrated the expansion to <b>OxygenOS 16 Live Alerts</b>, opening the live-activities space to more partner categories, food delivery (Zomato, Blinkit, Swiggy), transit (Uber, Rapido, Ola) and music',
     'Key decision: shipped both a <b>compact 2x2 and a stacked, swipeable widget</b>; order-tracking and quick-reorder are different jobs on the same surface',
-    "Context that made the bet: Zomato saw a <b>30% increase in peak-meal orders</b> YoY and grocery quick-commerce demand rose <b>60%</b>, daily-frequency partners prove an ambient commerce surface",
+    'Aligned global-partnerships value with the live-activities surface across <b>India BD, global BD, R&D, marketing and partner product, business and dev teams</b>',
   ]}
 />
 
 ## The problem
 
-Food and quick-commerce ordering required multiple app-switching steps. Shelf had evolved to support commerce widgets but needed high-value partners with real daily frequency to prove the model.
+Food and quick-commerce ordering required multiple app-switching steps, and the most valuable, highest-frequency partner apps had no home on the ambient layer of the phone. Shelf had evolved to support commerce widgets but needed daily-frequency partners to prove the model, and the live-activities surface (a glanceable, Dynamic-Island-style space) needed a partner standard before it could open up beyond OnePlus's own apps.
 
 <GoalOutcome
-  goal="Integrate Zomato and Blinkit as commerce widgets on Shelf, order tracking, reordering, and quick-commerce access from the homescreen layer."
-  outcome="Launched Q4 2024. The 'Eternal Never Settles' campaign drove major press coverage. Validated Shelf as OnePlus's ambient commerce surface."
+  goal="Bring high-frequency partner apps into OnePlus's ambient and live-activities surfaces, first as Shelf widgets, then as OS-level Live Alerts open to more partner categories."
+  outcome="Phase 1: Zomato & Blinkit commerce widgets shipped on Shelf as the 'Eternal Never Settles' campaign. Phase 2: the OxygenOS 16 Live Alerts space opened to more partner apps across food delivery, transit and music, with the partnerships orchestrated end to end."
 />
+
+## Two phases
+
+**Phase 1, Shelf widgets (OxygenOS 15).** Zomato and Blinkit launched as commerce widgets on Shelf: order tracking, reordering and quick-commerce access from the homescreen layer, run as two simultaneous partner integration tracks on the Shelf commerce SDK and launched as the "Eternal Never Settles" campaign.
+
+**Phase 2, Live Alerts (OxygenOS 16).** The live-activities space, OnePlus's glanceable Dynamic-Island-style surface, opened beyond first-party apps to more partner categories: food delivery (Zomato, Blinkit, Swiggy), transit (Uber, Rapido, Ola) and music. This was orchestrated from my work with the India business-development team, global BD, R&D teams, marketing, and the partners' product, business and development teams, aligning global-partnerships value with the live-activities surface.
 
 <FeatureGrid
   title="What I did"
   features={[
-    { label: 'Commerce Widget Design', value: 'Designed order status, reorder, and quick-add UX for Shelf' },
-    { label: 'Dual Partnership', value: 'Managed simultaneous Zomato and Blinkit integration tracks' },
-    { label: 'Campaign Co-Design', value: 'Co-created "Eternal Never Settles" brand campaign with partners' },
-    { label: 'SDK Standardisation', value: 'Used Shelf widget SDK to set commerce integration standards' },
+    { label: 'Commerce Widget Design', value: 'Order status, reorder, and quick-add UX for Shelf' },
+    { label: 'Dual Partnership', value: 'Simultaneous Zomato and Blinkit integration tracks' },
+    { label: 'Live Alerts Strategy', value: 'Opened the OxygenOS live-activities space to more partner categories' },
+    { label: 'Cross-Team Orchestration', value: 'India & global BD, R&D, marketing, and partner product/business/dev teams' },
   ]}
 />
 
@@ -71,8 +82,9 @@ Food and quick-commerce ordering required multiple app-switching steps. Shelf ha
 
 <Lesson>
   <p>
-    Launching India-only was right for partner relevance but produced predictable noise from global users seeing
-    features they couldn't have. The regional-exclusive playbook needs its own comms plan, not a footnote in the
-    global one.
+    Phase 1 proved that daily-frequency partners earn a place on the ambient layer; Phase 2 was the harder,
+    higher-leverage move, turning a one-off integration into an open partner standard on the live-activities
+    surface. The orchestration across BD, R&D, marketing and three partner orgs was the real work; the widget was
+    the easy part.
   </p>
 </Lesson>

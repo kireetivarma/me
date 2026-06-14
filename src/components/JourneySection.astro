@@ -66,6 +66,7 @@ for (const m of journey) {
               <div class="ms-body">
                 <p class="ms-desc">{m.description}</p>
                 {m.highlight && <p class="ms-highlight art-mono">★ {m.highlight}</p>}
+                {m.team && <p class="ms-team art-mono">team · {m.team}</p>}
                 {m.workSlugs.length > 0 && (
                   <div class="ms-links">
                     {m.workSlugs.map((s) => (
@@ -228,6 +229,11 @@ for (const m of journey) {
   .ms-highlight {
     font-size: var(--text-xs);
     color: #fbbf24;
+  }
+  .ms-team {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    line-height: 1.5;
   }
   .ms-links {
     display: flex;

@@ -32,6 +32,8 @@ const work = defineCollection({
     categories: z.array(z.enum(['AI', 'Products', 'Design', 'Partnerships', 'Fintech', 'OnePlus'])),
     role: z.string(),
     timeframe: z.string(),
+    /** Team composition / who I worked with, shown on the case-study header. */
+    team: z.string().optional(),
     metrics: z.array(z.object({ value: z.string(), label: z.string() })),
     /** One-line decision signal shown on project cards: "Chose X over Y because Z." */
     decision: z.string().optional(),
