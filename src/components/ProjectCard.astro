@@ -8,10 +8,11 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, categories, metrics, art, accent, role, timeframe, decision } = project.data;
+const { title, summary, categories, metrics, art, accent, role, timeframe, decision, partners } = project.data;
 const Art = resolveArt(art);
 const topMetric = metrics[0];
 const testimonial = testimonialsFor(project.id)[0];
+const showPartners = partners && partners.length >= 2;
 ---
 
 <a
@@ -39,12 +40,21 @@ const testimonial = testimonialsFor(project.id)[0];
     }
     {
       testimonial && (
-        <p class="card-quote">
-          “{testimonial.short}” <span class="quote-by">· {testimonial.author}</span>
+        <p class=”card-quote”>
+          “{testimonial.short}” <span class=”quote-by”>· {testimonial.author}</span>
         </p>
       )
     }
-    <div class="card-foot">
+    {
+      showPartners && (
+        <div class=”card-partners”>
+          {partners!.slice(0, 8).map((p) => (
+            <span class=”partner-badge”>{p}</span>
+          ))}
+        </div>
+      )
+    }
+    <div class=”card-foot”>
       {topMetric && (
         <span class="card-metric">
           <b class="metric-value">{topMetric.value}</b> {topMetric.label}
@@ -145,5 +155,22 @@ const testimonial = testimonialsFor(project.id)[0];
   .card-meta {
     font-size: var(--text-xs);
     color: var(--text-3);
+  }
+  .card-partners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.4rem;
+  }
+  .partner-badge {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--text-2);
+    background: var(--bg-2);
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
   }
 </style>

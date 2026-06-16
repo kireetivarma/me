@@ -60,6 +60,8 @@ const work = defineCollection({
         })
       )
       .default([]),
+    /** Brand partners/collaborators shown as a strip on project cards (only if 2+). */
+    partners: z.array(z.string()).optional(),
     order: z.number(),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
