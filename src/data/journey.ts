@@ -84,7 +84,7 @@ export const journey: Milestone[] = [
     title: 'OnePlus at global scale',
     role: 'PM → Senior PM → Lead, Product Strategy',
     description:
-      'Three roles in six years. Shipped core OxygenOS apps (Shelf, Scout, Nearby Charging Stations, Notes) as PM, Global Apps; then as Senior PM, Partnerships, authored the strategy that opened Shelf to third-party developers and grew partner engagement across the OS, onboarding Spotify, Snapchat, Zomato, Swiggy, Blinkit, Grab, Uber, Ola and Rapido. Closed as Lead, Product Strategy, running worldwide user research and greenlighting features via executive pitch decks.',
+      'Shipped core OxygenOS apps (Shelf, Scout, Nearby Charging Stations, Notes) as PM, Global Apps; then as Senior PM, Partnerships, authored the strategy that opened Shelf to third-party developers and grew partner engagement across the OS, onboarding Spotify, Snapchat, Zomato, Swiggy, Blinkit, Grab, Uber, Ola and Rapido. Closed as Lead, Product Strategy, running worldwide user research and greenlighting features via executive pitch decks.',
     workSlugs: [
       'oneplus-shelf',
       'oneplus-scout',
@@ -109,7 +109,7 @@ export const journey: Milestone[] = [
   },
   {
     id: 'builder',
-    years: '2025–present',
+    years: '2025',
     title: 'Independent builder & AI',
     role: 'Product Consultant · AI Builder',
     description:
