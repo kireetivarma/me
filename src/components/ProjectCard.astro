@@ -63,8 +63,8 @@ const partnerIcons = showPartners
           {partnerIcons.map(({ name, icon }) => (
             <div class=”partner-icon” title={name}>
               {icon ? (
-                <svg viewBox=”0 0 24 24” role=”img” aria-label={name}>
-                  <path d={icon.path} fill=”currentColor” />
+                <svg viewBox=”0 0 24 24” class=”p-logo” role=”img” aria-label={name}>
+                  <path d={icon.path} />
                 </svg>
               ) : (
                 <span class=”partner-text”>{name}</span>
@@ -179,33 +179,35 @@ const partnerIcons = showPartners
   .card-partners {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
     margin-top: 0.6rem;
     padding-top: 0.6rem;
     border-top: 1px solid var(--border);
+    overflow: hidden;
   }
   .partner-icon {
-    width: 18px;
-    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-  .partner-icon svg {
-    width: 18px;
-    height: 18px;
-    color: var(--text-2);
-    transition: color 0.2s;
+  .p-logo {
+    width: 16px;
+    height: 16px;
   }
-  .partner-icon:hover svg {
-    color: var(--text-1);
+  .p-logo :global(path) {
+    fill: var(--text-3);
+    transition: fill 0.2s;
+  }
+  .partner-icon:hover .p-logo :global(path) {
+    fill: var(--text-1);
   }
   .partner-text {
     font-size: 0.6rem;
     font-family: var(--font-mono);
     color: var(--text-3);
     letter-spacing: 0.01em;
+    white-space: nowrap;
   }
 </style>
