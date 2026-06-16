@@ -70,7 +70,7 @@ export const journey: Milestone[] = [
       'Co-founded Imux, a natural-language interface to databases (NLiDB) SaaS. Designed the B2B product 0-to-1, demoed to enterprise customers, and raised seed funding.',
     workSlugs: ['imux'],
     highlight: 'Seed funded',
-    team: { collaborators: '5-person founding team' },
+    team: { collaborators: '3-person founding team' },
     geo: {
       base: 'bangalore',
       locations: ['mumbai', 'seoul', 'bangkok'],
