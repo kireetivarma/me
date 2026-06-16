@@ -15,10 +15,13 @@ const topMetric = metrics[0];
 const testimonial = testimonialsFor(project.id)[0];
 const showPartners = partners && partners.length >= 2;
 
+const PARTNER_ICON_KEYS: Record<string, string> = {
+  'OnePlus': 'siOneplus',
+};
 const partnerIcons = showPartners
   ? partners!.slice(0, 8).map((name) => {
-      const iconKey = name.toLowerCase().replace(/\s+/g, '');
-      const icon = (simpleIcons as Record<string, unknown>)[iconKey] as any;
+      const key = PARTNER_ICON_KEYS[name] ?? ('si' + name.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, ''));
+      const icon = (simpleIcons as Record<string, unknown>)[key] as any;
       return { name, icon };
     })
   : [];
