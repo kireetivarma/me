@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { resolveArt } from './art/index';
 import { testimonialsFor } from '../data/testimonials';
+import * as simpleIcons from 'simple-icons';
 
 interface Props {
   project: CollectionEntry<'work'>;
@@ -13,6 +14,14 @@ const Art = resolveArt(art);
 const topMetric = metrics[0];
 const testimonial = testimonialsFor(project.id)[0];
 const showPartners = partners && partners.length >= 2;
+
+const partnerIcons = showPartners
+  ? partners!.slice(0, 8).map((name) => {
+      const iconKey = name.toLowerCase().replace(/\s+/g, '');
+      const icon = (simpleIcons as Record<string, unknown>)[iconKey] as any;
+      return { name, icon };
+    })
+  : [];
 ---
 
 <a
@@ -48,8 +57,16 @@ const showPartners = partners && partners.length >= 2;
     {
       showPartners && (
         <div class=”card-partners”>
-          {partners!.slice(0, 8).map((p) => (
-            <span class=”partner-badge”>{p}</span>
+          {partnerIcons.map(({ name, icon }) => (
+            <div class=”partner-icon” title={name}>
+              {icon ? (
+                <svg viewBox=”0 0 24 24” role=”img” aria-label={name}>
+                  <path d={icon.path} fill=”currentColor” />
+                </svg>
+              ) : (
+                <span class=”partner-text”>{name}</span>
+              )}
+            </div>
           ))}
         </div>
       )
@@ -158,22 +175,34 @@ const showPartners = partners && partners.length >= 2;
   }
   .card-partners {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 0.35rem;
+    gap: 0.4rem;
     margin-top: 0.6rem;
     padding-top: 0.6rem;
     border-top: 1px solid var(--border);
   }
-  .partner-badge {
-    font-size: 0.65rem;
-    font-family: var(--font-mono);
-    font-weight: 500;
+  .partner-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .partner-icon svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-2);
+    transition: color 0.2s;
+  }
+  .partner-icon:hover svg {
     color: var(--text-1);
-    background: color-mix(in srgb, var(--accent) 15%, transparent);
-    padding: 0.2rem 0.45rem;
-    border-radius: 3px;
+  }
+  .partner-text {
+    font-size: 0.6rem;
+    font-family: var(--font-mono);
+    color: var(--text-3);
     letter-spacing: 0.01em;
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-    white-space: nowrap;
   }
 </style>
