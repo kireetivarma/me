@@ -10,11 +10,14 @@ interface IconDef {
 
 const cells = profile.brands.map((b) => {
   const icon = 'icon' in b && b.icon ? ((simpleIcons as Record<string, unknown>)[b.icon] as IconDef | undefined) : undefined;
+  const internalHref = 'slug' in b && b.slug ? `/work/${b.slug}/` : undefined;
+  const externalHref = 'externalUrl' in b && b.externalUrl ? b.externalUrl : undefined;
   return {
     name: b.name,
     path: icon?.path,
     color: icon ? `#${icon.hex}` : ('color' in b ? b.color : undefined),
-    href: 'slug' in b && b.slug ? `/work/${b.slug}/` : undefined,
+    href: internalHref ?? externalHref,
+    external: !internalHref && Boolean(externalHref),
   };
 });
 ---
@@ -24,14 +27,16 @@ const cells = profile.brands.map((b) => {
     <p class="section-label reveal">// collaborated with</p>
     <h2 class="section-title reveal">Global brands &amp; teams</h2>
     <p class="section-sub reveal">
-      Brands, platforms, and product teams across consumer tech, fintech, food delivery, and entertainment.
+      Partners and platforms I shipped with, many onboarded through the Shelf, AOD and Live Alerts partner program I built at OnePlus.
     </p>
     <div class="brand-grid stagger">
       {
         cells.map((b) => {
           const Tag = b.href ? 'a' : 'div';
+          const rel = b.external ? 'noopener' : undefined;
+          const target = b.external ? '_blank' : undefined;
           return (
-            <Tag class="brand-cell" href={b.href} style={b.color ? `--brand:${b.color}` : undefined} title={b.name}>
+            <Tag class="brand-cell" href={b.href} target={target} rel={rel} style={b.color ? `--brand:${b.color}` : undefined} title={b.name}>
               {b.path ? (
                 <svg viewBox="0 0 24 24" class="brand-logo" role="img" aria-label={b.name}>
                   <path d={b.path} />

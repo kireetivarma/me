@@ -1,9 +1,9 @@
 export const profile = {
   name: 'Kireeti Varma',
-  title: 'Product, Design & Strategy',
-  tagline: 'Designer turned Product Builder at global scale',
+  title: 'Product Leader · 0-to-1 & Scale',
+  tagline: 'Product leader shipping 0-to-1 to 200M+ across OS platforms, partnerships and AI',
   description:
-    'Product Manager, Designer, 1x founder, ex-OnePlus, now building with AI. Crafting mobile & web experiences for 200M+ users globally, with partnerships spanning Spotify, Snapchat, Zomato, Grab & more.',
+    'Product leader with 12+ years shipping OS products end-to-end, from 0-to-1 to 200M+ users across 50+ countries. Ex-OnePlus: owned the partnership strategy that opened Shelf to developers and grew partner engagement across the OS, and shipped India\'s first food-delivery tracking on Always-on Display. Now building AI-native products and advising on product strategy.',
   email: 'mail@kireetivarma.me',
   location: 'Calgary, Canada 🇨🇦',
   availability: {
@@ -37,8 +37,8 @@ export const profile = {
     { name: 'Google', icon: 'siGoogle', slug: 'oneplus-scout' },
     { name: 'Oppo', icon: 'siOppo', slug: 'oneplus-shelf' },
     { name: 'Dvara Money', color: '#0E7C66', slug: 'cabdost' },
-    { name: 'Leucine', color: '#4F46E5' },
-    { name: 'Pluto Money', color: '#7C3AED' },
+    { name: 'Leucine', color: '#4F46E5', externalUrl: 'https://leucine.ai/cleen/' },
+    { name: 'Station91', color: '#7C3AED', slug: 'station91' },
     { name: 'Labh', color: '#10B981', slug: 'labh' },
     { name: 'Itihasa', color: '#F472B6', slug: 'itihasa-collective' },
     { name: 'Imux', color: '#38BDF8', slug: 'imux' },

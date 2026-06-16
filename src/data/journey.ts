@@ -30,11 +30,11 @@ export const journey: Milestone[] = [
     title: 'Startups, and Product Management',
     role: 'Product Manager, Program & Operations',
     description:
-      'Spent three years at Startup Village, India’s early-stage ecosystem, across 150+ startup teams at incubation stage, watching the same mistakes repeat: building before validating, designing before understanding. Started doing the product and design work myself, interfaces, visual, experience, interactions, because no one else was doing it systematically.',
+      'Built the online incubator platform for Startup Village, India’s early-stage ecosystem, supporting 150+ startup teams from idea to launch. Owned product and operations end-to-end, turning ambiguous early-stage problems into shipped product.',
     workSlugs: [],
     team: {
-      collaborators:
-        'Operations, program & product management · worked with dev, founder leadership, under the CTO, ops and content · 150+ startups, 500+ founders in the program',
+      led: 'Product, Operations',
+      collaborators: 'Engineering, Program, Operations, Leadership',
     },
     geo: {
       base: 'bangalore',
@@ -50,10 +50,10 @@ export const journey: Milestone[] = [
     title: 'Product & Design Agency',
     role: 'Founder · Product & Design Consultant',
     description:
-      'Founded a product agency. Helped cab drivers recover taxes with Cabdost, built bite-sized founder learning with Station91 and Tymline for short-form blogging, designed Leucine’s CLEEN OS and Instoried, Incola (an Australian rental advance pay-later subscription), plus a data-collection PWA for a medical NGO.',
+      'Founded a product agency. Helped 50K cab drivers recover taxes with Cabdost; designed Leucine’s CLEEN OS (cleaning validation for FDA audits) and Incola (an Australian pay-later subscription for rental deposits); built a data-collection PWA for a medical NGO; and shipped bite-sized founder learning with Station91 and Tymline.',
     workSlugs: ['cabdost', 'station91'],
-    highlight: '5,000 drivers · ~$175K recovered · 35x business growth',
-    team: { led: '5 devs, 1 QA, 1 ops, 1 marketing', collaborators: '10 founder teams served' },
+    highlight: '100,000 users · 10 products · 4 fundraised',
+    team: { led: '3 pods · 5 devs, 1 QA', collaborators: 'Founders, Operations, Marketing' },
     geo: {
       base: 'bangalore',
       locations: ['mumbai', 'newyork', 'brisbane'],
@@ -67,7 +67,7 @@ export const journey: Milestone[] = [
     title: 'Founding Imux',
     role: 'Cofounder, Product & Design',
     description:
-      'Co-founded Imux, a natural-language interface to databases (NLiDB) SaaS. Raised seed funding and learned what zero-to-one really costs.',
+      'Co-founded Imux, a natural-language interface to databases (NLiDB) SaaS. Designed the B2B product 0-to-1, demoed to enterprise customers, and raised seed funding.',
     workSlugs: ['imux'],
     highlight: 'Seed funded',
     team: { collaborators: '5-person founding team' },
@@ -82,9 +82,9 @@ export const journey: Milestone[] = [
     id: 'oneplus',
     years: '2019–2025',
     title: 'OnePlus at global scale',
-    role: 'Senior PM · Lead Product Strategy',
+    role: 'PM → Senior PM → Lead, Product Strategy',
     description:
-      'Led OnePlus Shelf ground-up redesign (4x MAU), scaled Scout to 50+ countries, shipped India’s first food-delivery tracking on Always-on Display, and drove partnerships with Spotify, Netflix, Snapchat, Zomato, Swiggy, Blinkit and Grab.',
+      'Three roles in six years. Shipped core OxygenOS apps (Shelf, Scout, Nearby Charging Stations, Notes) as PM, Global Apps; then as Senior PM, Partnerships, authored the strategy that opened Shelf to third-party developers and grew partner engagement across the OS, onboarding Spotify, Snapchat, Zomato, Swiggy, Blinkit, Grab, Uber, Ola and Rapido. Closed as Lead, Product Strategy, running worldwide user research and greenlighting features via executive pitch decks.',
     workSlugs: [
       'oneplus-shelf',
       'oneplus-scout',
@@ -95,8 +95,8 @@ export const journey: Milestone[] = [
     ],
     highlight: 'Employee of the Year 2021 · 200M+ users',
     team: {
-      led: '5 pods owned · 20 devs, 5 designers, 5 QA, 3 ops',
-      collaborators: 'legal, marketing, BD, leadership · 6 partner PMs, 15 partner devs',
+      led: '5 pods · 25 devs, 6 designers, 3 ops',
+      collaborators: 'Leadership, Business Development, Marketing, Legal, Partner Product, Partner Development',
     },
     geo: {
       base: ['hyderabad', 'bangalore'],
@@ -113,10 +113,10 @@ export const journey: Milestone[] = [
     title: 'Independent builder & AI',
     role: 'Product Consultant · AI Builder',
     description:
-      'Building with AI end-to-end: Product f(), an AI operating system for product teams; Labh, a SEBI-certified investment platform; Petfolk luxury pet care; Pro Studio for film pre-production; Itihasa Collective for screenwriters.',
+      'Building AI-native products end-to-end: Product f(), an AI operating system for product teams; Labh, a SEBI-certified investment platform; Petfolk pet care; Pro Studio for film pre-production; Itihasa Collective for screenwriters. Designing, building and shipping production software solo with AI in the loop, a forward-deployed way of working.',
     workSlugs: ['product-f', 'labh', 'petfolk', 'pro-studio-space', 'itihasa-collective', 'reporting-hub'],
     highlight: 'Currently building Product f()',
-    team: { collaborators: '5 founders, 5 devs, 5 ops, 3 designers across these ventures' },
+    team: { collaborators: 'Founders, Developers, Operations, Designers' },
     geo: {
       base: 'calgary',
       locations: ['hyderabad'],
