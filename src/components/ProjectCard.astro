@@ -52,29 +52,29 @@ const partnerIcons = showPartners
     }
     {
       testimonial && (
-        <p class=”card-quote”>
-          “{testimonial.short}” <span class=”quote-by”>· {testimonial.author}</span>
+        <p class="card-quote">
+          “{testimonial.short}” <span class="quote-by">· {testimonial.author}</span>
         </p>
       )
     }
     {
       showPartners && (
-        <div class=”card-partners”>
+        <div class="card-partners">
           {partnerIcons.map(({ name, icon }) => (
-            <div class=”partner-icon” title={name}>
+            <div class="partner-icon" title={name}>
               {icon ? (
-                <svg viewBox=”0 0 24 24” class=”p-logo” role=”img” aria-label={name}>
+                <svg viewBox="0 0 24 24" class="p-logo" role="img" aria-label={name}>
                   <path d={icon.path} />
                 </svg>
               ) : (
-                <span class=”partner-text”>{name}</span>
+                <span class="partner-text">{name}</span>
               )}
             </div>
           ))}
         </div>
       )
     }
-    <div class=”card-foot”>
+    <div class="card-foot">
       {topMetric && (
         <span class="card-metric">
           <b class="metric-value">{topMetric.value}</b> {topMetric.label}
