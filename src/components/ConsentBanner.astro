@@ -1,0 +1,86 @@
+<div id="consent-banner" style="display:none" role="region" aria-label="Cookie consent">
+  <p class="cb-text">We use analytics to understand how this site is used. EU visitors can opt out.</p>
+  <div class="cb-actions">
+    <button id="cb-accept" class="cb-btn">OK</button>
+    <button id="cb-decline" class="cb-btn cb-btn-muted">No thanks</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var stored = localStorage.getItem('ga_consent');
+    if (stored) return; // already decided
+
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+    if (!tz.startsWith('Europe/')) return;
+
+    var banner = document.getElementById('consent-banner');
+    if (!banner) return;
+    banner.style.display = 'flex';
+
+    document.getElementById('cb-accept').addEventListener('click', function () {
+      localStorage.setItem('ga_consent', 'granted');
+      if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      banner.style.display = 'none';
+    });
+
+    document.getElementById('cb-decline').addEventListener('click', function () {
+      localStorage.setItem('ga_consent', 'denied');
+      if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      banner.style.display = 'none';
+    });
+  })();
+</script>
+
+<style>
+  #consent-banner {
+    position: fixed;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.65rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    max-width: min(90vw, 480px);
+    z-index: 999;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  }
+  .cb-text {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    flex: 1;
+    min-width: 160px;
+    line-height: 1.5;
+  }
+  .cb-actions {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  .cb-btn {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+  }
+  .cb-btn:hover {
+    color: var(--text-1);
+    border-color: var(--text-2);
+  }
+  .cb-btn-muted {
+    color: var(--text-3);
+  }
+</style>

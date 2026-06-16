@@ -85,7 +85,7 @@ const jsonLd = {
             }
             {
               externalUrl && (
-                <a href={externalUrl} target="_blank" rel="noopener" class="btn btn-outline cs-visit reveal">
+                <a href={externalUrl} target="_blank" rel="noopener" class="btn btn-outline cs-visit reveal" data-ga-event="external_project_visit">
                   Visit {new URL(externalUrl).hostname} ↗
                 </a>
               )

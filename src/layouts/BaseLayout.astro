@@ -4,6 +4,7 @@ import '../styles/art.css';
 import Seo from '../components/Seo.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 
 interface Props {
   title: string;
@@ -47,6 +48,9 @@ const { accent, ...seo } = Astro.props;
       function gtag() {
         dataLayer.push(arguments);
       }
+      // Start in denied mode if an EU user previously opted out; granted otherwise.
+      var _c = typeof localStorage !== 'undefined' ? localStorage.getItem('ga_consent') : null;
+      gtag('consent', 'default', { analytics_storage: _c === 'denied' ? 'denied' : 'granted' });
       gtag('js', new Date());
       gtag('config', 'G-H9B2C9ETDC');
     </script>
@@ -57,6 +61,12 @@ const { accent, ...seo } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <ConsentBanner />
+
+    <script>
+      import { initAnalytics } from '../scripts/analytics';
+      initAnalytics();
+    </script>
 
     <script>
       // Scroll reveal: adds .in once when an element enters the viewport.
