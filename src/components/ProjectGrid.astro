@@ -31,7 +31,7 @@ const filters = ['Featured', 'All', 'AI', 'Products', 'Design', 'Partnerships', 
     {projects.map((p) => <ProjectCard project={p} />)}
   </div>
   <div class="view-all-wrap" data-view-all>
-    <a href="?category=all" class="view-all-link" data-filter-all>View all projects →</a>
+    <button class="view-all-link" data-filter-all>View all projects →</button>
   </div>
 </div>
 
@@ -79,10 +79,13 @@ const filters = ['Featured', 'All', 'AI', 'Products', 'Design', 'Partnerships', 
   }
   .view-all-link {
     font-size: var(--text-sm);
+    font-family: var(--font-body);
     color: var(--text-2);
-    text-decoration: none;
+    background: none;
+    border: none;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 0.1rem;
+    padding: 0 0 0.1rem;
+    cursor: pointer;
     transition: color 0.2s, border-color 0.2s;
   }
   .view-all-link:hover {
@@ -116,8 +119,7 @@ const filters = ['Featured', 'All', 'AI', 'Products', 'Design', 'Partnerships', 
       viewAllWrap.hidden = !isFeatured;
     };
 
-    viewAllLink.addEventListener('click', (e) => {
-      e.preventDefault();
+    viewAllLink.addEventListener('click', () => {
       const allPill = wrap.querySelector<HTMLAnchorElement>('.filter-pill[data-filter="all"]');
       allPill?.click();
     });

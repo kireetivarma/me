@@ -39,11 +39,14 @@ export function initFilterGrids() {
         e.preventDefault();
         const f = pill.dataset.filter ?? 'all';
         apply(f);
-        scrollToSection();
         const url = new URL(location.href);
         if (f === 'all') url.searchParams.delete('category');
         else url.searchParams.set('category', f);
         history.replaceState(null, '', url);
+        // rAF ensures scroll is measured after the browser commits the new layout
+        // (cards showing/hiding) and after replaceState, preventing iOS Safari
+        // scroll-restoration from overriding our target position.
+        requestAnimationFrame(scrollToSection);
       });
     }
 
