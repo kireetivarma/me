@@ -27,8 +27,8 @@ const { size = 'thumb' } = Astro.props;
   .frame {
     aspect-ratio: 16 / 10;
     border-radius: 2.5cqw;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: linear-gradient(150deg, rgba(96, 165, 250, 0.18), rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--art-stroke);
+    background: linear-gradient(150deg, rgba(96, 165, 250, 0.18), transparent);
     display: grid;
     place-items: end start;
     padding: 2cqw;
@@ -44,7 +44,7 @@ const { size = 'thumb' } = Astro.props;
     right: 0;
     height: 1cqw;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--art-fill);
     overflow: hidden;
   }
   .playhead::after {
@@ -77,7 +77,7 @@ const { size = 'thumb' } = Astro.props;
   .c2 { color: #4ade80; animation: roam2 11s ease-in-out infinite; }
   .c2 i { background: #4ade80; color: #06170c; }
   @keyframes focus {
-    0%, 100% { border-color: rgba(255, 255, 255, 0.14); }
+    0%, 100% { border-color: var(--art-stroke); }
     12% { border-color: #60a5fa; box-shadow: 0 0 6cqw rgba(96, 165, 250, 0.35); }
   }
   @keyframes scrub {

@@ -2,6 +2,9 @@
  * Shared chrome for project component-art.
  * Every art root is a container so internals scale with cqw units across
  * thumb / hero / ambient sizes from one markup.
+ *
+ * Glass-effect vars default to dark (white-on-dark); [data-theme='light'] flips
+ * them to dark-on-light so every art component is legible in both themes.
  */
 .art {
   container-type: inline-size;
@@ -12,15 +15,22 @@
   display: grid;
   place-items: center;
   isolation: isolate;
-  /* Art is always a dark scene (like a device screen), in both themes:
-     the white-glass primitives and per-art colors are tuned for it, so the
-     theme-dependent text/bg tokens are pinned to their dark values here. */
-  background: #0e1016;
-  --text-1: #f1f5f9;
-  --text-2: #94a3b8;
-  --text-3: #64748b;
-  --bg: #0c0d11;
-  --bg-2: #12141b;
+  background: var(--bg-2);
+
+  /* Glass-effect palette — dark defaults (white-on-dark): */
+  --art-fill:     rgba(255, 255, 255, 0.06);   /* subtle surface / panel bg */
+  --art-stroke:   rgba(255, 255, 255, 0.12);   /* borders / outlines */
+  --art-line-dim: rgba(255, 255, 255, 0.18);   /* dim skeleton bars */
+  --art-line:     rgba(255, 255, 255, 0.32);   /* normal skeleton bars */
+  --art-line-hi:  rgba(255, 255, 255, 0.46);   /* bright / emphasis bars */
+}
+
+[data-theme='light'] .art {
+  --art-fill:     rgba(0, 0, 0, 0.05);
+  --art-stroke:   rgba(0, 0, 0, 0.10);
+  --art-line-dim: rgba(0, 0, 0, 0.14);
+  --art-line:     rgba(0, 0, 0, 0.28);
+  --art-line-hi:  rgba(0, 0, 0, 0.50);
 }
 
 /* Animations idle until IntersectionObserver adds .in to a .reveal ancestor
@@ -35,9 +45,9 @@
 
 /* Widget card — the OnePlus Shelf visual primitive */
 .art-widget {
-  background: rgba(255, 255, 255, 0.09);
+  background: var(--art-fill);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--art-stroke);
   border-radius: 9cqw;
   padding: 5cqw;
   box-shadow: 0 4cqw 12cqw rgba(0, 0, 0, 0.35);
@@ -46,7 +56,7 @@
 /* Phone frame */
 .art-phone {
   border-radius: 12cqw;
-  border: 1.2cqw solid rgba(255, 255, 255, 0.18);
+  border: 1.2cqw solid var(--art-stroke);
   background: #06070a;
   box-shadow: 0 6cqw 18cqw rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -57,8 +67,8 @@
   display: flex;
   align-items: center;
   gap: 3cqw;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: var(--art-fill);
+  border: 1px solid var(--art-stroke);
   border-radius: 999px;
   padding: 3.5cqw 5cqw;
 }

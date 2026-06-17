@@ -47,16 +47,16 @@ const { size = 'thumb' } = Astro.props;
     height: 2.4cqw;
     width: 55%;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.22);
+    background: var(--art-line);
   }
-  .w-line.lg { width: 85%; margin-bottom: 2cqw; background: rgba(255, 255, 255, 0.45); }
+  .w-line.lg { width: 85%; margin-bottom: 2cqw; background: var(--art-line-hi); }
   .w-icon { font-size: 7cqw; }
   .w-temp { font-size: 6cqw; color: var(--text-1); }
   .ring {
     width: 10cqw;
     height: 10cqw;
     border-radius: 50%;
-    border: 1.6cqw solid rgba(255, 255, 255, 0.15);
+    border: 1.6cqw solid var(--art-stroke);
     position: relative;
   }
   .ring-fill {

@@ -21,7 +21,7 @@ const { size = 'thumb' } = Astro.props;
   .receipt {
     width: 52cqw;
     background: var(--bg-2);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--art-stroke);
     border-radius: 3cqw 3cqw 5cqw 5cqw;
     padding: 5cqw;
     position: relative;
@@ -47,8 +47,8 @@ const { size = 'thumb' } = Astro.props;
   }
   .rows { display: grid; gap: 2.4cqw; margin-bottom: 4cqw; }
   .r { display: flex; justify-content: space-between; }
-  .r i { width: 50%; height: 2cqw; border-radius: 99px; background: rgba(255, 255, 255, 0.16); }
-  .r b { width: 20%; height: 2cqw; border-radius: 99px; background: rgba(255, 255, 255, 0.28); }
+  .r i { width: 50%; height: 2cqw; border-radius: 99px; background: var(--art-line-dim); }
+  .r b { width: 20%; height: 2cqw; border-radius: 99px; background: var(--art-line); }
   .stamp {
     position: absolute;
     right: 4cqw;

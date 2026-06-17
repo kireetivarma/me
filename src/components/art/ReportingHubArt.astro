@@ -32,8 +32,8 @@ const { size = 'thumb' } = Astro.props;
   }
   .tile {
     border-radius: 3cqw;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--art-stroke);
+    background: var(--art-fill);
     padding: 3.5cqw;
     min-height: 18cqw;
     display: flex;
@@ -43,7 +43,7 @@ const { size = 'thumb' } = Astro.props;
   }
   .wide { grid-column: 1 / -1; min-height: 10cqw; flex-direction: column; align-items: flex-start; }
   .v { font-size: 5.5cqw; font-weight: 700; color: #f59e0b; }
-  .l { height: 2cqw; width: 60%; border-radius: 99px; background: rgba(255, 255, 255, 0.18); }
+  .l { height: 2cqw; width: 60%; border-radius: 99px; background: var(--art-line-dim); }
   .l.w80 { width: 80%; }
   .l.w55 { width: 55%; }
   .bars {
@@ -68,7 +68,7 @@ const { size = 'thumb' } = Astro.props;
     width: 11cqw;
     height: 11cqw;
     border-radius: 50%;
-    border: 2cqw solid rgba(255, 255, 255, 0.12);
+    border: 2cqw solid var(--art-stroke);
     border-top-color: #f59e0b;
     border-right-color: #f59e0b;
     animation: spin 4s cubic-bezier(0.6, 0, 0.3, 1) infinite;

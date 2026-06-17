@@ -37,12 +37,12 @@ const { size = 'thumb' } = Astro.props;
     bottom: 2.5cqw;
     width: 0.7cqw;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--art-stroke);
   }
   .node {
     position: relative;
     background: var(--bg-2);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--art-stroke);
     border-radius: 3.5cqw;
     padding: 3.5cqw 4cqw;
     box-shadow: 0 3cqw 10cqw rgba(0, 0, 0, 0.28);
@@ -56,16 +56,16 @@ const { size = 'thumb' } = Astro.props;
     height: 3.6cqw;
     border-radius: 50%;
     background: var(--bg-2);
-    border: 0.7cqw solid rgba(255, 255, 255, 0.25);
+    border: 0.7cqw solid var(--art-line-dim);
   }
   .bars { display: grid; gap: 2cqw; }
   .bars i {
     height: 2cqw;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.18);
+    background: var(--art-line-dim);
     width: 55%;
   }
-  .bars i.lg { width: 85%; background: rgba(255, 255, 255, 0.32); }
+  .bars i.lg { width: 85%; background: var(--art-line); }
   /* The "active" lesson walks down the timeline. */
   .n1 { animation: lit 6s ease infinite; }
   .n2 { animation: lit 6s ease infinite 2s; }
@@ -74,11 +74,11 @@ const { size = 'thumb' } = Astro.props;
   .n2 .dot { animation: litdot 6s ease infinite 2s; }
   .n3 .dot { animation: litdot 6s ease infinite 4s; }
   @keyframes lit {
-    0%, 26%, 100% { border-color: rgba(255, 255, 255, 0.12); }
+    0%, 26%, 100% { border-color: var(--art-stroke); }
     6%, 20% { border-color: rgba(245, 158, 11, 0.7); }
   }
   @keyframes litdot {
-    0%, 26%, 100% { background: var(--bg-2); border-color: rgba(255, 255, 255, 0.25); box-shadow: none; }
+    0%, 26%, 100% { background: var(--bg-2); border-color: var(--art-line-dim); box-shadow: none; }
     6%, 20% { background: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 4cqw rgba(245, 158, 11, 0.8); }
   }
 </style>

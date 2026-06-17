@@ -25,7 +25,7 @@ const { size = 'thumb' } = Astro.props;
     position: absolute;
     inset: 0;
     border-radius: 5cqw;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--art-stroke);
     background: var(--bg-2);
     box-shadow: 0 4cqw 12cqw rgba(0, 0, 0, 0.3);
   }
@@ -45,13 +45,13 @@ const { size = 'thumb' } = Astro.props;
     font-weight: 700;
     color: #facc15;
   }
-  .line { height: 2.4cqw; width: 60%; border-radius: 99px; background: rgba(255, 255, 255, 0.2); }
-  .line.lg { width: 90%; background: rgba(255, 255, 255, 0.45); margin-bottom: 2cqw; }
+  .line { height: 2.4cqw; width: 60%; border-radius: 99px; background: var(--art-line-dim); }
+  .line.lg { width: 90%; background: var(--art-line-hi); margin-bottom: 2cqw; }
   .prog {
     grid-column: 1 / -1;
     height: 1.4cqw;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--art-fill);
     overflow: hidden;
   }
   .prog i {

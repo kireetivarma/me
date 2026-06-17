@@ -20,7 +20,7 @@ const { size = 'thumb' } = Astro.props;
   .script {
     width: 60cqw;
     background: var(--bg-2);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--art-stroke);
     border-radius: 3cqw;
     padding: 5cqw;
     position: relative;
@@ -36,7 +36,7 @@ const { size = 'thumb' } = Astro.props;
   .line {
     height: 2cqw;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.18);
+    background: var(--art-line-dim);
     margin-bottom: 2.2cqw;
     transform-origin: left;
     animation: write 7s ease infinite;
