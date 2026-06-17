@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, categories, metrics, art, accent, role, timeframe, decision, partners } = project.data;
+const { title, summary, categories, metrics, art, accent, role, timeframe, decision, partners, featured } = project.data;
 const Art = resolveArt(art);
 const topMetric = metrics[0];
 const testimonial = testimonialsFor(project.id)[0];
@@ -31,6 +31,7 @@ const partnerIcons = showPartners
   href={`/work/${project.id}/`}
   class="project-card"
   data-categories={categories.map((c) => c.toLowerCase()).join(' ')}
+  data-featured={featured ? 'true' : 'false'}
   style={accent ? `--accent:${accent}` : undefined}
 >
   <div class="card-art">
