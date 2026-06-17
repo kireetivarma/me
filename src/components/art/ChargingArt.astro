@@ -39,25 +39,36 @@ const { size = 'thumb' } = Astro.props;
   }
   .illo { display: block; width: 100%; height: 100%; object-fit: contain; }
 
+  /* Footprints: an asymmetric "sole" with a small "toe" dot, angled toward the station. */
   .step {
     position: absolute;
-    width: 2.6cqw;
-    height: 2.6cqw;
+    width: 2cqw;
+    height: 3.2cqw;
+    border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
+    background: #10b981;
+    opacity: 0;
+    box-shadow: 0 0 1.8cqw rgba(16, 185, 129, 0.6);
+  }
+  .step::after {
+    content: '';
+    position: absolute;
+    top: -1.1cqw;
+    left: 58%;
+    width: 1cqw;
+    height: 1cqw;
     border-radius: 50%;
     background: #10b981;
-    top: 58%;
-    opacity: 0;
-    box-shadow: 0 0 2.4cqw rgba(16, 185, 129, 0.7);
+    box-shadow: 0 0 1.2cqw rgba(16, 185, 129, 0.6);
   }
-  .s1 { left: 30%; animation: step 5.5s ease infinite 0.2s; }
-  .s2 { left: 35%; animation: step 5.5s ease infinite 0.7s; }
-  .s3 { left: 40%; animation: step 5.5s ease infinite 1.2s; }
-  .s4 { left: 45%; animation: step 5.5s ease infinite 1.7s; }
+  .s1 { left: 30%; top: 60%; --rot: 22deg; animation: step 5.5s ease infinite 0.2s; }
+  .s2 { left: 35%; top: 53%; --rot: 34deg; animation: step 5.5s ease infinite 0.7s; }
+  .s3 { left: 40%; top: 60%; --rot: 22deg; animation: step 5.5s ease infinite 1.2s; }
+  .s4 { left: 45%; top: 53%; --rot: 34deg; animation: step 5.5s ease infinite 1.7s; }
   @keyframes step {
-    0%, 2% { opacity: 0; transform: scale(0.4); }
-    10% { opacity: 1; transform: scale(1); }
-    62% { opacity: 1; transform: scale(1); }
-    72%, 100% { opacity: 0; transform: scale(0.4); }
+    0%, 2% { opacity: 0; transform: rotate(var(--rot)) scale(0.4); }
+    10% { opacity: 1; transform: rotate(var(--rot)) scale(1); }
+    62% { opacity: 1; transform: rotate(var(--rot)) scale(1); }
+    72%, 100% { opacity: 0; transform: rotate(var(--rot)) scale(0.4); }
   }
 
   .charge {
@@ -92,15 +103,14 @@ const { size = 'thumb' } = Astro.props;
     box-shadow: 0 1.5cqw 5cqw rgba(0, 0, 0, 0.12);
   }
   .dist b::before {
-    content: '142 steps';
+    content: '96 steps';
     font-weight: 600;
     animation: count 5.5s steps(1) infinite;
   }
   @keyframes count {
-    0% { content: '142 steps'; }
-    18% { content: '96 steps'; }
-    36% { content: '54 steps'; }
-    54% { content: '18 steps'; }
+    0% { content: '96 steps'; }
+    24% { content: '54 steps'; }
+    48% { content: '18 steps'; }
     66%, 100% { content: 'Arrived ✓'; }
   }
 </style>
