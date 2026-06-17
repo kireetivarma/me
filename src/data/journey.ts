@@ -50,7 +50,7 @@ export const journey: Milestone[] = [
     title: 'Product Agency & Founding Imux',
     role: 'Founder, Product & Design · Cofounder, Imux',
     description:
-      ‘Founded a product & design agency: helped 50K cab drivers recover taxes with Cabdost; designed Leucine’s CLEEN OS (cleaning validation for FDA audits) and Incola (an Australian pay-later for rental deposits); built a data-collection PWA for a medical NGO; and shipped bite-sized founder learning with Station91 and Tymline. In the same stretch I co-founded Imux, a natural-language interface to databases (NLiDB) SaaS: designed the B2B product 0-to-1, demoed to enterprise customers, and raised seed funding.’,
+      'Founded a product & design agency: helped 50K cab drivers recover taxes with Cabdost; designed Leucine\'s CLEEN OS (cleaning validation for FDA audits) and Incola (an Australian pay-later for rental deposits); built a data-collection PWA for a medical NGO; and shipped bite-sized founder learning with Station91 and Tymline. In the same stretch I co-founded Imux, a natural-language interface to databases (NLiDB) SaaS: designed the B2B product 0-to-1, demoed to enterprise customers, and raised seed funding.',
     workSlugs: ['cabdost', 'station91', 'imux'],
     highlight: '100k+ users · 10 products · 5 fundraised · seed-funded Imux',
     team: {
