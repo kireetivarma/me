@@ -46,6 +46,8 @@ const work = defineCollection({
     /** Skills demonstrated, shown as tags on the case page and the /work/ skills overview. */
     skills: z.array(z.string()).default([]),
     art: z.string(),
+    /** Self-hosted hero video (path under /public, e.g. /media/foo.mp4). Takes priority over gallery/art as the hero. */
+    heroVideo: z.string().optional(),
     /** Gallery shown as the case-study hero (replaces the component-art when present). */
     gallery: z
       .array(z.object({ src: image(), alt: z.string(), caption: z.string().optional() }))

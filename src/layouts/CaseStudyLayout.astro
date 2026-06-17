@@ -30,6 +30,7 @@ const {
   skills,
   metrics,
   art,
+  heroVideo,
   gallery,
   accent,
   externalUrl,
@@ -39,6 +40,8 @@ const {
 } = entry.data;
 const Art = resolveArt(art);
 const hasGallery = gallery.length > 0;
+// A self-hosted hero video wins the hero slot; the intro goes full-width above it.
+const heroIsMedia = !!heroVideo || hasGallery;
 const quotes = testimonialsFor(entry.id);
 
 const allPosts = await getCollection('posts', ({ data }) => !data.draft);
@@ -61,7 +64,7 @@ const jsonLd = {
     <header class="cs-header">
       <div class="cs-ambient" aria-hidden="true"><Art size="ambient" /></div>
       <div class="container">
-        <div class:list={['cs-head-grid', { 'no-art': hasGallery }]}>
+        <div class:list={['cs-head-grid', { 'no-art': heroIsMedia }]}>
           <div class="cs-intro">
             <p class="cs-crumb art-mono"><a href="/work/">work</a> / {entry.id}</p>
             <h1 class="cs-title reveal">{title}</h1>
@@ -95,7 +98,7 @@ const jsonLd = {
             }
           </div>
           {
-            !hasGallery && (
+            !heroIsMedia && (
               <div class="cs-hero-art reveal">
                 <Art size="hero" />
               </div>
@@ -103,7 +106,28 @@ const jsonLd = {
           }
         </div>
         {
-          hasGallery && (
+          heroVideo && (
+            <div class="cs-video-hero reveal">
+              <video
+                id="cs-hero-video"
+                src={heroVideo}
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label={`${title} promo video`}
+              />
+              <button type="button" class="cs-video-audio" id="cs-video-audio" aria-pressed="false" aria-label="Unmute video">
+                <svg class="ic-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="m17 9 4 6M21 9l-4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="ic-unmuted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+                <span class="cs-video-audio-label">Sound off</span>
+              </button>
+            </div>
+          )
+        }
+        {
+          !heroVideo && hasGallery && (
             <div class="cs-gallery-hero reveal">
               <ImageCarousel images={gallery} />
             </div>
@@ -220,6 +244,47 @@ const jsonLd = {
   .cs-gallery-hero :global(.ic) {
     margin: 0;
   }
+  .cs-video-hero {
+    position: relative;
+    margin-top: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: #0c0d11;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .cs-video-hero video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(72vh, 640px);
+    object-fit: cover;
+  }
+  .cs-video-audio {
+    position: absolute;
+    bottom: 0.9rem;
+    right: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(12, 13, 17, 0.66);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #f1f5f9;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .cs-video-audio:hover { background: rgba(12, 13, 17, 0.9); border-color: rgba(255, 255, 255, 0.32); }
+  .cs-video-audio svg { width: 16px; height: 16px; }
+  .cs-video-audio .ic-unmuted { display: none; }
+  .cs-video-audio[aria-pressed='true'] .ic-muted { display: none; }
+  .cs-video-audio[aria-pressed='true'] .ic-unmuted { display: inline; }
   .cs-crumb {
     font-size: var(--text-xs);
     color: var(--text-3);
@@ -400,3 +465,26 @@ const jsonLd = {
   .cs-nav-link:hover { color: var(--text-1); }
   .cs-nav-link.next { text-align: right; }
 </style>
+
+<script>
+  // Hero video starts muted (required for autoplay); the toggle lets viewers
+  // hear the promo audio on demand.
+  const video = document.getElementById('cs-hero-video') as HTMLVideoElement | null;
+  const toggle = document.getElementById('cs-video-audio');
+  if (video && toggle) {
+    const label = toggle.querySelector('.cs-video-audio-label');
+    const sync = () => {
+      const on = !video.muted;
+      toggle.setAttribute('aria-pressed', String(on));
+      toggle.setAttribute('aria-label', on ? 'Mute video' : 'Unmute video');
+      if (label) label.textContent = on ? 'Sound on' : 'Sound off';
+    };
+    toggle.addEventListener('click', () => {
+      video.muted = !video.muted;
+      // Some browsers need an explicit play() after the user gesture.
+      if (!video.muted) video.play().catch(() => {});
+      sync();
+    });
+    sync();
+  }
+</script>

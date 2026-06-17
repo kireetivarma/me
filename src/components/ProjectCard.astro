@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, categories, metrics, art, accent, role, timeframe, decision, partners, featured } = project.data;
+const { title, summary, categories, metrics, art, heroVideo, accent, role, timeframe, decision, partners, featured } = project.data;
 const Art = resolveArt(art);
 const topMetric = metrics[0];
 const testimonial = testimonialsFor(project.id)[0];
@@ -35,7 +35,22 @@ const partnerIcons = showPartners
   style={accent ? `--accent:${accent}` : undefined}
 >
   <div class="card-art">
-    <Art size="thumb" />
+    {
+      heroVideo ? (
+        <video
+          class="card-video"
+          src={heroVideo}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        />
+      ) : (
+        <Art size="thumb" />
+      )
+    }
   </div>
   <div class="card-body">
     <div class="card-tags">
@@ -108,6 +123,12 @@ const partnerIcons = showPartners
     aspect-ratio: 16 / 10;
     border-bottom: 1px solid var(--border);
     background: var(--bg-2);
+  }
+  .card-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .card-body {
     padding: 1.4rem;
