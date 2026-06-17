@@ -284,7 +284,7 @@ for (const m of journey) {
     position: sticky;
     top: 80px;
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     background: var(--bg-card);
     padding: 1.2rem;
   }
@@ -293,21 +293,10 @@ for (const m of journey) {
        it must paint fully opaque (--bg-card is translucent) and sit above
        the timeline. Declared after the base rule so it wins the cascade. */
     .map-panel {
-      top: 68px;
+      top: 60px;
       z-index: 5;
       background: var(--bg);
       box-shadow: var(--shadow);
-    }
-    /* Opaque strip filling the gap between nav and panel top edge. */
-    .map-panel::before {
-      content: '';
-      position: absolute;
-      left: -1px;
-      right: -1px;
-      top: -8px;
-      height: 8px;
-      background: var(--bg);
-      z-index: -1;
     }
   }
   #impact-map { width: 100%; height: auto; }
