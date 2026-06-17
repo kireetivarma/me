@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { projects, id = 'work-grid' } = Astro.props;
-const filters = ['All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', 'OnePlus'];
+const filters = ['Featured', 'All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', 'OnePlus'];
 ---
 
 <div class="grid-wrap" id={id} data-filter-grid>
@@ -29,6 +29,9 @@ const filters = ['All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', '
   </div>
   <div class="grid stagger">
     {projects.map((p) => <ProjectCard project={p} />)}
+  </div>
+  <div class="view-all-wrap" data-view-all>
+    <a href="?category=all" class="view-all-link" data-filter-all>View all projects →</a>
   </div>
 </div>
 
@@ -70,6 +73,25 @@ const filters = ['All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', '
     border-color: var(--red);
     color: #fff;
   }
+  .view-all-wrap {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  .view-all-link {
+    font-size: var(--text-sm);
+    color: var(--text-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.1rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .view-all-link:hover {
+    color: var(--text-1);
+    border-color: var(--border-hover);
+  }
+  .view-all-wrap[hidden] {
+    display: none;
+  }
   .grid {
     display: grid;
     /* min() keeps cards from overflowing viewports narrower than 310px + padding */
@@ -81,4 +103,29 @@ const filters = ['All', 'AI', 'Products', 'Design', 'Partnerships', 'Fintech', '
 <script>
   import { initFilterGrids } from '../scripts/filter-grid';
   initFilterGrids();
+
+  // Show "View all projects" only when the featured filter is active.
+  for (const wrap of document.querySelectorAll<HTMLElement>('[data-filter-grid]')) {
+    const viewAllWrap = wrap.querySelector<HTMLElement>('[data-view-all]');
+    const viewAllLink = wrap.querySelector<HTMLAnchorElement>('[data-filter-all]');
+    if (!viewAllWrap || !viewAllLink) continue;
+
+    const sync = () => {
+      const active = wrap.querySelector<HTMLElement>('.filter-pill[aria-pressed="true"]');
+      const isFeatured = active?.dataset.filter === 'featured';
+      viewAllWrap.hidden = !isFeatured;
+    };
+
+    viewAllLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const allPill = wrap.querySelector<HTMLAnchorElement>('.filter-pill[data-filter="all"]');
+      allPill?.click();
+    });
+
+    wrap.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('.filter-pill')) setTimeout(sync, 0);
+    });
+
+    sync();
+  }
 </script>

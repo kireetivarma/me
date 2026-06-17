@@ -21,7 +21,10 @@ export function initFilterGrids() {
       for (const pill of pills) pill.setAttribute('aria-pressed', String(pill.dataset.filter === filter));
       for (const card of cards) {
         const cats = (card.dataset.categories ?? '').split(' ');
-        const visible = filter === 'all' ? card.dataset.hideAll === undefined : cats.includes(filter);
+        let visible: boolean;
+        if (filter === 'all') visible = card.dataset.hideAll === undefined;
+        else if (filter === 'featured') visible = card.dataset.featured === 'true';
+        else visible = cats.includes(filter);
         card.style.display = visible ? '' : 'none';
       }
     };
@@ -39,6 +42,6 @@ export function initFilterGrids() {
     }
 
     const initial = new URLSearchParams(location.search).get('category');
-    apply(initial ? initial.toLowerCase() : 'all');
+    apply(initial ? initial.toLowerCase() : 'featured');
   }
 }
