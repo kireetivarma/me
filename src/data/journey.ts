@@ -47,35 +47,21 @@ export const journey: Milestone[] = [
   {
     id: 'agency',
     years: '2017–2019',
-    title: 'Product & Design Agency',
-    role: 'Founder · Product & Design Consultant',
+    title: 'Product Agency & Founding Imux',
+    role: 'Founder, Product & Design · Cofounder, Imux',
     description:
-      'Founded a product agency. Helped 50K cab drivers recover taxes with Cabdost; designed Leucine’s CLEEN OS (cleaning validation for FDA audits) and Incola (an Australian pay-later subscription for rental deposits); built a data-collection PWA for a medical NGO; and shipped bite-sized founder learning with Station91 and Tymline.',
-    workSlugs: ['cabdost', 'station91'],
-    highlight: '100,000 users · 10 products · 4 fundraised',
-    team: { led: '3 pods · 5 devs, 1 QA', collaborators: 'Founders, Operations, Marketing' },
-    geo: {
-      base: 'bangalore',
-      locations: ['mumbai', 'newyork', 'brisbane'],
-      reach: ['IN', 'AU', 'US'],
-      users: '100k users · 4 fundraised',
+      'Founded a product & design agency: helped 50K cab drivers recover taxes with Cabdost; designed Leucine’s CLEEN OS (cleaning validation for FDA audits) and Incola (an Australian pay-later for rental deposits); built a data-collection PWA for a medical NGO; and shipped bite-sized founder learning with Station91 and Tymline. In the same stretch I co-founded Imux, a natural-language interface to databases (NLiDB) SaaS — designed the B2B product 0-to-1, demoed to enterprise customers, and raised seed funding.',
+    workSlugs: ['cabdost', 'station91', 'imux'],
+    highlight: '100k+ users · 10 products · 5 fundraised · seed-funded Imux',
+    team: {
+      led: '3 pods · 5 devs, 1 QA',
+      collaborators: 'Founders, Operations, Marketing · 3-person Imux founding team',
     },
-  },
-  {
-    id: 'imux',
-    years: '2018–2019',
-    title: 'Founding Imux',
-    role: 'Cofounder, Product & Design',
-    description:
-      'Co-founded Imux, a natural-language interface to databases (NLiDB) SaaS. Designed the B2B product 0-to-1, demoed to enterprise customers, and raised seed funding.',
-    workSlugs: ['imux'],
-    highlight: 'Seed funded',
-    team: { collaborators: '3-person founding team' },
     geo: {
       base: 'bangalore',
-      locations: ['mumbai', 'seoul', 'bangkok'],
-      reach: ['IN', 'KR', 'TH'],
-      users: '$150k seed fund · 5 paying customers',
+      locations: ['mumbai', 'newyork', 'brisbane', 'seoul', 'bangkok'],
+      reach: ['IN', 'AU', 'US', 'KR', 'TH'],
+      users: '100k users · India · US · AU · Korea · Thailand',
     },
   },
   {
@@ -84,7 +70,7 @@ export const journey: Milestone[] = [
     title: 'OnePlus at global scale',
     role: 'PM → Senior PM → Lead, Product Strategy',
     description:
-      'Shipped core OxygenOS apps (Shelf, Scout, Nearby Charging Stations, Notes) as PM, Global Apps; then as Senior PM, Partnerships, authored the strategy that opened Shelf to third-party developers and grew partner engagement across the OS, onboarding Spotify, Snapchat, Zomato, Swiggy, Blinkit, Grab, Uber, Ola and Rapido. Closed as Lead, Product Strategy, running worldwide user research and greenlighting features via executive pitch decks.',
+      'Shipped core OxygenOS apps (Shelf, Scout, Nearby Charging Stations, Notes) as PM, Global Apps; then as Senior PM, Partnerships, authored the strategy that opened Shelf to third-party developers and grew partner engagement across the OS, onboarding Spotify, Snapchat, Zomato, Swiggy, Blinkit, Grab, Uber, Ola and Rapido. Closed as Lead, Product Strategy, conducting global consumer insights, user, market research, and greenlighting features with executive pitch decks.',
     workSlugs: [
       'oneplus-shelf',
       'oneplus-scout',
