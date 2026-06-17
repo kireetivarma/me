@@ -51,24 +51,31 @@ const stateWord = (s?: string) =>
       One product mind across the whole lifecycle, from discovery to ops over a decade. Tap any project to see the proof.
     </p>
 
-    <div class="lc-wrap reveal">
-      <div class="lc-grid" role="table" aria-label="Product lifecycle coverage by project">
-        <!-- Stage header row -->
-        <div class="lc-head" role="row">
-          <span class="lc-corner" role="columnheader" aria-label="Project"></span>
-          <div class="lc-stages">
-            {
-              STAGES.map((s: LifecycleStage) => (
-                <span class="lc-th art-mono" role="columnheader" title={STAGE_FULL[s]}>
-                  {STAGE_ABBR[s]}
-                </span>
-              ))
-            }
-          </div>
-          <!-- Spacer matching chev width so stage columns align with segments -->
-          <span class="lc-chev-spacer" aria-hidden="true">+</span>
+    <!--
+      Stage header lives OUTSIDE the overflow-x scroll container so that
+      position:sticky;top:60px is relative to the viewport, not the scroll box.
+      It must also NOT be inside any element with transform (e.g. .reveal) as
+      that would create a new stacking context and break sticky.
+    -->
+    <div class="lc-head-wrap">
+      <div class="lc-head" role="row" aria-label="Stage columns">
+        <span class="lc-corner" role="columnheader" aria-label="Project"></span>
+        <div class="lc-stages">
+          {
+            STAGES.map((s: LifecycleStage) => (
+              <span class="lc-th art-mono" role="columnheader" title={STAGE_FULL[s]}>
+                <span class="th-full">{STAGE_FULL[s]}</span>
+                <span class="th-abbr">{STAGE_ABBR[s]}</span>
+              </span>
+            ))
+          }
         </div>
+        <span class="lc-chev-spacer" aria-hidden="true">+</span>
+      </div>
+    </div>
 
+    <div class="lc-wrap">
+      <div class="lc-grid" role="table" aria-label="Product lifecycle coverage by project">
         {
           rows.map(({ lc, project }) => {
             const detailId = `lc-d-${lc.slug}`;
@@ -126,36 +133,34 @@ const stateWord = (s?: string) =>
     --seg-gap: 3px;
   }
 
-  .lc-wrap {
-    margin-top: 1.4rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .lc-grid {
-    min-width: 420px;
+  /* ── Sticky header wrapper ───────────────────────────────────────────────
+     Sits OUTSIDE the overflow-x scroll container so sticky works relative
+     to the viewport. overflow:hidden lets JS sync scrollLeft from the body. */
+  .lc-head-wrap {
+    position: sticky;
+    top: 60px;
+    z-index: 10;
+    overflow: hidden;
+    margin-top: 0.6rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
   }
 
-  /* Header + rows share the same three-column layout so segments align. */
-  .lc-head,
-  .lc-row {
+  /* Header row: same 3-column grid as .lc-row so columns align. */
+  .lc-head {
     display: grid;
     grid-template-columns: var(--name-w) 1fr auto;
     align-items: center;
-  }
-
-  /* Header: normal flow (not sticky — sticky inside overflow-x breaks layout). */
-  .lc-head {
-    border-bottom: 1px solid var(--border);
+    min-width: 420px;
     padding: 0.35rem 0;
   }
 
-  /* Corner cell: glass bg matching the name column. */
+  /* Corner cell: opaque page background (NOT nav-bg glass) to avoid the
+     visible frosted-rectangle artifact in light mode. */
   .lc-corner {
     position: sticky;
     left: 0;
-    background: var(--nav-bg);
-    backdrop-filter: blur(16px) saturate(1.6);
-    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    background: var(--bg);
     z-index: 4;
     align-self: stretch;
   }
@@ -168,19 +173,41 @@ const stateWord = (s?: string) =>
   .lc-th {
     flex: 1;
     text-align: center;
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
     color: var(--text-3);
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  /* Invisible spacer in header that matches chev column width. */
+  /* Responsive labels: show full words on desktop, abbreviations on mobile. */
+  .th-abbr { display: none; }
+  .th-full { display: inline; }
+
+  /* Invisible spacer in header matching chev column so columns align. */
   .lc-chev-spacer {
     visibility: hidden;
     font-family: var(--font-mono);
     font-size: 1rem;
     padding-left: 0.6rem;
+  }
+
+  /* ── Scrollable body ─────────────────────────────────────────────────── */
+  .lc-wrap {
+    margin-top: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lc-grid {
+    min-width: 420px;
+  }
+
+  /* Header + rows share the same three-column layout. */
+  .lc-row {
+    display: grid;
+    grid-template-columns: var(--name-w) 1fr auto;
+    align-items: center;
   }
 
   .lc-item {
@@ -211,11 +238,11 @@ const stateWord = (s?: string) =>
     border-radius: var(--radius-sm);
   }
 
-  /* Name column: sticky left, full row height, glass background. */
+  /* Name column: sticky left, full row height, opaque bg + blur. */
   .lc-name {
     position: sticky;
     left: 0;
-    background: var(--nav-bg);
+    background: var(--bg);
     backdrop-filter: blur(16px) saturate(1.6);
     -webkit-backdrop-filter: blur(16px) saturate(1.6);
     z-index: 2;
@@ -367,6 +394,9 @@ const stateWord = (s?: string) =>
     .lc-name {
       font-size: 0.78rem;
     }
+    /* Switch to abbreviations on mobile. */
+    .th-full { display: none; }
+    .th-abbr { display: inline; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -377,6 +407,16 @@ const stateWord = (s?: string) =>
 </style>
 
 <script>
+  // Sync horizontal scroll of the sticky header with the body scroll container.
+  const headWrap = document.querySelector<HTMLElement>('.lc-head-wrap');
+  const bodyWrap = document.querySelector<HTMLElement>('.lc-wrap');
+  if (headWrap && bodyWrap) {
+    bodyWrap.addEventListener('scroll', () => {
+      headWrap.scrollLeft = bodyWrap.scrollLeft;
+    });
+  }
+
+  // Expand/collapse rows.
   document.querySelectorAll<HTMLButtonElement>('.lc-row').forEach((row) => {
     row.addEventListener('click', () => {
       const panel = row.nextElementSibling as HTMLElement | null;
