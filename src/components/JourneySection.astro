@@ -161,8 +161,8 @@ for (const m of journey) {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
-    bottom: 0;
+    top: var(--tl-top, calc(1.45rem + 5px));
+    bottom: var(--tl-bottom, calc(1.45rem + 5px));
     width: 2px;
     background: var(--border);
   }
@@ -298,15 +298,14 @@ for (const m of journey) {
       background: var(--bg);
       box-shadow: var(--shadow);
     }
-    /* Opaque strip masking the nav gap + rounded-corner notches so scrolling
-       text never peeks around the floating panel. */
+    /* Opaque strip filling the gap between nav and panel top edge. */
     .map-panel::before {
       content: '';
       position: absolute;
       left: -1px;
       right: -1px;
       top: -8px;
-      height: calc(8px + var(--radius-lg));
+      height: 8px;
       background: var(--bg);
       z-index: -1;
     }
@@ -414,15 +413,12 @@ for (const m of journey) {
     }
     if (anchor && top0 !== undefined) {
       const delta = anchor.getBoundingClientRect().top - top0;
-      // The compensating scroll fires its own scroll event. Left unguarded it
-      // re-enters onScroll, which sees the moved viewport and re-picks an
-      // earlier chapter, cascading the selection backwards (a light scroll past
-      // ch2 lands on ch1). Flag the echo so the next scroll tick ignores it.
       if (Math.abs(delta) >= 1) {
-        ignoreScroll = true;
+        ignoreScrollUntil = Date.now() + 120;
         window.scrollBy({ top: delta, behavior: 'instant' });
       }
     }
+    updateTimelineLine();
   }
 
   // Scroll-driven chapters: the aggregate "all" view shows first; as the user
@@ -450,18 +446,17 @@ for (const m of journey) {
   }
 
   let ticking = false;
-  // Set when show() performs a compensating scroll, so the resulting echo
-  // scroll event doesn't re-drive selection. See show() for the cascade it fixes.
-  let ignoreScroll = false;
+  // Timestamp guard: after a compensating scrollBy, ignore scroll-driven chapter
+  // selection until this time passes. A single boolean flag clears too early on
+  // iOS where the user's drag events arrive before the async scrollBy echo,
+  // causing the echo to re-enter chapter selection with stale positions.
+  let ignoreScrollUntil = 0;
   function onScroll() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
       ticking = false;
-      if (ignoreScroll) {
-        ignoreScroll = false;
-        return;
-      }
+      if (Date.now() < ignoreScrollUntil) return;
       const line = readingLine();
       let id = 'all';
       let active: HTMLElement | undefined;
@@ -477,9 +472,23 @@ for (const m of journey) {
       }
     });
   }
+  function updateTimelineLine() {
+    const tl = document.getElementById('timeline');
+    if (!tl) return;
+    const items = Array.from(tl.querySelectorAll<HTMLElement>('.milestone'));
+    if (items.length < 1) return;
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const dotCenter = 1.45 * rem + 5; // top: 1.45rem + half of 10px dot
+    const topPx = items[0].offsetTop + dotCenter;
+    const bottomPx = tl.offsetHeight - (items[items.length - 1].offsetTop + dotCenter);
+    tl.style.setProperty('--tl-top', `${topPx}px`);
+    tl.style.setProperty('--tl-bottom', `${Math.max(0, bottomPx)}px`);
+  }
+
   addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll, { passive: true });
+  addEventListener('resize', () => { onScroll(); updateTimelineLine(); }, { passive: true });
 
   show('all');
   onScroll();
+  updateTimelineLine();
 </script>
