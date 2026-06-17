@@ -1,5 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
 <BaseLayout title="404 · Kireeti Varma" description="Page not found.">
@@ -15,27 +21,89 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container nf">
       <p class="nf-code art-mono">404</p>
       <h1 class="section-title">This page wandered off.</h1>
-      <p class="section-sub">It may have moved during the redesign, the work and writing are still here.</p>
-      <div class="nf-cta">
+      <p class="section-sub">It may have moved during the redesign. Here's where to find everything:</p>
+
+      <div class="nf-nav">
         <a href="/" class="btn btn-primary">Home</a>
         <a href="/work/" class="btn btn-outline">Work</a>
         <a href="/posts/" class="btn btn-outline">Posts</a>
+        <a href="/about/" class="btn btn-outline">About</a>
+        <a href="/#contact" class="btn btn-outline">Contact</a>
+      </div>
+
+      <div class="nf-grid">
+        <div class="nf-block">
+          <p class="section-label art-mono">// case studies</p>
+          <ul class="nf-list">
+            {work.map((p) => (
+              <li>
+                <a href={`/work/${p.id}/`} data-ga-event="recover_404_work">{p.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="nf-block">
+          <p class="section-label art-mono">// reach me</p>
+          <ul class="nf-list">
+            <li><a href={`mailto:${profile.email}`}>Email ↗</a></li>
+            <li><a href={profile.social.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></li>
+            <li><a href={profile.social.calendly} target="_blank" rel="noopener">Book a call ↗</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .nf { text-align: center; padding: 4rem 0; }
+  .nf {
+    text-align: center;
+    padding: 4rem 0;
+  }
   .nf-code {
     font-size: var(--text-hero);
     color: var(--red);
     font-weight: 700;
   }
-  .nf-cta {
+  .nf-nav {
     display: flex;
     justify-content: center;
     gap: 0.8rem;
     flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .nf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    text-align: left;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  @media (max-width: 480px) {
+    .nf-grid { grid-template-columns: 1fr; }
+  }
+  .nf-block {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .nf-list {
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .nf-list li::before {
+    content: '· ';
+    color: var(--text-3);
+  }
+  .nf-list a {
+    font-size: var(--text-sm);
+    color: var(--text-2);
+    text-decoration: none;
+  }
+  .nf-list a:hover {
+    color: var(--text-1);
   }
 </style>
