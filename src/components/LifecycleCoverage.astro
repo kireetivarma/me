@@ -14,9 +14,29 @@ const { projects } = Astro.props;
 
 const projectMap = new Map(projects.map((p) => [p.id, p]));
 
+const ledCount = (lc: (typeof lifecycle)[number]) =>
+  Object.values(lc.stages).filter((v) => v === 'led').length;
+const coCount = (lc: (typeof lifecycle)[number]) =>
+  Object.values(lc.stages).filter((v) => v === 'co').length;
+
 const rows = lifecycle
   .map((l) => ({ lc: l, project: projectMap.get(l.slug) }))
-  .filter((r): r is { lc: (typeof lifecycle)[number]; project: CollectionEntry<'work'> } => !!r.project);
+  .filter((r): r is { lc: (typeof lifecycle)[number]; project: CollectionEntry<'work'> } => !!r.project)
+  .sort((a, b) => {
+    const diff = ledCount(b.lc) - ledCount(a.lc);
+    return diff !== 0 ? diff : coCount(b.lc) - coCount(a.lc);
+  });
+
+const STAGE_ABBR: Record<LifecycleStage, string> = {
+  discovery: 'Disc',
+  research: 'Rsch',
+  strategy: 'Stgy',
+  design: 'Dsgn',
+  build: 'Build',
+  test: 'Test',
+  launch: 'Launch',
+  ops: 'Ops',
+};
 
 const stateClass = (s?: string) => (s === 'led' ? 'led' : s === 'co' ? 'co' : s === 'supported' ? 'supported' : 'none');
 const stateWord = (s?: string) =>
@@ -39,12 +59,14 @@ const stateWord = (s?: string) =>
           <div class="lc-stages">
             {
               STAGES.map((s: LifecycleStage) => (
-                <span class="lc-th art-mono" role="columnheader" aria-label={STAGE_FULL[s]}>
-                  {STAGE_FULL[s]}
+                <span class="lc-th art-mono" role="columnheader" title={STAGE_FULL[s]}>
+                  {STAGE_ABBR[s]}
                 </span>
               ))
             }
           </div>
+          <!-- Spacer matching chev width so stage columns align with segments -->
+          <span class="lc-chev-spacer" aria-hidden="true">+</span>
         </div>
 
         {
@@ -71,7 +93,7 @@ const stateWord = (s?: string) =>
                     {STAGES.filter((s) => lc.stages[s] && lc.phaseLines[s]).map((s) => (
                       <li class="lc-phase-item">
                         <span class={`lc-phase-dot seg ${stateClass(lc.stages[s])}`} aria-hidden="true" />
-                        <span class="lc-phase-label">{STAGE_FULL[s]}</span>
+                        <span class="lc-phase-label">{STAGE_ABBR[s]}</span>
                         <span class="lc-phase-line">{lc.phaseLines[s]}</span>
                       </li>
                     ))}
@@ -100,65 +122,65 @@ const stateWord = (s?: string) =>
 <style>
   .lc-section {
     --name-w: clamp(84px, 22vw, 150px);
-    --seg-h: 24px;
+    --seg-h: 22px;
     --seg-gap: 3px;
   }
 
   .lc-wrap {
-    margin-top: 1.8rem;
+    margin-top: 1.4rem;
     overflow-x: auto;
-    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
   }
   .lc-grid {
-    min-width: 580px;
+    min-width: 420px;
   }
 
-  /* Header + rows share the same two-track layout. */
+  /* Header + rows share the same three-column layout so segments align. */
   .lc-head,
   .lc-row {
     display: grid;
-    grid-template-columns: var(--name-w) 1fr;
-    align-items: end;
+    grid-template-columns: var(--name-w) 1fr auto;
+    align-items: center;
   }
 
-  /* Sticky header: stays below the fixed 60px nav while scrolling vertically. */
+  /* Header: normal flow (not sticky — sticky inside overflow-x breaks layout). */
   .lc-head {
-    position: sticky;
-    top: 60px;
-    z-index: 3;
-    background: var(--bg);
     border-bottom: 1px solid var(--border);
-    padding-bottom: 0.4rem;
+    padding: 0.35rem 0;
   }
 
+  /* Corner cell: glass bg matching the name column. */
   .lc-corner {
     position: sticky;
     left: 0;
-    background: var(--bg);
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
     z-index: 4;
+    align-self: stretch;
   }
 
   .lc-stages {
     display: flex;
     gap: var(--seg-gap);
-    padding-left: 0.6rem;
-    align-items: flex-end;
+    padding: 0 0.5rem;
   }
   .lc-th {
     flex: 1;
     text-align: center;
-    font-size: 0.62rem;
-    letter-spacing: 0.04em;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--text-3);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    padding-bottom: 0.3rem;
-    height: 5.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    min-width: 0;
+    white-space: nowrap;
+  }
+
+  /* Invisible spacer in header that matches chev column width. */
+  .lc-chev-spacer {
+    visibility: hidden;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    padding-left: 0.6rem;
   }
 
   .lc-item {
@@ -172,14 +194,11 @@ const stateWord = (s?: string) =>
     width: 100%;
     background: none;
     border: 0;
-    padding: 0.45rem 0;
+    padding: 0.35rem 0;
     cursor: pointer;
     text-align: left;
     font: inherit;
     color: inherit;
-    grid-template-columns: var(--name-w) 1fr auto;
-    gap: 0;
-    align-items: center;
     transition: background 0.2s;
   }
   .lc-row:hover .lc-name,
@@ -192,13 +211,18 @@ const stateWord = (s?: string) =>
     border-radius: var(--radius-sm);
   }
 
-  /* Sticky name column: stays pinned during horizontal scroll. */
+  /* Name column: sticky left, full row height, glass background. */
   .lc-name {
     position: sticky;
     left: 0;
-    background: var(--bg);
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
     z-index: 2;
-    padding-right: 0.55rem;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding-right: 0.5rem;
     border-right: 1px solid var(--border);
     font-family: var(--font-display);
     font-size: var(--text-sm);
@@ -215,14 +239,14 @@ const stateWord = (s?: string) =>
     display: flex;
     gap: var(--seg-gap);
     height: var(--seg-h);
-    padding: 0 0.6rem;
+    padding: 0 0.5rem;
     align-items: center;
   }
   .seg {
     flex: 1;
     height: 100%;
     border-radius: 3px;
-    min-width: 8px;
+    min-width: 6px;
   }
 
   /* 3-step opaque intensity ramp. */
@@ -254,9 +278,9 @@ const stateWord = (s?: string) =>
     color: var(--accent);
   }
 
-  /* Detail panel: per-phase one-liners. */
+  /* Detail panel: per-phase one-liners, all same small size. */
   .lc-detail {
-    padding: 0.6rem 0.6rem 1rem;
+    padding: 0.5rem 0.5rem 0.9rem;
   }
   .lc-detail[hidden] {
     display: none;
@@ -264,40 +288,43 @@ const stateWord = (s?: string) =>
 
   .lc-phase-list {
     list-style: none;
-    margin: 0 0 0.8rem;
+    margin: 0 0 0.7rem;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.45rem;
+    gap: 0.4rem;
   }
   .lc-phase-item {
     display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-size: var(--text-sm);
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-size: var(--text-xs);
   }
   .lc-phase-dot {
     flex: none;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
+    min-height: 9px;
     border-radius: 2px;
+    margin-top: 0.15rem;
   }
   .lc-phase-label {
     flex: none;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
+    font-size: var(--text-xs);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--text-3);
-    min-width: 5.5rem;
+    min-width: 3.4rem;
   }
   .lc-phase-line {
+    font-size: var(--text-xs);
     color: var(--text-2);
     line-height: 1.4;
   }
 
   .lc-link {
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     color: var(--accent);
     text-decoration: none;
     white-space: nowrap;
@@ -321,8 +348,8 @@ const stateWord = (s?: string) =>
     gap: 0.5rem;
   }
   .key-seg {
-    width: 26px;
-    height: 12px;
+    width: 24px;
+    height: 10px;
     flex: none;
     display: inline-block;
     border-radius: 3px;
@@ -330,16 +357,15 @@ const stateWord = (s?: string) =>
 
   @media (max-width: 600px) {
     .lc-section {
-      --name-w: clamp(72px, 26vw, 120px);
-      --seg-h: 20px;
+      --name-w: clamp(70px, 25vw, 110px);
+      --seg-h: 18px;
       --seg-gap: 2px;
     }
     .lc-th {
-      font-size: 0.58rem;
-      height: 4.8rem;
+      font-size: 0.55rem;
     }
-    .lc-phase-label {
-      min-width: 4.8rem;
+    .lc-name {
+      font-size: 0.78rem;
     }
   }
 
