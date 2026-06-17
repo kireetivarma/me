@@ -15,6 +15,10 @@ metrics:
 decision: 'Put live order status on Always-on-Display instead of richer in-app notifications; a glance beats an unlock for a status users check a dozen times.'
 partners: ['OnePlus', 'Zomato', 'Swiggy']
 art: 'aod-food'
+gallery:
+  - { src: "../../assets/legacy/aod-zomato.png", alt: "Zomato live order status on OnePlus Always-on-Display", caption: "Zomato order status on AOD" }
+  - { src: "../../assets/legacy/aod-swiggy.png", alt: "Swiggy live order status on OnePlus Always-on-Display", caption: "Swiggy order status on AOD" }
+  - { src: "../../assets/legacy/aod-screen.png", alt: "OnePlus Always-on-Display with delivery tracking", caption: "AOD delivery tracking in context" }
 accent: '#e23744'
 relatedPosts:
   - oneplus-partnership-integration-with-zomato-swiggy-for-food-deliveries-on-aod-always-on-display
@@ -39,10 +43,6 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import aodZomato from '../../assets/legacy/aod-zomato.png';
-import aodSwiggy from '../../assets/legacy/aod-swiggy.png';
-import aodScreen from '../../assets/legacy/aod-screen.png';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Lesson from '../../components/Lesson.astro';
 
@@ -99,15 +99,6 @@ In the same period, Zomato reported a 30% increase in orders during peak meal ti
     { label: 'API Integration Design', value: 'Defined data contracts for real-time order status on AOD' },
     { label: 'AOD UX', value: 'Designed minimal, glanceable order tracking UI for AOD constraints' },
     { label: 'Launch Strategy', value: 'Coordinated joint GTM, PR, and OEM marketing campaigns' },
-  ]}
-/>
-
-<ImageCarousel
-  title="The shipped UI"
-  images={[
-    { src: aodZomato, alt: 'Zomato live order status on OnePlus Always-on-Display', caption: 'Zomato order status on AOD' },
-    { src: aodSwiggy, alt: 'Swiggy live order status on OnePlus Always-on-Display', caption: 'Swiggy order status on AOD' },
-    { src: aodScreen, alt: 'OnePlus Always-on-Display with delivery tracking', caption: 'AOD delivery tracking in context' },
   ]}
 />
 

@@ -1,0 +1,73 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'incola-art', size]} aria-hidden="true">
+  <div class="card">
+    <div class="top">
+      <span class="label art-mono">BOND DEPOSIT</span>
+      <span class="amount art-mono">$1,800</span>
+    </div>
+    <div class="split">
+      <i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i>
+    </div>
+    <div class="foot art-mono">4 × $450 · pay later</div>
+  </div>
+</div>
+
+<style>
+  .incola-art { background-image: radial-gradient(ellipse at 72% 30%, rgba(99, 102, 241, 0.16), transparent 60%); }
+  .card {
+    width: 58cqw;
+    background: var(--bg-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 5cqw;
+    padding: 5.5cqw;
+    box-shadow: 0 4cqw 14cqw rgba(0, 0, 0, 0.35);
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4.5cqw;
+  }
+  .label { font-size: 2.6cqw; letter-spacing: 0.2em; color: var(--text-3); }
+  .amount { font-size: 7cqw; font-weight: 700; color: #818cf8; }
+  .split {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2cqw;
+    margin-bottom: 3.5cqw;
+  }
+  .split i {
+    height: 3cqw;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .split i::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 99px;
+    background: #6366f1;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .s1::after { animation: fill 5.5s ease infinite; }
+  .s2::after { animation: fill 5.5s ease infinite 0.5s; }
+  .s3::after { animation: fill 5.5s ease infinite 1s; }
+  .s4::after { animation: fill 5.5s ease infinite 1.5s; }
+  @keyframes fill {
+    0%, 4% { transform: scaleX(0); }
+    16%, 88% { transform: scaleX(1); }
+    100% { transform: scaleX(1); }
+  }
+  .foot {
+    font-size: 2.6cqw;
+    color: var(--text-2);
+    letter-spacing: 0.04em;
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'tymline-art', size]} aria-hidden="true">
+  <div class="rail">
+    <span class="spine"></span>
+    <div class="node n1">
+      <span class="dot"></span>
+      <div class="bars"><i class="lg"></i><i></i></div>
+    </div>
+    <div class="node n2">
+      <span class="dot"></span>
+      <div class="bars"><i class="lg"></i><i></i></div>
+    </div>
+    <div class="node n3">
+      <span class="dot"></span>
+      <div class="bars"><i class="lg"></i><i></i></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tymline-art { background-image: radial-gradient(ellipse at 30% 35%, rgba(245, 158, 11, 0.12), transparent 60%); }
+  .rail {
+    width: 56cqw;
+    position: relative;
+    display: grid;
+    gap: 5cqw;
+    padding-left: 8cqw;
+  }
+  .spine {
+    position: absolute;
+    left: 2cqw;
+    top: 2.5cqw;
+    bottom: 2.5cqw;
+    width: 0.7cqw;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .node {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 3.5cqw;
+    padding: 3.5cqw 4cqw;
+    box-shadow: 0 3cqw 10cqw rgba(0, 0, 0, 0.28);
+  }
+  .dot {
+    position: absolute;
+    left: -7.4cqw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.6cqw;
+    height: 3.6cqw;
+    border-radius: 50%;
+    background: var(--bg-2);
+    border: 0.7cqw solid rgba(255, 255, 255, 0.25);
+  }
+  .bars { display: grid; gap: 2cqw; }
+  .bars i {
+    height: 2cqw;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.18);
+    width: 55%;
+  }
+  .bars i.lg { width: 85%; background: rgba(255, 255, 255, 0.32); }
+  /* The "active" lesson walks down the timeline. */
+  .n1 { animation: lit 6s ease infinite; }
+  .n2 { animation: lit 6s ease infinite 2s; }
+  .n3 { animation: lit 6s ease infinite 4s; }
+  .n1 .dot { animation: litdot 6s ease infinite; }
+  .n2 .dot { animation: litdot 6s ease infinite 2s; }
+  .n3 .dot { animation: litdot 6s ease infinite 4s; }
+  @keyframes lit {
+    0%, 26%, 100% { border-color: rgba(255, 255, 255, 0.12); }
+    6%, 20% { border-color: rgba(245, 158, 11, 0.7); }
+  }
+  @keyframes litdot {
+    0%, 26%, 100% { background: var(--bg-2); border-color: rgba(255, 255, 255, 0.25); box-shadow: none; }
+    6%, 20% { background: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 4cqw rgba(245, 158, 11, 0.8); }
+  }
+</style>

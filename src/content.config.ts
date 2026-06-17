@@ -23,8 +23,9 @@ const cityKey = z.string();
 
 const work = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/work' }),
-  schema: z.object({
-    title: z.string(),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
     /** Outcome-led <title> for search/social; falls back to title. */
     seoTitle: z.string().optional(),
     summary: z.string(),
@@ -45,6 +46,10 @@ const work = defineCollection({
     /** Skills demonstrated, shown as tags on the case page and the /work/ skills overview. */
     skills: z.array(z.string()).default([]),
     art: z.string(),
+    /** Gallery shown as the case-study hero (replaces the component-art when present). */
+    gallery: z
+      .array(z.object({ src: image(), alt: z.string(), caption: z.string().optional() }))
+      .default([]),
     accent: z.string().optional(),
     externalUrl: z.string().url().optional(),
     relatedPosts: z.array(z.string()).default([]),

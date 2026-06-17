@@ -11,7 +11,17 @@ metrics:
   - { value: '9', label: 'Core screens' }
   - { value: 'PWA', label: 'Offline-first' }
   - { value: '5K+', label: 'Community members served' }
-art: 'gradient'
+art: 'swasth'
+gallery:
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/01.png", alt: "Swasth data collection PWA — screen 1", caption: "Beneficiary registration flow" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/02.png", alt: "Swasth data collection PWA — screen 2" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/03.png", alt: "Swasth data collection PWA — screen 3", caption: "Health check data entry" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/04.png", alt: "Swasth data collection PWA — screen 4" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/05.png", alt: "Swasth data collection PWA — screen 5", caption: "Agent dashboard" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/06.png", alt: "Swasth data collection PWA — screen 6" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/07.png", alt: "Swasth data collection PWA — screen 7", caption: "Submission confirmation" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/08.png", alt: "Swasth data collection PWA — screen 8" }
+  - { src: "../../assets/posts/data-collection-pwa-for-a-medical-ngo/09.png", alt: "Swasth data collection PWA — screen 9", caption: "Data review screen" }
 accent: '#10b981'
 relatedPosts:
   - data-collection-pwa-for-a-medical-ngo
@@ -25,16 +35,6 @@ geo:
 
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import img01 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/01.png';
-import img02 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/02.png';
-import img03 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/03.png';
-import img04 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/04.png';
-import img05 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/05.png';
-import img06 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/06.png';
-import img07 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/07.png';
-import img08 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/08.png';
-import img09 from '../../assets/posts/data-collection-pwa-for-a-medical-ngo/09.png';
 
 <Tldr
   items={[
@@ -56,18 +56,3 @@ Swasth is a Mumbai-based NGO running free health camps for low-income families �
 ## Approach
 
 I joined Swasth in the field before designing anything. Watching agents work — the pace, the constraints, the interruptions — revealed that the tool had to be extremely direct: one task per screen, large targets, minimal text. The PWA format kept the app installable on low-end Android devices without a Play Store dependency.
-
-<ImageCarousel
-  title="App screens"
-  images={[
-    { src: img01, alt: 'Swasth data collection PWA — screen 1', caption: 'Beneficiary registration flow' },
-    { src: img02, alt: 'Swasth data collection PWA — screen 2' },
-    { src: img03, alt: 'Swasth data collection PWA — screen 3', caption: 'Health check data entry' },
-    { src: img04, alt: 'Swasth data collection PWA — screen 4' },
-    { src: img05, alt: 'Swasth data collection PWA — screen 5', caption: 'Agent dashboard' },
-    { src: img06, alt: 'Swasth data collection PWA — screen 6' },
-    { src: img07, alt: 'Swasth data collection PWA — screen 7', caption: 'Submission confirmation' },
-    { src: img08, alt: 'Swasth data collection PWA — screen 8' },
-    { src: img09, alt: 'Swasth data collection PWA — screen 9', caption: 'Data review screen' },
-  ]}
-/>

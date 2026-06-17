@@ -15,6 +15,14 @@ metrics:
 decision: 'Rebuilt the card system around resizable, rearrangeable widgets instead of patching fixed layouts; customisation was the top pain in user research.'
 partners: ['OnePlus', 'Spotify', 'Snapchat', 'Netflix', 'Zomato', 'Swiggy', 'Blinkit', 'Grab', 'Uber', 'Ola', 'Rapido']
 art: 'shelf'
+gallery:
+  - { src: "../../assets/legacy/buds-widget.png", alt: "OnePlus Buds control card on Shelf", caption: "Buds control card" }
+  - { src: "../../assets/legacy/weather-widget.png", alt: "Weather card on OnePlus Shelf", caption: "Weather card" }
+  - { src: "../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/05.png", alt: "OnePlus Shelf redesign — screen 5", caption: "Shelf redesign screens" }
+  - { src: "../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/06.png", alt: "OnePlus Shelf redesign — screen 6" }
+  - { src: "../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/07.png", alt: "OnePlus Shelf redesign — screen 7", caption: "Partner card integration" }
+  - { src: "../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/08.png", alt: "OnePlus Shelf redesign — screen 8" }
+  - { src: "../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/09.png", alt: "OnePlus Shelf redesign — screen 9", caption: "Final shipped Shelf UI" }
 externalUrl: 'https://www.oneplus.com'
 relatedPosts:
   - redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations
@@ -36,14 +44,6 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import budsWidget from '../../assets/legacy/buds-widget.png';
-import weatherWidget from '../../assets/legacy/weather-widget.png';
-import shelf05 from '../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/05.png';
-import shelf06 from '../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/06.png';
-import shelf07 from '../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/07.png';
-import shelf08 from '../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/08.png';
-import shelf09 from '../../assets/posts/redesigning-oneplus-shelf-from-the-ground-up-to-improve-ux-enable-partner-integrations/09.png';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
@@ -114,19 +114,6 @@ The release ran through closed and open beta groups with the OnePlus community, 
 ## The bigger picture
 
 Shelf went from a hidden panel to the surface every major partnership shipped on: Spotify's music widget, Zomato and Blinkit's commerce cards, and India's most-covered OEM integrations all run on the architecture this redesign established.
-
-<ImageCarousel
-  title="Card system & shipped UI"
-  images={[
-    { src: budsWidget, alt: 'OnePlus Buds control card on Shelf', caption: 'Buds control card' },
-    { src: weatherWidget, alt: 'Weather card on OnePlus Shelf', caption: 'Weather card' },
-    { src: shelf05, alt: 'OnePlus Shelf redesign — screen 5', caption: 'Shelf redesign screens' },
-    { src: shelf06, alt: 'OnePlus Shelf redesign — screen 6' },
-    { src: shelf07, alt: 'OnePlus Shelf redesign — screen 7', caption: 'Partner card integration' },
-    { src: shelf08, alt: 'OnePlus Shelf redesign — screen 8' },
-    { src: shelf09, alt: 'OnePlus Shelf redesign — screen 9', caption: 'Final shipped Shelf UI' },
-  ]}
-/>
 
 <Lesson>
   <p>

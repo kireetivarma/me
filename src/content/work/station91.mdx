@@ -14,6 +14,11 @@ metrics:
   - { value: 'Practitioner', label: 'Led content' }
 decision: 'Framed research as Job Scenarios (jobs-to-be-done) instead of personas; founders hire content to solve this week’s problem, not to match a demographic.'
 art: 'station91'
+gallery:
+  - { src: "../../assets/legacy/station91.png", alt: "Station91 app screens", caption: "Lesson player and tracks" }
+  - { src: "../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/40.png", alt: "Station91 Play Store ratings and reviews at launch", caption: "5.0★ Play Store reviews at launch" }
+  - { src: "../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/39.jpg", alt: "User chat feedback on Station91 design", caption: "Early user feedback, unprompted" }
+  - { src: "../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/34.png", alt: "User comment on Station91 UI", caption: "Community reception" }
 accent: '#facc15'
 relatedPosts:
   - bite-sized-learning-app-for-startup-founders-station91
@@ -27,11 +32,6 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import s91Mock from '../../assets/legacy/station91.png';
-import s91Reviews from '../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/40.png';
-import s91Chat from '../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/39.jpg';
-import s91Comment from '../../assets/posts/bite-sized-learning-app-for-startup-founders-station91/34.png';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Lesson from '../../components/Lesson.astro';
 
@@ -84,16 +84,6 @@ Four learning tracks of 5–10 minute practitioner lessons. The design process r
     { label: 'Go-to-Market', value: 'Launch playbooks, growth tactics, customer acquisition' },
     { label: 'Fundraising', value: 'Pitch decks, investor relations, and funding mechanics' },
     { label: 'Operations', value: 'Team building, processes, and scaling efficiently' },
-  ]}
-/>
-
-<ImageCarousel
-  title="Artefacts & user feedback"
-  images={[
-    { src: s91Mock, alt: 'Station91 app screens', caption: 'Lesson player and tracks' },
-    { src: s91Reviews, alt: 'Station91 Play Store ratings and reviews at launch', caption: '5.0★ Play Store reviews at launch' },
-    { src: s91Chat, alt: 'User chat feedback on Station91 design', caption: 'Early user feedback, unprompted' },
-    { src: s91Comment, alt: 'User comment on Station91 UI', caption: 'Community reception' },
   ]}
 />
 

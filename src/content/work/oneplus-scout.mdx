@@ -14,6 +14,11 @@ metrics:
   - { value: '4', label: 'New content verticals' }
 decision: 'Bet CTR recovery on rich result templates (e-commerce, streaming previews) rather than ranking tweaks; users choose faster when they can see the content.'
 art: 'scout'
+gallery:
+  - { src: "../../assets/legacy/scout-app.png", alt: "OnePlus Scout search interface overview", caption: "Scout search surface" }
+  - { src: "../../assets/posts/scaling-oneplus-scout-globally-users/01.avif", alt: "OnePlus Scout — global rollout screen 1", caption: "Global search results" }
+  - { src: "../../assets/posts/scaling-oneplus-scout-globally-users/02.avif", alt: "OnePlus Scout — global rollout screen 2", caption: "Rich result templates" }
+  - { src: "../../assets/posts/scaling-oneplus-scout-globally-users/03.avif", alt: "OnePlus Scout — global rollout screen 3", caption: "Scaled to 50+ countries" }
 relatedPosts:
   - scaling-oneplus-scout-globally-users
 coverage:
@@ -34,11 +39,6 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import scoutApp from '../../assets/legacy/scout-app.png';
-import scout01 from '../../assets/posts/scaling-oneplus-scout-globally-users/01.avif';
-import scout02 from '../../assets/posts/scaling-oneplus-scout-globally-users/02.avif';
-import scout03 from '../../assets/posts/scaling-oneplus-scout-globally-users/03.avif';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
@@ -99,16 +99,6 @@ v1.3 unified apps and shortcuts for visibility, added result templates for e-com
     { label: 'Global Localisation', value: 'Multilingual support and region-specific content strategies' },
     { label: 'Content Expansion', value: 'New verticals: apps, settings, contacts, and web results' },
     { label: 'Performance', value: 'Reduced latency and improved result relevance across queries' },
-  ]}
-/>
-
-<ImageCarousel
-  title="Scout in action"
-  images={[
-    { src: scoutApp, alt: 'OnePlus Scout search interface overview', caption: 'Scout search surface' },
-    { src: scout01, alt: 'OnePlus Scout — global rollout screen 1', caption: 'Global search results' },
-    { src: scout02, alt: 'OnePlus Scout — global rollout screen 2', caption: 'Rich result templates' },
-    { src: scout03, alt: 'OnePlus Scout — global rollout screen 3', caption: 'Scaled to 50+ countries' },
   ]}
 />
 

@@ -67,13 +67,14 @@ const expanded = await Promise.all(
     display: flex;
     flex-direction: column;
   }
+  /* Fixed-height viewport keeps every slide equal so shorter images sit
+     vertically centred instead of pinned to the top of a taller neighbour. */
   .ic-zoom {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 240px;
-    max-height: min(65vh, 560px);
+    height: clamp(280px, 56vh, 560px);
     padding: 0;
     border: 0;
     background: var(--bg-2);
@@ -82,7 +83,7 @@ const expanded = await Promise.all(
   }
   .ic-zoom :global(img) {
     max-width: 100%;
-    max-height: min(65vh, 560px);
+    max-height: 100%;
     width: auto;
     height: auto;
     display: block;
@@ -145,23 +146,86 @@ const expanded = await Promise.all(
 </style>
 
 <script>
-  function getLightbox() {
-    let lb = document.getElementById('ag-lightbox');
-    if (lb) return lb;
-    lb = document.createElement('div');
-    lb.id = 'ag-lightbox';
-    lb.setAttribute('role', 'dialog');
-    lb.setAttribute('aria-modal', 'true');
-    lb.style.cssText =
-      'position:fixed;inset:0;z-index:2000;display:none;place-items:center;background:rgba(5,6,9,0.92);backdrop-filter:blur(8px);cursor:zoom-out;padding:4vmin;';
-    lb.innerHTML =
-      '<img style="max-width:100%;max-height:92vh;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.6)" alt="" />' +
-      '<button aria-label="Close" style="position:fixed;top:14px;right:18px;background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer">&#215;</button>';
-    const close = () => { lb!.style.display = 'none'; document.documentElement.style.overflow = ''; };
-    lb.addEventListener('click', close);
-    addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-    document.body.appendChild(lb);
-    return lb;
+  type Shot = { src: string; alt: string };
+
+  interface Lightbox {
+    open(shots: Shot[], index: number): void;
+  }
+
+  function getLightbox(): Lightbox {
+    let lb = document.getElementById('ag-lightbox') as HTMLElement | null;
+    let shots: Shot[] = [];
+    let idx = 0;
+
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.id = 'ag-lightbox';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.style.cssText =
+        'position:fixed;inset:0;z-index:2000;display:none;place-items:center;background:rgba(5,6,9,0.92);backdrop-filter:blur(8px);padding:4vmin;';
+      lb.innerHTML =
+        '<img id="lb-img" style="max-width:100%;max-height:92vh;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.6);cursor:zoom-out" alt="" />' +
+        '<button data-lb="prev" aria-label="Previous image" style="position:fixed;left:14px;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,0.12);color:#fff;font-size:2rem;cursor:pointer;display:grid;place-items:center;line-height:1">&#8249;</button>' +
+        '<button data-lb="next" aria-label="Next image" style="position:fixed;right:14px;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,0.12);color:#fff;font-size:2rem;cursor:pointer;display:grid;place-items:center;line-height:1">&#8250;</button>' +
+        '<span data-lb="count" style="position:fixed;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:0.8rem;color:#cbd5e1"></span>' +
+        '<button data-lb="close" aria-label="Close" style="position:fixed;top:14px;right:18px;background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer">&#215;</button>';
+      document.body.appendChild(lb);
+    }
+
+    const root = lb;
+    const big = root.querySelector<HTMLImageElement>('#lb-img')!;
+    const prevBtn = root.querySelector<HTMLButtonElement>('[data-lb="prev"]')!;
+    const nextBtn = root.querySelector<HTMLButtonElement>('[data-lb="next"]')!;
+    const counter = root.querySelector<HTMLElement>('[data-lb="count"]')!;
+    const closeBtn = root.querySelector<HTMLButtonElement>('[data-lb="close"]')!;
+
+    const render = () => {
+      const s = shots[idx];
+      if (!s) return;
+      big.src = s.src;
+      big.alt = s.alt;
+      const many = shots.length > 1;
+      prevBtn.style.display = nextBtn.style.display = counter.style.display = many ? '' : 'none';
+      counter.textContent = `${idx + 1} / ${shots.length}`;
+    };
+    const go = (n: number) => { idx = (n + shots.length) % shots.length; render(); };
+    const close = () => { root.style.display = 'none'; document.documentElement.style.overflow = ''; };
+
+    // Bind once; guarded by a flag so re-entrant getLightbox() calls don't stack listeners.
+    if (!root.dataset.bound) {
+      root.dataset.bound = 'true';
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); go(idx - 1); });
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); go(idx + 1); });
+      closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+      big.addEventListener('click', close);
+      root.addEventListener('click', (e) => { if (e.target === root) close(); });
+      addEventListener('keydown', (e) => {
+        if (root.style.display === 'none') return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') go(idx - 1);
+        if (e.key === 'ArrowRight') go(idx + 1);
+      });
+      // Swipe between images on touch.
+      let x0: number | null = null;
+      root.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+      root.addEventListener('touchend', (e) => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
+        x0 = null;
+      }, { passive: true });
+    }
+
+    return {
+      open(s: Shot[], i: number) {
+        shots = s;
+        idx = i;
+        render();
+        root.style.display = 'grid';
+        document.documentElement.style.overflow = 'hidden';
+      },
+    };
   }
 
   for (const carousel of document.querySelectorAll<HTMLElement>('[data-img-carousel]')) {
@@ -170,17 +234,22 @@ const expanded = await Promise.all(
     const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('.ic-dot'));
     const prev = carousel.querySelector<HTMLButtonElement>('.ic-prev');
     const next = carousel.querySelector<HTMLButtonElement>('.ic-next');
+    const zooms = Array.from(carousel.querySelectorAll<HTMLButtonElement>('.ic-zoom'));
     if (!track || slides.length < 1) continue;
 
     let current = 0;
+
+    const sync = (i: number) => {
+      dots.forEach((d, j) => d.setAttribute('aria-selected', String(j === i)));
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === slides.length - 1;
+    };
 
     function goTo(i: number) {
       i = Math.max(0, Math.min(i, slides.length - 1));
       current = i;
       track!.scrollTo({ left: i * track!.clientWidth, behavior: 'smooth' });
-      dots.forEach((d, j) => d.setAttribute('aria-selected', String(j === i)));
-      if (prev) prev.disabled = i === 0;
-      if (next) next.disabled = i === slides.length - 1;
+      sync(i);
     }
 
     prev?.addEventListener('click', () => goTo(current - 1));
@@ -192,12 +261,7 @@ const expanded = await Promise.all(
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(() => {
         const i = Math.round(track.scrollLeft / (track.clientWidth || 1));
-        if (i !== current) {
-          current = i;
-          dots.forEach((d, j) => d.setAttribute('aria-selected', String(j === i)));
-          if (prev) prev.disabled = i === 0;
-          if (next) next.disabled = i === slides.length - 1;
-        }
+        if (i !== current) { current = i; sync(i); }
       }, 60);
     });
 
@@ -208,17 +272,13 @@ const expanded = await Promise.all(
 
     goTo(0);
 
-    carousel.querySelectorAll<HTMLButtonElement>('.ic-zoom').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const img = btn.querySelector('img');
-        if (!img) return;
-        const lb = getLightbox();
-        const big = lb.querySelector('img')!;
-        big.src = btn.dataset.full || img.currentSrc || img.src;
-        big.alt = img.alt;
-        lb.style.display = 'grid';
-        document.documentElement.style.overflow = 'hidden';
-      });
+    // The lightbox holds the whole gallery so a tapped image can be swiped through.
+    const shots = zooms.map((btn) => {
+      const img = btn.querySelector('img');
+      return { src: btn.dataset.full || img?.currentSrc || img?.src || '', alt: img?.alt || '' };
+    });
+    zooms.forEach((btn, i) => {
+      btn.addEventListener('click', () => getLightbox().open(shots, i));
     });
   }
 </script>

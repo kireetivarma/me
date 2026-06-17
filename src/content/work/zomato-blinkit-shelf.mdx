@@ -15,6 +15,9 @@ metrics:
 decision: 'Shipped both a compact 2x2 and a stacked swipeable widget rather than one format; order-tracking and quick-reorder are different jobs on the same surface.'
 partners: ['OnePlus', 'Zomato', 'Blinkit', 'Swiggy', 'Grab', 'Uber', 'Ola', 'Rapido']
 art: 'zomato-blinkit'
+gallery:
+  - { src: "../../assets/legacy/shelf-zomato-blinkit.png", alt: "Zomato and Blinkit commerce widgets on OnePlus Shelf", caption: "Zomato & Blinkit on Shelf" }
+  - { src: "../../assets/posts/eternal-never-settles-zomato-blinkit-on-oneplus-shelf/01.webp", alt: "Live Alerts feature for Zomato and Blinkit on OnePlus Shelf", caption: "Live Alerts — shipped feature" }
 accent: '#e23744'
 relatedPosts:
   - eternal-never-settles-zomato-blinkit-on-oneplus-shelf
@@ -40,9 +43,6 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import shelfWidgets from '../../assets/legacy/shelf-zomato-blinkit.png';
-import zbBlog from '../../assets/posts/eternal-never-settles-zomato-blinkit-on-oneplus-shelf/01.webp';
 import Lesson from '../../components/Lesson.astro';
 
 <Tldr
@@ -76,14 +76,6 @@ Food and quick-commerce ordering required multiple app-switching steps, and the 
     { label: 'Dual Partnership', value: 'Simultaneous Zomato and Blinkit integration tracks' },
     { label: 'Live Alerts Strategy', value: 'Opened the OxygenOS live-activities space to more partner categories' },
     { label: 'Cross-Team Orchestration', value: 'India & global BD, R&D, marketing, and partner product/business/dev teams' },
-  ]}
-/>
-
-<ImageCarousel
-  title="The shipped widgets"
-  images={[
-    { src: shelfWidgets, alt: 'Zomato and Blinkit commerce widgets on OnePlus Shelf', caption: 'Zomato & Blinkit on Shelf' },
-    { src: zbBlog, alt: 'Live Alerts feature for Zomato and Blinkit on OnePlus Shelf', caption: 'Live Alerts — shipped feature' },
   ]}
 />
 

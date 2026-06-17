@@ -13,6 +13,9 @@ import CabdostArt from './CabdostArt.astro';
 import ItihasaArt from './ItihasaArt.astro';
 import ProStudioArt from './ProStudioArt.astro';
 import ReportingHubArt from './ReportingHubArt.astro';
+import SwasthArt from './SwasthArt.astro';
+import IncolaArt from './IncolaArt.astro';
+import TymlineArt from './TymlineArt.astro';
 import GradientArt from './GradientArt.astro';
 
 /** Maps work-collection frontmatter `art` keys to components. */
@@ -32,6 +35,9 @@ export const artRegistry: Record<string, (props: { size?: 'thumb' | 'hero' | 'am
   itihasa: ItihasaArt,
   'pro-studio': ProStudioArt,
   'reporting-hub': ReportingHubArt,
+  swasth: SwasthArt,
+  incola: IncolaArt,
+  tymline: TymlineArt,
   gradient: GradientArt,
 };
 

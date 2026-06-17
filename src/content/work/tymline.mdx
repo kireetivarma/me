@@ -13,7 +13,20 @@ metrics:
   - { value: '11', label: 'Design iterations' }
   - { value: '2', label: 'Co-builders' }
 decision: 'Shipped in 3 months with 2 co-builders by treating each design iteration as a full usability cycle, not a visual refresh — each version answered a specific question from the previous round.'
-art: 'gradient'
+art: 'tymline'
+gallery:
+  - { src: "../../assets/legacy/tymline.png", alt: "Tymline product overview", caption: "Product overview" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/01.png", alt: "Tymline early wireframe overview", caption: "Early layout mapping" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/02.webp", alt: "Tymline design iteration 1", caption: "Sign-up flow v1" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/03.webp", alt: "Tymline design iteration 2", caption: "Sign-up flow v2" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/04.webp", alt: "Tymline design iteration 3", caption: "Sign-up flow v3" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/05.webp", alt: "Tymline design iteration 4", caption: "Timeline page v1" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/06.webp", alt: "Tymline design iteration 5", caption: "Post component iterations" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/07.webp", alt: "Tymline design iteration 6", caption: "Timeline header component" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/08.webp", alt: "Tymline design — post card", caption: "Post card final design" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/09.webp", alt: "Tymline design — timeline header", caption: "Timeline header final" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/10.webp", alt: "Tymline design — dashboard", caption: "User dashboard" }
+  - { src: "../../assets/posts/helping-people-build-short-blogs-with-tymline/11.webp", alt: "Tymline design — final screens", caption: "Shipped design language" }
 accent: '#f59e0b'
 relatedPosts:
   - helping-people-build-short-blogs-with-tymline
@@ -25,19 +38,6 @@ geo:
 
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import tymlineLegacy from '../../assets/legacy/tymline.png';
-import img01 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/01.png';
-import img02 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/02.webp';
-import img03 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/03.webp';
-import img04 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/04.webp';
-import img05 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/05.webp';
-import img06 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/06.webp';
-import img07 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/07.webp';
-import img08 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/08.webp';
-import img09 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/09.webp';
-import img10 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/10.webp';
-import img11 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/11.webp';
 
 <Tldr
   items={[
@@ -59,21 +59,3 @@ Organisations, startups, and individuals have no good place to create and share 
 ## Design process
 
 Each of the 11 iterations wasn't a visual refresh — it answered a specific question raised by the previous round. Early rounds focused on information architecture: how do timelines nest? How does a post within a timeline relate to the timeline header? Later rounds tackled visual language: card density, typography legibility at small scale, the distinction between public and private timelines.
-
-<ImageCarousel
-  title="Design iterations"
-  images={[
-    { src: tymlineLegacy, alt: 'Tymline product overview', caption: 'Product overview' },
-    { src: img01, alt: 'Tymline early wireframe overview', caption: 'Early layout mapping' },
-    { src: img02, alt: 'Tymline design iteration 1', caption: 'Sign-up flow v1' },
-    { src: img03, alt: 'Tymline design iteration 2', caption: 'Sign-up flow v2' },
-    { src: img04, alt: 'Tymline design iteration 3', caption: 'Sign-up flow v3' },
-    { src: img05, alt: 'Tymline design iteration 4', caption: 'Timeline page v1' },
-    { src: img06, alt: 'Tymline design iteration 5', caption: 'Post component iterations' },
-    { src: img07, alt: 'Tymline design iteration 6', caption: 'Timeline header component' },
-    { src: img08, alt: 'Tymline design — post card', caption: 'Post card final design' },
-    { src: img09, alt: 'Tymline design — timeline header', caption: 'Timeline header final' },
-    { src: img10, alt: 'Tymline design — dashboard', caption: 'User dashboard' },
-    { src: img11, alt: 'Tymline design — final screens', caption: 'Shipped design language' },
-  ]}
-/>

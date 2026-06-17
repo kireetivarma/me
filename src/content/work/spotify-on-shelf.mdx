@@ -15,6 +15,11 @@ metrics:
 decision: 'Designed the widget to serve non-Spotify users with generic recommendations and a download path, instead of gating it to logged-in users; the widget doubled as acquisition for the partner.'
 partners: ['OnePlus', 'Spotify']
 art: 'spotify-shelf'
+gallery:
+  - { src: "../../assets/legacy/spotify-card-wide.png", alt: "Spotify Made-for-You 4x2 widget on OnePlus Shelf", caption: "4x2: full recommendations" }
+  - { src: "../../assets/legacy/spotify-card-compact.png", alt: "Spotify compact 2x2 widget on OnePlus Shelf", caption: "2x2: quick controls" }
+  - { src: "../../assets/posts/spotify-made-for-you-on-oneplus-shelf-integrating-music-service-on-your-mobile/08.png", alt: "Spotify on OnePlus Shelf — integration detail", caption: "Integration detail" }
+  - { src: "../../assets/posts/spotify-made-for-you-on-oneplus-shelf-integrating-music-service-on-your-mobile/09.png", alt: "Spotify on OnePlus Shelf — in context", caption: "Widget in context" }
 accent: '#1db954'
 relatedPosts:
   - spotify-made-for-you-on-oneplus-shelf-integrating-music-service-on-your-mobile
@@ -35,11 +40,6 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import cardWide from '../../assets/legacy/spotify-card-wide.png';
-import cardCompact from '../../assets/legacy/spotify-card-compact.png';
-import spotify08 from '../../assets/posts/spotify-made-for-you-on-oneplus-shelf-integrating-music-service-on-your-mobile/08.png';
-import spotify09 from '../../assets/posts/spotify-made-for-you-on-oneplus-shelf-integrating-music-service-on-your-mobile/09.png';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Lesson from '../../components/Lesson.astro';
 
@@ -96,16 +96,6 @@ Playback controls, album art and now-playing UI on a card users could place at 2
 />
 
 {/* TODO(Kireeti): widget engagement retention after launch month, and 2x2 vs 4x2 adoption split if shareable. */}
-
-<ImageCarousel
-  title="The shipped widget"
-  images={[
-    { src: cardWide, alt: 'Spotify Made-for-You 4x2 widget on OnePlus Shelf', caption: '4x2: full recommendations' },
-    { src: cardCompact, alt: 'Spotify compact 2x2 widget on OnePlus Shelf', caption: '2x2: quick controls' },
-    { src: spotify08, alt: 'Spotify on OnePlus Shelf — integration detail', caption: 'Integration detail' },
-    { src: spotify09, alt: 'Spotify on OnePlus Shelf — in context', caption: 'Widget in context' },
-  ]}
-/>
 
 <Lesson>
   <p>

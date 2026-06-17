@@ -1,0 +1,101 @@
+---
+interface Props { size?: 'thumb' | 'hero' | 'ambient' }
+const { size = 'thumb' } = Astro.props;
+---
+
+<div class:list={['art', 'swasth-art', size]} aria-hidden="true">
+  <div class="card">
+    <div class="head art-mono">HEALTH SURVEY</div>
+    <svg class="pulse" viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true">
+      <polyline points="0,12 22,12 30,3 38,21 48,12 70,12 78,7 86,17 100,12" />
+    </svg>
+    <div class="rows">
+      <div class="row"><span class="box b1"></span><i></i></div>
+      <div class="row"><span class="box b2"></span><i></i></div>
+      <div class="row"><span class="box b3"></span><i></i></div>
+    </div>
+    <div class="sync art-mono">SYNCED</div>
+  </div>
+</div>
+
+<style>
+  .swasth-art { background-image: radial-gradient(ellipse at 28% 72%, rgba(16, 185, 129, 0.14), transparent 60%); }
+  .card {
+    width: 56cqw;
+    background: var(--bg-2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 5cqw;
+    padding: 5cqw;
+    position: relative;
+    box-shadow: 0 4cqw 14cqw rgba(0, 0, 0, 0.35);
+  }
+  .head { font-size: 2.6cqw; letter-spacing: 0.22em; color: var(--text-3); }
+  .pulse {
+    width: 100%;
+    height: 9cqw;
+    margin: 2.5cqw 0 4cqw;
+  }
+  .pulse polyline {
+    fill: none;
+    stroke: #10b981;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: trace 5s ease-in-out infinite;
+  }
+  @keyframes trace {
+    0% { stroke-dashoffset: 200; }
+    55%, 100% { stroke-dashoffset: 0; }
+  }
+  .rows { display: grid; gap: 3cqw; margin-bottom: 5cqw; }
+  .row { display: flex; align-items: center; gap: 3cqw; }
+  .box {
+    width: 5cqw;
+    height: 5cqw;
+    border-radius: 1.4cqw;
+    border: 0.5cqw solid rgba(16, 185, 129, 0.55);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .box::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 3.4cqw;
+    color: #10b981;
+    opacity: 0;
+  }
+  .box.b1::after { animation: tick 5s steps(1) infinite; }
+  .box.b2::after { animation: tick 5s steps(1) infinite 0.7s; }
+  .box.b3::after { animation: tick 5s steps(1) infinite 1.4s; }
+  @keyframes tick {
+    0%, 8% { opacity: 0; }
+    14%, 100% { opacity: 1; }
+  }
+  .row i {
+    height: 2.2cqw;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.18);
+    flex: 1;
+  }
+  .sync {
+    position: absolute;
+    right: 4cqw;
+    bottom: 4cqw;
+    font-size: 2.4cqw;
+    color: #10b981;
+    border: 0.5cqw solid #10b981;
+    border-radius: 1.5cqw;
+    padding: 0.6cqw 2cqw;
+    opacity: 0;
+    animation: pop 5s ease infinite;
+  }
+  @keyframes pop {
+    0%, 42% { opacity: 0; transform: scale(0.8); }
+    50%, 100% { opacity: 1; transform: scale(1); }
+  }
+</style>

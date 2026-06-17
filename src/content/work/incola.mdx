@@ -11,7 +11,17 @@ metrics:
   - { value: '7', label: 'Onboarding screens' }
   - { value: '3', label: 'Dashboard states' }
   - { value: 'AU', label: 'Market' }
-art: 'gradient'
+art: 'incola'
+gallery:
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/01.png", alt: "Incola app — onboarding screen 1", caption: "Eligibility check" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/02.png", alt: "Incola app — onboarding screen 2", caption: "Identity verification" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/03.png", alt: "Incola app — onboarding screen 3", caption: "Rental details" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/04.png", alt: "Incola app — onboarding screen 4", caption: "Instalment plan selection" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/05.png", alt: "Incola app — onboarding screen 5", caption: "Review & confirm" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/06.png", alt: "Incola app — dashboard state 1", caption: "Active deposit dashboard" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/07.png", alt: "Incola app — dashboard state 2", caption: "Repayment schedule" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/08.png", alt: "Incola app — dashboard state 3", caption: "Completed status" }
+  - { src: "../../assets/posts/designing-a-new-saas-model-for-rentals/09.png", alt: "Incola app — additional screen", caption: "Document upload" }
 accent: '#6366f1'
 relatedPosts:
   - designing-a-new-saas-model-for-rentals
@@ -25,16 +35,6 @@ geo:
 
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
-import img01 from '../../assets/posts/designing-a-new-saas-model-for-rentals/01.png';
-import img02 from '../../assets/posts/designing-a-new-saas-model-for-rentals/02.png';
-import img03 from '../../assets/posts/designing-a-new-saas-model-for-rentals/03.png';
-import img04 from '../../assets/posts/designing-a-new-saas-model-for-rentals/04.png';
-import img05 from '../../assets/posts/designing-a-new-saas-model-for-rentals/05.png';
-import img06 from '../../assets/posts/designing-a-new-saas-model-for-rentals/06.png';
-import img07 from '../../assets/posts/designing-a-new-saas-model-for-rentals/07.png';
-import img08 from '../../assets/posts/designing-a-new-saas-model-for-rentals/08.png';
-import img09 from '../../assets/posts/designing-a-new-saas-model-for-rentals/09.png';
 
 <Tldr
   items={[
@@ -56,18 +56,3 @@ Australian renters face a well-documented problem: security deposits (bonds) oft
 ## Approach
 
 Started with user research on Australian rental anxieties and the regulatory context. Flow mapping established the minimum viable information architecture: what Incola needed to collect, in what order, without overwhelming an already-stressed user. Wireframes iterated through the trust moments — where to show fees, when to ask for documents, how to confirm the deposit was secured.
-
-<ImageCarousel
-  title="UX screens"
-  images={[
-    { src: img01, alt: 'Incola app — onboarding screen 1', caption: 'Eligibility check' },
-    { src: img02, alt: 'Incola app — onboarding screen 2', caption: 'Identity verification' },
-    { src: img03, alt: 'Incola app — onboarding screen 3', caption: 'Rental details' },
-    { src: img04, alt: 'Incola app — onboarding screen 4', caption: 'Instalment plan selection' },
-    { src: img05, alt: 'Incola app — onboarding screen 5', caption: 'Review & confirm' },
-    { src: img06, alt: 'Incola app — dashboard state 1', caption: 'Active deposit dashboard' },
-    { src: img07, alt: 'Incola app — dashboard state 2', caption: 'Repayment schedule' },
-    { src: img08, alt: 'Incola app — dashboard state 3', caption: 'Completed status' },
-    { src: img09, alt: 'Incola app — additional screen', caption: 'Document upload' },
-  ]}
-/>

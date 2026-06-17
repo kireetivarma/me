@@ -5,6 +5,7 @@ import MetricsBand from '../components/MetricsBand.astro';
 import SkillTags from '../components/SkillTags.astro';
 import Announcements from '../components/Announcements.astro';
 import PostCard from '../components/PostCard.astro';
+import ImageCarousel from '../components/ImageCarousel.astro';
 import { resolveArt } from '../components/art/index';
 import { testimonialsFor } from '../data/testimonials';
 import { profile } from '../data/profile';
@@ -29,6 +30,7 @@ const {
   skills,
   metrics,
   art,
+  gallery,
   accent,
   externalUrl,
   relatedPosts,
@@ -36,6 +38,7 @@ const {
   announcements,
 } = entry.data;
 const Art = resolveArt(art);
+const hasGallery = gallery.length > 0;
 const quotes = testimonialsFor(entry.id);
 
 const allPosts = await getCollection('posts', ({ data }) => !data.draft);
@@ -58,7 +61,7 @@ const jsonLd = {
     <header class="cs-header">
       <div class="cs-ambient" aria-hidden="true"><Art size="ambient" /></div>
       <div class="container">
-        <div class="cs-head-grid">
+        <div class:list={['cs-head-grid', { 'no-art': hasGallery }]}>
           <div class="cs-intro">
             <p class="cs-crumb art-mono"><a href="/work/">work</a> / {entry.id}</p>
             <h1 class="cs-title reveal">{title}</h1>
@@ -91,10 +94,21 @@ const jsonLd = {
               )
             }
           </div>
-          <div class="cs-hero-art reveal">
-            <Art size="hero" />
-          </div>
+          {
+            !hasGallery && (
+              <div class="cs-hero-art reveal">
+                <Art size="hero" />
+              </div>
+            )
+          }
         </div>
+        {
+          hasGallery && (
+            <div class="cs-gallery-hero reveal">
+              <ImageCarousel images={gallery} />
+            </div>
+          )
+        }
         <MetricsBand metrics={metrics} />
       </div>
     </header>
@@ -193,6 +207,18 @@ const jsonLd = {
   }
   @media (max-width: 820px) {
     .cs-head-grid { grid-template-columns: 1fr; }
+  }
+  /* When a gallery serves as the hero, the intro is full-width text above it. */
+  .cs-head-grid.no-art {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .cs-gallery-hero {
+    margin-top: 2rem;
+  }
+  /* The carousel sets its own vertical rhythm; drop its default top margin here. */
+  .cs-gallery-hero :global(.ic) {
+    margin: 0;
   }
   .cs-crumb {
     font-size: var(--text-xs);
