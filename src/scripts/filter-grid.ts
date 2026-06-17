@@ -29,11 +29,17 @@ export function initFilterGrids() {
       }
     };
 
+    const scrollToSection = () => {
+      const top = wrap.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    };
+
     for (const pill of pills) {
       pill.addEventListener('click', (e) => {
         e.preventDefault();
         const f = pill.dataset.filter ?? 'all';
         apply(f);
+        scrollToSection();
         const url = new URL(location.href);
         if (f === 'all') url.searchParams.delete('category');
         else url.searchParams.set('category', f);
