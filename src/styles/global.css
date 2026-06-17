@@ -210,12 +210,12 @@ svg {
 }
 
 /* The hidden attribute must always win, even over component display rules
-   (e.g. .project-card { display: flex }) — the category filter relies on it. */
+   (e.g. .project-card { display: flex }): the category filter relies on it. */
 [hidden] {
   display: none !important;
 }
 
-/* Scroll reveal — hidden-by-default only when the reveal script can run
+/* Scroll reveal: hidden-by-default only when the reveal script can run
    (html.js is set inline in <head>), so content never sticks at opacity 0. */
 @media (prefers-reduced-motion: no-preference) {
   .js .reveal {

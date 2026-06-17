@@ -1,9 +1,9 @@
-/* Design tokens — single source of truth for both themes. */
+/* Design tokens: single source of truth for both themes. */
 :root {
   /* Signature accent: OnePlus red, the one brand constant. */
   --red: #f50514;
   --red-dark: #c8102e;
-  /* Per-page accent — case studies override via frontmatter. */
+  /* Per-page accent: case studies override via frontmatter. */
   --accent: var(--red);
 
   --bg: #0c0d11;

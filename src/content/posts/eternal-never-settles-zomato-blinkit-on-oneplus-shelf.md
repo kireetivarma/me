@@ -24,7 +24,7 @@ With the introduction of Zomato and Blinkit widgets, OnePlus underscores its com
 
 Zomato has established itself as a leading food delivery service in India, connecting users to a wide variety of local restaurants. With just a few taps, users can explore menus, read reviews, and place orders for delivery or takeout. In FY24-25, Zomato emerged as the top profitable food delivery player in Indian market.
 
-By embedding Zomato directly into the OnePlus Shelf, users can swiftly find and order their favorite meals from popular local spots. This streamlined access could encourage faster selection & more frequent ordering—something that is particularly appealing given that Zomato reported a 30% increase in orders during peak meal times last year.
+By embedding Zomato directly into the OnePlus Shelf, users can swiftly find and order their favorite meals from popular local spots. This streamlined access could encourage faster selection & more frequent ordering, something that is particularly appealing given that Zomato reported a 30% increase in orders during peak meal times last year.
 
 ### About Blinkit
 
@@ -38,7 +38,7 @@ Now, with Blinkit integrated into the OnePlus Shelf, users can order groceries e
 
 ## How the Integration Works
 
-The new widgets enable OnePlus users in India to interact with Zomato and Blinkit seamlessly. Upon accessing Shelf, users will see two distinct widgets—one for Zomato and one for Blinkit.
+The new widgets enable OnePlus users in India to interact with Zomato and Blinkit seamlessly. Upon accessing Shelf, users will see two distinct widgets: one for Zomato and one for Blinkit.
 
 The Zomato widget shows a curated list of nearby restaurants, making it simple to order from popular restaurants. Similarly, the Blinkit widget lets users browse across items and place orders, all from their accessible Shelf.
 
@@ -50,7 +50,7 @@ This integration saves time and adds convenience to daily routines, catering to 
 
 The introduction of these widgets truly enhances user convenience by allowing individuals to receive personalised recommendations based on their preferred restaurants located nearby. Rather than having to switch between multiple applications, users can effortlessly order food directly from the Shelf, streamlining the entire process and making it more efficient.
 
-Whether users are planning lunch or dealing with late-night cravings, the entire experience becomes streamlined and efficient—something every busy professional can appreciate.
+Whether users are planning lunch or dealing with late-night cravings, the entire experience becomes streamlined and efficient, something every busy professional can appreciate.
 
 ### Enhanced User Experience
 

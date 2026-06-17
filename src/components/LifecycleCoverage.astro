@@ -2,9 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import {
   lifecycle,
-  ERA_LABELS,
   STAGES,
-  STAGE_LABELS,
   STAGE_FULL,
   type LifecycleStage,
 } from '../data/lifecycle.ts';
@@ -16,17 +14,9 @@ const { projects } = Astro.props;
 
 const projectMap = new Map(projects.map((p) => [p.id, p]));
 
-// Group coverage rows by era, in ERA_LABELS order, joining each to its project.
-const eras = Object.keys(ERA_LABELS)
-  .map((era) => ({
-    id: era,
-    label: ERA_LABELS[era],
-    rows: lifecycle
-      .filter((l) => l.era === era)
-      .map((l) => ({ lc: l, project: projectMap.get(l.slug) }))
-      .filter((r): r is { lc: (typeof lifecycle)[number]; project: CollectionEntry<'work'> } => !!r.project),
-  }))
-  .filter((e) => e.rows.length > 0);
+const rows = lifecycle
+  .map((l) => ({ lc: l, project: projectMap.get(l.slug) }))
+  .filter((r): r is { lc: (typeof lifecycle)[number]; project: CollectionEntry<'work'> } => !!r.project);
 
 const stateClass = (s?: string) => (s === 'led' ? 'led' : s === 'co' ? 'co' : s === 'supported' ? 'supported' : 'none');
 const stateWord = (s?: string) =>
@@ -38,20 +28,19 @@ const stateWord = (s?: string) =>
     <p class="section-label reveal">// full-stack product</p>
     <h2 class="section-title reveal">Full Stack Product</h2>
     <p class="section-sub reveal">
-      One product mind across the whole lifecycle — from discovery to ops, mapped over 18 projects and a decade. Tap any
-      project to see the proof.
+      One product mind across the whole lifecycle, from discovery to ops over a decade. Tap any project to see the proof.
     </p>
 
     <div class="lc-wrap reveal">
       <div class="lc-grid" role="table" aria-label="Product lifecycle coverage by project">
-        <!-- Stage header -->
+        <!-- Stage header row -->
         <div class="lc-head" role="row">
           <span class="lc-corner" role="columnheader" aria-label="Project"></span>
           <div class="lc-stages">
             {
               STAGES.map((s: LifecycleStage) => (
-                <span class="lc-th art-mono" role="columnheader" title={STAGE_FULL[s]}>
-                  {STAGE_LABELS[s]}
+                <span class="lc-th art-mono" role="columnheader" aria-label={STAGE_FULL[s]}>
+                  {STAGE_FULL[s]}
                 </span>
               ))
             }
@@ -59,51 +48,41 @@ const stateWord = (s?: string) =>
         </div>
 
         {
-          eras.map((era) => (
-            <>
-              <div class="lc-era art-mono" role="rowgroup">
-                <span>{era.label}</span>
+          rows.map(({ lc, project }) => {
+            const detailId = `lc-d-${lc.slug}`;
+            return (
+              <div class="lc-item">
+                <button
+                  class="lc-row"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={detailId}
+                >
+                  <span class="lc-name">{project.data.title}</span>
+                  <span class="lc-track" role="img" aria-label={STAGES.map((s) => `${STAGE_FULL[s]}: ${stateWord(lc.stages[s])}`).join(', ')}>
+                    {STAGES.map((s: LifecycleStage) => (
+                      <span class={`seg ${stateClass(lc.stages[s])}`} />
+                    ))}
+                  </span>
+                  <span class="lc-chev" aria-hidden="true">+</span>
+                </button>
+                <div class="lc-detail" id={detailId} hidden>
+                  <ul class="lc-phase-list">
+                    {STAGES.filter((s) => lc.stages[s] && lc.phaseLines[s]).map((s) => (
+                      <li class="lc-phase-item">
+                        <span class={`lc-phase-dot seg ${stateClass(lc.stages[s])}`} aria-hidden="true" />
+                        <span class="lc-phase-label">{STAGE_FULL[s]}</span>
+                        <span class="lc-phase-line">{lc.phaseLines[s]}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={`/work/${lc.slug}/`} class="lc-link">
+                    View project →
+                  </a>
+                </div>
               </div>
-              {era.rows.map(({ lc, project }) => {
-                const detailId = `lc-d-${lc.slug}`;
-                const metrics = project.data.metrics.slice(0, 3);
-                return (
-                  <div class="lc-item">
-                    <button
-                      class="lc-row"
-                      type="button"
-                      aria-expanded="false"
-                      aria-controls={detailId}
-                    >
-                      <span class="lc-name">{project.data.title}</span>
-                      <span class="lc-track" role="img" aria-label={STAGES.map((s) => `${STAGE_FULL[s]}: ${stateWord(lc.stages[s])}`).join(', ')}>
-                        {STAGES.map((s: LifecycleStage) => (
-                          <span class={`seg ${stateClass(lc.stages[s])}`} />
-                        ))}
-                      </span>
-                      <span class="lc-chev" aria-hidden="true">+</span>
-                    </button>
-                    <div class="lc-detail" id={detailId} hidden>
-                      <p class="lc-tag">{project.data.tagline}</p>
-                      {metrics.length > 0 && (
-                        <div class="lc-metrics">
-                          {metrics.map((m) => (
-                            <span class="lc-metric">
-                              <b>{m.value}</b>
-                              <i>{m.label}</i>
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      <a href={`/work/${lc.slug}/`} class="lc-link">
-                        View project →
-                      </a>
-                    </div>
-                  </div>
-                );
-              })}
-            </>
-          ))
+            );
+          })
         }
       </div>
     </div>
@@ -120,71 +99,66 @@ const stateWord = (s?: string) =>
 
 <style>
   .lc-section {
-    --name-w: clamp(98px, 22vw, 154px);
-    --seg-h: 26px;
+    --name-w: clamp(84px, 22vw, 150px);
+    --seg-h: 24px;
+    --seg-gap: 3px;
   }
 
-  /* Horizontal scroll container for narrow screens. */
   .lc-wrap {
     margin-top: 1.8rem;
     overflow-x: auto;
     overflow-y: hidden;
-    /* Fade the right edge as a scroll affordance. */
     -webkit-overflow-scrolling: touch;
   }
   .lc-grid {
-    min-width: 660px;
+    min-width: 580px;
   }
 
-  /* Header + rows share the same two-track layout so cells line up. */
+  /* Header + rows share the same two-track layout. */
   .lc-head,
   .lc-row {
     display: grid;
     grid-template-columns: var(--name-w) 1fr;
-    align-items: center;
+    align-items: end;
   }
 
+  /* Sticky header: stays below the fixed 60px nav while scrolling vertically. */
   .lc-head {
-    padding-bottom: 0.5rem;
+    position: sticky;
+    top: 60px;
+    z-index: 3;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
   }
+
   .lc-corner {
     position: sticky;
     left: 0;
     background: var(--bg);
-    z-index: 2;
+    z-index: 4;
   }
+
   .lc-stages {
     display: flex;
-    gap: 3px;
+    gap: var(--seg-gap);
     padding-left: 0.6rem;
+    align-items: flex-end;
   }
   .lc-th {
     flex: 1;
     text-align: center;
     font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--text-3);
-    white-space: nowrap;
-  }
-
-  .lc-era {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding-bottom: 0.3rem;
+    height: 5.5rem;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    margin: 1.1rem 0 0.5rem;
-    font-size: var(--text-xs);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    position: sticky;
-    left: 0;
-  }
-  .lc-era::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+    justify-content: flex-start;
+    min-width: 0;
   }
 
   .lc-item {
@@ -198,13 +172,14 @@ const stateWord = (s?: string) =>
     width: 100%;
     background: none;
     border: 0;
-    padding: 0.5rem 0;
+    padding: 0.45rem 0;
     cursor: pointer;
     text-align: left;
     font: inherit;
     color: inherit;
     grid-template-columns: var(--name-w) 1fr auto;
     gap: 0;
+    align-items: center;
     transition: background 0.2s;
   }
   .lc-row:hover .lc-name,
@@ -217,49 +192,50 @@ const stateWord = (s?: string) =>
     border-radius: var(--radius-sm);
   }
 
+  /* Sticky name column: stays pinned during horizontal scroll. */
   .lc-name {
     position: sticky;
     left: 0;
     background: var(--bg);
-    z-index: 1;
-    padding-right: 0.6rem;
+    z-index: 2;
+    padding-right: 0.55rem;
+    border-right: 1px solid var(--border);
     font-family: var(--font-display);
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--text-2);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.25;
     transition: color 0.2s;
   }
 
-  /* The track: one continuous bar, internally divided into 8 stage segments. */
+  /* Track: one bar with 8 stage segments. */
   .lc-track {
     display: flex;
-    gap: 3px;
+    gap: var(--seg-gap);
     height: var(--seg-h);
-    padding: 0 0.6rem 0 0.6rem;
+    padding: 0 0.6rem;
+    align-items: center;
   }
   .seg {
     flex: 1;
+    height: 100%;
     border-radius: 3px;
     min-width: 8px;
   }
-  /* Led — solid accent with a soft vertical sheen. */
+
+  /* 3-step opaque intensity ramp. */
   .seg.led {
     background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 88%, #fff 12%), var(--accent));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
   }
-  /* Co-led — dashed accent outline, hollow. */
   .seg.co {
-    background: color-mix(in srgb, var(--accent) 9%, transparent);
-    border: 1.5px dashed color-mix(in srgb, var(--accent) 58%, transparent);
+    background: color-mix(in srgb, var(--accent) 55%, var(--bg-2));
   }
-  /* Supported — faint flat fill, no border. */
   .seg.supported {
-    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    background: color-mix(in srgb, var(--accent) 22%, var(--bg-2));
   }
-  /* Not involved — empty groove. */
   .seg.none {
     background: var(--bg-2);
     border: 1px solid var(--border);
@@ -278,44 +254,48 @@ const stateWord = (s?: string) =>
     color: var(--accent);
   }
 
-  /* Detail panel revealed on tap. */
+  /* Detail panel: per-phase one-liners. */
   .lc-detail {
-    padding: 0.2rem 0.6rem 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.7rem 1.4rem;
+    padding: 0.6rem 0.6rem 1rem;
   }
   .lc-detail[hidden] {
     display: none;
   }
-  .lc-tag {
-    flex-basis: 100%;
-    margin: 0;
-    font-size: var(--text-sm);
-    color: var(--text-2);
-    max-width: 60ch;
-  }
-  .lc-metrics {
+
+  .lc-phase-list {
+    list-style: none;
+    margin: 0 0 0.8rem;
+    padding: 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.2rem;
+    flex-direction: column;
+    gap: 0.45rem;
   }
-  .lc-metric {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.35rem;
+  .lc-phase-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: var(--text-sm);
   }
-  .lc-metric b {
-    font-family: var(--font-display);
-    font-size: var(--text-base);
-    color: var(--text-1);
+  .lc-phase-dot {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
   }
-  .lc-metric i {
-    font-style: normal;
-    font-size: var(--text-xs);
+  .lc-phase-label {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--text-3);
+    min-width: 5.5rem;
   }
+  .lc-phase-line {
+    color: var(--text-2);
+    line-height: 1.4;
+  }
+
   .lc-link {
     font-size: var(--text-sm);
     color: var(--accent);
@@ -342,14 +322,24 @@ const stateWord = (s?: string) =>
   }
   .key-seg {
     width: 26px;
-    height: 14px;
+    height: 12px;
     flex: none;
     display: inline-block;
+    border-radius: 3px;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 600px) {
+    .lc-section {
+      --name-w: clamp(72px, 26vw, 120px);
+      --seg-h: 20px;
+      --seg-gap: 2px;
+    }
     .lc-th {
-      font-size: 0.56rem;
+      font-size: 0.58rem;
+      height: 4.8rem;
+    }
+    .lc-phase-label {
+      min-width: 4.8rem;
     }
   }
 

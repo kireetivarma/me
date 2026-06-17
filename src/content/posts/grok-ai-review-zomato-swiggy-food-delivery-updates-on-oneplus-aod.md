@@ -16,7 +16,7 @@ The integration of Zomato and Swiggy into the Always-On Display (AOD) feature in
 
 ### Introduction of the Feature
 
-OxygenOS 13, based on Android 13, was officially announced by OnePlus on August 3, 2022, with a focus on a refreshed "Aquamorphic" design, performance improvements, and enhanced customization options. Among the standout features was the revamped AOD, which had been a point of praise in previous OxygenOS versions for its aesthetic and functional versatility. With OxygenOS 13, OnePlus expanded the AOD’s capabilities by integrating contextual information, including partnerships with third-party apps like Spotify, Zomato, and Swiggy. The Zomato and Swiggy integration allowed users in India to **track food delivery statuses—such as order confirmation, preparation, pickup, and estimated arrival time—directly on the AOD and lock screen**.
+OxygenOS 13, based on Android 13, was officially announced by OnePlus on August 3, 2022, with a focus on a refreshed "Aquamorphic" design, performance improvements, and enhanced customization options. Among the standout features was the revamped AOD, which had been a point of praise in previous OxygenOS versions for its aesthetic and functional versatility. With OxygenOS 13, OnePlus expanded the AOD’s capabilities by integrating contextual information, including partnerships with third-party apps like Spotify, Zomato, and Swiggy. The Zomato and Swiggy integration allowed users in India to **track food delivery statuses (order confirmation, preparation, pickup, and estimated arrival time) directly on the AOD and lock screen**.
 
 This feature was initially highlighted during the OxygenOS 13 announcement, with OnePlus noting that it was exclusive to India due to the regional popularity of these apps. However, it wasn’t fully available in the early beta builds released in August 2022 for devices like the OnePlus 10 Pro. The integration required app authorization and specific system settings to function, indicating that its rollout was phased and dependent on updates to both OxygenOS and the respective apps.
 
@@ -24,7 +24,7 @@ This feature was initially highlighted during the OxygenOS 13 announcement, with
 
 The implementation itself was straightforward: users needed to enable the "Contextual Info" or "Food Delivery AOD" option in the AOD settings and grant necessary permissions to Zomato and Swiggy. Once set up, the AOD would display a minimalistic widget-like interface showing delivery progress. This worked best when the apps were actively tracking an order, pulling data such as the delivery partner’s location or ETA directly onto the screen.
 
-Users who tested the feature appreciated its simplicity and the fact that it reduced the need to constantly unlock their phones—a small but meaningful convenience. For example, a user on X might have posted about ordering from Zomato, locking their phone, and still staying updated via the AOD, calling it "**a game-changer for lazy weekends**."
+Users who tested the feature appreciated its simplicity and the fact that it reduced the need to constantly unlock their phones, a small but meaningful convenience. For example, a user on X might have posted about ordering from Zomato, locking their phone, and still staying updated via the AOD, calling it "**a game-changer for lazy weekends**."
 
 ### User Reception
 
@@ -54,7 +54,7 @@ On platforms like the OnePlus Community and X, reactions ranged from enthusiasm 
 
 The Zomato and Swiggy AOD integration set a precedent for OxygenOS’s future direction, emphasizing localized features and third-party app partnerships. It influenced subsequent updates, such as OxygenOS 14 (released in 2023), which introduced additional AOD enhancements like the Carbon Footprint AOD, showing OnePlus’s commitment to evolving this feature. For Indian users, it reinforced OnePlus’s market focus, contributing to its strong presence in the region.
 
-The Zomato and Swiggy AOD integration settled into a "**nice-to-have**" feature. Users who relied on it regularly—particularly in India—continued to appreciate its convenience, adding to the OxygenOS experience.
+The Zomato and Swiggy AOD integration settled into a "**nice-to-have**" feature. Users who relied on it regularly, particularly in India, continued to appreciate its convenience, adding to the OxygenOS experience.
 
 ### Conclusion
 

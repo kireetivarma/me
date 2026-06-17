@@ -8,7 +8,7 @@ heroImageAlt: "An illustration of product partnerships on mobile"
 wixUrl: "https://kireetivarma.wixsite.com/kvportfolio/post/software-product-partnerships-and-their-large-scale-impact"
 ---
 
-In the ever-evolving digital landscape, **software product partnerships** have emerged as a powerful mechanism for driving innovation, enhancing user experiences, and reshaping market dynamics on a large scale. These collaborations—where companies integrate their technologies or services—create ecosystems that benefit users, businesses, and entire industries. From mobile devices to B2B platforms and beyond, strategic partnerships are redefining how we interact with technology daily.
+In the ever-evolving digital landscape, **software product partnerships** have emerged as a powerful mechanism for driving innovation, enhancing user experiences, and reshaping market dynamics on a large scale. These collaborations, where companies integrate their technologies or services, create ecosystems that benefit users, businesses, and entire industries. From mobile devices to B2B platforms and beyond, strategic partnerships are redefining how we interact with technology daily.
 
 *An illustration of product partnerships on mobile*
 
@@ -22,7 +22,7 @@ OnePlus, a prominent smartphone brand, exemplifies how software partnerships can
 
 ### Food delivery status on Always-On Display (AOD)
 
-OnePlus devices now feature real-time food delivery updates from **Zomato** and **Swiggy** directly on the **Always-On Display (AOD)**. Users can see whether their order is being prepared, out for delivery, or has arrived—all without unlocking their phone.
+OnePlus devices now feature real-time food delivery updates from **Zomato** and **Swiggy** directly on the **Always-On Display (AOD)**. Users can see whether their order is being prepared, out for delivery, or has arrived, all without unlocking their phone.
 
 **Large-Scale Impact**: This integration enhances convenience by reducing the steps needed to track an order. For millions of users in India, where food delivery apps are ubiquitous, this feature transforms the smartphone into a proactive assistant, subtly shifting how people engage with both their devices and these services.
 
@@ -66,9 +66,9 @@ A recent and innovative collaboration in India involves **Swiggy**, a food deliv
 
 ## Designing for Different Perspectives: Jared Spool’s Insights
 
-UX expert **Jared Spool** emphasizes the importance of **designing for different perspectives** by “zooming out” to see the bigger picture of user needs. Rather than focusing solely on immediate problems, Spool advocates considering the broader context—different user scenarios, lifestyles, and challenges—to create more inclusive and effective solutions.
+UX expert **Jared Spool** emphasizes the importance of **designing for different perspectives** by “zooming out” to see the bigger picture of user needs. Rather than focusing solely on immediate problems, Spool advocates considering the broader context: different user scenarios, lifestyles, and challenges, to create more inclusive and effective solutions.
 
-**Applied to Partnerships**: Take OnePlus’s AOD food delivery updates. By zooming out, designers recognized that users might be multitasking—watching videos, working, or socializing—while awaiting their food. Displaying updates on the AOD ensures minimal disruption, catering to diverse user contexts.
+**Applied to Partnerships**: Take OnePlus’s AOD food delivery updates. By zooming out, designers recognized that users might be multitasking, watching videos, working, or socializing, while awaiting their food. Displaying updates on the AOD ensures minimal disruption, catering to diverse user contexts.
 
 **Broader Design Implications**: This approach fosters accessibility and usability. For instance, users with limited dexterity or those in busy environments benefit from glanceable updates, making the feature valuable to a wider audience.
 
@@ -76,7 +76,7 @@ Spool’s philosophy underscores that successful partnerships hinge on design th
 
 ## Good Design Influences User Habits
 
-Thoughtful design in software partnerships doesn’t just solve problems—it shapes user behavior. The AOD food delivery integration is one example:
+Thoughtful design in software partnerships doesn’t just solve problems: it shapes user behavior. The AOD food delivery integration is one example:
 
 **Habit Formation**: Users now habitually glance at their AOD to check food delivery status, bypassing the need to unlock their phone or open an app. What was once a multi-step process is now a single, intuitive action.
 

@@ -17,7 +17,7 @@
   isolation: isolate;
   background: var(--bg-2);
 
-  /* Glass-effect palette — dark defaults (white-on-dark): */
+  /* Glass-effect palette: dark defaults (white-on-dark): */
   --art-fill:     rgba(255, 255, 255, 0.06);   /* subtle surface / panel bg */
   --art-stroke:   rgba(255, 255, 255, 0.12);   /* borders / outlines */
   --art-line-dim: rgba(255, 255, 255, 0.18);   /* dim skeleton bars */
@@ -43,7 +43,7 @@
   animation-play-state: running;
 }
 
-/* Widget card — the OnePlus Shelf visual primitive */
+/* Widget card: the OnePlus Shelf visual primitive */
 .art-widget {
   background: var(--art-fill);
   backdrop-filter: blur(8px);

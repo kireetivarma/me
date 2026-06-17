@@ -8,7 +8,7 @@ heroImageAlt: "Cofounding an NLiDB SaaS Product, Imux"
 wixUrl: "https://kireetivarma.wixsite.com/kvportfolio/post/cofounding-an-nlidb-saas-product-imux"
 ---
 
-When I co-founded Imux, our mission was crystal clear: we wanted to help managers and executives easily query their company databases using simple, clear English. This idea grew from a common problem in many organizations—the heavy reliance on complicated SQL queries, which often required data analysts for support. Throughout this journey, I learned an important lesson: technology should make our jobs easier, not create more obstacles.
+When I co-founded Imux, our mission was crystal clear: we wanted to help managers and executives easily query their company databases using simple, clear English. This idea grew from a common problem in many organizations: the heavy reliance on complicated SQL queries, which often required data analysts for support. Throughout this journey, I learned an important lesson: technology should make our jobs easier, not create more obstacles.
 
 In my role as product and design lead, I threw myself into the creative process. We brainstormed numerous ideas and conducted in-depth qualitative research to pinpoint our target users’ needs. After thoroughly analyzing the competitive landscape, it became evident that there was a significant gap in the market for user-friendly data querying tools. Traditional data visualization products often prioritized complex insights over usability for everyday users. This gap presented us with a unique opportunity.
 

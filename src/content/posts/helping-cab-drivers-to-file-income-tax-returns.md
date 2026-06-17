@@ -48,7 +48,7 @@ In the upcoming phases of design and development, more problems will be solved i
 
 While we are focussed on scaling up Cab Dost’s efficiency, our interests stay with all the stakeholders to solve problems for everybody who is involved.
 
-> I could apply for filing returns in less than 3 minutes. This is much faster and easier than coming to an office.— An Ola driver from Bengaluru.
+> I could apply for filing returns in less than 3 minutes. This is much faster and easier than coming to an office. An Ola driver from Bengaluru.
 
 We had many such drivers who were happy to file IT Returns, online!
 
