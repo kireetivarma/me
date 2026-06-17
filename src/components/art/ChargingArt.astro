@@ -1,73 +1,106 @@
 ---
+import { Image } from 'astro:assets';
+import stationMockup from '../../assets/work/ncs/station-mockup.png';
 interface Props { size?: 'thumb' | 'hero' | 'ambient' }
 const { size = 'thumb' } = Astro.props;
 ---
 
 <div class:list={['art', 'charging-art', size]} aria-hidden="true">
   <div class="scene">
-    <div class="map-bg">
-      <span class="pin p1">📍</span>
-      <span class="pin p2">📍</span>
-      <span class="ring"></span>
-    </div>
-    <div class="art-widget chip">
-      <span class="bolt">⚡</span>
-      <div>
-        <div class="line lg"></div>
-        <div class="line"></div>
-      </div>
-      <span class="dist art-mono">120m</span>
+    <div class="stage">
+      <Image class="illo" src={stationMockup} alt="" widths={[520, 860]} sizes="(max-width: 700px) 520px, 860px" />
+      <!-- Steps walked from the phone toward the station, lighting up in sequence -->
+      <span class="step s1"></span>
+      <span class="step s2"></span>
+      <span class="step s3"></span>
+      <span class="step s4"></span>
+      <!-- Charge pulse at the station once the walk completes -->
+      <span class="charge"></span>
+      <!-- Live step counter, the feature's signature -->
+      <span class="dist art-mono"><b></b></span>
     </div>
   </div>
 </div>
 
 <style>
-  .charging-art { background-image: radial-gradient(ellipse at 70% 20%, rgba(16, 185, 129, 0.12), transparent 60%); }
-  .scene { width: 70cqw; position: relative; }
-  .map-bg {
-    height: 30cqw;
-    border-radius: 5cqw;
-    background:
-      linear-gradient(var(--art-fill) 1px, transparent 1px),
-      linear-gradient(90deg, var(--art-fill) 1px, transparent 1px);
-    background-size: 10cqw 10cqw;
-    border: 1px solid var(--art-stroke);
-    position: relative;
-    overflow: hidden;
+  .charging-art { background-image: radial-gradient(ellipse at 72% 22%, rgba(16, 185, 129, 0.14), transparent 62%); }
+  .scene {
+    width: 86cqw;
+    background: #eceef3;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 4cqw;
+    padding: 3.5cqw;
+    box-shadow: 0 5cqw 16cqw rgba(0, 0, 0, 0.32);
   }
-  .pin { position: absolute; font-size: 5cqw; }
-  .p1 { top: 18%; left: 24%; animation: drop 5s ease infinite; }
-  .p2 { top: 45%; left: 64%; animation: drop 5s ease 0.6s infinite; }
-  .ring {
+  /* Aspect matches the illustration so percentage-positioned overlays land precisely. */
+  .stage {
+    position: relative;
+    aspect-ratio: 4320 / 2520;
+  }
+  .illo { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+  .step {
     position: absolute;
-    top: 52%;
-    left: 67%;
-    width: 4cqw;
-    height: 4cqw;
+    width: 2.6cqw;
+    height: 2.6cqw;
     border-radius: 50%;
-    border: 0.6cqw solid #10b981;
-    animation: pulse 2.4s ease-out infinite;
+    background: #10b981;
+    top: 58%;
+    opacity: 0;
+    box-shadow: 0 0 2.4cqw rgba(16, 185, 129, 0.7);
   }
-  .chip {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 4cqw;
-    align-items: center;
-    margin-top: -6cqw;
-    position: relative;
-    width: 85%;
-    margin-inline: auto;
+  .s1 { left: 30%; animation: step 5.5s ease infinite 0.2s; }
+  .s2 { left: 35%; animation: step 5.5s ease infinite 0.7s; }
+  .s3 { left: 40%; animation: step 5.5s ease infinite 1.2s; }
+  .s4 { left: 45%; animation: step 5.5s ease infinite 1.7s; }
+  @keyframes step {
+    0%, 2% { opacity: 0; transform: scale(0.4); }
+    10% { opacity: 1; transform: scale(1); }
+    62% { opacity: 1; transform: scale(1); }
+    72%, 100% { opacity: 0; transform: scale(0.4); }
   }
-  .bolt { font-size: 6cqw; }
-  .dist { font-size: 4cqw; color: #10b981; }
-  .line { height: 2.2cqw; width: 55%; border-radius: 99px; background: var(--art-line-dim); }
-  .line.lg { width: 85%; background: var(--art-line-hi); margin-bottom: 1.8cqw; }
-  @keyframes drop {
-    0%, 8% { opacity: 0; transform: translateY(-60%); }
-    18%, 100% { opacity: 1; transform: none; }
+
+  .charge {
+    position: absolute;
+    left: 61%;
+    top: 40%;
+    width: 6cqw;
+    height: 6cqw;
+    border-radius: 50%;
+    border: 0.7cqw solid #10b981;
+    opacity: 0;
+    animation: charge 5.5s ease-out infinite;
   }
-  @keyframes pulse {
-    0% { transform: scale(0.5); opacity: 1; }
-    100% { transform: scale(2.4); opacity: 0; }
+  @keyframes charge {
+    0%, 62% { opacity: 0; transform: scale(0.5); }
+    66% { opacity: 1; transform: scale(0.7); }
+    100% { opacity: 0; transform: scale(2.6); }
+  }
+
+  .dist {
+    position: absolute;
+    left: 50%;
+    top: 2%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 3cqw;
+    color: #047857;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 99px;
+    padding: 1cqw 2.6cqw;
+    box-shadow: 0 1.5cqw 5cqw rgba(0, 0, 0, 0.12);
+  }
+  .dist b::before {
+    content: '142 steps';
+    font-weight: 600;
+    animation: count 5.5s steps(1) infinite;
+  }
+  @keyframes count {
+    0% { content: '142 steps'; }
+    18% { content: '96 steps'; }
+    36% { content: '54 steps'; }
+    54% { content: '18 steps'; }
+    66%, 100% { content: 'Arrived ✓'; }
   }
 </style>
