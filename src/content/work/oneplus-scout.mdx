@@ -34,8 +34,11 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import ImageCarousel from '../../components/ImageCarousel.astro';
 import scoutApp from '../../assets/legacy/scout-app.png';
+import scout01 from '../../assets/posts/scaling-oneplus-scout-globally-users/01.avif';
+import scout02 from '../../assets/posts/scaling-oneplus-scout-globally-users/02.avif';
+import scout03 from '../../assets/posts/scaling-oneplus-scout-globally-users/03.avif';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
@@ -99,9 +102,14 @@ v1.3 unified apps and shortcuts for visibility, added result templates for e-com
   ]}
 />
 
-<ArtefactGallery
-  title="Artefacts"
-  items={[{ src: scoutApp, alt: 'OnePlus Scout search interface', caption: 'Scout search surface' }]}
+<ImageCarousel
+  title="Scout in action"
+  images={[
+    { src: scoutApp, alt: 'OnePlus Scout search interface overview', caption: 'Scout search surface' },
+    { src: scout01, alt: 'OnePlus Scout — global rollout screen 1', caption: 'Global search results' },
+    { src: scout02, alt: 'OnePlus Scout — global rollout screen 2', caption: 'Rich result templates' },
+    { src: scout03, alt: 'OnePlus Scout — global rollout screen 3', caption: 'Scaled to 50+ countries' },
+  ]}
 />
 
 <Lesson>

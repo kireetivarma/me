@@ -1,0 +1,224 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title?: string;
+  images: { src: ImageMetadata; alt: string; caption?: string }[];
+}
+const { title, images } = Astro.props;
+
+const expanded = await Promise.all(
+  images.map((img) => getImage({ src: img.src, width: Math.min(img.src.width, 1800) }))
+);
+---
+
+<div class="ic" data-img-carousel>
+  {title && <h3 class="ic-title">{title}</h3>}
+  <div class="ic-wrap">
+    <div class="ic-track" tabindex="0" role="region" aria-label="Image gallery">
+      {images.map((img, i) => (
+        <div class="ic-slide">
+          <button class="ic-zoom" type="button" aria-label={`View full size: ${img.alt}`} data-full={expanded[i].src}>
+            <Image src={img.src} alt={img.alt} width={900} loading={i === 0 ? 'eager' : 'lazy'} />
+          </button>
+          {img.caption && <p class="ic-caption">{img.caption}</p>}
+        </div>
+      ))}
+    </div>
+    {images.length > 1 && (
+      <>
+        <button class="ic-arrow ic-prev" type="button" aria-label="Previous image">&#8249;</button>
+        <button class="ic-arrow ic-next" type="button" aria-label="Next image">&#8250;</button>
+      </>
+    )}
+  </div>
+  {images.length > 1 && (
+    <div class="ic-dots">
+      {images.map((_, i) => (
+        <button class="ic-dot" type="button" aria-label={`Image ${i + 1}`} aria-selected={i === 0 ? 'true' : 'false'} data-idx={String(i)} />
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .ic { margin: 2.5rem 0; }
+  .ic-title { margin-bottom: 1rem; }
+  .ic-wrap {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+  }
+  .ic-track {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    outline: none;
+  }
+  .ic-track::-webkit-scrollbar { display: none; }
+  .ic-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+  }
+  .ic-zoom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 240px;
+    max-height: min(65vh, 560px);
+    padding: 0;
+    border: 0;
+    background: var(--bg-2);
+    cursor: zoom-in;
+    overflow: hidden;
+  }
+  .ic-zoom :global(img) {
+    max-width: 100%;
+    max-height: min(65vh, 560px);
+    width: auto;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+  .ic-caption {
+    font-size: var(--text-xs);
+    color: var(--text-3);
+    padding: 0.5rem 0.8rem;
+    text-align: center;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+  }
+  .ic-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(12, 13, 17, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-1);
+    font-size: 1.5rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: opacity 0.2s, background 0.2s;
+    z-index: 2;
+    line-height: 1;
+    padding: 0;
+  }
+  .ic-prev { left: 0.6rem; }
+  .ic-next { right: 0.6rem; }
+  .ic-arrow:hover { background: rgba(12, 13, 17, 0.92); }
+  .ic-arrow:disabled { opacity: 0.2; pointer-events: none; }
+  .ic-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .ic-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--border-hover);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    padding: 0;
+  }
+  .ic-dot[aria-selected='true'] {
+    background: var(--accent);
+    transform: scale(1.35);
+  }
+</style>
+
+<script>
+  function getLightbox() {
+    let lb = document.getElementById('ag-lightbox');
+    if (lb) return lb;
+    lb = document.createElement('div');
+    lb.id = 'ag-lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.style.cssText =
+      'position:fixed;inset:0;z-index:2000;display:none;place-items:center;background:rgba(5,6,9,0.92);backdrop-filter:blur(8px);cursor:zoom-out;padding:4vmin;';
+    lb.innerHTML =
+      '<img style="max-width:100%;max-height:92vh;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.6)" alt="" />' +
+      '<button aria-label="Close" style="position:fixed;top:14px;right:18px;background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer">&#215;</button>';
+    const close = () => { lb!.style.display = 'none'; document.documentElement.style.overflow = ''; };
+    lb.addEventListener('click', close);
+    addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    document.body.appendChild(lb);
+    return lb;
+  }
+
+  for (const carousel of document.querySelectorAll<HTMLElement>('[data-img-carousel]')) {
+    const track = carousel.querySelector<HTMLElement>('.ic-track');
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('.ic-slide'));
+    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('.ic-dot'));
+    const prev = carousel.querySelector<HTMLButtonElement>('.ic-prev');
+    const next = carousel.querySelector<HTMLButtonElement>('.ic-next');
+    if (!track || slides.length < 1) continue;
+
+    let current = 0;
+
+    function goTo(i: number) {
+      i = Math.max(0, Math.min(i, slides.length - 1));
+      current = i;
+      track!.scrollTo({ left: i * track!.clientWidth, behavior: 'smooth' });
+      dots.forEach((d, j) => d.setAttribute('aria-selected', String(j === i)));
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === slides.length - 1;
+    }
+
+    prev?.addEventListener('click', () => goTo(current - 1));
+    next?.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+    let scrollTimer: ReturnType<typeof setTimeout>;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const i = Math.round(track.scrollLeft / (track.clientWidth || 1));
+        if (i !== current) {
+          current = i;
+          dots.forEach((d, j) => d.setAttribute('aria-selected', String(j === i)));
+          if (prev) prev.disabled = i === 0;
+          if (next) next.disabled = i === slides.length - 1;
+        }
+      }, 60);
+    });
+
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+    });
+
+    goTo(0);
+
+    carousel.querySelectorAll<HTMLButtonElement>('.ic-zoom').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const img = btn.querySelector('img');
+        if (!img) return;
+        const lb = getLightbox();
+        const big = lb.querySelector('img')!;
+        big.src = btn.dataset.full || img.currentSrc || img.src;
+        big.alt = img.alt;
+        lb.style.display = 'grid';
+        document.documentElement.style.overflow = 'hidden';
+      });
+    });
+  }
+</script>

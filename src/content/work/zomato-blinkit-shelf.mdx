@@ -40,8 +40,9 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ArtefactGallery from '../../components/ArtefactGallery.astro';
+import ImageCarousel from '../../components/ImageCarousel.astro';
 import shelfWidgets from '../../assets/legacy/shelf-zomato-blinkit.png';
+import zbBlog from '../../assets/posts/eternal-never-settles-zomato-blinkit-on-oneplus-shelf/01.webp';
 import Lesson from '../../components/Lesson.astro';
 
 <Tldr
@@ -78,10 +79,11 @@ Food and quick-commerce ordering required multiple app-switching steps, and the 
   ]}
 />
 
-<ArtefactGallery
+<ImageCarousel
   title="The shipped widgets"
-  items={[
+  images={[
     { src: shelfWidgets, alt: 'Zomato and Blinkit commerce widgets on OnePlus Shelf', caption: 'Zomato & Blinkit on Shelf' },
+    { src: zbBlog, alt: 'Live Alerts feature for Zomato and Blinkit on OnePlus Shelf', caption: 'Live Alerts — shipped feature' },
   ]}
 />
 

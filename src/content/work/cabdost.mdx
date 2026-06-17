@@ -33,8 +33,13 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ArtefactGallery from '../../components/ArtefactGallery.astro';
-import cabdostMock from '../../assets/legacy/cabdost.png';
+import ImageCarousel from '../../components/ImageCarousel.astro';
+import cbHero from '../../assets/posts/helping-cab-drivers-to-file-income-tax-returns/hero.png';
+import cb02 from '../../assets/posts/helping-cab-drivers-to-file-income-tax-returns/02.webp';
+import cb03 from '../../assets/posts/helping-cab-drivers-to-file-income-tax-returns/03.webp';
+import cb04 from '../../assets/posts/helping-cab-drivers-to-file-income-tax-returns/04.webp';
+import cb05 from '../../assets/posts/helping-cab-drivers-to-file-income-tax-returns/05.webp';
+import cb06 from '../../assets/posts/helping-cab-drivers-to-file-income-tax-returns/06.webp';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
@@ -99,9 +104,16 @@ A minimal, guided filing flow for drivers, plus an agent dashboard that replaced
   ]}
 />
 
-<ArtefactGallery
-  title="Artefacts"
-  items={[{ src: cabdostMock, alt: 'Cabdost driver app screens', caption: 'Driver-facing filing flow' }]}
+<ImageCarousel
+  title="App screens"
+  images={[
+    { src: cbHero, alt: 'Cabdost app overview', caption: 'Cabdost driver app' },
+    { src: cb02, alt: 'Cabdost — ITR filing flow', caption: 'ITR filing flow' },
+    { src: cb03, alt: 'Cabdost — income tracking', caption: 'Income & expense tracking' },
+    { src: cb04, alt: 'Cabdost — compliance tools', caption: 'Compliance dashboard' },
+    { src: cb05, alt: 'Cabdost — financial literacy', caption: 'Financial literacy module' },
+    { src: cb06, alt: 'Cabdost — agent dashboard', caption: 'Agent operations dashboard' },
+  ]}
 />
 
 <Lesson>

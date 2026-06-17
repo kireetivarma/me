@@ -183,6 +183,8 @@ svg {
   font-style: italic;
 }
 .prose img {
+  width: 100%;
+  height: auto;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   margin: 1.5em 0;

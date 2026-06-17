@@ -1,0 +1,79 @@
+---
+title: 'Tymline'
+seoTitle: 'Tymline — Short-form social blogging, from wireframes to launch'
+summary: 'Co-designed a social blogging app for creating shareable, chronological timelines — from startup changelogs to personal stories. Iterated through 11 design versions from rough sketches to a shipped product in under 3 months.'
+tagline: 'Short-form social blogging, from wireframes to ship in 3 months'
+categories: [Design, Products]
+role: 'Co-founder, Product & Design'
+timeframe: '2017'
+team: { collaborators: '2 co-builders (engineering)' }
+skills: ['Product Design', 'UI Design', 'Co-founder', 'Rapid Prototyping', 'Usability Testing', 'Information Architecture']
+metrics:
+  - { value: '3', label: 'Months from idea to launch' }
+  - { value: '11', label: 'Design iterations' }
+  - { value: '2', label: 'Co-builders' }
+decision: 'Shipped in 3 months with 2 co-builders by treating each design iteration as a full usability cycle, not a visual refresh — each version answered a specific question from the previous round.'
+art: 'gradient'
+accent: '#f59e0b'
+relatedPosts:
+  - helping-people-build-short-blogs-with-tymline
+order: 18
+geo:
+  base: hyderabad
+  reach: [IN]
+---
+
+import Tldr from '../../components/Tldr.astro';
+import GoalOutcome from '../../components/GoalOutcome.astro';
+import ImageCarousel from '../../components/ImageCarousel.astro';
+import tymlineLegacy from '../../assets/legacy/tymline.png';
+import img01 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/01.png';
+import img02 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/02.webp';
+import img03 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/03.webp';
+import img04 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/04.webp';
+import img05 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/05.webp';
+import img06 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/06.webp';
+import img07 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/07.webp';
+import img08 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/08.webp';
+import img09 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/09.webp';
+import img10 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/10.webp';
+import img11 from '../../assets/posts/helping-people-build-short-blogs-with-tymline/11.webp';
+
+<Tldr
+  items={[
+    'Co-founded Tymline with 2 others and took ownership of product and design end to end',
+    'Core insight: most content on the web has no native home for <b>chronological, multi-media organisation</b> — blogs are posts, not timelines',
+    'Went from first sketch to shipped product in <b>3 months</b> across 11 design iterations, each answering a specific user experience question from the round before',
+  ]}
+/>
+
+## The problem
+
+Organisations, startups, and individuals have no good place to create and share information in chronological order. Blog posts are single entries. Social media is noisy. A startup's product changelog, a creator's project story, a researcher's reading list — none of these fit cleanly anywhere. Tymline was the answer: shareable, chronological, multi-media timelines for anything.
+
+<GoalOutcome
+  goal="Build a social blogging product that lets anyone create multiple timelines, add text and media entries in chronological order, and share them publicly."
+  outcome="A shipped product with timeline creation, multi-media posts, and public sharing. Launched in 3 months across 11 design iterations with a 2-person engineering team."
+/>
+
+## Design process
+
+Each of the 11 iterations wasn't a visual refresh — it answered a specific question raised by the previous round. Early rounds focused on information architecture: how do timelines nest? How does a post within a timeline relate to the timeline header? Later rounds tackled visual language: card density, typography legibility at small scale, the distinction between public and private timelines.
+
+<ImageCarousel
+  title="Design iterations"
+  images={[
+    { src: tymlineLegacy, alt: 'Tymline product overview', caption: 'Product overview' },
+    { src: img01, alt: 'Tymline early wireframe overview', caption: 'Early layout mapping' },
+    { src: img02, alt: 'Tymline design iteration 1', caption: 'Sign-up flow v1' },
+    { src: img03, alt: 'Tymline design iteration 2', caption: 'Sign-up flow v2' },
+    { src: img04, alt: 'Tymline design iteration 3', caption: 'Sign-up flow v3' },
+    { src: img05, alt: 'Tymline design iteration 4', caption: 'Timeline page v1' },
+    { src: img06, alt: 'Tymline design iteration 5', caption: 'Post component iterations' },
+    { src: img07, alt: 'Tymline design iteration 6', caption: 'Timeline header component' },
+    { src: img08, alt: 'Tymline design — post card', caption: 'Post card final design' },
+    { src: img09, alt: 'Tymline design — timeline header', caption: 'Timeline header final' },
+    { src: img10, alt: 'Tymline design — dashboard', caption: 'User dashboard' },
+    { src: img11, alt: 'Tymline design — final screens', caption: 'Shipped design language' },
+  ]}
+/>

@@ -28,8 +28,14 @@ geo:
 import Tldr from '../../components/Tldr.astro';
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
-import ArtefactGallery from '../../components/ArtefactGallery.astro';
-import imuxMock from '../../assets/legacy/imux.png';
+import ImageCarousel from '../../components/ImageCarousel.astro';
+import imux04 from '../../assets/posts/cofounding-an-nlidb-saas-product-imux/04.png';
+import imux05 from '../../assets/posts/cofounding-an-nlidb-saas-product-imux/05.png';
+import imux06 from '../../assets/posts/cofounding-an-nlidb-saas-product-imux/06.png';
+import imux07 from '../../assets/posts/cofounding-an-nlidb-saas-product-imux/07.png';
+import imux08 from '../../assets/posts/cofounding-an-nlidb-saas-product-imux/08.png';
+import imux09 from '../../assets/posts/cofounding-an-nlidb-saas-product-imux/09.png';
+import imux10 from '../../assets/posts/cofounding-an-nlidb-saas-product-imux/10.png';
 import Lesson from '../../components/Lesson.astro';
 
 <Tldr
@@ -59,9 +65,17 @@ Non-technical stakeholders cannot self-serve data insights due to SQL complexity
   ]}
 />
 
-<ArtefactGallery
-  title="Artefacts"
-  items={[{ src: imuxMock, alt: 'Imux natural-language query interface', caption: 'Plain-English query UI' }]}
+<ImageCarousel
+  title="Product screens"
+  images={[
+    { src: imux04, alt: 'Imux — natural language query interface', caption: 'NL query interface' },
+    { src: imux05, alt: 'Imux — schema detection', caption: 'Auto schema detection' },
+    { src: imux06, alt: 'Imux — query results', caption: 'Query results & visualisation' },
+    { src: imux07, alt: 'Imux — analytics dashboard', caption: 'Analytics dashboard' },
+    { src: imux08, alt: 'Imux — enterprise dashboard', caption: 'Enterprise access controls' },
+    { src: imux09, alt: 'Imux — data export', caption: 'Data export & reporting' },
+    { src: imux10, alt: 'Imux — B2B product overview', caption: 'B2B product overview' },
+  ]}
 />
 
 <Lesson>
