@@ -1,116 +1,139 @@
 ---
 import { Image } from 'astro:assets';
-import stationMockup from '../../assets/work/ncs/station-mockup.png';
+import phone from '../../assets/work/ncs/phone-final.png';
+import station from '../../assets/work/ncs/station-final.png';
 interface Props { size?: 'thumb' | 'hero' | 'ambient' }
 const { size = 'thumb' } = Astro.props;
 ---
 
 <div class:list={['art', 'charging-art', size]} aria-hidden="true">
   <div class="scene">
-    <div class="stage">
-      <Image class="illo" src={stationMockup} alt="" widths={[520, 860]} sizes="(max-width: 700px) 520px, 860px" />
-      <!-- Steps walked from the phone toward the station, lighting up in sequence -->
-      <span class="step s1"></span>
-      <span class="step s2"></span>
-      <span class="step s3"></span>
-      <span class="step s4"></span>
-      <!-- Charge pulse at the station once the walk completes -->
-      <span class="charge"></span>
-      <!-- Live step counter, the feature's signature -->
+    <div class="phone-wrap">
+      <Image class="phone" src={phone} alt="" widths={[200, 360]} sizes="200px" />
+    </div>
+    <div class="path">
       <span class="dist art-mono"><b></b></span>
+      <div class="steps">
+        <span class="step s1"></span>
+        <span class="step s2"></span>
+        <span class="step s3"></span>
+        <span class="step s4"></span>
+      </div>
+    </div>
+    <div class="station-wrap">
+      <Image class="station" src={station} alt="" widths={[320, 560]} sizes="320px" />
+      <span class="charge"></span>
     </div>
   </div>
 </div>
 
 <style>
-  .charging-art { background-image: radial-gradient(ellipse at 72% 22%, rgba(16, 185, 129, 0.14), transparent 62%); }
-  .scene {
-    width: 86cqw;
-    background: #eceef3;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 4cqw;
-    padding: 3.5cqw;
-    box-shadow: 0 5cqw 16cqw rgba(0, 0, 0, 0.32);
+  .charging-art {
+    background-image: radial-gradient(ellipse at 68% 32%, rgba(16, 185, 129, 0.16), transparent 62%);
+    /* Soft halo to lift the dark phone off a dark background; off in light mode. */
+    --phone-glow: rgba(148, 163, 184, 0.28);
   }
-  /* Aspect matches the illustration so percentage-positioned overlays land precisely. */
-  .stage {
-    position: relative;
-    aspect-ratio: 4320 / 2520;
-  }
-  .illo { display: block; width: 100%; height: 100%; object-fit: contain; }
+  [data-theme='light'] .charging-art { --phone-glow: transparent; }
 
-  /* Footprints: an asymmetric "sole" with a small "toe" dot, angled toward the station. */
-  .step {
+  .scene {
+    width: 92cqw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1.5cqw;
+  }
+
+  .phone-wrap { position: relative; flex: 0 0 auto; }
+  .phone-wrap::before {
+    content: '';
     position: absolute;
+    inset: -16% -14%;
+    z-index: -1;
+    background: radial-gradient(closest-side, var(--phone-glow), transparent 76%);
+  }
+  .phone { height: 40cqw; width: auto; display: block; }
+
+  .path {
+    flex: 0 0 auto;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3cqw;
+    padding-bottom: 5cqw;
+  }
+  .steps { display: flex; align-items: flex-end; gap: 2.6cqw; }
+  /* Footprints: an asymmetric sole + a small toe, angled toward the station. */
+  .step {
+    position: relative;
     width: 2cqw;
     height: 3.2cqw;
     border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
     background: #10b981;
     opacity: 0;
-    box-shadow: 0 0 1.8cqw rgba(16, 185, 129, 0.6);
+    box-shadow: 0 0 1.6cqw rgba(16, 185, 129, 0.6);
   }
   .step::after {
     content: '';
     position: absolute;
     top: -1.1cqw;
-    left: 58%;
+    left: 56%;
     width: 1cqw;
     height: 1cqw;
     border-radius: 50%;
     background: #10b981;
     box-shadow: 0 0 1.2cqw rgba(16, 185, 129, 0.6);
   }
-  .s1 { left: 30%; top: 60%; --rot: 22deg; animation: step 5.5s ease infinite 0.2s; }
-  .s2 { left: 35%; top: 53%; --rot: 34deg; animation: step 5.5s ease infinite 0.7s; }
-  .s3 { left: 40%; top: 60%; --rot: 22deg; animation: step 5.5s ease infinite 1.2s; }
-  .s4 { left: 45%; top: 53%; --rot: 34deg; animation: step 5.5s ease infinite 1.7s; }
-  @keyframes step {
+  .s2, .s4 { margin-bottom: 2.4cqw; }
+  .s1 { --rot: 20deg; animation: ncs-step 5.5s ease infinite 0.2s; }
+  .s2 { --rot: 32deg; animation: ncs-step 5.5s ease infinite 0.7s; }
+  .s3 { --rot: 20deg; animation: ncs-step 5.5s ease infinite 1.2s; }
+  .s4 { --rot: 32deg; animation: ncs-step 5.5s ease infinite 1.7s; }
+  @keyframes ncs-step {
     0%, 2% { opacity: 0; transform: rotate(var(--rot)) scale(0.4); }
-    10% { opacity: 1; transform: rotate(var(--rot)) scale(1); }
+    12% { opacity: 1; transform: rotate(var(--rot)) scale(1); }
     62% { opacity: 1; transform: rotate(var(--rot)) scale(1); }
     72%, 100% { opacity: 0; transform: rotate(var(--rot)) scale(0.4); }
   }
 
-  .charge {
-    position: absolute;
-    left: 61%;
-    top: 40%;
-    width: 6cqw;
-    height: 6cqw;
-    border-radius: 50%;
-    border: 0.7cqw solid #10b981;
-    opacity: 0;
-    animation: charge 5.5s ease-out infinite;
-  }
-  @keyframes charge {
-    0%, 62% { opacity: 0; transform: scale(0.5); }
-    66% { opacity: 1; transform: scale(0.7); }
-    100% { opacity: 0; transform: scale(2.6); }
-  }
-
   .dist {
-    position: absolute;
-    left: 50%;
-    top: 2%;
-    transform: translateX(-50%);
-    white-space: nowrap;
     font-size: 3cqw;
-    color: #047857;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    color: #10b981;
+    background: var(--bg-2);
+    border: 1px solid var(--art-stroke);
     border-radius: 99px;
-    padding: 1cqw 2.6cqw;
-    box-shadow: 0 1.5cqw 5cqw rgba(0, 0, 0, 0.12);
+    padding: 0.9cqw 2.4cqw;
+    box-shadow: 0 1.5cqw 5cqw rgba(0, 0, 0, 0.18);
+    white-space: nowrap;
   }
   .dist b::before {
     content: '96 steps';
     font-weight: 600;
-    animation: count 5.5s steps(1) infinite;
+    animation: ncs-count 5.5s steps(1) infinite;
   }
-  @keyframes count {
+  @keyframes ncs-count {
     0% { content: '96 steps'; }
     24% { content: '54 steps'; }
     48% { content: '18 steps'; }
     66%, 100% { content: 'Arrived ✓'; }
+  }
+
+  .station-wrap { position: relative; flex: 0 0 auto; }
+  .station { height: 46cqw; width: auto; display: block; }
+  .charge {
+    position: absolute;
+    left: 16%;
+    top: 36%;
+    width: 7cqw;
+    height: 7cqw;
+    border-radius: 50%;
+    border: 0.7cqw solid #10b981;
+    opacity: 0;
+    animation: ncs-charge 5.5s ease-out infinite;
+  }
+  @keyframes ncs-charge {
+    0%, 62% { opacity: 0; transform: scale(0.4); }
+    66% { opacity: 1; transform: scale(0.6); }
+    100% { opacity: 0; transform: scale(2.6); }
   }
 </style>
