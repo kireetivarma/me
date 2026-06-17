@@ -6,6 +6,7 @@ import JourneySection from '../components/JourneySection.astro';
 import ProjectGrid from '../components/ProjectGrid.astro';
 import BrandGrid from '../components/BrandGrid.astro';
 import PressStrip from '../components/PressStrip.astro';
+import LifecycleCoverage from '../components/LifecycleCoverage.astro';
 import ContactSection from '../components/ContactSection.astro';
 import PostCard from '../components/PostCard.astro';
 
@@ -45,6 +46,8 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft))
 
   <BrandGrid />
   <PressStrip />
+
+  <LifecycleCoverage projects={work} />
 
   {
     posts.length > 0 && (

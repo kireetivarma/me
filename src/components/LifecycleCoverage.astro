@@ -1,0 +1,373 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import {
+  lifecycle,
+  ERA_LABELS,
+  STAGES,
+  STAGE_LABELS,
+  STAGE_FULL,
+  type LifecycleStage,
+} from '../data/lifecycle.ts';
+
+interface Props {
+  projects: CollectionEntry<'work'>[];
+}
+const { projects } = Astro.props;
+
+const projectMap = new Map(projects.map((p) => [p.id, p]));
+
+// Group coverage rows by era, in ERA_LABELS order, joining each to its project.
+const eras = Object.keys(ERA_LABELS)
+  .map((era) => ({
+    id: era,
+    label: ERA_LABELS[era],
+    rows: lifecycle
+      .filter((l) => l.era === era)
+      .map((l) => ({ lc: l, project: projectMap.get(l.slug) }))
+      .filter((r): r is { lc: (typeof lifecycle)[number]; project: CollectionEntry<'work'> } => !!r.project),
+  }))
+  .filter((e) => e.rows.length > 0);
+
+const stateClass = (s?: string) => (s === 'led' ? 'led' : s === 'co' ? 'co' : s === 'supported' ? 'supported' : 'none');
+const stateWord = (s?: string) =>
+  s === 'led' ? 'Led' : s === 'co' ? 'Co-led' : s === 'supported' ? 'Supported' : 'Not involved';
+---
+
+<section class="section lc-section">
+  <div class="container">
+    <p class="section-label reveal">// full-stack product</p>
+    <h2 class="section-title reveal">Full Stack Product</h2>
+    <p class="section-sub reveal">
+      One product mind across the whole lifecycle — from discovery to ops, mapped over 18 projects and a decade. Tap any
+      project to see the proof.
+    </p>
+
+    <div class="lc-wrap reveal">
+      <div class="lc-grid" role="table" aria-label="Product lifecycle coverage by project">
+        <!-- Stage header -->
+        <div class="lc-head" role="row">
+          <span class="lc-corner" role="columnheader" aria-label="Project"></span>
+          <div class="lc-stages">
+            {
+              STAGES.map((s: LifecycleStage) => (
+                <span class="lc-th art-mono" role="columnheader" title={STAGE_FULL[s]}>
+                  {STAGE_LABELS[s]}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        {
+          eras.map((era) => (
+            <>
+              <div class="lc-era art-mono" role="rowgroup">
+                <span>{era.label}</span>
+              </div>
+              {era.rows.map(({ lc, project }) => {
+                const detailId = `lc-d-${lc.slug}`;
+                const metrics = project.data.metrics.slice(0, 3);
+                return (
+                  <div class="lc-item">
+                    <button
+                      class="lc-row"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls={detailId}
+                    >
+                      <span class="lc-name">{project.data.title}</span>
+                      <span class="lc-track" role="img" aria-label={STAGES.map((s) => `${STAGE_FULL[s]}: ${stateWord(lc.stages[s])}`).join(', ')}>
+                        {STAGES.map((s: LifecycleStage) => (
+                          <span class={`seg ${stateClass(lc.stages[s])}`} />
+                        ))}
+                      </span>
+                      <span class="lc-chev" aria-hidden="true">+</span>
+                    </button>
+                    <div class="lc-detail" id={detailId} hidden>
+                      <p class="lc-tag">{project.data.tagline}</p>
+                      {metrics.length > 0 && (
+                        <div class="lc-metrics">
+                          {metrics.map((m) => (
+                            <span class="lc-metric">
+                              <b>{m.value}</b>
+                              <i>{m.label}</i>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <a href={`/work/${lc.slug}/`} class="lc-link">
+                        View project →
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="lc-legend reveal">
+      <span class="lc-key"><span class="seg led key-seg"></span> Led</span>
+      <span class="lc-key"><span class="seg co key-seg"></span> Co-led</span>
+      <span class="lc-key"><span class="seg supported key-seg"></span> Supported</span>
+      <span class="lc-key"><span class="seg none key-seg"></span> Not involved</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lc-section {
+    --name-w: clamp(98px, 22vw, 154px);
+    --seg-h: 26px;
+  }
+
+  /* Horizontal scroll container for narrow screens. */
+  .lc-wrap {
+    margin-top: 1.8rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Fade the right edge as a scroll affordance. */
+    -webkit-overflow-scrolling: touch;
+  }
+  .lc-grid {
+    min-width: 660px;
+  }
+
+  /* Header + rows share the same two-track layout so cells line up. */
+  .lc-head,
+  .lc-row {
+    display: grid;
+    grid-template-columns: var(--name-w) 1fr;
+    align-items: center;
+  }
+
+  .lc-head {
+    padding-bottom: 0.5rem;
+  }
+  .lc-corner {
+    position: sticky;
+    left: 0;
+    background: var(--bg);
+    z-index: 2;
+  }
+  .lc-stages {
+    display: flex;
+    gap: 3px;
+    padding-left: 0.6rem;
+  }
+  .lc-th {
+    flex: 1;
+    text-align: center;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+
+  .lc-era {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 1.1rem 0 0.5rem;
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    position: sticky;
+    left: 0;
+  }
+  .lc-era::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .lc-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .lc-item:last-child {
+    border-bottom: 0;
+  }
+
+  .lc-row {
+    width: 100%;
+    background: none;
+    border: 0;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    grid-template-columns: var(--name-w) 1fr auto;
+    gap: 0;
+    transition: background 0.2s;
+  }
+  .lc-row:hover .lc-name,
+  .lc-row:focus-visible .lc-name {
+    color: var(--text-1);
+  }
+  .lc-row:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .lc-name {
+    position: sticky;
+    left: 0;
+    background: var(--bg);
+    z-index: 1;
+    padding-right: 0.6rem;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s;
+  }
+
+  /* The track: one continuous bar, internally divided into 8 stage segments. */
+  .lc-track {
+    display: flex;
+    gap: 3px;
+    height: var(--seg-h);
+    padding: 0 0.6rem 0 0.6rem;
+  }
+  .seg {
+    flex: 1;
+    border-radius: 3px;
+    min-width: 8px;
+  }
+  /* Led — solid accent with a soft vertical sheen. */
+  .seg.led {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 88%, #fff 12%), var(--accent));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+  /* Co-led — dashed accent outline, hollow. */
+  .seg.co {
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    border: 1.5px dashed color-mix(in srgb, var(--accent) 58%, transparent);
+  }
+  /* Supported — faint flat fill, no border. */
+  .seg.supported {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  /* Not involved — empty groove. */
+  .seg.none {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+  }
+
+  .lc-chev {
+    align-self: center;
+    padding-left: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--text-3);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .lc-row[aria-expanded='true'] .lc-chev {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+
+  /* Detail panel revealed on tap. */
+  .lc-detail {
+    padding: 0.2rem 0.6rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem 1.4rem;
+  }
+  .lc-detail[hidden] {
+    display: none;
+  }
+  .lc-tag {
+    flex-basis: 100%;
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--text-2);
+    max-width: 60ch;
+  }
+  .lc-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+  }
+  .lc-metric {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+  .lc-metric b {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    color: var(--text-1);
+  }
+  .lc-metric i {
+    font-style: normal;
+    font-size: var(--text-xs);
+    color: var(--text-3);
+  }
+  .lc-link {
+    font-size: var(--text-sm);
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .lc-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Legend */
+  .lc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.4rem;
+    margin-top: 1.4rem;
+    font-size: var(--text-xs);
+    color: var(--text-3);
+  }
+  .lc-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .key-seg {
+    width: 26px;
+    height: 14px;
+    flex: none;
+    display: inline-block;
+  }
+
+  @media (max-width: 560px) {
+    .lc-th {
+      font-size: 0.56rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lc-chev {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.lc-row').forEach((row) => {
+    row.addEventListener('click', () => {
+      const panel = row.nextElementSibling as HTMLElement | null;
+      if (!panel || !panel.classList.contains('lc-detail')) return;
+      const open = row.getAttribute('aria-expanded') === 'true';
+      row.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+    });
+  });
+</script>
