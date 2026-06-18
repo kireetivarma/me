@@ -76,7 +76,7 @@ export const journey: Milestone[] = [
       'oneplus-scout',
       'food-delivery-aod',
       'spotify-on-shelf',
-      'zomato-blinkit-shelf',
+      'live-alerts-shelf-food-transit-music',
       'nearby-charging-stations',
     ],
     highlight: 'Employee of the Year 2021 · 200M+ users',

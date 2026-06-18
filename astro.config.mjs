@@ -7,4 +7,7 @@ export default defineConfig({
   site: 'https://kireetivarma.me',
   trailingSlash: 'ignore',
   integrations: [mdx(), sitemap()],
+  redirects: {
+    '/work/zomato-blinkit-shelf': '/work/live-alerts-shelf-food-transit-music',
+  },
 });

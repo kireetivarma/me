@@ -144,7 +144,7 @@ export const lifecycle: ProjectCoverage[] = [
     },
   },
   {
-    slug: 'zomato-blinkit-shelf',
+    slug: 'live-alerts-shelf-food-transit-music',
     stages: { discovery: 'led', research: 'led', strategy: 'led', design: 'co', build: 'co', test: 'co', launch: 'co', ops: 'co' },
     phaseLines: {
       discovery: 'Identified AOD and Shelf as untapped partner surfaces for Indian users',

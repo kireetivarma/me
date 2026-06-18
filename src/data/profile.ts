@@ -33,7 +33,7 @@ export const profile = {
     { name: 'Zomato', icon: 'siZomato', slug: 'food-delivery-aod' },
     { name: 'Grab', icon: 'siGrab', slug: 'oneplus-scout' },
     { name: 'Swiggy', icon: 'siSwiggy', slug: 'food-delivery-aod' },
-    { name: 'Blinkit', color: '#F9D100', slug: 'zomato-blinkit-shelf' },
+    { name: 'Blinkit', color: '#F9D100', slug: 'live-alerts-shelf-food-transit-music' },
     { name: 'Google', icon: 'siGoogle', slug: 'oneplus-scout' },
     { name: 'Oppo', icon: 'siOppo', slug: 'oneplus-shelf' },
     { name: 'Dvara Money', color: '#0E7C66', slug: 'cabdost' },

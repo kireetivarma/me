@@ -20,7 +20,7 @@ export const testimonials: Testimonial[] = [
     author: 'Ramagopala Reddy Palukuru',
     role: 'Vice President, OnePlus India',
     relation: 'Managed Kireeti directly',
-    projects: ['spotify-on-shelf', 'zomato-blinkit-shelf'],
+    projects: ['spotify-on-shelf', 'live-alerts-shelf-food-transit-music'],
   },
   {
     quote:
