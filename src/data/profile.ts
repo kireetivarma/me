@@ -3,7 +3,7 @@ export const profile = {
   title: 'Product Leader · 0-to-1 & Scale',
   tagline: 'Product leader shipping 0-to-1 to 200M+ across OS platforms, partnerships and AI',
   description:
-    'Product leader with 12+ years owning the full product lifecycle, from discovery to ops, across consumer OS, AI and fintech. Ex-OnePlus: led Shelf from redesign to a developer platform (4x MAU), shipped Scout to 200M+ users (2x CTR), and launched India\'s first food-delivery AOD with Zomato and Spotify. Now building AI-native products and advising on product strategy.',
+    'Product leader with 12+ years owning the full product lifecycle, from discovery to ops, across consumer OS, AI and fintech. Ex-OnePlus: led Shelf from redesign to a developer platform (4x MAU), shipped Scout to 100M+ users (2x CTR), and launched India\'s first food-delivery AOD with Zomato and Spotify. Now building AI-native products and advising on product strategy.',
   email: 'mail@kireetivarma.me',
   location: 'Calgary, Canada 🇨🇦',
   availability: {
