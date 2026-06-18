@@ -16,7 +16,7 @@ export const profile = {
     calendly: 'https://calendly.com/kireeti/25',
   },
   stats: [
-    { value: '200M+', label: 'Users Reached' },
+    { value: '200M+', label: 'Users Reached (OnePlus & OPPO)' },
     { value: '20+', label: 'Products Built & Shipped' },
     { value: '25+', label: 'Teams Globally' },
     { value: '12+', label: 'Years Experience' },

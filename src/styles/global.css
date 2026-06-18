@@ -244,6 +244,16 @@ svg {
   .js .stagger.in > *:nth-child(n + 7) { transition-delay: 0.4s; }
 }
 
+/* Subtle footnote marker for directional figures (see MetricsNote). */
+.conf-star {
+  font-size: 0.7em;
+  opacity: 0.45;
+  font-weight: 400;
+  margin-left: 1px;
+  vertical-align: super;
+  line-height: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

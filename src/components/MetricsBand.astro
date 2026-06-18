@@ -9,7 +9,14 @@ const { metrics } = Astro.props;
   {
     metrics.map((m) => (
       <div class="metric">
-        <span class="metric-value">{m.value}</span>
+        {m.value.endsWith('*') ? (
+          <span class="metric-value">
+            {m.value.slice(0, -1)}
+            <sup class="conf-star">*</sup>
+          </span>
+        ) : (
+          <span class="metric-value">{m.value}</span>
+        )}
         <span class="metric-label">{m.label}</span>
       </div>
     ))

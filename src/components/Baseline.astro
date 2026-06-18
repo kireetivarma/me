@@ -14,7 +14,7 @@ const { metric, before, after, method } = Astro.props;
   <div class="bl-vals">
     <span class="bl-before">{before}</span>
     <span class="bl-arrow" aria-hidden="true">→</span>
-    <span class="bl-after">{after}</span>
+    <span class="bl-after" set:html={after} />
   </div>
   {method && <p class="bl-method">Measured by: {method}</p>}
 </div>

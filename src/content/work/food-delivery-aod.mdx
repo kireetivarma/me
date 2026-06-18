@@ -9,7 +9,7 @@ timeframe: '2022–2023'
 team: { collaborators: '2 partner PMs, 2 partner dev teams · BD, R&D, legal, marketing, leadership' }
 skills: ['Strategic Partnerships', 'Business Development', 'Stakeholder Management', 'Product Strategy', 'Go-to-Market Strategy', 'Cross-functional Team Leadership']
 metrics:
-  - { value: '60%', label: 'MAU reach at launch' }
+  - { value: '60%*', label: 'MAU reach at launch' }
   - { value: '#1', label: 'India-first feature' }
   - { value: '2', label: 'Partners (Zomato, Swiggy)' }
 decision: 'Put live order status on Always-on-Display instead of richer in-app notifications; a glance beats an unlock for a status users check a dozen times.'
@@ -45,12 +45,13 @@ import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Lesson from '../../components/Lesson.astro';
+import MetricsNote from '../../components/MetricsNote.astro';
 
 <Tldr
   items={[
     "Shipped <b>India's first</b> live food-delivery tracking on Always-on-Display, with Zomato and Swiggy as launch partners",
     'Key decision: put order status on the <b>AOD itself</b>, not richer notifications; a glance beats an unlock for something users check a dozen times per order',
-    'Reached <b>60% of OnePlus MAU</b> at launch and became one of the most-covered OEM features in India that year',
+    'Reached <b>60%<sup class="conf-star">*</sup> of MAU</b> at launch and became one of the most-covered OEM features in India that year',
   ]}
 />
 
@@ -60,7 +61,7 @@ Food delivery users unlocked their phones over and over just to check order stat
 
 <GoalOutcome
   goal="Launch India's first AOD food delivery integration, Zomato and Swiggy live order tracking visible without unlocking the device."
-  outcome="Reached 60% of OnePlus MAU at launch. Industry-first feature with significant media coverage. Cemented OnePlus as a lifestyle-first Android brand."
+  outcome='Reached 60%<sup class="conf-star">*</sup> of MAU at launch. Industry-first feature with significant media coverage. Cemented OnePlus as a lifestyle-first Android brand.'
 />
 
 <DecisionTable
@@ -88,8 +89,6 @@ Food delivery users unlocked their phones over and over just to check order stat
 
 A minimal, glanceable order-status UI designed inside AOD's battery and pixel constraints, fed by real-time data contracts agreed with both partners' product teams. Launch was a coordinated GTM across OnePlus, Zomato and Swiggy.
 
-In the same period, Zomato reported a 30% increase in orders during peak meal times year-over-year; glanceable status was part of making frequent ordering feel effortless on OnePlus devices.
-
 {/* TODO(Kireeti): if available, add AOD feature adoption/opt-in numbers and any partner-reported engagement deltas. */}
 
 <FeatureGrid
@@ -109,3 +108,5 @@ In the same period, Zomato reported a 30% increase in orders during peak meal ti
     means a quieter launch day.
   </p>
 </Lesson>
+
+<MetricsNote />

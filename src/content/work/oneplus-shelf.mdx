@@ -9,7 +9,7 @@ timeframe: '2020–2024'
 team: { led: '7 devs, 3 QA, 2 designers, 1 ops', collaborators: 'marketing, legal' }
 skills: ['Product Management', 'Cross-functional Team Leadership', 'User Research', 'Product Design', 'Usability Testing', 'Product Road Mapping', 'A/B Testing']
 metrics:
-  - { value: '4x', label: 'MAU growth' }
+  - { value: '4x*', label: 'MAU growth' }
   - { value: '3', label: 'Major partner integrations' }
   - { value: 'EOTY', label: '2021 recognition' }
 decision: 'Rebuilt the card system around resizable, rearrangeable widgets instead of patching fixed layouts; customisation was the top pain in user research.'
@@ -38,7 +38,7 @@ geo:
   hq: shenzhen
   locations: [bangalore, gurgaon]
   reach: worldwide
-  users: '200M+'
+  users: '200M+ (OnePlus & OPPO)'
 ---
 
 import Tldr from '../../components/Tldr.astro';
@@ -47,12 +47,13 @@ import FeatureGrid from '../../components/FeatureGrid.astro';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
+import MetricsNote from '../../components/MetricsNote.astro';
 
 <Tldr
   items={[
     'Led the ground-up redesign of Shelf and rolled it out globally as a <b>Key Selling Point of OxygenOS 12</b>',
     'Key decision: rebuilt the card system around <b>resizable, rearrangeable widgets</b> because customisation was the top pain in research, not a new coat of paint on fixed layouts',
-    'Result: <b>4x MAU growth</b> and the partner architecture that Spotify, Zomato and Blinkit later shipped on',
+    'Result: <b>4x<sup class="conf-star">*</sup> MAU growth</b> and the partner architecture that Spotify, Zomato and Blinkit later shipped on',
   ]}
 />
 
@@ -65,13 +66,13 @@ I validated this with collated community feedback, a user survey, and one-on-one
 <Baseline
   metric="Monthly active share of the global user base"
   before="Single-digit %"
-  after="~1 in 3 users"
+  after='~1 in 3 users<sup class="conf-star">*</sup>'
   method="internal MAU share, pre- vs post-redesign"
 />
 
 <GoalOutcome
   goal="Redesign Shelf from the ground up to improve UX, increase engagement, and build a scalable partner integration framework."
-  outcome="4x MAU growth. Unlocked Spotify, Zomato, and Blinkit integrations. Became OnePlus's primary partner surface. Employee of the Year recognition."
+  outcome='4x<sup class="conf-star">*</sup> MAU growth. Unlocked Spotify, Zomato, and Blinkit integrations. Became OnePlus&#39;s primary partner surface. Employee of the Year recognition.'
 />
 
 <DecisionTable
@@ -122,3 +123,5 @@ Shelf went from a hidden panel to the surface every major partnership shipped on
     and redesigned the content second, instead of doing both under one launch.
   </p>
 </Lesson>
+
+<MetricsNote />

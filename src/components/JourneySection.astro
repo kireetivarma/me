@@ -37,7 +37,7 @@ const mapState: Record<string, { reach: string[] | 'worldwide'; markers: Marker[
   all: {
     reach: allWorldwide ? 'worldwide' : [...allCountries],
     markers: journey.flatMap((m) => markersFor(m.geo)),
-    users: '200M+ users · NA · EU · SEA · India',
+    users: '200M+ users (OnePlus & OPPO) · NA · EU · SEA · India',
   },
 };
 for (const m of journey) {
@@ -50,7 +50,7 @@ for (const m of journey) {
     <p class="section-label reveal">// the journey</p>
     <h2 class="section-title reveal">A decade across design, product &amp; AI</h2>
     <p class="section-sub reveal">
-      From product &amp; design consulting for early-stage startups 0-to-1, to 200M+ users at OnePlus, to building AI products.
+      From product &amp; design consulting for early-stage startups 0-to-1, to 200M+ users across OnePlus &amp; OPPO, to building AI products.
     </p>
 
     <div class="journey-grid">
@@ -121,7 +121,7 @@ for (const m of journey) {
           }
         </svg>
         <div class="map-foot">
-          <span class="map-users art-mono" id="map-users">200M+ users · NA · EU · SEA · India</span>
+          <span class="map-users art-mono" id="map-users">200M+ users (OnePlus & OPPO) · NA · EU · SEA · India</span>
           <ul class="legend">
             <li><i class="lg-base"></i> Base</li>
             <li><i class="lg-hq"></i> HQ</li>

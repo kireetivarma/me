@@ -9,11 +9,11 @@ const { goal, outcome } = Astro.props;
 <div class="go-grid">
   <div class="go goal">
     <span class="go-label">Goal</span>
-    <p>{goal}</p>
+    <p set:html={goal} />
   </div>
   <div class="go outcome">
     <span class="go-label">Outcome</span>
-    <p>{outcome}</p>
+    <p set:html={outcome} />
   </div>
 </div>
 

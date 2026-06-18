@@ -24,7 +24,7 @@ With the introduction of Zomato and Blinkit widgets, OnePlus underscores its com
 
 Zomato has established itself as a leading food delivery service in India, connecting users to a wide variety of local restaurants. With just a few taps, users can explore menus, read reviews, and place orders for delivery or takeout. In FY24-25, Zomato emerged as the top profitable food delivery player in Indian market.
 
-By embedding Zomato directly into the OnePlus Shelf, users can swiftly find and order their favorite meals from popular local spots. This streamlined access could encourage faster selection & more frequent ordering, something that is particularly appealing given that Zomato reported a 30% increase in orders during peak meal times last year.
+By embedding Zomato directly into the OnePlus Shelf, users can swiftly find and order their favorite meals from popular local spots. This streamlined access could encourage faster selection & more frequent ordering.
 
 ### About Blinkit
 

@@ -139,7 +139,7 @@ export const lifecycle: ProjectCoverage[] = [
       design: 'Co-led UX from concept to shipped product with the design team',
       build: 'Drove the engineering partnership to ship the NLP engine',
       test: 'Led testing across 50+ device models and 12 OS languages',
-      launch: 'Shipped to 200M+ users as a flagship OxygenOS feature',
+      launch: 'Shipped to 200M+ OnePlus & OPPO users as a flagship OxygenOS feature',
       ops: 'Owned CTR optimisation, doubling click-through rate',
     },
   },

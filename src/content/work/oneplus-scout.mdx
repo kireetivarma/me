@@ -9,8 +9,8 @@ timeframe: '2020–2022'
 team: { led: '5 devs, 2 QA, 2 designers, 1 ops', collaborators: '1 partner PM, 5 partner devs · marketing, legal, HQ, leadership' }
 skills: ['Product Management', 'NLP', 'Product Discovery', 'Analytics', 'A/B Testing', 'New Product Rollout', 'Go-to-Market Strategy']
 metrics:
-  - { value: '2x', label: 'CTR improvement' }
-  - { value: '50+', label: 'Countries reached' }
+  - { value: '2x*', label: 'CTR improvement' }
+  - { value: '50+*', label: 'Countries reached' }
   - { value: '4', label: 'New content verticals' }
 decision: 'Bet CTR recovery on rich result templates (e-commerce, streaming previews) rather than ranking tweaks; users choose faster when they can see the content.'
 art: 'scout'
@@ -33,7 +33,7 @@ geo:
   hq: shenzhen
   locations: [bangalore]
   reach: worldwide
-  users: '100M+'
+  users: '100M+ (OnePlus & OPPO)'
 ---
 
 import Tldr from '../../components/Tldr.astro';
@@ -42,12 +42,13 @@ import FeatureGrid from '../../components/FeatureGrid.astro';
 import DecisionTable from '../../components/DecisionTable.astro';
 import Baseline from '../../components/Baseline.astro';
 import Lesson from '../../components/Lesson.astro';
+import MetricsNote from '../../components/MetricsNote.astro';
 
 <Tldr
   items={[
     'Took Scout from a regional, declining-CTR search feature to a <b>global product in 50+ countries</b>, packaged into the OnePlus Launcher on the Play Store',
     'Key decision: bet the CTR recovery on <b>rich result templates</b> (e-commerce, streaming) rather than ranking tweaks, because users choose faster when they can see the content',
-    'Result: <b>CTR doubled</b> across the v1 → v1.3 → v2.0 ladder',
+    'Result: <b>CTR doubled<sup class="conf-star">*</sup></b> across the v1 → v1.3 → v2.0 ladder',
   ]}
 />
 
@@ -64,7 +65,7 @@ Scout v1 was a regional search feature with limited content coverage, weak multi
 
 <GoalOutcome
   goal="Scale Scout to a globally relevant, high-performance search and discovery feature with expanded content types and multilingual support."
-  outcome="CTR doubled. Expanded to 50+ countries. New content categories, faster indexing, and significantly improved user satisfaction."
+  outcome='CTR doubled<sup class="conf-star">*</sup>. Expanded to 50+ countries. New content categories, faster indexing, and significantly improved user satisfaction.'
 />
 
 <DecisionTable
@@ -109,3 +110,5 @@ v1.3 unified apps and shortcuts for visibility, added result templates for e-com
     was the cadence at which fixes could reach users.
   </p>
 </Lesson>
+
+<MetricsNote />

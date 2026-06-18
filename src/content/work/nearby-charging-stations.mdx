@@ -8,8 +8,8 @@ timeframe: '2020'
 team: { led: '3 devs, 1 QA, 1 designer', collaborators: 'marketing, procurement, legal, operations, deployment' }
 skills: ['Product Management', 'Cross-functional Team Leadership', 'Product Launch', 'Stakeholder Management', 'Strategic Partnerships', 'Product Requirements']
 metrics:
-  - { value: '2', label: 'Launch airports' }
-  - { value: '25+', label: 'Charging gates covered' }
+  - { value: '2*', label: 'Launch airports' }
+  - { value: '25+*', label: 'Charging gates covered' }
   - { value: 'OS-level', label: 'Proximity triggers' }
 art: 'charging'
 gallery:
@@ -35,6 +35,7 @@ geo:
 
 import GoalOutcome from '../../components/GoalOutcome.astro';
 import FeatureGrid from '../../components/FeatureGrid.astro';
+import MetricsNote from '../../components/MetricsNote.astro';
 
 ## The problem
 
@@ -54,3 +55,5 @@ OnePlus users walking through an airport had no way of knowing a OnePlus Chargin
     { label: 'Marketing × OS Collab', value: 'Coordinated pilot rollout across airport gates with the marketing and infra teams' },
   ]}
 />
+
+<MetricsNote />
