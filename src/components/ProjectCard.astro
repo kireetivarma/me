@@ -93,7 +93,11 @@ const partnerIcons = showPartners
     <div class="card-foot">
       {topMetric && (
         <span class="card-metric">
-          <b class="metric-value">{topMetric.value}</b> {topMetric.label}
+          <b class="metric-value">
+            {topMetric.value.endsWith('*')
+              ? <>{topMetric.value.slice(0, -1)}<sup class="conf-star">*</sup></>
+              : topMetric.value}
+          </b> {topMetric.label}
         </span>
       )}
       <span class="card-meta">{role} · {timeframe}</span>
