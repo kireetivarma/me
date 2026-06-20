@@ -14,17 +14,19 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
       var m = location.pathname.match(/^\/posts\/([^\/]+?)(?:\.html)?\/?$/);
       if (m) { location.replace('/post/' + m[1] + '/' + location.search + location.hash); return; }
 
-      var n = 10;
-      var notice = document.getElementById('nf-redirect');
-      var countEl = document.getElementById('nf-count');
-      var timer = setInterval(function () {
-        n--;
-        if (countEl) countEl.textContent = n;
-        if (n <= 0) { clearInterval(timer); location.href = '/'; }
-      }, 1000);
-      document.getElementById('nf-cancel').addEventListener('click', function () {
-        clearInterval(timer);
-        if (notice) notice.style.display = 'none';
+      document.addEventListener('DOMContentLoaded', function () {
+        var n = 10;
+        var notice = document.getElementById('nf-redirect');
+        var countEl = document.getElementById('nf-count');
+        var timer = setInterval(function () {
+          n--;
+          if (countEl) countEl.textContent = n;
+          if (n <= 0) { clearInterval(timer); location.href = '/'; }
+        }, 1000);
+        document.getElementById('nf-cancel').addEventListener('click', function () {
+          clearInterval(timer);
+          if (notice) notice.style.display = 'none';
+        });
       });
     })();
   </script>
@@ -43,7 +45,7 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
       </div>
 
       <p id="nf-redirect" class="nf-redirect">
-        Taking you to portfolio in <span id="nf-count">10</span> seconds.
+        <span>Taking you to portfolio in <span id="nf-count">10</span> seconds.</span>
         <button id="nf-cancel" class="btn btn-outline nf-cancel-btn">Cancel</button>
       </p>
 
@@ -103,6 +105,7 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
     margin: 0 auto;
   }
   @media (max-width: 480px) {
+    .nf { padding: 1.5rem 0 2.5rem; }
     .nf-grid {
       grid-template-columns: 1fr;
       text-align: center;

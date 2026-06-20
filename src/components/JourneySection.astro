@@ -80,7 +80,7 @@ for (const m of journey) {
                   <div class="ms-links">
                     {m.workSlugs.map((s) => (
                       <a href={`/work/${s}/`} class="ms-link">
-                        {titleOf(s)} →
+                        {titleOf(s).replace(/\(\s+\)/g, '()')} →
                       </a>
                     ))}
                   </div>
