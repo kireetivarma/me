@@ -12,7 +12,7 @@ wixUrl: "https://kireetivarma.wixsite.com/kvportfolio/post/how-you-can-enable-cr
 
 ## What
 
-Most travellers who keep moving between places use multiple carriers and mobile devices to manage their data plans. [#notify](https://kireetivarma.wixsite.com/kvportfolio/posts/hashtags/notify) is an application projected at keeping the user notified about the alerts over other devices.
+Most travellers who keep moving between places use multiple carriers and mobile devices to manage their data plans. #notify is an application projected at keeping the user notified about the alerts over other devices.
 
 ## Why
 

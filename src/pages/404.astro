@@ -10,11 +10,22 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
 
 <BaseLayout title="404 · Kireeti Varma" description="Page not found.">
   <script is:inline>
-    // Legacy nicety: /posts/<slug> (plural) was never a post URL, posts live
-    // at /post/<slug>. Forward any stray variant before showing the 404.
     (function () {
       var m = location.pathname.match(/^\/posts\/([^\/]+?)(?:\.html)?\/?$/);
-      if (m) location.replace('/post/' + m[1] + '/' + location.search + location.hash);
+      if (m) { location.replace('/post/' + m[1] + '/' + location.search + location.hash); return; }
+
+      var n = 10;
+      var notice = document.getElementById('nf-redirect');
+      var countEl = document.getElementById('nf-count');
+      var timer = setInterval(function () {
+        n--;
+        if (countEl) countEl.textContent = n;
+        if (n <= 0) { clearInterval(timer); location.href = '/'; }
+      }, 1000);
+      document.getElementById('nf-cancel').addEventListener('click', function () {
+        clearInterval(timer);
+        if (notice) notice.style.display = 'none';
+      });
     })();
   </script>
   <section class="section">
@@ -30,6 +41,11 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
         <a href="/about/" class="btn btn-outline">About</a>
         <a href="/#contact" class="btn btn-outline">Contact</a>
       </div>
+
+      <p id="nf-redirect" class="nf-redirect">
+        Taking you to portfolio in <span id="nf-count">10</span> seconds.
+        <button id="nf-cancel" class="btn btn-outline nf-cancel-btn">Cancel</button>
+      </p>
 
       <div class="nf-grid">
         <div class="nf-block">
@@ -114,5 +130,18 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
   }
   .nf-list a:hover {
     color: var(--text-1);
+  }
+  .nf-redirect {
+    font-size: var(--text-sm);
+    color: var(--text-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+  .nf-cancel-btn {
+    font-size: var(--text-xs);
+    padding: 0.25rem 0.65rem;
   }
 </style>

@@ -76,4 +76,4 @@ Look forward to the official launch in Q4 2024. The integration could very well 
 
 Also: I asked Grok to review this feature, and this is what it said:
 
-[https://www.kireetivarma.me/post/i-asked-grok-to-review-a-feature-release](/grok-ai-review-zomato-blinkit-widgets-on-oneplus-shelf/)
+[https://www.kireetivarma.me/post/i-asked-grok-to-review-a-feature-release](/post/grok-ai-review-zomato-blinkit-widgets-on-oneplus-shelf/)

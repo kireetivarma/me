@@ -54,4 +54,4 @@ So, if you are a OnePlus user who loves ordering food, this new feature will und
 
 Head to my tweet on this, where you can share your feedback on this integration:
 
-[Click here to read what Grok has to say about the feature](/grok-ai-review-zomato-swiggy-food-delivery-updates-on-oneplus-aod/).
+[Click here to read what Grok has to say about the feature](/post/grok-ai-review-zomato-swiggy-food-delivery-updates-on-oneplus-aod/).

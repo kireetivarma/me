@@ -72,4 +72,4 @@ References:
 
 [https://www.fonearena.com/blog/438649/oneplus-oxygenos-15-features.html](https://www.fonearena.com/blog/438649/oneplus-oxygenos-15-features.html)
 
-> Read more about this feature here: [kireetivarma.me/post/eternal-never-settles-zomato-blinkit-on-oneplus-shelf](/eternal-never-settles-zomato-blinkit-on-oneplus-shelf/)
+> Read more about this feature here: [kireetivarma.me/post/eternal-never-settles-zomato-blinkit-on-oneplus-shelf](/post/eternal-never-settles-zomato-blinkit-on-oneplus-shelf/)

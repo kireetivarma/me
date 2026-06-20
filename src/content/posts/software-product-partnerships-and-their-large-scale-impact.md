@@ -102,4 +102,4 @@ By embracing Jared Spool’s call to design for different perspectives, companie
 
 What do you think? Let me know on X
 
-[Read more about AOD-Food delivery integration here.](/oneplus-partnership-integration-with-zomato-swiggy-for-food-deliveries-on-aod-always-on-display/)
+[Read more about AOD-Food delivery integration here.](/post/oneplus-partnership-integration-with-zomato-swiggy-for-food-deliveries-on-aod-always-on-display/)

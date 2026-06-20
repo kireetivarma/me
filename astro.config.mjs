@@ -9,5 +9,6 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   redirects: {
     '/work/zomato-blinkit-shelf': '/work/live-alerts-shelf-food-transit-music',
+    '/posts/hashtags/notify': '/work/',
   },
 });
