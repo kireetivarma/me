@@ -90,7 +90,7 @@ export const journey: Milestone[] = [
       locations: ['noida', 'gurgaon', 'bangkok', 'singapore', 'jakarta', 'seattle', 'london', 'stockholm'],
       // NA · EU · SEA · India: the four OnePlus regions these products served
       reach: ['US', 'CA', 'GB', 'IE', 'FR', 'DE', 'IT', 'ES', 'PT', 'NL', 'BE', 'AT', 'CH', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'SK', 'HU', 'RO', 'BG', 'GR', 'HR', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'ID', 'PH', 'VN', 'IN'],
-      users: '200Mn+ users (OnePlus & OPPO) · NA · EU · SEA · India',
+      users: '200Mn+ users · NA · EU · SEA · India',
     },
   },
   {
@@ -99,9 +99,9 @@ export const journey: Milestone[] = [
     title: 'Independent builder & AI',
     role: 'Product Consultant · AI Builder',
     description:
-      'Building AI-native products end-to-end: Product f (), an AI operating system for product teams; Labh, a SEBI-certified investment platform; Petfolk pet care; Pro Studio for film pre-production; Itihasa Collective for screenwriters. Designing, building and shipping production software solo with AI in the loop, a forward-deployed way of working.',
+      'Building AI-native products end-to-end: Product f(), an AI operating system for product teams; Labh, a SEBI-certified investment platform; Petfolk pet care; Pro Studio for film pre-production; Itihasa Collective for screenwriters. Designing, building and shipping production software solo with AI in the loop, a forward-deployed way of working.',
     workSlugs: ['product-f', 'labh', 'petfolk', 'pro-studio-space', 'itihasa-collective', 'reporting-hub'],
-    highlight: 'Currently building Product f ()',
+    highlight: 'Currently building Product f()',
     team: { collaborators: 'Founders, Developers, Operations, Designers' },
     geo: {
       base: 'calgary',

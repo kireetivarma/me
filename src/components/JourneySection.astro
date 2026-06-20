@@ -37,7 +37,7 @@ const mapState: Record<string, { reach: string[] | 'worldwide'; markers: Marker[
   all: {
     reach: allWorldwide ? 'worldwide' : [...allCountries],
     markers: journey.flatMap((m) => markersFor(m.geo)),
-    users: '200M+ users (OnePlus & OPPO) · NA · EU · SEA · India',
+    users: '200M+ users · NA · EU · SEA · India',
   },
 };
 for (const m of journey) {
@@ -80,7 +80,7 @@ for (const m of journey) {
                   <div class="ms-links">
                     {m.workSlugs.map((s) => (
                       <a href={`/work/${s}/`} class="ms-link">
-                        {titleOf(s).replace(/\(\s+\)/g, '()')} →
+                        {titleOf(s).replace(/\s*\(\s*\)/g, '()')} →
                       </a>
                     ))}
                   </div>
@@ -121,7 +121,7 @@ for (const m of journey) {
           }
         </svg>
         <div class="map-foot">
-          <span class="map-users art-mono" id="map-users">200M+ users (OnePlus & OPPO) · NA · EU · SEA · India</span>
+          <span class="map-users art-mono" id="map-users">200M+ users · NA · EU · SEA · India</span>
           <ul class="legend">
             <li><i class="lg-base"></i> Base</li>
             <li><i class="lg-hq"></i> HQ</li>
@@ -450,10 +450,17 @@ for (const m of journey) {
       let id = 'all';
       let active: HTMLElement | undefined;
       for (const m of milestones) {
+        // Mobile: ch1 (index 0) opens only on tap — never auto-activates via scroll.
+        if (mobile.matches && m === milestones[0]) continue;
         if (m.getBoundingClientRect().top <= line) {
           id = m.dataset.milestone!;
           active = m;
         }
+      }
+      // Mobile: when nothing else has scrolled into view, default to ch2 (not ch1).
+      if (mobile.matches && id === 'all') {
+        id = milestones[1].dataset.milestone!;
+        active = milestones[1] as HTMLElement;
       }
       if (id !== current) {
         current = id;
