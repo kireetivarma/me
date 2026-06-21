@@ -457,11 +457,6 @@ for (const m of journey) {
           active = m;
         }
       }
-      // Mobile: when nothing else has scrolled into view, default to ch2 (not ch1).
-      if (mobile.matches && id === 'all') {
-        id = milestones[1].dataset.milestone!;
-        active = milestones[1] as HTMLElement;
-      }
       if (id !== current) {
         current = id;
         show(id, active);
